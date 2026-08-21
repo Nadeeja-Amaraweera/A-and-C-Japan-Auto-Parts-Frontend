@@ -27,10 +27,11 @@
     <header class="bg-primary-dark text-white shadow-sm sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center space-x-2">
-                <div class="text-3xl font-black italic tracking-tighter text-white">
+                <button class="md:hidden text-white mr-2" onclick="document.getElementById('supplier-sidebar').classList.toggle('hidden'); document.getElementById('supplier-sidebar').classList.toggle('absolute'); document.getElementById('supplier-sidebar').classList.toggle('z-40'); document.getElementById('supplier-sidebar').classList.toggle('w-full');"><i class="fas fa-bars text-xl"></i></button>
+                <div class="text-2xl sm:text-3xl font-black italic tracking-tighter text-white">
                     A&C <span class="text-primary-red">JAPAN</span>
                 </div>
-                <div class="ml-2 pl-2 border-l border-gray-600 text-sm font-semibold tracking-widest text-primary-gold uppercase">Supplier Portal</div>
+                <div class="hidden sm:block ml-2 pl-2 border-l border-gray-600 text-sm font-semibold tracking-widest text-primary-gold uppercase">Supplier Portal</div>
             </a>
             <div class="flex items-center space-x-6 text-sm">
                 <a href="#" class="relative hover:text-primary-gold transition">
@@ -54,8 +55,11 @@
     <div class="flex-grow flex container mx-auto px-4 py-6 gap-6">
         
         <!-- Sidebar Navigation -->
-        <aside class="w-64 hidden md:block shrink-0">
+        <aside id="supplier-sidebar" class="w-64 hidden md:block shrink-0 bg-gray-50 h-full">
             <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 sticky top-24">
+                <div class="flex justify-end md:hidden mb-4">
+                    <button class="text-gray-400 hover:text-gray-800" onclick="document.getElementById('supplier-sidebar').classList.add('hidden'); document.getElementById('supplier-sidebar').classList.remove('absolute', 'z-40', 'w-full');"><i class="fas fa-times text-xl"></i></button>
+                </div>
                 <nav class="space-y-1">
                     <a href="#" class="flex items-center px-4 py-3 bg-primary-red/10 text-primary-red font-semibold rounded-lg"><i class="fas fa-chart-pie w-6 text-center mr-2"></i> Overview</a>
                     <a href="#" class="flex items-center px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-primary-dark font-medium rounded-lg transition"><i class="fas fa-car w-6 text-center mr-2"></i> My Vehicles</a>
@@ -69,7 +73,7 @@
         </aside>
 
         <!-- Dashboard Content -->
-        <main class="w-full">
+        <main class="w-full min-w-0">
             
             <!-- Top Actions & Title -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
@@ -147,7 +151,7 @@
                         </div>
                         
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left border-collapse">
+                            <table class="w-full text-left border-collapse min-w-[800px]">
                                 <thead>
                                     <tr class="text-xs text-gray-500 uppercase border-b border-gray-200 bg-white">
                                         <th class="py-3 px-5 font-semibold">Vehicle</th>

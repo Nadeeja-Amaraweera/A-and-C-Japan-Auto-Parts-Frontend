@@ -41,15 +41,15 @@
                 <span class="flex items-center"><i class="fas fa-phone-alt mr-2 text-primary-gold"></i> Free call: +84 5678 9999</span>
             </div>
             <div class="flex items-center space-x-6">
-                <div class="cursor-pointer hover:text-primary-gold transition"><i class="fas fa-globe mr-1"></i> English <i class="fas fa-chevron-down text-xs ml-1"></i></div>
-                <div class="cursor-pointer hover:text-primary-gold transition">USD <i class="fas fa-chevron-down text-xs ml-1"></i></div>
-                <a href="login.html" class="hover:text-primary-gold transition"><i class="far fa-user mr-1"></i> My Account</a>
+                <div class="hidden sm:block cursor-pointer hover:text-primary-gold transition"><i class="fas fa-globe mr-1"></i> English <i class="fas fa-chevron-down text-xs ml-1"></i></div>
+                <div class="hidden sm:block cursor-pointer hover:text-primary-gold transition">USD <i class="fas fa-chevron-down text-xs ml-1"></i></div>
+                <a href="login.html" class="hover:text-primary-gold transition"><i class="far fa-user mr-1"></i> <span class="hidden sm:inline">My Account</span></a>
                 <a href="cart.html" class="flex items-center hover:text-primary-gold transition">
                     <div class="relative">
                         <i class="fas fa-shopping-cart text-lg"></i>
                         <span class="absolute -top-2 -right-2 bg-primary-red text-white rounded-full text-[10px] w-4 h-4 flex items-center justify-center">3</span>
                     </div>
-                    <span class="ml-2">My Cart</span>
+                    <span class="ml-2 hidden sm:inline">My Cart</span>
                 </a>
             </div>
         </div>
@@ -57,7 +57,7 @@
 
     <!-- Main Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
             <!-- Logo -->
             <a href="index.html" class="flex items-center space-x-2">
                 <div class="text-3xl font-black italic tracking-tighter text-primary-dark">
@@ -67,17 +67,22 @@
                     Auto Parts<br>& Auctions
                 </div>
             </a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary-red focus:outline-none ml-auto" onclick="document.getElementById('mobile-nav').classList.toggle('hidden'); document.getElementById('mobile-search').classList.toggle('hidden');">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
 
             <!-- Search Bar -->
-            <div class="flex-1 max-w-2xl mx-8">
+            <div id="mobile-search" class="hidden md:flex flex-1 max-w-2xl mx-0 md:mx-8 w-full mt-4 md:mt-0 order-last md:order-none">
                 <form class="flex w-full">
-                    <select class="bg-gray-100 border border-gray-300 text-gray-700 py-2 px-4 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary-red">
+                    <select class="bg-gray-100 border border-gray-300 text-gray-700 py-2 px-2 md:px-4 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary-red text-sm md:text-base">
                         <option>All Categories</option>
                         <option>Vehicles</option>
                         <option>Auto Parts</option>
                     </select>
-                    <input type="text" placeholder="Search for vehicles, parts..." class="flex-1 border-t border-b border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary-red focus:border-primary-red">
-                    <button type="submit" class="bg-primary-red text-white px-6 rounded-r-md hover:bg-red-700 transition">
+                    <input type="text" placeholder="Search for vehicles, parts..." class="flex-1 border-t border-b border-gray-300 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-primary-red focus:border-primary-red text-sm md:text-base">
+                    <button type="submit" class="bg-primary-red text-white px-4 md:px-6 rounded-r-md hover:bg-red-700 transition">
                         <i class="fas fa-search"></i>
                     </button>
                 </form>
@@ -87,14 +92,14 @@
         <!-- Navigation -->
         <nav class="border-t border-gray-200">
             <div class="container mx-auto px-4">
-                <ul class="flex space-x-8 text-sm font-semibold text-gray-700">
-                    <li><a href="index.html" class="block py-3 border-b-2 border-primary-red text-primary-red">HOME</a></li>
-                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">NEW ARRIVALS</a></li>
-                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">UNDER $100</a></li>
-                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">DEALS</a></li>
-                    <li><a href="#" class="block py-3 hover:text-primary-red transition">PAGES</a></li>
-                    <li><a href="#" class="block py-3 hover:text-primary-red transition">CONTACT US</a></li>
-                    <li><a href="#" class="block py-3 hover:text-primary-red transition">ABOUT US</a></li>
+                <ul id="mobile-nav" class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-gray-700 pb-4 md:pb-0">
+                    <li><a href="index.html" class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-red text-primary-red pl-2 md:pl-0">HOME</a></li>
+                    <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">NEW ARRIVALS</a></li>
+                    <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">UNDER $100</a></li>
+                    <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">DEALS</a></li>
+                    <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">PAGES</a></li>
+                    <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">CONTACT US</a></li>
+                    <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">ABOUT US</a></li>
                 </ul>
             </div>
         </nav>
@@ -110,7 +115,7 @@
             <div class="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div class="max-w-xl text-white transform transition-all duration-1000 translate-y-0 opacity-100 slide-content">
                     <span class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Special Offer</span>
-                    <h1 class="text-5xl font-black uppercase mb-4 leading-tight">At the lowest price!<br><span class="text-primary-gold">Automotive Parts</span></h1>
+                    <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">At the lowest price!<br><span class="text-primary-gold">Automotive Parts</span></h1>
                     <p class="text-xl mb-6 font-light">High quality Japanese parts and exclusive vehicle auctions.</p>
                     <div class="flex items-end mb-8">
                         <span class="text-gray-300 line-through mr-3">$99.00</span>
@@ -128,7 +133,7 @@
             <div class="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
                     <span class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Import Direct</span>
-                    <h1 class="text-5xl font-black uppercase mb-4 leading-tight">Authentic JDM<br><span class="text-primary-gold">Engines & Transmissions</span></h1>
+                    <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Authentic JDM<br><span class="text-primary-gold">Engines & Transmissions</span></h1>
                     <p class="text-xl mb-6 font-light">Legendary powerplants sourced directly from Japan. 2JZ, RB26, SR20 in stock.</p>
                     <a href="listing.html" class="inline-block bg-white text-primary-dark font-bold py-3 px-8 rounded hover:bg-gray-100 transition hover-lift shadow-lg">View Inventory <i class="fas fa-arrow-right ml-2"></i></a>
                 </div>
@@ -142,7 +147,7 @@
             <div class="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
                     <span class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Live Auctions</span>
-                    <h1 class="text-5xl font-black uppercase mb-4 leading-tight">Bid on Rare<br><span class="text-primary-gold">Japanese Classics</span></h1>
+                    <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Bid on Rare<br><span class="text-primary-gold">Japanese Classics</span></h1>
                     <p class="text-xl mb-6 font-light">Direct access to Japan's premier auto auctions. Import your dream car today.</p>
                     <a href="listing.html" class="inline-block bg-primary-gold text-primary-dark font-bold py-3 px-8 rounded hover:bg-yellow-400 transition hover-lift shadow-lg">View Live Auctions <i class="fas fa-gavel ml-2"></i></a>
                 </div>
@@ -156,7 +161,7 @@
             <div class="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
                     <span class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Performance Upgrades</span>
-                    <h1 class="text-5xl font-black uppercase mb-4 leading-tight">Unleash the<br><span class="text-primary-gold">Full Potential</span></h1>
+                    <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Unleash the<br><span class="text-primary-gold">Full Potential</span></h1>
                     <p class="text-xl mb-6 font-light">Premium turbo kits, exhaust systems, and suspension components.</p>
                     <div class="flex items-end mb-8">
                         <span class="text-4xl font-bold text-white">Up to 20% OFF</span>
@@ -173,7 +178,7 @@
             <div class="container mx-auto px-4 h-full flex items-center relative z-10">
                 <div class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
                     <span class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Genuine Quality</span>
-                    <h1 class="text-5xl font-black uppercase mb-4 leading-tight">Perfect Fitment<br><span class="text-primary-gold">OEM Body Parts</span></h1>
+                    <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Perfect Fitment<br><span class="text-primary-gold">OEM Body Parts</span></h1>
                     <p class="text-xl mb-6 font-light">Restore your vehicle with genuine bumpers, fenders, lights, and accessories.</p>
                     <a href="listing.html" class="inline-block bg-white text-primary-dark font-bold py-3 px-8 rounded hover:bg-gray-100 transition hover-lift shadow-lg">Find Your Part <i class="fas fa-search ml-2"></i></a>
                 </div>

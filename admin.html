@@ -25,15 +25,16 @@
 <body class="bg-gray-100 text-gray-800 h-screen overflow-hidden flex">
 
     <!-- Sidebar -->
-    <aside class="w-64 bg-admin-side text-gray-300 flex flex-col h-full shrink-0 shadow-xl z-20">
+    <aside id="admin-sidebar" class="w-64 bg-admin-side text-gray-300 flex flex-col h-full shrink-0 shadow-xl z-20 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out">
         <!-- Logo -->
-        <div class="h-16 flex items-center px-6 bg-admin-dark border-b border-gray-800">
+        <div class="h-16 flex items-center justify-between px-6 bg-admin-dark border-b border-gray-800">
             <a href="index.html" class="flex items-center space-x-2">
                 <div class="text-xl font-black italic tracking-tighter text-white">
                     A&C <span class="text-primary-red">JAPAN</span>
                 </div>
                 <span class="text-xs font-bold text-admin-accent uppercase tracking-widest ml-1">Admin</span>
             </a>
+            <button class="md:hidden text-gray-400 hover:text-white transition" onclick="document.getElementById('admin-sidebar').classList.add('-translate-x-full');"><i class="fas fa-times text-xl"></i></button>
         </div>
 
         <!-- Navigation -->
@@ -68,12 +69,12 @@
     </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-1 flex flex-col h-full overflow-hidden">
+    <div class="flex-1 flex flex-col h-full overflow-hidden min-w-0">
         
         <!-- Top Header -->
         <header class="h-16 bg-white shadow-sm flex items-center justify-between px-6 z-10 shrink-0">
             <div class="flex items-center">
-                <button class="text-gray-500 hover:text-gray-800 md:hidden"><i class="fas fa-bars text-xl"></i></button>
+                <button class="text-gray-500 hover:text-gray-800 md:hidden" onclick="document.getElementById('admin-sidebar').classList.toggle('-translate-x-full');"><i class="fas fa-bars text-xl"></i></button>
                 <div class="hidden md:flex ml-4 relative">
                     <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     <input type="text" placeholder="Search anything..." class="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-admin-accent w-64 bg-gray-50">

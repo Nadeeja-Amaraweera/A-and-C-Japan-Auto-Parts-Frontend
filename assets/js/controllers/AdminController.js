@@ -204,7 +204,7 @@ class AdminController {
                     <!-- Quick Actions -->
                     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                         <h3 class="text-lg font-bold mb-4">Quick Actions</h3>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <button onclick="adminController.navigateTo('auctions')" class="bg-gray-50 hover:bg-gray-100 p-4 rounded-lg border border-gray-200 text-center transition">
                                 <i class="fas fa-gavel text-2xl text-red-500 mb-2"></i>
                                 <p class="font-semibold text-sm">Manage Auctions</p>
@@ -246,8 +246,8 @@ class AdminController {
                         <h2 class="text-2xl font-bold">Users Management</h2>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                        <table class="w-full text-left">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
+                        <table class="w-full text-left min-w-[800px]">
                             <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
                                 <tr>
                                     <th class="px-6 py-3 font-semibold">User</th>
@@ -302,8 +302,8 @@ class AdminController {
                         <h2 class="text-2xl font-bold">Auctions Monitor</h2>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                        <table class="w-full text-left">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
+                        <table class="w-full text-left min-w-[800px]">
                             <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
                                 <tr>
                                     <th class="px-6 py-3 font-semibold">Item</th>
@@ -366,8 +366,8 @@ class AdminController {
                         </nav>
                     </div>
 
-                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                        <table class="w-full text-left">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
+                        <table class="w-full text-left min-w-[800px]">
                             <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
                                 <tr>
                                     <th class="px-6 py-3 font-semibold">Product</th>
@@ -429,8 +429,8 @@ class AdminController {
                     </button>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <table class="w-full text-left">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
+                    <table class="w-full text-left min-w-[800px]">
                         <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
                             <tr>
                                 <th class="px-6 py-3 font-semibold">ID</th>
@@ -484,8 +484,8 @@ class AdminController {
                     </nav>
                 </div>
 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <table class="w-full text-left">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
+                    <table class="w-full text-left min-w-[800px]">
                         <thead class="bg-gray-50 text-xs text-gray-500 uppercase">
                             <tr>
                                 <th class="px-6 py-3 font-semibold">Order ID</th>
@@ -556,7 +556,7 @@ class AdminController {
             <div class="fade-in">
                 <h2 class="text-2xl font-bold mb-6">Site Settings</h2>
                 
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-x-auto">
                     <div class="flex border-b border-gray-200">
                         <button class="px-6 py-3 border-b-2 border-primary-red text-primary-red font-bold">General</button>
                         <button class="px-6 py-3 border-b-2 border-transparent text-gray-500 hover:text-gray-700">Security</button>

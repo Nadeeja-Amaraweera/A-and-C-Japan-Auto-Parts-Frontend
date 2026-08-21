@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2020 Chevrolet Corvette Stingray - A&C Japan Auto Parts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { dark: '#1a2a3a', red: '#c41e24', gold: '#f5a623' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header (Simplified version of index header) -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <div class="text-3xl font-black italic tracking-tighter text-primary-dark">
+                    A&C <span class="text-primary-red">JAPAN</span>
+                </div>
+            </a>
+            <div class="flex items-center space-x-6 text-sm">
+                <a href="login.html" class="hover:text-primary-red transition"><i class="far fa-user mr-1"></i> My Account</a>
+                <a href="cart.html" class="flex items-center hover:text-primary-red transition">
+                    <i class="fas fa-shopping-cart text-lg mr-2"></i> My Cart
+                </a>
+            </div>
+        </div>
+        <!-- Navigation -->
+        <nav class="border-t border-gray-200">
+            <div class="container mx-auto px-4">
+                <ul class="flex space-x-8 text-sm font-semibold text-gray-700">
+                    <li><a href="index.html" class="block py-3 hover:text-primary-red transition">HOME</a></li>
+                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">NEW ARRIVALS</a></li>
+                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">UNDER $100</a></li>
+                    <li><a href="listing.html" class="block py-3 hover:text-primary-red transition">DEALS</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumbs -->
+    <div class="bg-gray-100 py-3 border-b border-gray-200">
+        <div class="container mx-auto px-4 text-sm text-gray-500">
+            <a href="index.html" class="hover:text-primary-red">Home</a> <i class="fas fa-chevron-right text-xs mx-2"></i>
+            <a href="listing.html" class="hover:text-primary-red">Vehicles</a> <i class="fas fa-chevron-right text-xs mx-2"></i>
+            <span class="text-gray-800">2020 Chevrolet Corvette Stingray</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <div class="flex flex-col lg:flex-row gap-8 mb-12">
+            
+            <!-- Left Column: Gallery & Details -->
+            <div class="w-full lg:w-2/3">
+                <!-- Title & Basic Info -->
+                <div class="mb-4">
+                    <div class="flex justify-between items-start">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">2020 Chevrolet Corvette Stingray</h1>
+                        <button class="text-gray-400 hover:text-primary-red text-xl"><i class="far fa-heart"></i></button>
+                    </div>
+                    <p class="text-gray-600"><i class="fas fa-map-marker-alt text-primary-red mr-1"></i> Tokyo, Japan | VIN: 1G1YXXXXXXX123456</p>
+                </div>
+
+                <!-- Image Gallery -->
+                <div class="mb-8">
+                    <!-- Main Image -->
+                    <div class="w-full h-96 bg-gray-200 rounded-lg overflow-hidden mb-4 relative">
+                        <img id="mainImage" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop" alt="Corvette Stingray" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4 bg-primary-red text-white text-xs font-bold px-3 py-1 rounded shadow">HOT AUCTION</div>
+                    </div>
+                    <!-- Thumbnails -->
+                    <div class="grid grid-cols-5 gap-2">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop" class="w-full h-20 object-cover rounded cursor-pointer border-2 border-primary-red" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop" class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1593460354583-4224ab273ef3?q=80&w=2071&auto=format&fit=crop" class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition" onclick="changeImage(this)">
+                        <img src="https://images.unsplash.com/photo-1606103856616-95240c5f2b80?q=80&w=1924&auto=format&fit=crop" class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition" onclick="changeImage(this)">
+                        <div class="w-full h-20 bg-gray-200 rounded flex items-center justify-center cursor-pointer hover:bg-gray-300 transition relative">
+                            <span class="text-sm font-semibold text-gray-600">+5 Photos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vehicle Details Tabs -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="flex border-b border-gray-200">
+                        <button class="px-6 py-4 font-semibold text-primary-red border-b-2 border-primary-red focus:outline-none">Overview</button>
+                        <button class="px-6 py-4 font-semibold text-gray-500 hover:text-gray-800 focus:outline-none transition">Features</button>
+                        <button class="px-6 py-4 font-semibold text-gray-500 hover:text-gray-800 focus:outline-none transition">Condition Report</button>
+                    </div>
+                    
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold mb-4">Vehicle Specifications</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-8 mb-8 text-sm">
+                            <div>
+                                <p class="text-gray-500 mb-1">Make / Model</p>
+                                <p class="font-semibold">Chevrolet Corvette</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Year</p>
+                                <p class="font-semibold">2020</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Mileage</p>
+                                <p class="font-semibold">12,450 mi</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Transmission</p>
+                                <p class="font-semibold">8-Speed Dual-Clutch</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Engine</p>
+                                <p class="font-semibold">6.2L V8</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Drivetrain</p>
+                                <p class="font-semibold">RWD</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Fuel Type</p>
+                                <p class="font-semibold">Gasoline</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Exterior Color</p>
+                                <p class="font-semibold">Torch Red</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 mb-1">Interior Color</p>
+                                <p class="font-semibold">Jet Black</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-lg font-bold mb-2">Description</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                            Stunning 2020 Chevrolet Corvette Stingray 2LT package finished in Torch Red over Jet Black leather. Powered by a mid-mounted 6.2-liter LT2 V8 paired with an eight-speed dual-clutch transaxle. Features include the Z51 Performance Package, magnetic ride control, GT2 bucket seats, carbon-fiber interior trim, a performance data and video recorder, front lift system with memory, and a Bose 14-speaker audio system.
+                        </p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            This C8 is in pristine condition with only 12,450 miles. Regularly serviced and garaged. Clean title in hand.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Bidding Info -->
+            <div class="w-full lg:w-1/3">
+                
+                <!-- Bidding Panel -->
+                <div class="bg-white rounded-lg shadow-lg border border-gray-100 p-6 mb-6">
+                    
+                    <!-- Timer -->
+                    <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg mb-6 border border-gray-200">
+                        <p class="text-sm text-gray-500 mb-1 uppercase font-semibold tracking-wider">Auction Ends In</p>
+                        <div class="flex space-x-3 text-2xl font-black text-primary-dark">
+                            <div class="flex flex-col items-center"><span class="text-primary-red">01</span><span class="text-xs font-normal text-gray-400">DAYS</span></div><span>:</span>
+                            <div class="flex flex-col items-center"><span>04</span><span class="text-xs font-normal text-gray-400">HRS</span></div><span>:</span>
+                            <div class="flex flex-col items-center"><span>23</span><span class="text-xs font-normal text-gray-400">MIN</span></div><span>:</span>
+                            <div class="flex flex-col items-center"><span>15</span><span class="text-xs font-normal text-gray-400">SEC</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Current Bid -->
+                    <div class="mb-6">
+                        <p class="text-sm text-gray-500 mb-1">Current Bid (14 Bids)</p>
+                        <div class="text-4xl font-black text-primary-dark mb-2">$54,200</div>
+                        <p class="text-sm text-green-600 font-semibold"><i class="fas fa-check-circle mr-1"></i> Reserve Met</p>
+                    </div>
+
+                    <!-- Place Bid Input -->
+                    <div class="mb-4">
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
+                            <input type="number" id="bidAmount" min="54300" step="100" class="w-full border-2 border-gray-300 rounded-lg py-3 pl-8 pr-4 text-lg font-bold text-gray-800 focus:border-primary-red focus:outline-none transition" value="54300">
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Enter US $54,300 or more</p>
+                    </div>
+
+                    <button onclick="openBidModal()" class="w-full bg-primary-red hover:bg-red-700 text-white font-bold py-4 rounded-lg shadow-lg hover-lift transition text-lg mb-4">
+                        Place Bid Now
+                    </button>
+                    
+                    <p class="text-xs text-center text-gray-500">By placing a bid, you're committing to buy this item if you win.</p>
+                </div>
+
+                <!-- Bid History -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="font-bold text-lg text-primary-dark">Recent Bidders</h3>
+                        <a href="#" class="text-xs text-primary-red hover:underline">View All 14 Bids</a>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center pb-3 border-b border-gray-100">
+                            <div>
+                                <p class="font-semibold text-sm">j***k (15 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
+                                <p class="text-xs text-gray-400">Oct 24, 2023 - 14:32:01</p>
+                            </div>
+                            <span class="font-bold text-gray-800">$54,200</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-gray-100">
+                            <div>
+                                <p class="font-semibold text-sm">m***9 (42 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
+                                <p class="text-xs text-gray-400">Oct 24, 2023 - 11:15:45</p>
+                            </div>
+                            <span class="font-bold text-gray-800">$54,000</span>
+                        </li>
+                        <li class="flex justify-between items-center pb-3 border-b border-gray-100">
+                            <div>
+                                <p class="font-semibold text-sm">j***k (15 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
+                                <p class="text-xs text-gray-400">Oct 23, 2023 - 09:22:11</p>
+                            </div>
+                            <span class="font-bold text-gray-800">$53,500</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <div>
+                                <p class="font-semibold text-sm">t***r (3 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
+                                <p class="text-xs text-gray-400">Oct 22, 2023 - 18:05:30</p>
+                            </div>
+                            <span class="font-bold text-gray-800">$52,000</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Seller Info -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <h3 class="font-bold text-lg text-primary-dark mb-4">Seller Information</h3>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-xl font-bold text-gray-500 mr-4">
+                            TA
+                        </div>
+                        <div>
+                            <p class="font-bold text-gray-800"><a href="#" class="hover:text-primary-red transition">TokyoAuto_Official</a></p>
+                            <p class="text-sm text-gray-500">100% Positive Feedback (450 reviews)</p>
+                        </div>
+                    </div>
+                    <a href="#" class="block w-full text-center border border-gray-300 text-gray-700 font-semibold py-2 rounded hover:bg-gray-50 transition text-sm mb-2">Contact Seller</a>
+                    <a href="#" class="block w-full text-center text-primary-red text-sm hover:underline">View other items</a>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-500">
+        <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bid Confirmation Modal -->
+    <div id="bidModal" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden backdrop-blur-sm">
+        <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
+            <h3 class="text-2xl font-bold text-primary-dark mb-2">Confirm Your Bid</h3>
+            <p class="text-gray-600 text-sm mb-6">You are about to place a legally binding bid on the 2020 Chevrolet Corvette Stingray.</p>
+            
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-500 text-sm">Your Bid Amount:</span>
+                    <span class="text-2xl font-bold text-primary-dark" id="modalBidAmount">$54,300</span>
+                </div>
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-gray-500">Buyer's Premium (5%):</span>
+                    <span class="text-gray-700 font-semibold" id="modalFee">$2,715</span>
+                </div>
+                <div class="border-t border-gray-200 my-2 pt-2 flex justify-between items-center">
+                    <span class="font-bold text-gray-800">Total Commitment:</span>
+                    <span class="font-bold text-primary-red text-lg" id="modalTotal">$57,015</span>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <button onclick="closeBidModal()" class="flex-1 bg-white border border-gray-300 text-gray-700 font-bold py-3 rounded hover:bg-gray-50 transition">Cancel</button>
+                <button onclick="confirmBid()" class="flex-1 bg-primary-red hover:bg-red-700 text-white font-bold py-3 rounded shadow-lg transition">Confirm Bid</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="assets/js/app.js"></script>
+    <script>
+        // Image Gallery Script
+        function changeImage(element) {
+            const mainImg = document.getElementById('mainImage');
+            const thumbs = element.parentElement.querySelectorAll('img');
+            
+            mainImg.src = element.src;
+            
+            // Reset borders/opacity
+            thumbs.forEach(t => {
+                t.classList.remove('border-2', 'border-primary-red');
+                t.classList.add('opacity-70');
+            });
+            
+            // Highlight active
+            element.classList.remove('opacity-70');
+            element.classList.add('border-2', 'border-primary-red');
+        }
+
+        // Modal Logic
+        const modal = document.getElementById('bidModal');
+        const inputAmount = document.getElementById('bidAmount');
+        const mAmount = document.getElementById('modalBidAmount');
+        const mFee = document.getElementById('modalFee');
+        const mTotal = document.getElementById('modalTotal');
+
+        function formatCurrency(num) {
+            return '$' + parseFloat(num).toLocaleString('en-US', {minimumFractionDigits: 0, maximumFractionDigits: 0});
+        }
+
+        function openBidModal() {
+            const amount = parseFloat(inputAmount.value);
+            if(amount >= 54300) {
+                const fee = amount * 0.05;
+                const total = amount + fee;
+                
+                mAmount.innerText = formatCurrency(amount);
+                mFee.innerText = formatCurrency(fee);
+                mTotal.innerText = formatCurrency(total);
+                
+                modal.classList.remove('hidden');
+            } else {
+                alert("Bid must be at least $54,300");
+            }
+        }
+
+        function closeBidModal() {
+            modal.classList.add('hidden');
+        }
+
+        function confirmBid() {
+            // Mock API Call using config
+            console.log("Placing bid via: " + API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUCTIONS.PLACE_BID.replace('{id}', '1'));
+            alert('Bid placed successfully! (Mock Action)');
+            closeBidModal();
+        }
+    </script>
+</body>
+</html>

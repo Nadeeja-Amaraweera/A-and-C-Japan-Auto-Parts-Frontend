@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --primary-dark: #1a2a3a;
+  --primary-red: #c41e24;
+  --primary-gold: #f5a623;
+  --bg-light: #f5f5f5;
+  --text-dark: #333333;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-red);
+}
+
+/* Glassmorphism utility for modern look */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-dark {
+  background: rgba(26, 42, 58, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover effects */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Utility to ensure elements with Tailwind don't clash with base */
+.text-primary-red {
+    color: var(--primary-red);
+}
+.bg-primary-red {
+    background-color: var(--primary-red);
+}
+.text-primary-dark {
+    color: var(--primary-dark);
+}
+.bg-primary-dark {
+    background-color: var(--primary-dark);
+}
+.text-primary-gold {
+    color: var(--primary-gold);
+}
+.bg-primary-gold {
+    background-color: var(--primary-gold);
+}

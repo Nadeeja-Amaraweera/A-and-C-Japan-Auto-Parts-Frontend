@@ -6,8 +6,12 @@ import { API_CONFIG } from './api-config.js';
 import { apiService } from './api-service.js';
 import { authController } from './controllers/AuthController.js';
 import { auctionController } from './controllers/AuctionController.js';
+import { adminController } from './controllers/AdminController.js';
 import { eventBus, EVENTS } from './events/EventBus.js';
 import { Helpers } from './utils/helpers.js';
+
+// Expose adminController globally for inline onclick handlers in the admin dashboard
+window.adminController = adminController;
 
 class App {
     constructor() {
@@ -100,7 +104,7 @@ class App {
             'add-auction': () => this.loadAddAuctionPage(),
             'profile': () => this.loadProfilePage(),
             'supplier-dashboard': () => this.loadSupplierDashboard(),
-            'admin-dashboard': () => this.loadAdminDashboard(),
+            'admin': () => adminController.init(),
             'cart': () => this.loadCartPage(),
             'login': () => this.loadLoginPage(),
             'register': () => this.loadRegisterPage(),

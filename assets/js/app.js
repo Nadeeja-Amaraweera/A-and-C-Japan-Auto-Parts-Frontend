@@ -97,6 +97,8 @@ class App {
      * Get page loader function
      */
     getPageLoader(page) {
+
+        console.log(page);
         const loaders = {
             'index': () => this.loadHomePage(),
             'auctions': () => this.loadAuctionsPage(),
@@ -106,7 +108,7 @@ class App {
             'supplier-dashboard': () => this.loadSupplierDashboard(),
             'admin': () => adminController.init(),
             'cart': () => this.loadCartPage(),
-            'login': () => this.loadLoginPage(),
+            'login': () => this.initLoginPage(),
             'register': () => this.loadRegisterPage(),
             'contact': () => this.loadContactPage(),
             'about': () => this.loadAboutPage(),
@@ -196,6 +198,120 @@ class App {
         } catch (error) {
             console.error('Auction details load error:', error);
             this.showError('Failed to load auction details');
+        }
+    }
+
+    // ✅ Login Page Initialization
+    async initLoginPage() {
+        console.log('🔐 Setting up login page...');
+
+        // Already logged in? Redirect
+        // if (this.authController.isAuthenticated()) {
+        //     window.location.href = 'profile.html';
+        //     return;
+        // }
+
+        // ---------- LOGIN FORM ----------
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                console.log("Clicked on login button");
+                e.preventDefault();
+
+                // 1. Get data
+                const email = document.getElementById('loginEmail')?.value?.trim();
+                const password = document.getElementById('loginPassword')?.value?.trim();
+
+                // 2. Validate
+                if (!email || !password) {
+                    this.showError('Please enter email and password');
+                    return;
+                }
+
+                // 3. Show loading
+                const button = document.getElementById('loginButton');
+                button.disabled = true;
+                button.textContent = 'Logging in...';
+
+                // 4. Call AuthController
+                const result = await this.authController.login(email, password);
+
+                // 5. Handle result
+                if (result.success) {
+                    this.showSuccess('Login successful!');
+                    window.location.href = 'profile.html';
+                } else {
+                    this.showError(result.error || 'Login failed');
+                    button.disabled = false;
+                    button.textContent = 'Login';
+                }
+            });
+        }
+
+        // ---------- REGISTER FORM ----------
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // 1. Get data
+                const name = document.getElementById('regName')?.value?.trim();
+                const email = document.getElementById('regEmail')?.value?.trim();
+                const phone = document.getElementById('regPhone')?.value?.trim();
+                const password = document.getElementById('regPassword')?.value;
+                const confirmPassword = document.getElementById('regConfirmPassword')?.value;
+                const termsChecked = document.getElementById('regTerms')?.checked;
+
+                // 2. Validate
+                if (!name || !email || !phone || !password || !confirmPassword) {
+                    this.showError('Please fill all required fields');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    this.showError('Passwords do not match!');
+                    return;
+                }
+
+                if (password.length < 6) {
+                    this.showError('Password must be at least 6 characters');
+                    return;
+                }
+
+                if (!termsChecked) {
+                    this.showError('Please accept Terms & Conditions');
+                    return;
+                }
+
+                // 3. Show loading
+                const button = document.getElementById('registerButton');
+                button.disabled = true;
+                button.textContent = 'Creating account...';
+
+                // 4. Prepare data
+                const userData = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                };
+
+                console.log(userData);
+
+                // 5. Call AuthController
+                const result = await this.authController.register(userData);
+
+                // 6. Handle result
+                if (result.success) {
+                    this.showSuccess('Registration successful! Please login.');
+                    document.getElementById('registerForm').reset();
+                    window.location.href = 'login.html';
+                } else {
+                    this.showError(result.error || 'Registration failed');
+                    button.disabled = false;
+                    button.textContent = 'Create Account';
+                }
+            });
         }
     }
 
@@ -614,6 +730,8 @@ class App {
     loadNotifications() {
         // Implement notification loading
     }
+
+
 }
 
 // Initialize app when DOM is ready

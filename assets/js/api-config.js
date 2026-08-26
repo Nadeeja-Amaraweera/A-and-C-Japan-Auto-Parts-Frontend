@@ -5,7 +5,7 @@
 
 export const API_CONFIG = {
     // Base URL for all API calls
-    BASE_URL: 'http://localhost:8080/api/v1',
+    BASE_URL: 'http://localhost:8080/api',
 
     // API version
     VERSION: 'v1',

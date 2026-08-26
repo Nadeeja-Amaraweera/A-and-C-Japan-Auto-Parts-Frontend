@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,6 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
 
     <!-- Simple Header -->
@@ -31,14 +33,15 @@
                     A&C <span class="text-primary-red">JAPAN</span>
                 </div>
             </a>
-            <a href="index.html" class="text-gray-500 hover:text-primary-red transition"><i class="fas fa-arrow-left mr-1"></i> Back to Home</a>
+            <a href="index.html" class="text-gray-500 hover:text-primary-red transition"><i
+                    class="fas fa-arrow-left mr-1"></i> Back to Home</a>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="flex-grow flex items-center justify-center py-12 px-4">
         <div class="max-w-4xl w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
-            
+
             <!-- Login Section -->
             <div class="w-full md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-100">
                 <h2 class="text-2xl font-bold text-primary-dark mb-2">Welcome Back</h2>
@@ -47,20 +50,26 @@
                 <form id="loginForm" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email / Username</label>
-                        <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="Enter your email or username">
+                        <input type="text" required id="loginEmail"
+                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                            placeholder="Enter your email or username">
                     </div>
                     <div>
                         <div class="flex justify-between items-center mb-1">
                             <label class="block text-sm font-medium text-gray-700">Password</label>
                             <a href="#" class="text-xs text-primary-red hover:underline">Forgot password?</a>
                         </div>
-                        <input type="password" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="••••••••">
+                        <input type="password" required id="loginPassword"
+                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                            placeholder="••••••••">
                     </div>
                     <div class="flex items-center">
-                        <input type="checkbox" id="remember" class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
+                        <input type="checkbox" id="remember"
+                            class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
                         <label for="remember" class="ml-2 block text-sm text-gray-600">Remember me</label>
                     </div>
-                    <button type="submit" class="w-full bg-primary-dark text-white font-semibold py-3 rounded hover:bg-gray-800 transition shadow-md">Login</button>
+                    <button type="submit"
+                        class="w-full bg-primary-dark text-white font-semibold py-3 rounded hover:bg-gray-800 transition shadow-md">Login</button>
                 </form>
             </div>
 
@@ -72,51 +81,68 @@
                 <form id="registerForm" class="space-y-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="John Doe">
+                        <input type="text" required id="regName"
+                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                            placeholder="John Doe">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="john@example.com">
+                        <input type="email" required id="regEmail"
+                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                            placeholder="john@example.com">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input type="tel" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="+1 234 567 8900">
+                        <input type="tel" required id="regPhone"
+                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                            placeholder="+1 234 567 8900">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                            <input type="password" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="••••••••">
+                            <input type="password" required id="regPassword"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                                placeholder="••••••••">
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                            <input type="password" required class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition" placeholder="••••••••">
+                            <input type="password" required id="regConfirmPassword"
+                                class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                                placeholder="••••••••">
                         </div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">I want to register as a:</label>
                         <div class="flex space-x-4 mt-2">
                             <label class="flex items-center">
-                                <input type="radio" name="userType" value="buyer" checked class="text-primary-red focus:ring-primary-red h-4 w-4">
+                                <input type="radio" name="userType" value="buyer" checked
+                                    class="text-primary-red focus:ring-primary-red h-4 w-4">
                                 <span class="ml-2 text-sm text-gray-700">Buyer</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="userType" value="seller" class="text-primary-red focus:ring-primary-red h-4 w-4">
+                                <input type="radio" name="userType" value="seller"
+                                    class="text-primary-red focus:ring-primary-red h-4 w-4">
                                 <span class="ml-2 text-sm text-gray-700">Seller / Supplier</span>
                             </label>
                         </div>
                     </div>
                     <div class="flex items-start mt-4">
                         <div class="flex items-center h-5">
-                            <input id="terms" type="checkbox" required class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
+                            <input id="terms" type="checkbox" required
+                                class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
                         </div>
                         <div class="ml-2 text-sm">
-                            <label for="terms" class="text-gray-600">I agree to the <a href="#" class="text-primary-red hover:underline">Terms & Conditions</a> and Privacy Policy.</label>
+                            <label for="terms" class="text-gray-600">I agree to the <a href="#"
+                                    class="text-primary-red hover:underline">Terms & Conditions</a> and Privacy
+                                Policy.</label>
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-primary-red text-white font-semibold py-3 rounded hover:bg-red-700 transition shadow-md mt-2">Create Account</button>
+                    <button type="submit"
+                        class="w-full bg-primary-red text-white font-semibold py-3 rounded hover:bg-red-700 transition shadow-md mt-2">Create
+                        Account</button>
                 </form>
             </div>
-            
+
         </div>
     </main>
 
@@ -131,7 +157,7 @@
             e.preventDefault();
             // In a real app, this would use API_CONFIG.ENDPOINTS.AUTH.LOGIN
             console.log('Login logic here');
-            window.location.href = 'profile.html';
+            // window.location.href = 'profile.html';
         });
 
         document.getElementById('registerForm').addEventListener('submit', (e) => {
@@ -141,4 +167,5 @@
         });
     </script>
 </body>
+
 </html>

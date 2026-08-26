@@ -5,14 +5,14 @@
 
 export const API_CONFIG = {
     // Base URL for all API calls
-    BASE_URL: 'http://localhost:8080/api',
-    
+    BASE_URL: 'http://localhost:8080/api/v1',
+
     // API version
     VERSION: 'v1',
-    
+
     // Timeout in milliseconds
     TIMEOUT: 30000,
-    
+
     // Endpoints grouped by module
     ENDPOINTS: {
         // Authentication endpoints
@@ -25,7 +25,7 @@ export const API_CONFIG = {
             RESET_PASSWORD: '/auth/reset-password',
             VERIFY_EMAIL: '/auth/verify-email'
         },
-        
+
         // User management endpoints
         USERS: {
             GET_ALL: '/users',
@@ -39,7 +39,7 @@ export const API_CONFIG = {
             GET_SUPPLIER_STATUS: '/users/{id}/supplier-status',
             UPLOAD_DOCUMENTS: '/users/{id}/documents'
         },
-        
+
         // Vehicle management endpoints
         VEHICLES: {
             GET_ALL: '/vehicles',
@@ -53,7 +53,7 @@ export const API_CONFIG = {
             GET_BY_USER: '/vehicles/user/{userId}',
             UPLOAD_IMAGES: '/vehicles/{id}/images'
         },
-        
+
         // Auction management endpoints
         AUCTIONS: {
             GET_ALL: '/auctions',
@@ -74,7 +74,7 @@ export const API_CONFIG = {
             GET_USER_AUCTIONS: '/auctions/user',
             GET_HIGHEST_BID: '/auctions/{id}/highest-bid'
         },
-        
+
         // Product management endpoints
         PRODUCTS: {
             GET_ALL: '/products',
@@ -89,7 +89,7 @@ export const API_CONFIG = {
             GET_DEALS: '/products/deals',
             UPLOAD_IMAGES: '/products/{id}/images'
         },
-        
+
         // Category management endpoints
         CATEGORIES: {
             GET_ALL: '/categories',
@@ -99,7 +99,7 @@ export const API_CONFIG = {
             DELETE: '/categories/{id}',
             GET_TREE: '/categories/tree'
         },
-        
+
         // Cart management endpoints
         CART: {
             GET: '/cart',
@@ -110,7 +110,7 @@ export const API_CONFIG = {
             GET_COUNT: '/cart/count',
             GET_TOTAL: '/cart/total'
         },
-        
+
         // Order management endpoints
         ORDERS: {
             CREATE: '/orders',
@@ -121,14 +121,14 @@ export const API_CONFIG = {
             CANCEL: '/orders/{id}/cancel',
             GET_INVOICE: '/orders/{id}/invoice'
         },
-        
+
         // Payment endpoints
         PAYMENT: {
             CREATE_SESSION: '/payment/create-session',
             VERIFY: '/payment/verify',
             GET_STATUS: '/payment/status/{id}'
         },
-        
+
         // Admin endpoints
         ADMIN: {
             DASHBOARD: '/admin/dashboard',
@@ -145,7 +145,7 @@ export const API_CONFIG = {
             STATISTICS: '/admin/statistics',
             REPORTS: '/admin/reports'
         },
-        
+
         // Notification endpoints
         NOTIFICATIONS: {
             GET_ALL: '/notifications',
@@ -155,7 +155,7 @@ export const API_CONFIG = {
             GET_COUNT: '/notifications/count'
         }
     },
-    
+
     // HTTP status codes
     STATUS: {
         OK: 200,
@@ -169,7 +169,7 @@ export const API_CONFIG = {
         CONFLICT: 409,
         INTERNAL_ERROR: 500
     },
-    
+
     // Local storage keys
     STORAGE_KEYS: {
         TOKEN: 'authToken',
@@ -182,7 +182,7 @@ export const API_CONFIG = {
         RECENT_SEARCHES: 'recentSearches',
         WISHLIST: 'wishlist'
     },
-    
+
     // Default headers
     HEADERS: {
         'Content-Type': 'application/json',

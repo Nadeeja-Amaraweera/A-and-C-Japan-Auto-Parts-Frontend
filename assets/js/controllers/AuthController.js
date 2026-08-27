@@ -40,14 +40,22 @@ class AuthController {
     async login(email, password) {
         try {
             const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { email, password });
-            if (response.user) {
-                this.user = new User(response.user);
-                this.isAuthenticated = true;
-                this.notifyListeners();
-                return { success: true, user: this.user };
+            if (response.status === 0) {
+                console.log('✅ Login successful!');
+                return {
+                    success: true,
+                    user: new User(response.body),
+                    message: response.message || 'Login successful!'
+                };
             }
             return { success: false, error: 'Invalid credentials' };
         } catch (error) {
+            if (error.status === 401) {
+                return {
+                    success: false,
+                    error: error.data?.message || 'Invalid credentials'
+                };
+            }
             return { success: false, error: error.message };
         }
     }

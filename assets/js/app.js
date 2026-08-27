@@ -252,7 +252,6 @@ class App {
         const registerForm = document.getElementById('registerForm');
         if (registerForm) {
             registerForm.addEventListener('submit', async (e) => {
-                console.log("Clicked on register button");
                 e.preventDefault();
 
                 // 1. Get data
@@ -299,10 +298,6 @@ class App {
                     userPassword: password,
                 };
 
-                console.log(name, email, phone, password, confirmPassword, termsChecked);
-
-                console.log(userData);
-
                 // 5. Call AuthController
                 const result = await this.authController.register(userData);
 
@@ -310,7 +305,10 @@ class App {
                 if (result.success) {
                     this.showSuccess('Registration successful! Please login.');
                     document.getElementById('registerForm').reset();
-                    window.location.href = 'login.html';
+                    const loginEmail = document.getElementById('loginEmail');
+                    loginEmail.focus();
+
+                    // window.location.href = 'login.html';
                 } else {
                     this.showError(result.error || 'Registration failed');
                     // button.disabled = false;
@@ -576,8 +574,43 @@ class App {
     /**
      * Show success notification
      */
-    showSuccess(message) {
-        this.showNotification(message, 'success');
+    showSuccess(message, duration = 5000) {
+        let container = document.getElementById('success-toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'success-toast-container';
+            // Top-center position specifically for success messages
+            container.className = 'fixed top-5 left-1/2 transform -translate-x-1/2 z-[10000] flex flex-col items-center space-y-3 pointer-events-none';
+            document.body.appendChild(container);
+        }
+
+        const toastEl = document.createElement('div');
+        toastEl.className = 'bg-green-50 text-green-900 border border-green-200 pointer-events-auto px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-4 min-w-[320px] max-w-lg transform transition-all duration-500 -translate-y-24 opacity-0';
+
+        toastEl.innerHTML = `
+            <div class="flex-shrink-0 bg-green-500 rounded-full h-8 w-8 flex items-center justify-center shadow-inner">
+                <i class="fas fa-check text-white text-sm"></i>
+            </div>
+            <div class="font-semibold flex-1 text-sm tracking-wide">${message}</div>
+            <button onclick="this.parentElement.style.opacity='0'; this.parentElement.style.transform='translateY(-24px)'; setTimeout(() => this.parentElement.remove(), 500)" class="text-green-600 hover:text-green-800 focus:outline-none transition-colors p-1">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
+
+        container.appendChild(toastEl);
+
+        // Trigger entrance animation
+        setTimeout(() => {
+            toastEl.classList.remove('-translate-y-24', 'opacity-0');
+        }, 10);
+
+        // Auto remove
+        setTimeout(() => {
+            if (toastEl.parentElement) {
+                toastEl.classList.add('-translate-y-24', 'opacity-0');
+                setTimeout(() => toastEl.remove(), 500);
+            }
+        }, duration);
     }
 
     /**
@@ -644,7 +677,7 @@ class App {
         const toastEl = document.createElement('div');
         toastEl.id = `toast-${toast.id}`;
         toastEl.className = `${styles[toast.type] || styles.info} pointer-events-auto px-4 py-3 rounded shadow-lg flex items-center space-x-3 min-w-[300px] max-w-md transform transition-all duration-300 translate-x-full opacity-0`;
-        
+
         toastEl.innerHTML = `
             <div>${icons[toast.type] || icons.info}</div>
             <div class="font-medium flex-1 text-sm">${toast.message}</div>

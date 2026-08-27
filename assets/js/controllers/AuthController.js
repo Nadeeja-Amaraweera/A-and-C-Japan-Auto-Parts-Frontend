@@ -57,11 +57,10 @@ class AuthController {
      */
     async register(userData) {
         try {
-            console.log(userData);
             const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.REGISTER, userData);
-            if (response.user) {
-                console.log(response.user);
-                return { success: true, user: new User(response.user) };
+            if (response) {
+
+                return { success: true, error: 'Registration OK' };
             }
             return { success: false, error: 'Registration failed' };
         } catch (error) {

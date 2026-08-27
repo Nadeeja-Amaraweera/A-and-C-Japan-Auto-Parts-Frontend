@@ -8,7 +8,7 @@ import { eventBus } from './events/EventBus.js';
 
 class ApiService {
     async request(endpoint, options = {}) {
-        const url = `${API_CONFIG.BASE_URL}${endpoint}`;
+        const url = `${API_CONFIG.BASE_URL}${API_CONFIG.API_PREFIX}${API_CONFIG.VERSION}${endpoint}`;
 
         const headers = { ...API_CONFIG.HEADERS, ...(options.headers || {}) };
 

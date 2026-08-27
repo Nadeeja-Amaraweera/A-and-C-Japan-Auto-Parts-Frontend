@@ -252,6 +252,7 @@ class App {
         const registerForm = document.getElementById('registerForm');
         if (registerForm) {
             registerForm.addEventListener('submit', async (e) => {
+                console.log("Clicked on register button");
                 e.preventDefault();
 
                 // 1. Get data
@@ -261,6 +262,8 @@ class App {
                 const password = document.getElementById('regPassword')?.value;
                 const confirmPassword = document.getElementById('regConfirmPassword')?.value;
                 const termsChecked = document.getElementById('regTerms')?.checked;
+
+
 
                 // 2. Validate
                 if (!name || !email || !phone || !password || !confirmPassword) {
@@ -273,7 +276,7 @@ class App {
                     return;
                 }
 
-                if (password.length < 6) {
+                if (password.length < 3) {
                     this.showError('Password must be at least 6 characters');
                     return;
                 }
@@ -285,16 +288,18 @@ class App {
 
                 // 3. Show loading
                 const button = document.getElementById('registerButton');
-                button.disabled = true;
-                button.textContent = 'Creating account...';
+                // button.disabled = true;
+                // button.textContent = 'Creating account...';
 
                 // 4. Prepare data
                 const userData = {
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    password: password,
+                    userName: name,
+                    userEmail: email,
+                    userPhone: phone,
+                    userPassword: password,
                 };
+
+                console.log(name, email, phone, password, confirmPassword, termsChecked);
 
                 console.log(userData);
 
@@ -308,8 +313,8 @@ class App {
                     window.location.href = 'login.html';
                 } else {
                     this.showError(result.error || 'Registration failed');
-                    button.disabled = false;
-                    button.textContent = 'Create Account';
+                    // button.disabled = false;
+                    // button.textContent = 'Create Account';
                 }
             });
         }
@@ -614,22 +619,46 @@ class App {
      * Render toast
      */
     renderToast(toast) {
-        const container = document.getElementById('toast-container');
-        if (!container) return;
+        let container = document.getElementById('toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toast-container';
+            container.className = 'fixed bottom-5 right-5 z-[9999] flex flex-col items-end space-y-3 pointer-events-none';
+            document.body.appendChild(container);
+        }
 
-        const colors = {
-            success: 'bg-green-500',
-            error: 'bg-red-500',
-            info: 'bg-blue-500',
-            warning: 'bg-yellow-500'
+        const styles = {
+            success: 'bg-white text-gray-800 border-l-4 border-green-500',
+            error: 'bg-white text-gray-800 border-l-4 border-red-500',
+            info: 'bg-white text-gray-800 border-l-4 border-blue-500',
+            warning: 'bg-white text-gray-800 border-l-4 border-yellow-500'
+        };
+
+        const icons = {
+            success: '<i class="fas fa-check-circle text-green-500 text-xl"></i>',
+            error: '<i class="fas fa-exclamation-circle text-red-500 text-xl"></i>',
+            info: '<i class="fas fa-info-circle text-blue-500 text-xl"></i>',
+            warning: '<i class="fas fa-exclamation-triangle text-yellow-500 text-xl"></i>'
         };
 
         const toastEl = document.createElement('div');
         toastEl.id = `toast-${toast.id}`;
-        toastEl.className = `${colors[toast.type]} text-white px-4 py-2 rounded-lg shadow-lg mb-2 animate-slide-in`;
-        toastEl.textContent = toast.message;
+        toastEl.className = `${styles[toast.type] || styles.info} pointer-events-auto px-4 py-3 rounded shadow-lg flex items-center space-x-3 min-w-[300px] max-w-md transform transition-all duration-300 translate-x-full opacity-0`;
+        
+        toastEl.innerHTML = `
+            <div>${icons[toast.type] || icons.info}</div>
+            <div class="font-medium flex-1 text-sm">${toast.message}</div>
+            <button onclick="this.parentElement.style.opacity='0'; this.parentElement.style.transform='translateX(100%)'; setTimeout(() => this.parentElement.remove(), 300)" class="text-gray-400 hover:text-gray-600 focus:outline-none">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
 
         container.appendChild(toastEl);
+
+        // Trigger animation
+        setTimeout(() => {
+            toastEl.classList.remove('translate-x-full', 'opacity-0');
+        }, 10);
     }
 
     /**
@@ -638,7 +667,10 @@ class App {
     removeToast(id) {
         const toast = document.getElementById(`toast-${id}`);
         if (toast) {
-            toast.remove();
+            toast.classList.add('translate-x-full', 'opacity-0');
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
         }
         this.toasts = this.toasts.filter(t => t.id !== id);
     }

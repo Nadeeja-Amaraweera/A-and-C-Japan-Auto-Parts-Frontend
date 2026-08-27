@@ -5,10 +5,12 @@
 
 export const API_CONFIG = {
     // Base URL for all API calls
-    BASE_URL: 'http://localhost:8080/api',
+    BASE_URL: 'http://localhost:8080',
+
+    API_PREFIX: '/api',
 
     // API version
-    VERSION: 'v1',
+    VERSION: '/v1',
 
     // Timeout in milliseconds
     TIMEOUT: 30000,

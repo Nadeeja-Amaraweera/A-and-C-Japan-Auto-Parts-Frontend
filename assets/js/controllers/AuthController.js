@@ -60,10 +60,25 @@ class AuthController {
             const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.REGISTER, userData);
             if (response) {
 
-                return { success: true, error: 'Registration OK' };
+                if (response.status === 0) {
+                    console.log('✅ Registration successful!');
+                    return {
+                        success: true,
+                        user: new User(response.body),
+                        message: response.message || 'Registration successful!'
+                    };
+                }
             }
             return { success: false, error: 'Registration failed' };
         } catch (error) {
+
+            if (error.status === 409) {
+                return {
+                    success: false,
+                    error: error.data?.message || 'User already exists'
+                };
+            }
+
             return { success: false, error: error.message };
         }
     }

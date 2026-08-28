@@ -56,6 +56,8 @@ class App {
             // Load initial data
             await this.loadInitialData();
 
+            this.authController.restoreSession();
+
             this.isInitialized = true;
 
             // Emit initialization event
@@ -206,10 +208,12 @@ class App {
         console.log('🔐 Setting up login page...');
 
         // Already logged in? Redirect
-        // if (this.authController.isAuthenticated()) {
-        //     window.location.href = 'profile.html';
-        //     return;
-        // }
+        if (this.authController.isAuthenticated) {
+            console.log("already logged in")
+
+            window.location.href = 'profile.html';
+            return;
+        }
 
         // ---------- LOGIN FORM ----------
         const loginForm = document.getElementById('loginForm');
@@ -238,7 +242,7 @@ class App {
                 // 5. Handle result
                 if (result.success) {
                     this.showSuccess('Login successful!');
-                    window.location.href = 'profile.html';
+                    // window.location.href = 'index.html';
                 } else {
                     this.showError(result.error || 'Login failed');
                     button.disabled = false;
@@ -257,6 +261,7 @@ class App {
                 const name = document.getElementById('regName')?.value?.trim();
                 const email = document.getElementById('regEmail')?.value?.trim();
                 const phone = document.getElementById('regPhone')?.value?.trim();
+                const address = document.getElementById('regAddress')?.value?.trim();
                 const password = document.getElementById('regPassword')?.value;
                 const confirmPassword = document.getElementById('regConfirmPassword')?.value;
                 const termsChecked = document.getElementById('regTerms')?.checked;
@@ -264,7 +269,7 @@ class App {
 
 
                 // 2. Validate
-                if (!name || !email || !phone || !password || !confirmPassword) {
+                if (!name || !email || !phone || !address || !password || !confirmPassword) {
                     this.showError('Please fill all required fields');
                     return;
                 }
@@ -294,6 +299,7 @@ class App {
                     userName: name,
                     userEmail: email,
                     userPhone: phone,
+                    userAddress: address,
                     userPassword: password,
                 };
 

@@ -5,12 +5,40 @@
 import { API_CONFIG } from '../api-config.js';
 import { apiService } from '../api-service.js';
 import { User } from '../models/User.js';
+import { storage } from '../utils/storage.js';
 
 class AuthController {
     constructor() {
         this.user = null;
         this.isAuthenticated = false;
         this.authListeners = [];
+        this.restoreSession();
+    }
+
+    restoreSession() {
+        const token = storage.getToken();
+        const userData = storage.getUser();
+
+        if (token && userData) {
+            try {
+                this.user = new User(userData);
+                this.isAuthenticated = true;
+                console.log('✅ Session restored for:', this.user.getName());
+                return true;
+            } catch (e) {
+                console.error('❌ Session restore error:', e);
+                this.clearSession();
+                return false;
+            }
+        }
+        return false;
+    }
+
+    clearSession() {
+        storage.removeToken();
+        storage.removeUser();
+        this.user = null;
+        this.isAuthenticated = false;
     }
 
     /**
@@ -42,9 +70,23 @@ class AuthController {
             const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { userEmail, password });
             if (response.status === 0) {
                 console.log('✅ Login successful!');
+
+                if (response.body.token) {
+                    storage.setToken(response.body.token);
+                    console.log('✅ Token set to storage:', storage.getToken());
+                } else {
+                    console.warn('⚠️ No token in response!');
+                }
+
+                const user = new User(response.body);
+                storage.setUser(user);
+                this.user = user;
+                this.isAuthenticated = true;
+                this.notifyListeners();
+
                 return {
                     success: true,
-                    user: new User(response.body),
+                    user: user,
                     message: response.message || 'Login successful!'
                 };
             }
@@ -113,12 +155,7 @@ class AuthController {
         return this.user;
     }
 
-    /**
-     * Check if user is authenticated
-     */
-    isAuthenticated() {
-        return this.isAuthenticated;
-    }
+
 
     /**
      * Check if user is admin

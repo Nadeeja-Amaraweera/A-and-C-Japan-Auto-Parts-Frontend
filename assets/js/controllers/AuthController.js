@@ -37,9 +37,9 @@ class AuthController {
     /**
      * Login user
      */
-    async login(email, password) {
+    async login(userEmail, password) {
         try {
-            const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { email, password });
+            const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { userEmail, password });
             if (response.status === 0) {
                 console.log('✅ Login successful!');
                 return {
@@ -50,7 +50,7 @@ class AuthController {
             }
             return { success: false, error: 'Invalid credentials' };
         } catch (error) {
-            if (error.status === 401) {
+            if (error.status === 403) {
                 return {
                     success: false,
                     error: error.data?.message || 'Invalid credentials'

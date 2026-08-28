@@ -29,12 +29,18 @@ class ApiService {
             if (response.status === API_CONFIG.STATUS.UNAUTHORIZED) {
                 // Token might be expired
                 eventBus.emit('auth:unauthorized');
-                throw new Error('Unauthorized');
+                const error = new Error('Unauthorized');
+                error.status = 401;
+                error.data = { message: 'Unauthorized' };
+                throw error;
             }
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.message || `HTTP Error ${response.status}`);
+                const error = new Error(errorData.message || `HTTP Error ${response.status}`);
+                error.status = response.status;
+                error.data = errorData;
+                throw error;
             }
 
             // Handle 204 No Content

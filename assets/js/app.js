@@ -215,15 +215,14 @@ class App {
         const loginForm = document.getElementById('loginForm');
         if (loginForm) {
             loginForm.addEventListener('submit', async (e) => {
-                console.log("Clicked on login button");
                 e.preventDefault();
 
                 // 1. Get data
-                const email = document.getElementById('loginEmail')?.value?.trim();
+                const userEmail = document.getElementById('loginEmail')?.value?.trim();
                 const password = document.getElementById('loginPassword')?.value?.trim();
 
                 // 2. Validate
-                if (!email || !password) {
+                if (!userEmail || !password) {
                     this.showError('Please enter email and password');
                     return;
                 }
@@ -234,7 +233,7 @@ class App {
                 button.textContent = 'Logging in...';
 
                 // 4. Call AuthController
-                const result = await this.authController.login(email, password);
+                const result = await this.authController.login(userEmail, password);
 
                 // 5. Handle result
                 if (result.success) {

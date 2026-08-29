@@ -5,6 +5,7 @@
 import { API_CONFIG } from '../api-config.js';
 import { apiService } from '../api-service.js';
 import { Auction } from '../models/Auction.js';
+import { storage } from '../utils/storage.js';
 
 class AuctionController {
     constructor() {
@@ -32,6 +33,8 @@ class AuctionController {
             return [];
         }
     }
+
+
 
     /**
      * Load active auctions

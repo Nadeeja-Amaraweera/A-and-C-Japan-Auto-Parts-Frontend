@@ -35,7 +35,9 @@ export const storage = {
 
     // Token specific helpers
     getToken: () => storage.get(API_CONFIG.STORAGE_KEYS.TOKEN),
+
     setToken: (token) => storage.set(API_CONFIG.STORAGE_KEYS.TOKEN, token),
+
     removeToken: () => storage.remove(API_CONFIG.STORAGE_KEYS.TOKEN),
 
     // User specific helpers

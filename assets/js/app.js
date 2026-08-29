@@ -208,7 +208,7 @@ class App {
         console.log('🔐 Setting up login page...');
 
         // Already logged in? Redirect
-        if (this.authController.isAuthenticated) {
+        if (this.authController.checkIsAuthenticated()) {
             console.log("already logged in")
 
             window.location.href = 'profile.html';
@@ -242,7 +242,8 @@ class App {
                 // 5. Handle result
                 if (result.success) {
                     this.showSuccess('Login successful!');
-                    // window.location.href = 'index.html';
+                    alert('login ok');
+                    window.location.href = 'index.html';
                 } else {
                     this.showError(result.error || 'Login failed');
                     button.disabled = false;
@@ -324,6 +325,17 @@ class App {
     }
 
     /**
+     * Load profile page
+     */
+    async loadProfilePage() {
+        console.log('👤 Loading profile page...');
+        if (!this.authController.checkIsAuthenticated()) {
+            window.location.href = 'login.html';
+            return;
+        }
+    }
+
+    /**
      * Setup bid form
      */
     setupBidForm(auction) {
@@ -344,7 +356,7 @@ class App {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            if (!this.authController.isAuthenticated) {
+            if (!this.authController.checkIsAuthenticated()) {
                 this.showError('Please login to place a bid');
                 return;
             }
@@ -391,6 +403,18 @@ class App {
         document.addEventListener('click', (e) => {
             if (e.target.matches('[data-theme-toggle]')) {
                 this.toggleTheme();
+            }
+        });
+
+        // Logout handling
+        document.addEventListener('click', async (e) => {
+            const logoutTarget = e.target.closest('#logoutBtn, [data-logout]');
+            if (logoutTarget) {
+                e.preventDefault();
+                console.log('🔴 Log out button clicked');
+                await this.authController.logout();
+                this.showSuccess('Logged out successfully!');
+                window.location.href = 'login.html';
             }
         });
 
@@ -444,7 +468,7 @@ class App {
             await this.updateCartBadge();
 
             // Load notifications if authenticated
-            if (this.authController.isAuthenticated) {
+            if (this.authController.checkIsAuthenticated()) {
                 await this.loadNotifications();
             }
 

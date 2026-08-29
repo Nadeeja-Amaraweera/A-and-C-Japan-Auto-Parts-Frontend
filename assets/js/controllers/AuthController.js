@@ -7,6 +7,7 @@ import { apiService } from '../api-service.js';
 import { User } from '../models/User.js';
 import { storage } from '../utils/storage.js';
 
+
 class AuthController {
     constructor() {
         this.user = null;
@@ -27,7 +28,7 @@ class AuthController {
                 return true;
             } catch (e) {
                 console.error('❌ Session restore error:', e);
-                this.clearSession();
+                // this.clearSession();
                 return false;
             }
         }
@@ -35,10 +36,24 @@ class AuthController {
     }
 
     clearSession() {
-        storage.removeToken();
-        storage.removeUser();
+        // storage.removeToken();
+        // storage.removeUser();
         this.user = null;
         this.isAuthenticated = false;
+    }
+
+
+    checkIsAuthenticated() {
+        // ✅ Check both token and user
+        const token = storage.getToken();
+        const user = storage.getUser();
+
+        // If storage has data but state doesn't, restore
+        if (token && user && !this.isAuthenticated) {
+            this.restoreSession();
+        }
+
+        return this.isAuthenticated && !!token && !!user;
     }
 
     /**
@@ -55,7 +70,7 @@ class AuthController {
                 return true;
             } catch (error) {
                 console.error('Auth init error:', error);
-                this.logout();
+                // this.logout();
                 return false;
             }
         }
@@ -138,10 +153,13 @@ class AuthController {
      */
     async logout() {
         try {
-            await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGOUT, {});
+            // await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGOUT, {});
+            storage.removeToken();
+            storage.removeUser();
         } catch (error) {
             console.error('Logout error:', error);
         } finally {
+            // this.clearSession();
             this.user = null;
             this.isAuthenticated = false;
             this.notifyListeners();

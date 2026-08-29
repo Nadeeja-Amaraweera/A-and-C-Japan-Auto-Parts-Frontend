@@ -94,6 +94,7 @@ class AuthController {
                 }
 
                 const user = new User(response.body);
+                console.log(response.body);
                 storage.setUser(user);
                 this.user = user;
                 this.isAuthenticated = true;

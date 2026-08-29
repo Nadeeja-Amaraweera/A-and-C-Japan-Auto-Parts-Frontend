@@ -9,6 +9,7 @@ import { auctionController } from './controllers/AuctionController.js';
 import { adminController } from './controllers/AdminController.js';
 import { eventBus, EVENTS } from './events/EventBus.js';
 import { Helpers } from './utils/helpers.js';
+import { Topbar } from './components/Topbar.js';
 
 // Expose adminController globally for inline onclick handlers in the admin dashboard
 window.adminController = adminController;
@@ -38,6 +39,9 @@ class App {
         try {
             this.showLoading();
 
+            // Render Topbar
+            Topbar.render();
+
             // Initialize auth
             await this.authController.init();
 
@@ -55,6 +59,8 @@ class App {
 
             // Load initial data
             await this.loadInitialData();
+
+            this.updateNav();
 
             this.authController.restoreSession();
 
@@ -203,16 +209,53 @@ class App {
         }
     }
 
+    async updateNav() {
+        const myAccountNav = Topbar.getAccountNavLink();
+
+        console.log("🔍 Updating navigation...");
+        console.log("myAccountNav element:", myAccountNav);
+
+
+        if (!myAccountNav) {
+            console.warn('⚠️ myAccountNav element not found!');
+            return;
+        }
+
+        // ✅ Check if user is authenticated
+        if (this.authController.checkIsAuthenticated()) {
+            // ✅ Change to profile link
+            myAccountNav.href = 'profile.html';
+            myAccountNav.innerHTML = `
+            <i class="far fa-user mr-1"></i>
+            <span class="hidden sm:inline">Profile</span>
+        `;
+            console.log('✅ Navigation updated: Logged in -> Profile');
+        } else {
+            // ✅ Change to login link
+            myAccountNav.href = 'login.html';
+            myAccountNav.innerHTML = `
+            <i class="far fa-user mr-1"></i>
+            <span class="hidden sm:inline">Login</span>
+        `;
+            console.log('✅ Navigation updated: Logged out -> Login');
+        }
+    }
+
     // ✅ Login Page Initialization
     async initLoginPage() {
         console.log('🔐 Setting up login page...');
 
+        const mainPage = document.getElementById('mainLoginpage');
+
+
         // Already logged in? Redirect
         if (this.authController.checkIsAuthenticated()) {
             console.log("already logged in")
-
+            mainPage.classList.add("hidden");
             window.location.href = 'profile.html';
             return;
+        } else {
+            mainPage.classList.remove("hidden");
         }
 
         // ---------- LOGIN FORM ----------
@@ -239,11 +282,12 @@ class App {
                 // 4. Call AuthController
                 const result = await this.authController.login(userEmail, password);
 
+
                 // 5. Handle result
                 if (result.success) {
                     this.showSuccess('Login successful!');
-                    alert('login ok');
                     window.location.href = 'index.html';
+
                 } else {
                     this.showError(result.error || 'Login failed');
                     button.disabled = false;

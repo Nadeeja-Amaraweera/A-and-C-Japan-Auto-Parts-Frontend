@@ -24,7 +24,7 @@ class AuthController {
             try {
                 this.user = new User(userData);
                 this.isAuthenticated = true;
-                console.log('✅ Session restored for:', this.user.getName());
+                console.log('✅ Session restored for:', this.user);
                 return true;
             } catch (e) {
                 console.error('❌ Session restore error:', e);

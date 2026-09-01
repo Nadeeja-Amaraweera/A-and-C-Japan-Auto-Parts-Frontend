@@ -27,7 +27,6 @@ class AuthController {
                 console.log('✅ Session restored for:', this.user);
                 return true;
             } catch (e) {
-                console.error('❌ Session restore error:', e);
                 // this.clearSession();
                 return false;
             }

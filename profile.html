@@ -68,20 +68,20 @@
                     </div>
 
                     <nav class="space-y-2">
-                        <a href="#"
-                            class="block px-4 py-2 bg-gray-50 text-primary-red font-semibold rounded transition"><i
+                        <a href="#" onclick="showProfileDashboard(event)"
+                            class="nav-tab block px-4 py-2 bg-gray-50 text-primary-red font-semibold rounded transition"><i
                                 class="far fa-user w-6"></i> Profile Dashboard</a>
-                        <a href="#"
-                            class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
+                        <a href="#" onclick="showOrderHistory(event)"
+                            class="nav-tab block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
                                 class="fas fa-shopping-bag w-6"></i> Order History</a>
-                        <a href="#"
-                            class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
+                        <a href="#" onclick="showMyBids(event)"
+                            class="nav-tab block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
                                 class="fas fa-gavel w-6"></i> My Bids</a>
-                        <a href="#"
-                            class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
+                        <a href="#" onclick="showWishlist(event)"
+                            class="nav-tab block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
                                 class="far fa-heart w-6"></i> Wishlist</a>
-                        <a href="#"
-                            class="block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
+                        <a href="#" onclick="showSettings(event)"
+                            class="nav-tab block px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-primary-red font-medium rounded transition"><i
                                 class="fas fa-cog w-6"></i> Settings</a>
                         <button id="logoutBtn"
                             class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 hover:text-red-700 font-medium rounded transition flex items-center cursor-pointer">
@@ -103,7 +103,7 @@
             </aside>
 
             <!-- Dashboard Content -->
-            <div class="w-full md:w-3/4">
+            <div id="dashboard-content" class="w-full md:w-3/4">
 
                 <h1 class="text-2xl font-bold text-gray-800 mb-6">Profile Dashboard</h1>
 
@@ -244,13 +244,236 @@
 
     <script type="module" src="assets/js/app.js"></script>
     <script>
-        function becomeSupplier() {
-            if (confirm("Are you sure you want to upgrade your account to a Supplier? This will allow you to list vehicles and parts for sale.")) {
-                // Mock API Call
-                console.log("Upgrading user role via: " + API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.USERS.BECOME_SUPPLIER.replace('{id}', 'currentUser'));
-                alert("Account upgraded! Redirecting to Supplier Dashboard.");
-                window.location.href = "supplier-dashboard.html";
+        let profileDashboardHTML = '';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            profileDashboardHTML = document.getElementById('dashboard-content').innerHTML;
+        });
+
+        function setActiveTab(clickedElement) {
+            if (!clickedElement) return;
+            
+            const tabs = document.querySelectorAll('.nav-tab');
+            const activeClasses = ['bg-gray-50', 'text-primary-red', 'font-semibold'];
+            const inactiveClasses = ['text-gray-600', 'font-medium'];
+
+            tabs.forEach(tab => {
+                tab.classList.remove(...activeClasses);
+                tab.classList.add(...inactiveClasses);
+            });
+
+            clickedElement.classList.remove(...inactiveClasses);
+            clickedElement.classList.add(...activeClasses);
+        }
+
+        function showProfileDashboard(event) {
+            if(event) {
+                event.preventDefault();
+                setActiveTab(event.currentTarget);
             }
+            document.getElementById('dashboard-content').innerHTML = profileDashboardHTML;
+        }
+
+        function showOrderHistory(event) {
+            if(event) {
+                event.preventDefault();
+                setActiveTab(event.currentTarget);
+            }
+            document.getElementById('dashboard-content').innerHTML = `
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Order History</h1>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-200">
+                                <th class="py-3 px-6">Order ID</th>
+                                <th class="py-3 px-6">Date</th>
+                                <th class="py-3 px-6">Items</th>
+                                <th class="py-3 px-6">Total</th>
+                                <th class="py-3 px-6">Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#ORD-9082</td>
+                                <td class="py-4 px-6 text-gray-500">Oct 24, 2023</td>
+                                <td class="py-4 px-6">Brembo Brake Pads (x1)</td>
+                                <td class="py-4 px-6 font-semibold">$85.00</td>
+                                <td class="py-4 px-6"><span class="bg-blue-100 text-blue-700 py-1 px-2 rounded text-xs font-semibold">Processing</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#ORD-8933</td>
+                                <td class="py-4 px-6 text-gray-500">Oct 15, 2023</td>
+                                <td class="py-4 px-6">NGK Spark Plugs (x4)</td>
+                                <td class="py-4 px-6 font-semibold">$130.00</td>
+                                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#ORD-8511</td>
+                                <td class="py-4 px-6 text-gray-500">Sep 28, 2023</td>
+                                <td class="py-4 px-6">Castrol EDGE 5W-30 (x2)</td>
+                                <td class="py-4 px-6 font-semibold">$57.98</td>
+                                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function showMyBids(event) {
+            if(event) {
+                event.preventDefault();
+                setActiveTab(event.currentTarget);
+            }
+            document.getElementById('dashboard-content').innerHTML = `
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">My Bids</h1>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-200">
+                                <th class="py-3 px-6">Auction ID</th>
+                                <th class="py-3 px-6">Vehicle</th>
+                                <th class="py-3 px-6">My Bid</th>
+                                <th class="py-3 px-6">Current Highest</th>
+                                <th class="py-3 px-6">Status</th>
+                                <th class="py-3 px-6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-sm">
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#AUC-2104</td>
+                                <td class="py-4 px-6">2018 Toyota Supra RZ</td>
+                                <td class="py-4 px-6 font-semibold text-gray-800">$42,500</td>
+                                <td class="py-4 px-6 font-semibold text-red-600">$43,000</td>
+                                <td class="py-4 px-6"><span class="bg-red-100 text-red-700 py-1 px-2 rounded text-xs font-semibold">Outbid</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">Increase Bid</a></td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#AUC-1988</td>
+                                <td class="py-4 px-6">Nissan Skyline GT-R R34</td>
+                                <td class="py-4 px-6 font-semibold text-gray-800">$120,000</td>
+                                <td class="py-4 px-6 font-semibold text-gray-800">$120,000</td>
+                                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Winning</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+                            </tr>
+                            <tr class="border-b border-gray-100 hover:bg-gray-50">
+                                <td class="py-4 px-6 font-medium">#AUC-1502</td>
+                                <td class="py-4 px-6">Honda Civic Type R (EK9)</td>
+                                <td class="py-4 px-6 font-semibold text-gray-800">$25,000</td>
+                                <td class="py-4 px-6 font-semibold text-gray-800">$28,500</td>
+                                <td class="py-4 px-6"><span class="bg-gray-100 text-gray-700 py-1 px-2 rounded text-xs font-semibold">Ended</span></td>
+                                <td class="py-4 px-6"><a href="#" class="text-gray-500 hover:underline">Details</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        function showWishlist(event) {
+            if(event) {
+                event.preventDefault();
+                setActiveTab(event.currentTarget);
+            }
+            document.getElementById('dashboard-content').innerHTML = `
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Wishlist</h1>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded flex-shrink-0 flex items-center justify-center text-gray-400">
+                            <i class="fas fa-car text-3xl"></i>
+                        </div>
+                        <div class="ml-4 flex-grow">
+                            <h3 class="font-bold text-gray-800">Subaru Impreza WRX STI</h3>
+                            <p class="text-sm text-gray-500">Auction ends in 2 days</p>
+                            <p class="font-semibold text-primary-red mt-1">Current Bid: $18,500</p>
+                        </div>
+                        <div class="ml-4">
+                            <button class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 flex items-center">
+                        <div class="w-20 h-20 bg-gray-200 rounded flex-shrink-0 flex items-center justify-center text-gray-400">
+                            <i class="fas fa-cogs text-3xl"></i>
+                        </div>
+                        <div class="ml-4 flex-grow">
+                            <h3 class="font-bold text-gray-800">HKS Hi-Power Exhaust</h3>
+                            <p class="text-sm text-gray-500">In Stock</p>
+                            <p class="font-semibold text-gray-800 mt-1">$850.00</p>
+                        </div>
+                        <div class="ml-4 flex flex-col items-end space-y-2">
+                            <button class="text-primary-red hover:underline text-sm font-semibold">Add to Cart</button>
+                            <button class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showSettings(event) {
+            if(event) {
+                event.preventDefault();
+                setActiveTab(event.currentTarget);
+            }
+            document.getElementById('dashboard-content').innerHTML = `
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Settings</h1>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Email Notifications</label>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2" checked> <span class="text-sm">Receive order updates</span>
+                            </div>
+                        </div>
+                        <button class="bg-primary-red hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button">Save Settings</button>
+                    </form>
+                </div>
+            `;
+        }
+
+        function becomeSupplier() {
+            const dashboardContent = document.getElementById('dashboard-content');
+            dashboardContent.innerHTML = `
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">Supplier Registration</h1>
+                <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                    <form onsubmit="submitSupplierForm(event)">
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="businessName">Business Name</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="businessName" type="text" placeholder="Enter your business name" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="businessAddress">Business Address</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="businessAddress" type="text" placeholder="Enter your business address" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="contactPerson">Contact Person</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="contactPerson" type="text" placeholder="Enter contact person name" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phoneNumber" type="tel" placeholder="Enter phone number" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF)</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="businessRegistration" type="file" accept="application/pdf" required>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button class="bg-primary-red hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
+                                Submit Registration
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+        }
+
+        function submitSupplierForm(event) {
+            event.preventDefault();
+            alert("Supplier registration submitted successfully!");
+            window.location.href = "supplier-dashboard.html";
         }
     </script>
 </body>

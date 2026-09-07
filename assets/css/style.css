@@ -76,3 +76,32 @@ body {
 .bg-primary-gold {
     background-color: var(--primary-gold);
 }
+
+/* Hover utilities for primary colors */
+.hover\:bg-primary-dark:hover {
+    background-color: var(--primary-dark);
+}
+.hover\:text-primary-dark:hover {
+    color: var(--primary-dark);
+}
+.hover\:border-primary-dark:hover {
+    border-color: var(--primary-dark);
+}
+.hover\:bg-primary-red:hover {
+    background-color: var(--primary-red);
+}
+.hover\:text-primary-red:hover {
+    color: var(--primary-red);
+}
+.hover\:border-primary-red:hover {
+    border-color: var(--primary-red);
+}
+.hover\:bg-primary-gold:hover {
+    background-color: var(--primary-gold);
+}
+.hover\:text-primary-gold:hover {
+    color: var(--primary-gold);
+}
+.hover\:border-primary-gold:hover {
+    border-color: var(--primary-gold);
+}

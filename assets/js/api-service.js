@@ -4,7 +4,6 @@
  */
 import { API_CONFIG } from './api-config.js';
 import { storage } from './utils/storage.js';
-import { eventBus } from './events/EventBus.js';
 
 class ApiService {
     async request(endpoint, options = {}) {

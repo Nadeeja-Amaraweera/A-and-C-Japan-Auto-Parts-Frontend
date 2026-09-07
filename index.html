@@ -6,31 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A&C Japan Auto Parts - Vehicle Auction</title>
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom CSS Configuration for Tailwind -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            dark: '#1a2a3a',
-                            red: '#c41e24',
-                            gold: '#f5a623',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
     <!-- Custom Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -365,8 +346,8 @@
                         </div>
 
                         <a href="auction-details.html"
-                            class="block w-full text-center bg-gray-100 hover:bg-primary-dark hover:text-white text-primary-dark font-semibold py-2 rounded transition border border-gray-200 hover:border-primary-dark">Place
-                            Bid</a>
+                            class="block w-full text-center bg-primary-red text-white font-semibold py-2 rounded transition hover:bg-red-700 shadow-md">Place
+                            Bid Now</a>
                     </div>
                 </div>
 
@@ -398,8 +379,8 @@
                         </div>
 
                         <a href="auction-details.html"
-                            class="block w-full text-center bg-gray-100 hover:bg-primary-dark hover:text-white text-primary-dark font-semibold py-2 rounded transition border border-gray-200 hover:border-primary-dark">Place
-                            Bid</a>
+                            class="block w-full text-center bg-primary-red text-white font-semibold py-2 rounded transition hover:bg-red-700 shadow-md">Place
+                            Bid Now</a>
                     </div>
                 </div>
 
@@ -431,8 +412,8 @@
                         </div>
 
                         <a href="auction-details.html"
-                            class="block w-full text-center bg-gray-100 hover:bg-primary-dark hover:text-white text-primary-dark font-semibold py-2 rounded transition border border-gray-200 hover:border-primary-dark">Place
-                            Bid</a>
+                            class="block w-full text-center bg-primary-red text-white font-semibold py-2 rounded transition hover:bg-red-700 shadow-md">Place
+                            Bid Now</a>
                     </div>
                 </div>
 
@@ -739,7 +720,7 @@
         slideInterval = setInterval(nextSlide, 5000);
 
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('Homepage loaded with API BASE_URL:', API_CONFIG.BASE_URL);
+
         });
     </script>
 </body>

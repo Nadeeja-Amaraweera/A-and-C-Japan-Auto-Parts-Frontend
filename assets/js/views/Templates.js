@@ -2,9 +2,15 @@
  * Templates Generator
  * Functions that return complex HTML strings for specific models
  */
-import { formatters } from '../utils/formatters.js';
-
 export const Templates = {
+    // Local helper
+    formatCurrency: (amount, currency = 'USD') => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 2
+        }).format(amount);
+    },
     /**
      * Generate HTML for a product card
      */
@@ -18,7 +24,7 @@ export const Templates = {
                     <div class="text-xs text-gray-500 mb-1">SKU: ${product.sku}</div>
                     <h3 class="font-bold text-gray-800 mb-2 leading-tight flex-grow"><a href="#" class="hover:text-primary-red transition">${product.name}</a></h3>
                     <div class="flex justify-between items-center mt-2">
-                        <span class="font-bold text-lg text-primary-dark">${formatters.currency(product.price)}</span>
+                        <span class="font-bold text-lg text-primary-dark">${Templates.formatCurrency(product.price)}</span>
                         <button class="bg-gray-100 hover:bg-primary-red hover:text-white text-gray-700 w-8 h-8 rounded flex items-center justify-center transition" onclick="app.cart.addItem(${product.id})">
                             <i class="fas fa-cart-plus"></i>
                         </button>
@@ -52,7 +58,7 @@ export const Templates = {
                     <div class="mt-auto pt-3 border-t border-gray-100 flex justify-between items-end">
                         <div>
                             <p class="text-xs text-gray-500 mb-1">Current Bid</p>
-                            <p class="font-bold text-xl text-primary-dark">${formatters.currency(auction.highestBid || auction.startPrice)}</p>
+                            <p class="font-bold text-xl text-primary-dark">${Templates.formatCurrency(auction.highestBid || auction.startPrice)}</p>
                         </div>
                         <a href="auction-details.html?id=${auction.id}" class="text-primary-red font-semibold text-sm hover:underline">Bid Now <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>

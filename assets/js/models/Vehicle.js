@@ -75,62 +75,6 @@ export class Vehicle {
     }
 
     /**
-     * Get full title with brand and model
-     */
-    getFullTitle() {
-        return `${this.brand} ${this.model} ${this.year}`;
-    }
-
-    /**
-     * Get display price with currency
-     */
-    getDisplayPrice() {
-        return `${this.currency} ${this.price.toLocaleString()}`;
-    }
-
-    /**
-     * Get price in specific currency
-     */
-    getPriceInCurrency(currency, rate) {
-        return this.price * rate;
-    }
-
-    /**
-     * Check if vehicle is new
-     */
-    isNew() {
-        return this.condition === 'NEW';
-    }
-
-    /**
-     * Check if vehicle is available
-     */
-    isAvailable() {
-        return this.status === 'APPROVED' || this.status === 'PENDING';
-    }
-
-    /**
-     * Get age of vehicle
-     */
-    getAge() {
-        return new Date().getFullYear() - this.year;
-    }
-
-    /**
-     * Get main image
-     */
-    getMainImage() {
-        return this.images.length > 0 ? this.images[0] : this.thumbnail || '/assets/images/default-vehicle.jpg';
-    }
-
-    /**
-     * Get all images
-     */
-    getImages() {
-        return this.images.length > 0 ? this.images : [this.thumbnail];
-    }
-
-    /**
      * Convert to JSON
      */
     toJSON() {
@@ -190,37 +134,5 @@ export class Vehicle {
      */
     static fromJSON(data) {
         return new Vehicle(data);
-    }
-
-    /**
-     * Validate vehicle data
-     */
-    validate() {
-        const errors = {};
-
-        if (!this.brand) {
-            errors.brand = 'Brand is required';
-        }
-
-        if (!this.model) {
-            errors.model = 'Model is required';
-        }
-
-        if (!this.year || this.year < 1900 || this.year > new Date().getFullYear() + 1) {
-            errors.year = 'Valid year is required';
-        }
-
-        if (this.price <= 0) {
-            errors.price = 'Price must be greater than 0';
-        }
-
-        if (!this.description || this.description.length < 10) {
-            errors.description = 'Description must be at least 10 characters';
-        }
-
-        return {
-            isValid: Object.keys(errors).length === 0,
-            errors
-        };
     }
 }

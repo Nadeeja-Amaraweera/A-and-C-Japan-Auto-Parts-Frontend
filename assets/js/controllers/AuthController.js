@@ -8,14 +8,6 @@ class AuthController {
     constructor() {
         this.user = null;
         this.isAuthenticated = false;
-        this.authListeners = []
-    }
-
-    clearSession() {
-        // storage.removeToken();
-        // storage.removeUser();
-        this.user = null;
-        this.isAuthenticated = false;
     }
 
     async init() {
@@ -25,7 +17,6 @@ class AuthController {
                 const userData = await apiService.get(API_CONFIG.ENDPOINTS.USERS.GET_PROFILE);
                 this.user = new User(userData);
                 this.isAuthenticated = true;
-                this.notifyListeners();
                 return true;
             } catch (error) {
                 console.error('Auth init error:', error);
@@ -37,8 +28,9 @@ class AuthController {
     }
 
     async login(userEmail, password) {
+        console.log("AuthController: login() method called!")
         try {
-            const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { userEmail, password });
+            const response = await apiService.postPublic(API_CONFIG.ENDPOINTS.AUTH.LOGIN, { userEmail, password });
             if (response.status === 0) {
                 console.log('✅ Login successful!');
 
@@ -50,11 +42,10 @@ class AuthController {
                 }
 
                 const user = new User(response.body);
-                console.log(response.body);
+
                 storage.setUser(user);
                 this.user = user;
                 this.isAuthenticated = true;
-                this.notifyListeners();
 
                 return {
                     success: true,
@@ -76,7 +67,8 @@ class AuthController {
 
     async register(userData) {
         try {
-            const response = await apiService.post(API_CONFIG.ENDPOINTS.AUTH.REGISTER, userData);
+            const response = await apiService.postPublic(API_CONFIG.ENDPOINTS.USERS.REGISTER, userData);
+            console.log("Raw API response:", response);
             if (response) {
 
                 if (response.status === 0) {
@@ -97,6 +89,19 @@ class AuthController {
                     error: error.data?.message || 'User already exists'
                 };
             }
+            if (error.status === 400) {
+                return {
+                    success: false,
+                    error: error.data?.message || 'Invalid registration data. Please check all fields.'
+                };
+            }
+
+            if (error.status === 401 || error.status === 403) {
+                return {
+                    success: false,
+                    error: 'Authentication error. Please try again.'
+                };
+            }
 
             return { success: false, error: error.message };
         }
@@ -104,16 +109,13 @@ class AuthController {
 
     async logout() {
         try {
-            // await apiService.post(API_CONFIG.ENDPOINTS.AUTH.LOGOUT, {});
             storage.removeToken();
             storage.removeUser();
         } catch (error) {
             console.error('Logout error:', error);
         } finally {
-            // this.clearSession();
             this.user = null;
             this.isAuthenticated = false;
-            this.notifyListeners();
         }
     }
 

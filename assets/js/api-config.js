@@ -31,6 +31,7 @@ export const API_CONFIG = {
 
         // User management endpoints
         USERS: {
+            REGISTER: '/users/register',
             GET_ALL: '/users',
             GET_BY_ID: '/users/{id}',
             CREATE: '/users',

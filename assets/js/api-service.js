@@ -11,9 +11,22 @@ class ApiService {
 
         const headers = { ...API_CONFIG.HEADERS, ...(options.headers || {}) };
 
-        const token = storage.getToken();
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
+        const skipAuth = options.skipAuth ?? true;
+
+        console.log(`🔑 Skip auth: ${skipAuth}`); // Debug log
+
+        if (!skipAuth) {
+            console.log("true")
+            const token = storage.getToken();
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+                console.log('🔑 Token attached to request');
+            } else {
+                console.warn('⚠️ No token available for protected request');
+            }
+        } else {
+            console.log('🔓 Public request - No token attached');
+            delete headers['Authorization'];
         }
 
         const config = {
@@ -27,7 +40,6 @@ class ApiService {
 
             if (response.status === API_CONFIG.STATUS.UNAUTHORIZED) {
                 // Token might be expired
-                eventBus.emit('auth:unauthorized');
                 const error = new Error('Unauthorized');
                 error.status = 401;
                 error.data = { message: 'Unauthorized' };
@@ -50,19 +62,34 @@ class ApiService {
             return await response.json();
         } catch (error) {
             console.error(`API Request failed for ${endpoint}`, error);
+            if (!error.status) {
+                error.status = 500;
+            }
             throw error;
         }
     }
 
+
+
     get(endpoint, headers = {}) {
-        return this.request(endpoint, { method: 'GET', headers });
+        return this.request(endpoint, { method: 'GET', headers, skipAuth: true });
+    }
+
+    postPublic(endpoint, body, headers = {}) {
+        return this.request(endpoint, {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers,
+            skipAuth: true
+        });
     }
 
     post(endpoint, body, headers = {}) {
         return this.request(endpoint, {
             method: 'POST',
             body: JSON.stringify(body),
-            headers
+            headers,
+            skipAuth: false
         });
     }
 
@@ -70,7 +97,8 @@ class ApiService {
         return this.request(endpoint, {
             method: 'PUT',
             body: JSON.stringify(body),
-            headers
+            headers,
+            skipAuth: false
         });
     }
 
@@ -78,12 +106,13 @@ class ApiService {
         return this.request(endpoint, {
             method: 'PATCH',
             body: JSON.stringify(body),
-            headers
+            headers,
+            skipAuth: false
         });
     }
 
     delete(endpoint, options = {}) {
-        const config = { method: 'DELETE', headers: options.headers || {} };
+        const config = { method: 'DELETE', headers: options.headers || {}, skipAuth: false };
         if (options.data) {
             config.body = JSON.stringify(options.data);
         }

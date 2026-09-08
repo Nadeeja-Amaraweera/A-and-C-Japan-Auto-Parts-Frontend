@@ -5,13 +5,13 @@ class App {
 
     init() {
         Topbar.render();
-        Topbar.getAccountNavLink().addEventListener('click', () => {
-            window.location.href = "login.html";
-        });
+
         this.setupLoginForm();
         this.setupRegisterForm();
+        this.updateTopbar();
     }
 
+    // Show Toast
     showToast(message, type = 'success') {
         const toast = document.createElement('div');
         const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
@@ -40,68 +40,102 @@ class App {
         }, 3000);
     }
 
+    // Setup Login Form
     setupLoginForm() {
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
 
-            try {
-                const response = await authController.login(email, password);
-                if (response.success) {
-                    this.showToast(response.message || "Login successful!", 'success');
-                    // setTimeout(() => window.location.href = "index.html", 500);
-                } else {
-                    const errorMsg = response.message || response.error || 'Login failed';
-                    this.showToast(errorMsg, 'error');
+                try {
+                    const response = await authController.login(email, password);
+                    if (response.success) {
+                        this.showToast(response.message || "Login successful!", 'success');
+                        setTimeout(() => window.location.href = "index.html", 1500);
+                        this.updateTopbar();
+                    } else {
+                        const errorMsg = response.message || response.error || 'Login failed';
+                        this.showToast(errorMsg, 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Login error:', error);
+                    this.showToast('An unexpected error occurred during login', 'error');
                 }
-            } catch (error) {
-                console.error('❌ Login error:', error);
-                this.showToast('An unexpected error occurred during login', 'error');
-            }
-
-        });
+            });
+        }
     }
 
+    // Setup Register Form
     setupRegisterForm() {
-        document.getElementById('registerForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('regName').value;
-            const email = document.getElementById('regEmail').value;
-            const phone = document.getElementById('regPhone').value;
-            const password = document.getElementById('regPassword').value;
-            const confirmPassword = document.getElementById('regConfirmPassword').value;
-            console.log(name, email, phone, password, confirmPassword);
+        const registerForm = document.getElementById('registerForm');
+        if (registerForm) {
+            registerForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('regName').value;
+                const email = document.getElementById('regEmail').value;
+                const phone = document.getElementById('regPhone').value;
+                const password = document.getElementById('regPassword').value;
+                const address = document.getElementById('regAddress').value;
+                const confirmPassword = document.getElementById('regConfirmPassword').value;
+                console.log(name, email, phone, password, address, confirmPassword);
 
-            const userData = {
-                userName: name,
-                userEmail: email,
-                userPassword: password,
-                userPhone: phone
-            }
-
-            try {
-                const response = await authController.register(userData);
-                if (response.success) {
-                    console.log('✅ Registration successful!');
-                    this.showToast(response.message || 'Registration successful!', 'success');
-                    setTimeout(() => window.location.href = "index.html", 1500);
-                } else {
-                    const errorMsg = response.message || response.error || 'Registration failed';
-                    console.error('❌ Registration failed:', errorMsg);
-                    this.showToast(errorMsg, 'error');
+                const userData = {
+                    userName: name,
+                    userEmail: email,
+                    userPassword: password,
+                    userPhone: phone,
+                    userAddress: address
                 }
-            } catch (error) {
-                console.error('❌ Registration error:', error);
-                this.showToast('An unexpected error occurred during registration', 'error');
+
+                try {
+                    const response = await authController.register(userData);
+                    if (response.success) {
+                        console.log('✅ Registration successful!');
+                        this.showToast(response.message || 'Registration successful!', 'success');
+                        setTimeout(() => window.location.href = "index.html", 1500);
+                    } else {
+                        const errorMsg = response.message || response.error || 'Registration failed';
+                        console.error('❌ Registration failed:', errorMsg);
+                        this.showToast(errorMsg, 'error');
+                    }
+                } catch (error) {
+                    console.error('❌ Registration error:', error);
+                    this.showToast('An unexpected error occurred during registration', 'error');
+                }
+            });
+        }
+    }
+
+    async updateTopbar() {
+        console.log('Updating topbar...');
+        const accountNavLink = Topbar.getAccountNavLink();
+        const usernameSpan = document.getElementById('topbar-username');
+
+        const result = await authController.validateUser();
+
+        if (result.success) {
+            console.log("User is validated successfully!!!!");
+            console.log("User:", result.user);
+
+            if (usernameSpan) {
+                usernameSpan.textContent = result.user.userName || result.user.name || 'User';
+                console.log('Username:', usernameSpan.textContent);
             }
-        });
+            accountNavLink.href = "profile.html";
+        } else {
+            console.log("User validation failed:", result.error);
+            accountNavLink.href = "login.html";
+            if (usernameSpan) {
+                usernameSpan.textContent = 'My Account';
+            }
+        }
     }
 
     logout() {
 
     }
-
 }
 
 // Initialize app when DOM is ready

@@ -71,8 +71,8 @@ class ApiService {
 
 
 
-    get(endpoint, headers = {}) {
-        return this.request(endpoint, { method: 'GET', headers, skipAuth: true });
+    get(endpoint, headers = {}, skipAuth = false) {
+        return this.request(endpoint, { method: 'GET', headers, skipAuth });
     }
 
     postPublic(endpoint, body, headers = {}) {

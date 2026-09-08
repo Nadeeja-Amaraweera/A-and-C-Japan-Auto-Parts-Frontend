@@ -14,9 +14,9 @@ export class Topbar {
                         <div class="hidden sm:block cursor-pointer hover:text-primary-gold transition">
                             USD <i class="fas fa-chevron-down text-xs ml-1"></i>
                         </div>
-                        <a id="myAccountNav" class="hover:text-primary-gold transition cursor-pointer">
+                        <a id="myAccountNav" class="hover:text-primary-gold transition cursor-pointer" href="login.html">
                             <i class="far fa-user mr-1"></i>
-                            <span class="hidden sm:inline">My Account</span>
+                            <span id="topbar-username" class="hidden sm:inline">My Account</span>
                         </a>
                     </div>
                 </div>

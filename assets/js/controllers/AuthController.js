@@ -44,6 +44,7 @@ class AuthController {
                 const user = new User(response.body);
 
                 storage.setUser(user);
+                console.log("response.body.token", response.body.token)
                 this.user = user;
                 this.isAuthenticated = true;
 
@@ -107,6 +108,25 @@ class AuthController {
         }
     }
 
+    async validateUser() {
+        try {
+            const response = await apiService.get(API_CONFIG.ENDPOINTS.AUTH.VALIDATE, {}, false);
+            if (response.status === 0) {
+                console.log('✅ User validated successfully!', response.body);
+                this.user = new User(response.body);
+                this.isAuthenticated = true;
+                return {
+                    success: true,
+                    user: this.user,
+                    message: response.message || 'User validated successfully!'
+                };
+            }
+            return { success: false, error: 'User validation failed' };
+        } catch (error) {
+            return { success: false, error: error.message };
+        }
+    }
+
     async logout() {
         try {
             storage.removeToken();
@@ -126,8 +146,6 @@ class AuthController {
     isAdmin() {
         return this.isAuthenticated && this.user && this.user.isAdmin();
     }
-
-
 }
 
 // Export singleton

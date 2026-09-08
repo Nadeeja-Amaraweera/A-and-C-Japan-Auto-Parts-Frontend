@@ -41,8 +41,13 @@ class AuthController {
                     console.warn('⚠️ No token in response!');
                 }
 
-                const user = new User(response.body);
+                const userData = {
+                    userId: response.body.userId || response.body.id,
+                    username: response.body.username || response.body.userName || response.body.name,
+                    token: response.body.token
+                };
 
+                const user = new User(userData);
                 storage.setUser(user);
                 console.log("response.body.token", response.body.token)
                 this.user = user;

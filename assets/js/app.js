@@ -53,8 +53,7 @@ class App {
                     const response = await authController.login(email, password);
                     if (response.success) {
                         this.showToast(response.message || "Login successful!", 'success');
-                        setTimeout(() => window.location.href = "index.html", 1500);
-                        this.updateTopbar();
+                        setTimeout(() => window.location.href = "index.html", 1000);
                     } else {
                         const errorMsg = response.message || response.error || 'Login failed';
                         this.showToast(errorMsg, 'error');
@@ -120,7 +119,7 @@ class App {
             console.log("User:", result.user);
 
             if (usernameSpan) {
-                usernameSpan.textContent = result.user.userName || result.user.name || 'User';
+                usernameSpan.textContent = result.user.name;
                 console.log('Username:', usernameSpan.textContent);
             }
             accountNavLink.href = "profile.html";
@@ -128,7 +127,7 @@ class App {
             console.log("User validation failed:", result.error);
             accountNavLink.href = "login.html";
             if (usernameSpan) {
-                usernameSpan.textContent = 'My Account';
+                usernameSpan.textContent = 'Login';
             }
         }
     }

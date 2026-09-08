@@ -6,7 +6,7 @@
 export class User {
     constructor(data = {}) {
         this.id = data.userId || data.id || null;
-        this.name = data.userName || data.name || '';
+        this.name = data.username || data.userName || data.name || '';
         this.token = data.token || null;
     }
 
@@ -38,7 +38,7 @@ export class User {
     toJSON() {
         return {
             userId: this.id,
-            userName: this.name,
+            username: this.name,
             token: this.token
         };
     }

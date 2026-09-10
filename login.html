@@ -2,142 +2,142 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login / Register - A&C Japan Auto Parts</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register - A&C Japan Auto Parts</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+<body class="text-white min-h-screen flex flex-col">
 
-    <!-- Simple Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <div class="text-3xl font-black italic tracking-tighter text-primary-dark">
-                    A&C <span class="text-primary-red">JAPAN</span>
-                </div>
-            </a>
-            <a href="index.html" class="text-gray-500 hover:text-primary-red transition"><i
-                    class="fas fa-arrow-left mr-1"></i> Back to Home</a>
+  <!-- Simple Header -->
+  <header class="glass-panel sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-2">
+        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
+          A&C <span class="text-primary-red">JAPAN</span>
         </div>
-    </header>
+      </a>
+      <a href="index.html" class="text-gray-400 hover:text-primary-red transition"><i
+          class="fas fa-arrow-left mr-1"></i> Back to Home</a>
+      </div>
+  </header>
 
-    <!-- Main Content -->
-    <main class="flex-grow flex items-center justify-center py-12 px-4" id="mainLoginpage">
-        <div class="max-w-4xl w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+  <!-- Main Content -->
+  <main class="flex-grow flex items-center justify-center py-12 px-4" id="mainLoginpage">
+    <div class="max-w-4xl w-full glass-panel rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
 
-            <!-- Login Section -->
-            <div class="w-full md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-gray-100">
-                <h2 class="text-2xl font-bold text-primary-dark mb-2">Welcome Back</h2>
-                <p class="text-gray-500 text-sm mb-8">Sign in to your account to continue</p>
+      <!-- Login Section -->
+      <div class="w-full md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10">
+        <h2 class="text-2xl font-bold text-white font-bold tracking-wide mb-2">Welcome Back</h2>
+        <p class="text-gray-400 text-sm mb-8">Sign in to your account to continue</p>
 
-                <form id="loginForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" required id="loginEmail"
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                            placeholder="Enter your email">
-                    </div>
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <label class="block text-sm font-medium text-gray-700">Password</label>
-                            <a href="#" class="text-xs text-primary-red hover:underline">Forgot password?</a>
-                        </div>
-                        <div class="relative">
-                            <input type="password" required id="loginPassword"
-                                class="w-full px-4 py-2 pr-10 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                                placeholder="••••••••">
-                            <button type="button"
-                                onclick="const input = document.getElementById('loginPassword'); const icon = this.querySelector('i'); if(input.type === 'password') { input.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); } else { input.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }"
-                                class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-600 focus:outline-none">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="flex items-center">
-                        <input type="checkbox" id="remember"
-                            class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
-                        <label for="remember" class="ml-2 block text-sm text-gray-600">Remember me</label>
-                    </div>
-                    <button type="submit" id="loginButton"
-                        class="w-full bg-primary-dark text-white font-semibold py-3 rounded hover:bg-gray-800 transition shadow-md">Login</button>
-                </form>
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-200 mb-1">Email</label>
+            <input type="email" required id="loginEmail"
+              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              placeholder="Enter your email">
+          </div>
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="block text-sm font-medium text-gray-200">Password</label>
+              <a href="#" class="text-xs text-primary-red hover:underline">Forgot password?</a>
             </div>
-
-            <!-- Register Section -->
-            <div class="w-full md:w-1/2 p-8 md:p-12 bg-gray-50">
-                <h2 class="text-2xl font-bold text-primary-dark mb-2">Create Account</h2>
-                <p class="text-gray-500 text-sm mb-8">Join us to start bidding and buying</p>
-
-                <form id="registerForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                        <input type="text" required id="regName"
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                            placeholder="John Doe">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" required id="regEmail"
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                            placeholder="john@example.com">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-                        <input type="tel" required id="regPhone"
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                            placeholder="+1 234 567 8900">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                        <input type="text" required id="regAddress"
-                            class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                            placeholder="123 Main St, City, Country">
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                            <input type="password" required id="regPassword"
-                                class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                                placeholder="••••••••">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
-                            <input type="password" required id="regConfirmPassword"
-                                class="w-full px-4 py-2 border border-gray-300 rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
-                                placeholder="••••••••">
-                        </div>
-                    </div>
-                    <div class="flex items-start mt-4">
-                        <div class="flex items-center h-5">
-                            <input id="regTerms" type="checkbox" required
-                                class="w-4 h-4 text-primary-red border-gray-300 rounded focus:ring-primary-red">
-                        </div>
-                        <div class="ml-2 text-sm">
-                            <label for="regTerms" class="text-gray-600">I agree to the <a href="#"
-                                    class="text-primary-red hover:underline">Terms & Conditions</a> and Privacy
-                                Policy.</label>
-                        </div>
-                    </div>
-                    <button type="submit"
-                        class="w-full bg-primary-red text-white font-semibold py-3 rounded hover:bg-red-700 transition shadow-md mt-2">Create
-                        Account</button>
-                </form>
+            <div class="relative">
+              <input type="password" required id="loginPassword"
+                class="w-full px-4 py-2 pr-10 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                placeholder="••••••••">
+              <button type="button"
+                onclick="const input = document.getElementById('loginPassword'); const icon = this.querySelector('i'); if(input.type === 'password') { input.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); } else { input.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }"
+                class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-300 focus:outline-none">
+                <i class="fas fa-eye"></i>
+              </button>
             </div>
+          </div>
+          <div class="flex items-center">
+            <input type="checkbox" id="remember"
+              class="w-4 h-4 text-primary-red border-white/20 rounded focus:ring-primary-red">
+            <label for="remember" class="ml-2 block text-sm text-gray-300">Remember me</label>
+          </div>
+          <button type="submit" id="loginButton"
+            class="w-full btn-3d btn-primary-3d font-semibold py-3 rounded transition shadow-md">Login</button>
+        </form>
+      </div>
 
-        </div>
-    </main>
+      <!-- Register Section -->
+      <div class="w-full md:w-1/2 p-8 md:p-12 ">
+        <h2 class="text-2xl font-bold text-white font-bold tracking-wide mb-2">Create Account</h2>
+        <p class="text-gray-400 text-sm mb-8">Join us to start bidding and buying</p>
 
-    <!-- Simple Footer -->
-    <footer class="bg-white border-t border-gray-200 py-6 text-center text-sm text-gray-500">
-        <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
-    </footer>
+        <form id="registerForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-200 mb-1">Full Name</label>
+            <input type="text" required id="regName"
+              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              placeholder="John Doe">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-200 mb-1">Email Address</label>
+            <input type="email" required id="regEmail"
+              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              placeholder="john@example.com">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-200 mb-1">Phone Number</label>
+            <input type="tel" required id="regPhone"
+              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              placeholder="+1 234 567 8900">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-200 mb-1">Address</label>
+            <input type="text" required id="regAddress"
+              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              placeholder="123 Main St, City, Country">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-200 mb-1">Password</label>
+              <input type="password" required id="regPassword"
+                class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                placeholder="••••••••">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-200 mb-1">Confirm Password</label>
+              <input type="password" required id="regConfirmPassword"
+                class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                placeholder="••••••••">
+            </div>
+          </div>
+          <div class="flex items-start mt-4">
+            <div class="flex items-center h-5">
+              <input id="regTerms" type="checkbox" required
+                class="w-4 h-4 text-primary-red border-white/20 rounded focus:ring-primary-red">
+            </div>
+            <div class="ml-2 text-sm">
+              <label for="regTerms" class="text-gray-300">I agree to the <a href="#"
+                  class="text-primary-red hover:underline">Terms & Conditions</a> and Privacy
+                Policy.</label>
+            </div>
+          </div>
+          <button type="submit"
+            class="w-full btn-3d btn-primary-3d  font-semibold py-3 rounded  transition shadow-md mt-2">Create
+            Account</button>
+        </form>
+      </div>
 
-    <script type="module" src="assets/js/app.js"></script>
+    </div>
+  </main>
+
+  <!-- Simple Footer -->
+  <footer class="glass-panel border-t border-white/10 py-6 text-center text-sm text-gray-400">
+    <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
+  </footer>
+
+  <script type="module" src="assets/js/app.js"></script>
 </body>
 
 </html>

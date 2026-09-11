@@ -12,9 +12,35 @@ class App {
         this.setupLoginForm();
         this.setupRegisterForm();
         this.updateTopbar();
+        this.initPageLoader();
 
         if (window.location.pathname.includes('profile.html')) {
             this.loadProfilePage();
+        }
+    }
+
+    // Auto-dismiss page loader if present on non-profile pages
+    initPageLoader() {
+        const loader = document.getElementById('page-loader');
+        if (loader) {
+            const dismiss = () => {
+                if (loader && !loader.classList.contains('opacity-0')) {
+                    loader.classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => {
+                        try { loader.remove(); } catch (_) {}
+                    }, 500);
+                }
+            };
+
+            if (document.readyState === 'complete') {
+                setTimeout(dismiss, 300);
+            } else {
+                window.addEventListener('load', () => {
+                    setTimeout(dismiss, 300);
+                });
+                // Safe fallback timeout
+                setTimeout(dismiss, 1200);
+            }
         }
     }
 
@@ -26,7 +52,7 @@ class App {
         const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
         const icon = type === 'success' ? '<i class="fas fa-check-circle mr-2"></i>' : '<i class="fas fa-exclamation-circle mr-2"></i>';
 
-        toast.className = `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded shadow-lg transform transition-all duration-300 -translate-y-full opacity-0 z-[9999] flex items-center`;
+        toast.className = `fixed bottom-4 right-4 ${bgColor} text-white px-6 py-3 rounded shadow-lg transform transition-all duration-300 translate-y-full opacity-0 z-[9999] flex items-center`;
         toast.innerHTML = `${icon} <span>${message}</span>`;
 
         document.body.appendChild(toast);
@@ -34,7 +60,7 @@ class App {
         // Trigger animation
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-                toast.classList.remove('-translate-y-full', 'opacity-0');
+                toast.classList.remove('translate-y-full', 'opacity-0');
                 toast.classList.add('translate-y-0', 'opacity-100');
             });
         });
@@ -42,7 +68,7 @@ class App {
         // Remove after 3 seconds
         setTimeout(() => {
             toast.classList.remove('translate-y-0', 'opacity-100');
-            toast.classList.add('-translate-y-full', 'opacity-0');
+            toast.classList.add('translate-y-full', 'opacity-0');
             setTimeout(() => {
                 toast.remove();
             }, 300);

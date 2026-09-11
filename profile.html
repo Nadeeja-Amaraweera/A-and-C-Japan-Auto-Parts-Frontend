@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Account - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -14,7 +14,8 @@
 <body class="text-white min-h-screen flex flex-col">
 
   <!-- Full-Screen Profile Loading Overlay -->
-  <div id="profile-loader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+  <div id="profile-loader"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
       <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
@@ -50,8 +51,8 @@
         </a>
       </div>
     </div>
-  
-      </header>
+
+  </header>
 
   <!-- Main Content -->
   <main class="flex-grow container mx-auto px-4 py-8">
@@ -95,8 +96,7 @@
           </nav>
         </div>
 
-        <div
-          class="bg-gradient-to-br from-primary-dark to-gray-900 text-white rounded-lg p-6 text-center">
+        <div class="bg-gradient-to-br from-primary-dark to-gray-900 text-white rounded-lg p-6 text-center">
           <i class="fas fa-store text-4xl text-primary-gold mb-3"></i>
           <h3 class="text-lg font-bold mb-2">Want to sell?</h3>
           <p class="text-xs text-gray-300 mb-4">Upgrade your account to a Supplier to list vehicles and parts.
@@ -115,8 +115,7 @@
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div class="glass-panel p-6 rounded-lg border border-white/10 flex items-center">
-            <div
-              class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xl mr-4">
+            <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xl mr-4">
               <i class="fas fa-shopping-bag"></i>
             </div>
             <div>
@@ -152,8 +151,7 @@
             <button
               class="px-6 py-4 font-semibold text-primary-red border-b-2 border-primary-red focus:outline-none">Recent
               Orders (Parts)</button>
-            <button
-              class="px-6 py-4 font-semibold text-gray-400 hover:text-white focus:outline-none transition">Active
+            <button class="px-6 py-4 font-semibold text-gray-400 hover:text-white focus:outline-none transition">Active
               Bids (Vehicles)</button>
           </div>
 
@@ -249,8 +247,8 @@
   <script type="module" src="assets/js/app.js"></script>
   <script>
     window.profileDashboardHTML = '';
-    
-    window.updateProfileDashboardCache = function() {
+
+    window.updateProfileDashboardCache = function () {
       const el = document.getElementById('dashboard-content');
       if (el) {
         window.profileDashboardHTML = el.innerHTML;
@@ -263,7 +261,7 @@
 
     function setActiveTab(clickedElement) {
       if (!clickedElement) return;
-      
+
       const tabs = document.querySelectorAll('.nav-tab');
       const activeClasses = ['text-primary-red', 'font-semibold'];
       const inactiveClasses = ['text-gray-300', 'font-medium'];
@@ -278,7 +276,7 @@
     }
 
     function showProfileDashboard(event) {
-      if(event) {
+      if (event) {
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
@@ -286,7 +284,7 @@
     }
 
     function showOrderHistory(event) {
-      if(event) {
+      if (event) {
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
@@ -336,7 +334,7 @@
     }
 
     function showMyBids(event) {
-      if(event) {
+      if (event) {
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
@@ -386,7 +384,7 @@
     }
 
     function showWishlist(event) {
-      if(event) {
+      if (event) {
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
@@ -425,7 +423,7 @@
     }
 
     function showSettings(event) {
-      if(event) {
+      if (event) {
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }

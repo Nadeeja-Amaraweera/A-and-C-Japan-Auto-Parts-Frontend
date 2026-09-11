@@ -18,6 +18,23 @@
 
 <body class="text-white">
 
+  <!-- Page Loading Overlay -->
+  <div id="page-loader"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-4">
+      <!-- Spinning Outer Ring -->
+      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <!-- Inner Icon -->
+      <div class="absolute text-primary-red">
+        <i class="fas fa-car text-lg"></i>
+      </div>
+    </div>
+    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+      Loading A&C Japan Auto Parts...
+    </p>
+    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+  </div>
+
   <!-- Main Header -->
   <header class="glass-panel sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
@@ -39,12 +56,11 @@
       </button>
 
       <!-- Search Bar -->
-      <div 
       <div id="mobile-search"
         class="hidden md:flex flex-1 max-w-2xl mx-0 md:mx-8 w-full mt-4 md:mt-0 order-last md:order-none">
         <form class="flex w-full">
           <select
-            class="input-3d py-2 px-2 md:px-4 rounded-l-md focus:outline-none text-sm md:text-base">
+            class="input-3d py-2 px-2 md:px-4 rounded-l-xl focus:outline-none text-sm md:text-base glass-panel">
             <option>All Categories</option>
             <option>Vehicles</option>
             <option>Auto Parts</option>
@@ -52,7 +68,7 @@
           <input type="text" placeholder="Search for vehicles, parts..."
             class="flex-1 input-3d py-2 px-4 focus:outline-none text-sm md:text-base border-l-0">
           <button type="submit"
-            class="btn-3d btn-primary-3d px-4 md:px-6 rounded-r-md transition">
+            class="btn-3d btn-primary-3d px-4 md:px-6 rounded-r-xl transition text-white">
             <i class="fas fa-search"></i>
           </button>
         </form>
@@ -103,15 +119,15 @@
             class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Special
             Offer</span>
           <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">At the lowest
-            price!<br><span class="text-primary-gold">Automotive Parts</span></h1>
-          <p class="text-xl mb-6 font-light">High quality Japanese parts and exclusive vehicle auctions.</p>
+            price!<br><span class="text-rose-400">Automotive Parts</span></h1>
+          <p class="text-xl mb-6 font-light text-gray-200">High quality Japanese parts and exclusive vehicle auctions.</p>
           <div class="flex items-end mb-8">
-            <span class="text-gray-300 line-through mr-3">$99.00</span>
+            <span class="text-gray-400 line-through mr-3">$99.00</span>
             <span class="text-4xl font-bold text-white">$69.00 <span
-                class="text-sm font-normal">NEW</span></span>
+                class="text-sm font-normal text-rose-400">NEW</span></span>
           </div>
           <a href="listing.html"
-            class="inline-block bg-primary-gold text-white font-bold tracking-wide font-bold py-3 px-8 rounded hover:bg-yellow-400 transition card-3d shadow-lg">Shop
+            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Shop
             Now <i class="fas fa-arrow-right ml-2"></i></a>
         </div>
       </div>
@@ -121,7 +137,7 @@
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?q=80&w=2070&auto=format&fit=crop"
         alt="JDM Engines" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
           class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
@@ -129,11 +145,11 @@
             class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Import
             Direct</span>
           <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Authentic JDM<br><span
-              class="text-primary-gold">Engines & Transmissions</span></h1>
-          <p class="text-xl mb-6 font-light">Legendary powerplants sourced directly from Japan. 2JZ, RB26,
+              class="text-rose-400">Engines & Transmissions</span></h1>
+          <p class="text-xl mb-6 font-light text-gray-200">Legendary powerplants sourced directly from Japan. 2JZ, RB26,
             SR20 in stock.</p>
           <a href="listing.html"
-            class="inline-block glass-panel text-white font-bold tracking-wide font-bold py-3 px-8 rounded hover:glass-panel/5 transition card-3d shadow-lg">View
+            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">View
             Inventory <i class="fas fa-arrow-right ml-2"></i></a>
         </div>
       </div>
@@ -143,7 +159,7 @@
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=2070&auto=format&fit=crop"
         alt="Vehicle Auctions" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
           class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
@@ -151,11 +167,11 @@
             class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Live
             Auctions</span>
           <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Bid on Rare<br><span
-              class="text-primary-gold">Japanese Classics</span></h1>
-          <p class="text-xl mb-6 font-light">Direct access to Japan's premier auto auctions. Import your dream
+              class="text-rose-400">Japanese Classics</span></h1>
+          <p class="text-xl mb-6 font-light text-gray-200">Direct access to Japan's premier auto auctions. Import your dream
             car today.</p>
           <a href="listing.html"
-            class="inline-block bg-primary-gold text-white font-bold tracking-wide font-bold py-3 px-8 rounded hover:bg-yellow-400 transition card-3d shadow-lg">View
+            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">View
             Live Auctions <i class="fas fa-gavel ml-2"></i></a>
         </div>
       </div>
@@ -165,7 +181,7 @@
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070&auto=format&fit=crop"
         alt="Performance Parts" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
           class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
@@ -173,14 +189,14 @@
             class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Performance
             Upgrades</span>
           <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Unleash the<br><span
-              class="text-primary-gold">Full Potential</span></h1>
-          <p class="text-xl mb-6 font-light">Premium turbo kits, exhaust systems, and suspension components.
+              class="text-rose-400">Full Potential</span></h1>
+          <p class="text-xl mb-6 font-light text-gray-200">Premium turbo kits, exhaust systems, and suspension components.
           </p>
           <div class="flex items-end mb-8">
             <span class="text-4xl font-bold text-white">Up to 20% OFF</span>
           </div>
           <a href="listing.html"
-            class="inline-block bg-primary-gold text-white font-bold tracking-wide font-bold py-3 px-8 rounded hover:bg-yellow-400 transition card-3d shadow-lg">Shop
+            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Shop
             Performance <i class="fas fa-bolt ml-2"></i></a>
         </div>
       </div>
@@ -190,7 +206,7 @@
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1632733711679-529326f6db12?q=80&w=2070&auto=format&fit=crop"
         alt="OEM Parts" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-transparent"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
           class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
@@ -198,11 +214,11 @@
             class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Genuine
             Quality</span>
           <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Perfect Fitment<br><span
-              class="text-primary-gold">OEM Body Parts</span></h1>
-          <p class="text-xl mb-6 font-light">Restore your vehicle with genuine bumpers, fenders, lights, and
+              class="text-rose-400">OEM Body Parts</span></h1>
+          <p class="text-xl mb-6 font-light text-gray-200">Restore your vehicle with genuine bumpers, fenders, lights, and
             accessories.</p>
           <a href="listing.html"
-            class="inline-block glass-panel text-white font-bold tracking-wide font-bold py-3 px-8 rounded hover:glass-panel/5 transition card-3d shadow-lg">Find
+            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Find
             Your Part <i class="fas fa-search ml-2"></i></a>
         </div>
       </div>
@@ -551,7 +567,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-primary-dark text-gray-300 pt-16 pb-8 border-t-4 border-primary-red">
+  <footer class="glass-panel bg-[#050811]/95 text-gray-300 pt-16 pb-8 border-t border-white/10">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <!-- Company Info -->
@@ -561,21 +577,21 @@
               A&C <span class="text-primary-red">JAPAN</span>
             </div>
           </a>
-          <p class="text-sm mb-6 leading-relaxed">Your premier destination for high-quality Japanese
+          <p class="text-sm mb-6 leading-relaxed text-gray-400">Your premier destination for high-quality Japanese
             automotive parts and exclusive vehicle auctions. We bridge the gap between quality and
             affordability.</p>
           <div class="flex space-x-4">
             <a href="#"
-              class="w-10 h-10 rounded-full glass-panel/10 flex items-center justify-center hover:bg-primary-red transition text-white"><i
+              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
                 class="fab fa-facebook-f"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-full glass-panel/10 flex items-center justify-center hover:bg-primary-red transition text-white"><i
+              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
                 class="fab fa-twitter"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-full glass-panel/10 flex items-center justify-center hover:bg-primary-red transition text-white"><i
+              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
                 class="fab fa-instagram"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-full glass-panel/10 flex items-center justify-center hover:bg-primary-red transition text-white"><i
+              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
                 class="fab fa-youtube"></i></a>
           </div>
         </div>
@@ -583,18 +599,18 @@
         <!-- Quick Links -->
         <div>
           <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">Quick
-            Links<span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-primary-gold"></span></h4>
+            Links<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="#" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> About Us</a></li>
-            <li><a href="#" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Contact Us</a></li>
-            <li><a href="listing.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="listing.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Live Auctions</a>
             </li>
-            <li><a href="#" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Auto Parts</a></li>
-            <li><a href="#" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> FAQs</a></li>
           </ul>
         </div>
@@ -602,20 +618,20 @@
         <!-- My Account -->
         <div>
           <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">My
-            Account<span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-primary-gold"></span></h4>
+            Account<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="login.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="login.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Login / Register</a>
             </li>
-            <li><a href="profile.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="profile.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Order History</a>
             </li>
-            <li><a href="profile.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="profile.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> My Bids</a></li>
-            <li><a href="cart.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="cart.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Shopping Cart</a>
             </li>
-            <li><a href="add-auction.html" class="hover:text-primary-gold transition flex items-center"><i
+            <li><a href="add-auction.html" class="hover:text-rose-400 transition flex items-center"><i
                   class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Sell Vehicle</a>
             </li>
           </ul>
@@ -624,23 +640,23 @@
         <!-- Contact Info -->
         <div>
           <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">Contact
-            Info<span class="absolute -bottom-2 left-0 w-1/2 h-1 bg-primary-gold"></span></h4>
+            Info<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
           <ul class="space-y-4 text-sm">
             <li class="flex items-start">
-              <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-gold text-lg"></i>
+              <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-red text-lg"></i>
               <span>123 Auto Market Street, Tokyo, Japan 100-0001</span>
             </li>
             <li class="flex items-start">
-              <i class="fas fa-phone-alt mt-1 mr-3 text-primary-gold text-lg"></i>
+              <i class="fas fa-phone-alt mt-1 mr-3 text-primary-blue text-lg"></i>
               <div>
                 <span class="block">+84 5678 9999</span>
                 <span class="block text-gray-400">(Mon-Fri: 9AM - 6PM)</span>
               </div>
             </li>
             <li class="flex items-start">
-              <i class="fas fa-envelope mt-1 mr-3 text-primary-gold text-lg"></i>
+              <i class="fas fa-envelope mt-1 mr-3 text-rose-400 text-lg"></i>
               <a href="mailto:support@ancjapan.com"
-                class="hover:text-primary-gold transition">support@ancjapan.com</a>
+                class="hover:text-rose-400 transition">support@ancjapan.com</a>
             </li>
           </ul>
         </div>

@@ -11,52 +11,68 @@
 </head>
 <body class="text-white min-h-screen flex flex-col">
 
+  <!-- Page Loading Overlay -->
+  <div id="page-loader"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-4">
+      <!-- Spinning Outer Ring -->
+      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <!-- Inner Icon -->
+      <div class="absolute text-primary-red">
+        <i class="fas fa-chart-line text-lg"></i>
+      </div>
+    </div>
+    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+      Loading supplier portal...
+    </p>
+    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+  </div>
+
   <!-- Header -->
-  <header class="bg-primary-dark text-white sticky top-0 z-50">
+  <header class="glass-panel sticky top-0 z-50 border-b border-white/10 bg-[#050811]/90 backdrop-blur-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
         <button class="md:hidden text-white mr-2" onclick="document.getElementById('supplier-sidebar').classList.toggle('hidden'); document.getElementById('supplier-sidebar').classList.toggle('absolute'); document.getElementById('supplier-sidebar').classList.toggle('z-40'); document.getElementById('supplier-sidebar').classList.toggle('w-full');"><i class="fas fa-bars text-xl"></i></button>
         <div class="text-2xl sm:text-3xl font-black italic tracking-tighter text-white">
           A&C <span class="text-primary-red">JAPAN</span>
         </div>
-        <div class="hidden sm:block ml-2 pl-2 border-l border-gray-600 text-sm font-semibold tracking-widest text-primary-gold uppercase">Supplier Portal</div>
+        <div class="hidden sm:block ml-2 pl-2 border-l border-white/20 text-xs font-bold tracking-widest text-primary-red uppercase">Supplier Portal</div>
       </a>
-      <div class="flex items-center space-x-6 text-sm">
-        <a href="#" class="relative hover:text-primary-gold transition">
-          <i class="far fa-bell text-lg"></i>
-          <span class="absolute -top-1 -right-1 bg-primary-red rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold">5</span>
+      <div class="flex items-center space-x-4 sm:space-x-6 text-sm">
+        <a href="#" class="relative w-9 h-9 rounded-lg glass-panel border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition">
+          <i class="far fa-bell text-sm"></i>
+          <span class="absolute -top-1 -right-1 bg-primary-red rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold text-white shadow">5</span>
         </a>
-        <a href="#" class="relative hover:text-primary-gold transition">
-          <i class="far fa-envelope text-lg"></i>
-          <span class="absolute -top-1 -right-1 bg-primary-red rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold">2</span>
+        <a href="#" class="relative w-9 h-9 rounded-lg glass-panel border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition">
+          <i class="far fa-envelope text-sm"></i>
+          <span class="absolute -top-1 -right-1 bg-primary-blue rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold text-white shadow">2</span>
         </a>
-        <div class="flex items-center cursor-pointer">
-          <img src="https://ui-avatars.com/api/?name=Tokyo+Auto&background=f5a623&color=fff" alt="Avatar" class="w-8 h-8 rounded-full border-2 border-white mr-2">
-          <span class="font-semibold hidden sm:inline">TokyoAuto_Official</span>
-          <i class="fas fa-chevron-down ml-2 text-xs text-gray-400"></i>
+        <div class="flex items-center cursor-pointer glass-panel px-3 py-1.5 rounded-xl border border-white/10 hover:border-white/20 transition">
+          <img src="https://ui-avatars.com/api/?name=Tokyo+Auto&background=730505&color=fff" alt="Avatar" class="w-7 h-7 rounded-full border border-white/30 mr-2">
+          <span class="font-semibold text-xs hidden sm:inline text-gray-200">TokyoAuto_Official</span>
+          <i class="fas fa-chevron-down ml-2 text-[10px] text-gray-400"></i>
         </div>
       </div>
     </div>
-  
-      </header>
+  </header>
 
   <!-- Main Content -->
   <div class="flex-grow flex container mx-auto px-4 py-6 gap-6">
     
     <!-- Sidebar Navigation -->
     <aside id="supplier-sidebar" class="w-64 hidden md:block shrink-0 h-full">
-      <div class="glass-panel rounded-lg border border-white/10 p-4 sticky top-24">
+      <div class="glass-panel rounded-2xl border border-white/10 p-4 sticky top-24">
         <div class="flex justify-end md:hidden mb-4">
           <button class="text-gray-400 hover:text-white" onclick="document.getElementById('supplier-sidebar').classList.add('hidden'); document.getElementById('supplier-sidebar').classList.remove('absolute', 'z-40', 'w-full');"><i class="fas fa-times text-xl"></i></button>
         </div>
         <nav class="space-y-1">
-          <a href="#" class="flex items-center px-4 py-3 bg-primary-red/10 text-primary-red font-semibold rounded-lg"><i class="fas fa-chart-pie w-6 text-center mr-2"></i> Overview</a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition"><i class="fas fa-car w-6 text-center mr-2"></i> My Vehicles</a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition"><i class="fas fa-boxes w-6 text-center mr-2"></i> Parts Inventory</a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition"><i class="fas fa-gavel w-6 text-center mr-2"></i> Active Auctions</a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition"><i class="fas fa-file-invoice-dollar w-6 text-center mr-2"></i> Sales & Orders</a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition relative"><i class="far fa-comments w-6 text-center mr-2"></i> Messages <span class="absolute right-4 bg-primary-red text-white text-xs font-bold px-2 py-0.5 rounded-full">2</span></a>
-          <a href="#" class="flex items-center px-4 py-3 text-gray-300 hover: hover:text-white font-bold tracking-wide font-medium rounded-lg transition"><i class="fas fa-cog w-6 text-center mr-2"></i> Settings</a>
+          <a href="#" class="flex items-center px-4 py-2.5 bg-gradient-to-r from-primary-red/30 to-primary-blue/30 text-white font-semibold rounded-xl border-l-4 border-primary-red shadow-sm"><i class="fas fa-chart-pie w-6 text-center mr-2 text-rose-400"></i> Overview</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-car w-6 text-center mr-2 text-gray-400"></i> My Vehicles</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-boxes w-6 text-center mr-2 text-gray-400"></i> Parts Inventory</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-gavel w-6 text-center mr-2 text-gray-400"></i> Active Auctions</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-file-invoice-dollar w-6 text-center mr-2 text-gray-400"></i> Sales & Orders</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition relative"><i class="far fa-comments w-6 text-center mr-2 text-gray-400"></i> Messages <span class="absolute right-4 bg-primary-red text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">2</span></a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-cog w-6 text-center mr-2 text-gray-400"></i> Settings</a>
         </nav>
       </div>
     </aside>
@@ -71,11 +87,11 @@
           <p class="text-sm text-gray-400">Welcome back, here's what's happening with your store today.</p>
         </div>
         <div class="mt-4 sm:mt-0 flex space-x-3">
-          <a href="add-auction.html" class="bg-primary-red hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow transition flex items-center">
+          <a href="add-auction.html" class="btn-3d btn-primary-3d text-white font-semibold py-2 px-4 rounded-xl shadow transition flex items-center text-sm">
             <i class="fas fa-plus mr-2"></i> Add Vehicle
           </a>
-          <a href="#" class="bg-primary-dark hover:bg-gray-800 text-white font-semibold py-2 px-4 rounded shadow transition flex items-center">
-            <i class="fas fa-box-open mr-2"></i> Add Part
+          <a href="#" class="glass-panel border border-white/10 hover:border-white/20 text-white font-semibold py-2 px-4 rounded-xl shadow transition flex items-center text-sm">
+            <i class="fas fa-box-open mr-2 text-primary-blue"></i> Add Part
           </a>
         </div>
       </div>
@@ -83,48 +99,48 @@
       <!-- Stats Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         
-        <div class="glass-panel p-5 rounded-lg border border-white/10 border-l-4 border-l-green-500">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Total Revenue</p>
-              <h3 class="text-2xl font-black text-white">$142,500</h3>
+              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Total Revenue</p>
+              <h3 class="text-2xl font-black text-white tracking-tight">$142,500</h3>
             </div>
-            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600"><i class="fas fa-dollar-sign"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg"><i class="fas fa-dollar-sign"></i></div>
           </div>
-          <p class="text-xs text-green-600 font-semibold mt-2"><i class="fas fa-arrow-up mr-1"></i> +12.5% <span class="text-gray-400 font-normal">from last month</span></p>
+          <p class="text-xs text-emerald-400 font-semibold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +12.5% <span class="text-gray-400 font-normal ml-1">from last month</span></p>
         </div>
 
-        <div class="glass-panel p-5 rounded-lg border border-white/10 border-l-4 border-l-primary-red">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
-              <h3 class="text-2xl font-black text-white">12</h3>
+              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
+              <h3 class="text-2xl font-black text-white tracking-tight">12</h3>
             </div>
-            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-primary-red"><i class="fas fa-gavel"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-primary-red/20 border border-primary-red/30 flex items-center justify-center text-rose-400 text-lg"><i class="fas fa-gavel"></i></div>
           </div>
-          <p class="text-xs text-gray-400 mt-2">4 ending within 24 hours</p>
+          <p class="text-xs text-rose-400/90 font-medium mt-3">4 ending within 24 hours</p>
         </div>
 
-        <div class="glass-panel p-5 rounded-lg border border-white/10 border-l-4 border-l-blue-500">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Total Bids</p>
-              <h3 class="text-2xl font-black text-white">284</h3>
+              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Total Bids</p>
+              <h3 class="text-2xl font-black text-white tracking-tight">284</h3>
             </div>
-            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500"><i class="fas fa-users"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-primary-blue/20 border border-primary-blue/30 flex items-center justify-center text-blue-400 text-lg"><i class="fas fa-users"></i></div>
           </div>
-          <p class="text-xs text-green-600 font-semibold mt-2"><i class="fas fa-arrow-up mr-1"></i> +5.2% <span class="text-gray-400 font-normal">from last month</span></p>
+          <p class="text-xs text-emerald-400 font-semibold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +5.2% <span class="text-gray-400 font-normal ml-1">from last month</span></p>
         </div>
 
-        <div class="glass-panel p-5 rounded-lg border border-white/10 border-l-4 border-l-primary-gold">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-xs text-gray-400 uppercase font-bold tracking-wider mb-1">Items Sold</p>
-              <h3 class="text-2xl font-black text-white">45</h3>
+              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Items Sold</p>
+              <h3 class="text-2xl font-black text-white tracking-tight">45</h3>
             </div>
-            <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-primary-gold"><i class="fas fa-shopping-cart"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300 text-lg"><i class="fas fa-shopping-cart"></i></div>
           </div>
-          <p class="text-xs text-gray-400 mt-2">3 pending fulfillment</p>
+          <p class="text-xs text-gray-400 mt-3">3 pending fulfillment</p>
         </div>
 
       </div>

@@ -6,13 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buy Now - Spare Parts - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body class="text-white">
+
+  <!-- Page Loading Overlay -->
+  <div id="page-loader"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-4">
+      <!-- Spinning Outer Ring -->
+      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <!-- Inner Icon -->
+      <div class="absolute text-primary-red">
+        <i class="fas fa-boxes text-lg"></i>
+      </div>
+    </div>
+    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+      Loading spare parts...
+    </p>
+    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+  </div>
 
   <header class="glass-panel sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
@@ -41,10 +58,10 @@
       <div class="container mx-auto px-4">
         <ul id="mobile-nav-listing"
           class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-gray-200 pb-4 md:pb-0">
-          <li><a href="index.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">HOME</a></li>
-          <li><a href="listing.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">LIVE AUCTIONS</a>
+          <li><a href="index.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">HOME</a>
+          </li>
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">LIVE
+              AUCTIONS</a>
           </li>
           <li><a href="buy-now.html"
               class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-red text-primary-red pl-2 md:pl-0">BUY
@@ -52,14 +69,15 @@
         </ul>
       </div>
     </nav>
-  
-      </header>
 
-  <!-- Page Title -->
-  <div class="bg-primary-dark py-8">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-3xl font-bold text-white mb-2">Buy Now - Spare Parts</h1>
-      <p class="text-gray-400 text-sm">Home / Spare Parts</p>
+  </header>
+
+  <!-- Page Title Banner -->
+  <div class="glass-panel py-10 border-b border-white/10 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-r from-primary-red/10 via-transparent to-primary-blue/10 pointer-events-none"></div>
+    <div class="container mx-auto px-4 text-center relative z-10">
+      <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-2">Buy Now - Spare Parts</h1>
+      <p class="text-gray-400 text-sm"><a href="index.html" class="hover:text-white transition">Home</a> / <span class="text-rose-400">Spare Parts</span></p>
     </div>
   </div>
 
@@ -70,15 +88,15 @@
     <aside id="filters-aside" class="w-full md:w-1/4">
       <div class="glass-panel p-5 rounded-lg border border-white/10">
         <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-lg text-white font-bold tracking-wide"><i class="fas fa-filter mr-2"></i> Filters</h3>
+          <h3 class="font-bold text-lg text-white font-bold tracking-wide"><i class="fas fa-filter mr-2"></i> Filters
+          </h3>
           <button class="text-xs text-primary-red hover:underline">Clear All</button>
         </div>
 
         <!-- Brand Filter -->
         <div class="mb-6">
           <h4 class="font-semibold mb-2 text-sm">Brand</h4>
-          <select
-            class="w-full input-3d rounded p-2 text-sm focus:ring-1 focus:ring-primary-red outline-none">
+          <select class="w-full input-3d rounded p-2 text-sm focus:ring-1 focus:ring-primary-red outline-none">
             <option>All Brands</option>
             <option>Toyota</option>
             <option>Honda</option>
@@ -144,7 +162,8 @@
           </div>
           <!-- View Toggles -->
           <div class="flex input-3d rounded overflow-hidden">
-            <button class="px-3 py-1.5 glass-panel/5 text-white font-bold tracking-wide"><i class="fas fa-th"></i></button>
+            <button class="px-3 py-1.5 glass-panel/5 text-white font-bold tracking-wide"><i
+                class="fas fa-th"></i></button>
             <button class="px-3 py-1.5 glass-panel text-gray-400 hover:text-white font-bold tracking-wide"><i
                 class="fas fa-list"></i></button>
           </div>
@@ -154,13 +173,11 @@
       <!-- Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group cursor-pointer"
-          onclick="showProductDetails()">
+        <div class="glass-panel rounded-lg card-3d overflow-hidden group cursor-pointer" onclick="showProductDetails()">
           <div class="relative">
             <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop"
               alt="Car" class="w-full h-48 object-cover">
-            <div
-              class="absolute top-3 left-3 bg-primary-dark text-white text-xs font-bold px-2 py-1 rounded">
+            <div class="absolute top-3 left-3 bg-primary-dark text-white text-xs font-bold px-2 py-1 rounded">
               BUY NOW</div>
           </div>
           <div class="p-5">
@@ -185,8 +202,7 @@
       <!-- Pagination -->
       <div class="mt-10 flex justify-center">
         <nav class="flex items-center space-x-1">
-          <button
-            class="px-3 py-1 rounded border border-white/20 text-gray-400 hover:glass-panel/5 disabled:opacity-50"
+          <button class="px-3 py-1 rounded border border-white/20 text-gray-400 hover:glass-panel/5 disabled:opacity-50"
             disabled><i class="fas fa-angle-left"></i></button>
           <button class="px-3 py-1 rounded border border-primary-red bg-primary-red text-white">1</button>
           <button class="px-3 py-1 rounded border border-white/20 text-gray-200 hover:glass-panel/5">2</button>

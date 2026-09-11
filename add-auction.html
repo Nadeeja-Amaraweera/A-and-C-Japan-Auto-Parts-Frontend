@@ -5,71 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add New Auction - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="text-white min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-car text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading listing form...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
+  <!-- Dynamic Topbar Hook -->
+  <div id="dynamic-topbar"></div>
+
   <!-- Header -->
-  <header class="glass-panel sticky top-0 z-50">
+  <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
       </a>
-      <button class="md:hidden text-gray-300 ml-auto" onclick="document.getElementById('mobile-header-links').classList.toggle('hidden');">
+      <button class="md:hidden text-slate-700 ml-auto" onclick="document.getElementById('mobile-header-links').classList.toggle('hidden');">
         <i class="fas fa-bars text-2xl"></i>
       </button>
       <div id="mobile-header-links" class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 text-sm font-semibold">
-        <a href="supplier-dashboard.html" class="block md:inline hover:text-primary-red transition"><i class="fas fa-chart-line mr-1"></i> Dashboard</a>
-        <a href="profile.html" class="block md:inline hover:text-primary-red transition"><i class="far fa-user mr-1"></i> My Account</a>
+        <a href="supplier-dashboard.html" class="block md:inline hover:text-primary-blue transition text-slate-700"><i class="fas fa-chart-line mr-1 text-primary-blue"></i> Dashboard</a>
+        <a href="profile.html" class="block md:inline hover:text-primary-blue transition text-slate-700"><i class="far fa-user mr-1 text-primary-blue"></i> My Account</a>
       </div>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="flex-grow container mx-auto px-4 py-12 max-w-4xl">
-    <div class="glass-panel rounded-2xl shadow-2xl border border-white/10 overflow-hidden">
+    <div class="glass-panel card-3d rounded-2xl shadow-sm border border-white/90 bg-white/85 overflow-hidden">
       
-      <div class="relative p-6 md:p-8 border-b border-white/10 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-r from-primary-red/20 via-transparent to-primary-blue/20 pointer-events-none"></div>
+      <div class="relative p-6 md:p-8 border-b border-slate-200/80 bg-blue-50/40 overflow-hidden">
         <div class="relative z-10">
-          <h1 class="text-2xl md:text-3xl font-black text-white tracking-tight">List a Vehicle for Auction</h1>
-          <p class="text-sm text-gray-300 mt-1">Fill in the details below to create a new auction listing.</p>
+          <h1 class="text-2xl md:text-3xl font-black text-[#0b1f3a] tracking-tight">List a Vehicle for Auction</h1>
+          <p class="text-sm text-slate-600 mt-1 font-medium">Fill in the details below to create a new auction listing.</p>
         </div>
       </div>
 
       <form id="addAuctionForm" class="p-6 md:p-8">
         
         <!-- Section 1: Basic Info -->
-        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-6">1. Basic Information</h2>
+        <h2 class="text-lg font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-6">1. Basic Information</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div class="md:col-span-2">
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Vehicle Title <span class="text-red-500">*</span></label>
-            <input type="text" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., 2020 Chevrolet Corvette Stingray 2LT">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Vehicle Title <span class="text-rose-500">*</span></label>
+            <input type="text" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., 2020 Chevrolet Corvette Stingray 2LT">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Brand <span class="text-red-500">*</span></label>
-            <select required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red outline-none glass-panel">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Brand <span class="text-rose-500">*</span></label>
+            <select required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
               <option value="">Select Brand</option>
               <option value="toyota">Toyota</option>
               <option value="honda">Honda</option>
@@ -78,20 +80,20 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Model <span class="text-red-500">*</span></label>
-            <input type="text" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., Corvette">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Model <span class="text-rose-500">*</span></label>
+            <input type="text" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., Corvette">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Year <span class="text-red-500">*</span></label>
-            <input type="number" required min="1900" max="2025" class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., 2020">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Year <span class="text-rose-500">*</span></label>
+            <input type="number" required min="1900" max="2025" class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., 2020">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Mileage (miles) <span class="text-red-500">*</span></label>
-            <input type="number" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., 12450">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Mileage (miles) <span class="text-rose-500">*</span></label>
+            <input type="number" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., 12450">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Condition <span class="text-red-500">*</span></label>
-            <select required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red outline-none glass-panel">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Condition <span class="text-rose-500">*</span></label>
+            <select required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
               <option value="">Select Condition</option>
               <option value="new">New</option>
               <option value="used">Used</option>
@@ -99,25 +101,25 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Vehicle Location <span class="text-red-500">*</span></label>
-            <input type="text" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., Tokyo, Japan">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Vehicle Location <span class="text-rose-500">*</span></label>
+            <input type="text" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., Tokyo, Japan">
           </div>
         </div>
 
         <!-- Section 2: Technical Specs -->
-        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-6">2. Technical Specifications</h2>
+        <h2 class="text-lg font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-6">2. Technical Specifications</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Transmission <span class="text-red-500">*</span></label>
-            <select required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red outline-none glass-panel">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Transmission <span class="text-rose-500">*</span></label>
+            <select required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
               <option value="">Select Transmission</option>
               <option value="auto">Automatic</option>
               <option value="manual">Manual</option>
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Fuel Type <span class="text-red-500">*</span></label>
-            <select required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red outline-none glass-panel">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Fuel Type <span class="text-rose-500">*</span></label>
+            <select required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
               <option value="">Select Fuel</option>
               <option value="gasoline">Gasoline</option>
               <option value="diesel">Diesel</option>
@@ -126,63 +128,63 @@
             </select>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Engine Size</label>
-            <input type="text" class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., 6.2L V8">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Engine Size</label>
+            <input type="text" class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., 6.2L V8">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Exterior Color</label>
-            <input type="text" class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="e.g., Torch Red">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Exterior Color</label>
+            <input type="text" class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="e.g., Torch Red">
           </div>
           <div class="md:col-span-2">
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Description <span class="text-red-500">*</span></label>
-            <textarea required rows="4" class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="Describe the vehicle's features, history, and condition..."></textarea>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Description <span class="text-rose-500">*</span></label>
+            <textarea required rows="4" class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm" placeholder="Describe the vehicle's features, history, and condition..."></textarea>
           </div>
         </div>
 
         <!-- Section 3: Auction Details -->
-        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-6">3. Auction Details</h2>
+        <h2 class="text-lg font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-6">3. Auction Details</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Starting Price (USD) <span class="text-red-500">*</span></label>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Starting Price (USD) <span class="text-rose-500">*</span></label>
             <div class="relative">
-              <span class="absolute left-3 top-2 text-gray-400">$</span>
-              <input type="number" required min="0" class="w-full pl-8 pr-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="0">
+              <span class="absolute left-3 top-2.5 text-slate-400 font-bold">$</span>
+              <input type="number" required min="0" class="w-full pl-8 pr-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm font-bold" placeholder="0">
             </div>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Reserve Price (USD)</label>
+            <label class="block text-sm font-bold text-slate-700 mb-1">Reserve Price (USD)</label>
             <div class="relative">
-              <span class="absolute left-3 top-2 text-gray-400">$</span>
-              <input type="number" class="w-full pl-8 pr-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none" placeholder="Optional">
+              <span class="absolute left-3 top-2.5 text-slate-400 font-bold">$</span>
+              <input type="number" class="w-full pl-8 pr-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm font-bold" placeholder="Optional">
             </div>
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">Start Date & Time <span class="text-red-500">*</span></label>
-            <input type="datetime-local" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none text-gray-200">
+            <label class="block text-sm font-bold text-slate-700 mb-1">Start Date & Time <span class="text-rose-500">*</span></label>
+            <input type="datetime-local" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
           </div>
           <div>
-            <label class="block text-sm font-semibold text-gray-200 mb-1">End Date & Time <span class="text-red-500">*</span></label>
-            <input type="datetime-local" required class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none text-gray-200">
+            <label class="block text-sm font-bold text-slate-700 mb-1">End Date & Time <span class="text-rose-500">*</span></label>
+            <input type="datetime-local" required class="w-full px-4 py-2.5 input-3d rounded-xl bg-white border border-slate-200 focus:border-primary-blue outline-none text-slate-800 text-sm">
           </div>
         </div>
 
         <!-- Section 4: Media -->
-        <h2 class="text-lg font-bold text-white border-b border-white/10 pb-2 mb-6">4. Images</h2>
+        <h2 class="text-lg font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-6">4. Images</h2>
         <div class="mb-8">
-          <label class="block text-sm font-semibold text-gray-200 mb-2">Upload Images (Max 10) <span class="text-red-500">*</span></label>
-          <div class="border-2 border-dashed border-white/20 rounded-lg p-8 text-center hover:glass-panel/5 transition cursor-pointer" id="dropzone">
-            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
-            <p class="text-gray-300 font-semibold mb-1">Click to upload or drag and drop</p>
-            <p class="text-xs text-gray-400 mb-4">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+          <label class="block text-sm font-bold text-slate-700 mb-2">Upload Images (Max 10) <span class="text-rose-500">*</span></label>
+          <div class="border-2 border-dashed border-slate-200 hover:border-primary-blue bg-blue-50/20 rounded-2xl p-8 text-center transition cursor-pointer" id="dropzone">
+            <i class="fas fa-cloud-upload-alt text-4xl text-primary-blue mb-3"></i>
+            <p class="text-slate-700 font-bold mb-1">Click to upload or drag and drop</p>
+            <p class="text-xs text-slate-400 mb-4">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
             <input type="file" multiple accept="image/*" class="hidden" id="fileInput">
-            <button type="button" onclick="document.getElementById('fileInput').click()" class="glass-panel border border-white/20 text-gray-200 font-semibold py-2 px-4 rounded hover:">Browse Files</button>
+            <button type="button" onclick="document.getElementById('fileInput').click()" class="border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold py-2 px-5 rounded-xl text-sm transition cursor-pointer shadow-2xs">Browse Files</button>
           </div>
           <!-- Preview Area -->
           <div id="imagePreview" class="flex flex-wrap gap-4 mt-4 hidden">
             <!-- Simulated preview items -->
-            <div class="relative w-24 h-24 bg-gray-200 rounded border border-white/20 overflow-hidden group">
+            <div class="relative w-24 h-24 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden group">
               <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover">
-              <div class="absolute inset-0 bg-black/50 hidden group-hover:flex items-center justify-center cursor-pointer">
+              <div class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center cursor-pointer">
                 <i class="fas fa-trash text-white"></i>
               </div>
             </div>
@@ -190,16 +192,16 @@
         </div>
 
         <!-- Submit Buttons -->
-        <div class="flex justify-end space-x-4 border-t border-white/10 pt-6">
-          <button type="button" class="px-6 py-2 border border-white/20 text-gray-200 font-semibold rounded hover: transition">Save Draft</button>
-          <button type="submit" class="px-8 py-2 btn-3d btn-primary-3d  font-bold rounded shadow  transition">List Vehicle</button>
+        <div class="flex justify-end space-x-4 border-t border-slate-100 pt-6">
+          <button type="button" class="px-6 py-2.5 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-bold rounded-xl transition text-sm cursor-pointer">Save Draft</button>
+          <button type="submit" class="px-8 py-2.5 btn-3d btn-primary-3d font-bold rounded-xl shadow-sm transition text-sm cursor-pointer">List Vehicle</button>
         </div>
       </form>
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="glass-panel border-t border-white/10 py-6 text-center text-sm text-gray-400 mt-auto">
+  <footer class="glass-panel border-t border-slate-200/80 bg-white/70 py-6 text-center text-sm text-slate-500 mt-auto">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
 
@@ -212,14 +214,11 @@
     fileInput.addEventListener('change', function() {
       if(this.files && this.files.length > 0) {
         imagePreview.classList.remove('hidden');
-        // In a real app, you'd generate object URLs for preview here
       }
     });
 
     document.getElementById('addAuctionForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      // In a real app, this would use API_CONFIG.ENDPOINTS.AUCTIONS.CREATE
-      console.log('API POST to: ' + API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUCTIONS.CREATE);
       alert('Auction listing created successfully! (Mock)');
       window.location.href = 'supplier-dashboard.html';
     });

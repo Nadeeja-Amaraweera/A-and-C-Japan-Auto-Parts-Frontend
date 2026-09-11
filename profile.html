@@ -11,43 +11,46 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="text-white min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Full-Screen Profile Loading Overlay -->
   <div id="profile-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-car text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading your profile...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
+  <!-- Dynamic Topbar Hook -->
+  <div id="dynamic-topbar"></div>
+
   <!-- Header -->
-  <header class="glass-panel sticky top-0 z-50">
+  <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
       </a>
-      <button class="md:hidden text-gray-300 ml-auto"
+      <button class="md:hidden text-slate-700 ml-auto"
         onclick="document.getElementById('mobile-header-links').classList.toggle('hidden');">
         <i class="fas fa-bars text-2xl"></i>
       </button>
       <div id="mobile-header-links"
         class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-        <a href="index.html" class="block md:inline hover:text-primary-red transition">Home</a>
-        <a href="listing.html" class="block md:inline hover:text-primary-red transition">Auctions</a>
-        <a href="cart.html" class="block md:inline flex items-center hover:text-primary-red transition">
-          <i class="fas fa-shopping-cart text-lg mr-2"></i> Cart
+        <a href="index.html" class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Home</a>
+        <a href="listing.html" class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Auctions</a>
+        <a href="cart.html" class="block md:inline flex items-center hover:text-primary-blue transition text-slate-700 font-medium">
+          <i class="fas fa-shopping-cart text-lg mr-2 text-primary-blue"></i> Cart
         </a>
       </div>
     </div>
@@ -61,48 +64,48 @@
 
       <!-- Sidebar -->
       <aside class="w-full md:w-1/4">
-        <div class="glass-panel rounded-lg border border-white/10 p-6 mb-6">
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 mb-6 shadow-sm">
           <div class="flex items-center mb-6">
             <div id="profile-avatar"
-              class="w-16 h-16 bg-primary-dark text-white rounded-full flex items-center justify-center text-2xl font-bold mr-4">
+              class="w-16 h-16 bg-blue-100 text-primary-blue rounded-full flex items-center justify-center text-2xl font-black mr-4 shadow-inner">
               --
             </div>
             <div>
-              <h2 id="profile-name" class="text-lg font-bold text-white">Loading...</h2>
-              <p id="profile-role" class="text-xs text-gray-400">Member</p>
+              <h2 id="profile-name" class="text-lg font-bold text-[#0b1f3a]">Loading...</h2>
+              <p id="profile-role" class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Member</p>
             </div>
           </div>
 
-          <nav class="space-y-2">
+          <nav class="space-y-1.5">
             <a href="#" onclick="showProfileDashboard(event)"
-              class="nav-tab block px-4 py-2 text-primary-red font-semibold rounded transition"><i
-                class="far fa-user w-6"></i> Profile Dashboard</a>
+              class="nav-tab block px-4 py-2.5 text-primary-blue bg-blue-50/80 font-bold rounded-xl transition"><i
+                class="far fa-user w-6 text-primary-blue"></i> Profile Dashboard</a>
             <a href="#" onclick="showOrderHistory(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="fas fa-shopping-bag w-6"></i> Order History</a>
             <a href="#" onclick="showMyBids(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="fas fa-gavel w-6"></i> My Bids</a>
             <a href="#" onclick="showWishlist(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="far fa-heart w-6"></i> Wishlist</a>
             <a href="#" onclick="showSettings(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="fas fa-cog w-6"></i> Settings</a>
             <button id="logoutBtn"
-              class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 hover:text-red-700 font-medium rounded transition flex items-center cursor-pointer">
+              class="w-full text-left px-4 py-2.5 text-rose-600 hover:bg-rose-50 font-semibold rounded-xl transition flex items-center cursor-pointer">
               <i class="fas fa-sign-out-alt w-6"></i> Log Out
             </button>
           </nav>
         </div>
 
-        <div class="bg-gradient-to-br from-primary-dark to-gray-900 text-white rounded-lg p-6 text-center">
-          <i class="fas fa-store text-4xl text-primary-gold mb-3"></i>
-          <h3 class="text-lg font-bold mb-2">Want to sell?</h3>
-          <p class="text-xs text-gray-300 mb-4">Upgrade your account to a Supplier to list vehicles and parts.
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/70 border border-blue-200/70 rounded-2xl p-6 text-center shadow-xs">
+          <i class="fas fa-store text-4xl text-primary-blue mb-3"></i>
+          <h3 class="text-lg font-bold text-[#0b1f3a] mb-2">Want to sell?</h3>
+          <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">Upgrade your account to a Supplier to list vehicles and parts.
           </p>
           <button onclick="becomeSupplier()"
-            class="w-full bg-primary-red hover:bg-red-700 text-white font-semibold py-2 rounded transition">Become
+            class="w-full btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Become
             a Supplier</button>
         </div>
       </aside>
@@ -110,55 +113,55 @@
       <!-- Dashboard Content -->
       <div id="dashboard-content" class="w-full md:w-3/4">
 
-        <h1 class="text-2xl font-bold text-white mb-6">Profile Dashboard</h1>
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Profile Dashboard</h1>
 
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div class="glass-panel p-6 rounded-lg border border-white/10 flex items-center">
-            <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-xl mr-4">
+          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
+            <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="fas fa-shopping-bag"></i>
             </div>
             <div>
-              <p class="text-sm text-gray-400">Total Orders</p>
-              <p class="text-2xl font-bold text-white">12</p>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Total Orders</p>
+              <p class="text-2xl font-black text-[#0b1f3a]">12</p>
             </div>
           </div>
-          <div class="glass-panel p-6 rounded-lg border border-white/10 flex items-center">
+          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
             <div
-              class="w-12 h-12 rounded-full bg-green-50 text-green-500 flex items-center justify-center text-xl mr-4">
+              class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="fas fa-gavel"></i>
             </div>
             <div>
-              <p class="text-sm text-gray-400">Active Bids</p>
-              <p class="text-2xl font-bold text-white">3</p>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Active Bids</p>
+              <p class="text-2xl font-black text-[#0b1f3a]">3</p>
             </div>
           </div>
-          <div class="glass-panel p-6 rounded-lg border border-white/10 flex items-center">
+          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
             <div
-              class="w-12 h-12 rounded-full bg-red-50 text-primary-red flex items-center justify-center text-xl mr-4">
+              class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="far fa-heart"></i>
             </div>
             <div>
-              <p class="text-sm text-gray-400">Wishlist Items</p>
-              <p class="text-2xl font-bold text-white">8</p>
+              <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Wishlist Items</p>
+              <p class="text-2xl font-black text-[#0b1f3a]">8</p>
             </div>
           </div>
         </div>
 
         <!-- Recent Activity Tabs -->
-        <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
-          <div class="flex border-b border-white/10">
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 overflow-hidden shadow-sm">
+          <div class="flex border-b border-slate-200/80 bg-slate-50/50">
             <button
-              class="px-6 py-4 font-semibold text-primary-red border-b-2 border-primary-red focus:outline-none">Recent
+              class="px-6 py-4 font-bold text-primary-blue border-b-2 border-primary-blue focus:outline-none">Recent
               Orders (Parts)</button>
-            <button class="px-6 py-4 font-semibold text-gray-400 hover:text-white focus:outline-none transition">Active
+            <button class="px-6 py-4 font-semibold text-slate-500 hover:text-slate-800 focus:outline-none transition">Active
               Bids (Vehicles)</button>
           </div>
 
-          <div class="p-0">
+          <div class="p-0 overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="text-gray-400 text-xs uppercase border-b border-white/10">
+                <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
                   <th class="py-3 px-6">Order ID</th>
                   <th class="py-3 px-6">Date</th>
                   <th class="py-3 px-6">Items</th>
@@ -168,37 +171,37 @@
                 </tr>
               </thead>
               <tbody class="text-sm">
-                <tr class="border-b border-white/10 hover:">
-                  <td class="py-4 px-6 font-medium">#ORD-9082</td>
-                  <td class="py-4 px-6 text-gray-400">Oct 24, 2023</td>
-                  <td class="py-4 px-6">Brembo Brake Pads (x1)</td>
-                  <td class="py-4 px-6 font-semibold">$85.00</td>
+                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-9082</td>
+                  <td class="py-4 px-6 text-slate-500">Oct 24, 2023</td>
+                  <td class="py-4 px-6 text-slate-700">Brembo Brake Pads (x1)</td>
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$85.00</td>
                   <td class="py-4 px-6"><span
-                      class="bg-blue-100 text-blue-700 py-1 px-2 rounded text-xs font-semibold">Processing</span>
+                      class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">Processing</span>
                   </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a>
+                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
                   </td>
                 </tr>
-                <tr class="border-b border-white/10 hover:">
-                  <td class="py-4 px-6 font-medium">#ORD-8933</td>
-                  <td class="py-4 px-6 text-gray-400">Oct 15, 2023</td>
-                  <td class="py-4 px-6">NGK Spark Plugs (x4)</td>
-                  <td class="py-4 px-6 font-semibold">$130.00</td>
+                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8933</td>
+                  <td class="py-4 px-6 text-slate-500">Oct 15, 2023</td>
+                  <td class="py-4 px-6 text-slate-700">NGK Spark Plugs (x4)</td>
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$130.00</td>
                   <td class="py-4 px-6"><span
-                      class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span>
+                      class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span>
                   </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a>
+                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
                   </td>
                 </tr>
-                <tr class="hover:">
-                  <td class="py-4 px-6 font-medium">#ORD-8511</td>
-                  <td class="py-4 px-6 text-gray-400">Sep 28, 2023</td>
-                  <td class="py-4 px-6">Castrol EDGE 5W-30 (x2)</td>
-                  <td class="py-4 px-6 font-semibold">$57.98</td>
+                <tr class="hover:bg-blue-50/30 transition">
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8511</td>
+                  <td class="py-4 px-6 text-slate-500">Sep 28, 2023</td>
+                  <td class="py-4 px-6 text-slate-700">Castrol EDGE 5W-30 (x2)</td>
+                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$57.98</td>
                   <td class="py-4 px-6"><span
-                      class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span>
+                      class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span>
                   </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a>
+                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
                   </td>
                 </tr>
               </tbody>
@@ -207,29 +210,29 @@
         </div>
 
         <!-- Personal Information -->
-        <div class="mt-8 glass-panel rounded-lg border border-white/10 p-6">
+        <div class="mt-8 glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="font-bold text-lg text-white">Personal Information</h3>
-            <button class="text-sm text-primary-red hover:underline"><i class="fas fa-edit mr-1"></i>
+            <h3 class="font-bold text-lg text-[#0b1f3a]">Personal Information</h3>
+            <button class="text-sm text-primary-blue font-bold hover:underline cursor-pointer"><i class="fas fa-edit mr-1"></i>
               Edit</button>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
             <div>
-              <p class="text-gray-400 mb-1">Full Name</p>
-              <p id="info-fullname" class="font-semibold text-white">--</p>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Full Name</p>
+              <p id="info-fullname" class="font-bold text-[#0b1f3a]">--</p>
             </div>
             <div>
-              <p class="text-gray-400 mb-1">Email Address</p>
-              <p id="info-email" class="font-semibold text-white">--</p>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Email Address</p>
+              <p id="info-email" class="font-bold text-[#0b1f3a]">--</p>
             </div>
             <div>
-              <p class="text-gray-400 mb-1">Phone Number</p>
-              <p id="info-phone" class="font-semibold text-white">--</p>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Phone Number</p>
+              <p id="info-phone" class="font-bold text-[#0b1f3a]">--</p>
             </div>
             <div>
-              <p class="text-gray-400 mb-1">Shipping Address</p>
-              <p id="info-address" class="font-semibold text-white">--</p>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Shipping Address</p>
+              <p id="info-address" class="font-bold text-[#0b1f3a]">--</p>
             </div>
           </div>
         </div>
@@ -240,7 +243,7 @@
   </main>
 
   <!-- Footer -->
-  <footer class="glass-panel border-t border-white/10 py-6 text-center text-sm text-gray-400 mt-auto">
+  <footer class="glass-panel border-t border-slate-200/80 bg-white/70 py-6 text-center text-sm text-slate-500 mt-auto">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
 
@@ -263,8 +266,8 @@
       if (!clickedElement) return;
 
       const tabs = document.querySelectorAll('.nav-tab');
-      const activeClasses = ['text-primary-red', 'font-semibold'];
-      const inactiveClasses = ['text-gray-300', 'font-medium'];
+      const activeClasses = ['text-primary-blue', 'bg-blue-50/80', 'font-bold'];
+      const inactiveClasses = ['text-slate-600', 'font-medium'];
 
       tabs.forEach(tab => {
         tab.classList.remove(...activeClasses);
@@ -289,11 +292,11 @@
         setActiveTab(event.currentTarget);
       }
       document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-white mb-6">Order History</h1>
-        <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Order History</h1>
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 overflow-hidden shadow-sm">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="text-gray-400 text-xs uppercase border-b border-white/10">
+              <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
                 <th class="py-3 px-6">Order ID</th>
                 <th class="py-3 px-6">Date</th>
                 <th class="py-3 px-6">Items</th>
@@ -303,29 +306,29 @@
               </tr>
             </thead>
             <tbody class="text-sm">
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#ORD-9082</td>
-                <td class="py-4 px-6 text-gray-400">Oct 24, 2023</td>
-                <td class="py-4 px-6">Brembo Brake Pads (x1)</td>
-                <td class="py-4 px-6 font-semibold">$85.00</td>
-                <td class="py-4 px-6"><span class="bg-blue-100 text-blue-700 py-1 px-2 rounded text-xs font-semibold">Processing</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-9082</td>
+                <td class="py-4 px-6 text-slate-500">Oct 24, 2023</td>
+                <td class="py-4 px-6 text-slate-700">Brembo Brake Pads (x1)</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$85.00</td>
+                <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">Processing</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
               </tr>
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#ORD-8933</td>
-                <td class="py-4 px-6 text-gray-400">Oct 15, 2023</td>
-                <td class="py-4 px-6">NGK Spark Plugs (x4)</td>
-                <td class="py-4 px-6 font-semibold">$130.00</td>
-                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8933</td>
+                <td class="py-4 px-6 text-slate-500">Oct 15, 2023</td>
+                <td class="py-4 px-6 text-slate-700">NGK Spark Plugs (x4)</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$130.00</td>
+                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
               </tr>
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#ORD-8511</td>
-                <td class="py-4 px-6 text-gray-400">Sep 28, 2023</td>
-                <td class="py-4 px-6">Castrol EDGE 5W-30 (x2)</td>
-                <td class="py-4 px-6 font-semibold">$57.98</td>
-                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Delivered</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8511</td>
+                <td class="py-4 px-6 text-slate-500">Sep 28, 2023</td>
+                <td class="py-4 px-6 text-slate-700">Castrol EDGE 5W-30 (x2)</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$57.98</td>
+                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
               </tr>
             </tbody>
           </table>
@@ -339,11 +342,11 @@
         setActiveTab(event.currentTarget);
       }
       document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-white mb-6">My Bids</h1>
-        <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">My Bids</h1>
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 overflow-hidden shadow-sm">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="text-gray-400 text-xs uppercase border-b border-white/10">
+              <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
                 <th class="py-3 px-6">Auction ID</th>
                 <th class="py-3 px-6">Vehicle</th>
                 <th class="py-3 px-6">My Bid</th>
@@ -353,29 +356,29 @@
               </tr>
             </thead>
             <tbody class="text-sm">
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#AUC-2104</td>
-                <td class="py-4 px-6">2018 Toyota Supra RZ</td>
-                <td class="py-4 px-6 font-semibold text-white">$42,500</td>
-                <td class="py-4 px-6 font-semibold text-red-600">$43,000</td>
-                <td class="py-4 px-6"><span class="bg-red-100 text-red-700 py-1 px-2 rounded text-xs font-semibold">Outbid</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">Increase Bid</a></td>
+              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-2104</td>
+                <td class="py-4 px-6 text-slate-700 font-medium">2018 Toyota Supra RZ</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$42,500</td>
+                <td class="py-4 px-6 font-bold text-rose-600">$43,000</td>
+                <td class="py-4 px-6"><span class="bg-rose-100 text-rose-700 py-1 px-2.5 rounded-full text-xs font-bold">Outbid</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">Increase Bid</a></td>
               </tr>
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#AUC-1988</td>
-                <td class="py-4 px-6">Nissan Skyline GT-R R34</td>
-                <td class="py-4 px-6 font-semibold text-white">$120,000</td>
-                <td class="py-4 px-6 font-semibold text-white">$120,000</td>
-                <td class="py-4 px-6"><span class="bg-green-100 text-green-700 py-1 px-2 rounded text-xs font-semibold">Winning</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-red hover:underline">View</a></td>
+              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-1988</td>
+                <td class="py-4 px-6 text-slate-700 font-medium">Nissan Skyline GT-R R34</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$120,000</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$120,000</td>
+                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Winning</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
               </tr>
-              <tr class="border-b border-white/10 hover:">
-                <td class="py-4 px-6 font-medium">#AUC-1502</td>
-                <td class="py-4 px-6">Honda Civic Type R (EK9)</td>
-                <td class="py-4 px-6 font-semibold text-white">$25,000</td>
-                <td class="py-4 px-6 font-semibold text-white">$28,500</td>
-                <td class="py-4 px-6"><span class="glass-panel/5 text-gray-200 py-1 px-2 rounded text-xs font-semibold">Ended</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-gray-400 hover:underline">Details</a></td>
+              <tr class="hover:bg-blue-50/30 transition">
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-1502</td>
+                <td class="py-4 px-6 text-slate-700 font-medium">Honda Civic Type R (EK9)</td>
+                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$25,000</td>
+                <td class="py-4 px-6 font-bold text-slate-700">$28,500</td>
+                <td class="py-4 px-6"><span class="bg-slate-100 text-slate-600 py-1 px-2.5 rounded-full text-xs font-bold">Ended</span></td>
+                <td class="py-4 px-6"><a href="#" class="text-slate-500 font-bold hover:underline">Details</a></td>
               </tr>
             </tbody>
           </table>
@@ -389,33 +392,33 @@
         setActiveTab(event.currentTarget);
       }
       document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-white mb-6">Wishlist</h1>
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Wishlist</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="glass-panel rounded-lg border border-white/10 p-4 flex items-center">
-            <div class="w-20 h-20 bg-gray-200 rounded flex-shrink-0 flex items-center justify-center text-gray-400">
-              <i class="fas fa-car text-3xl"></i>
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-4 flex items-center shadow-sm">
+            <div class="w-20 h-20 bg-slate-100 rounded-xl flex-shrink-0 flex items-center justify-center text-slate-400">
+              <i class="fas fa-car text-3xl text-primary-blue"></i>
             </div>
             <div class="ml-4 flex-grow">
-              <h3 class="font-bold text-white">Subaru Impreza WRX STI</h3>
-              <p class="text-sm text-gray-400">Auction ends in 2 days</p>
-              <p class="font-semibold text-primary-red mt-1">Current Bid: $18,500</p>
+              <h3 class="font-bold text-[#0b1f3a]">Subaru Impreza WRX STI</h3>
+              <p class="text-xs text-slate-500">Auction ends in 2 days</p>
+              <p class="font-black text-primary-blue mt-1">Current Bid: $18,500</p>
             </div>
             <div class="ml-4">
-              <button class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-trash"></i></button>
+              <button class="text-slate-400 hover:text-rose-600 transition cursor-pointer p-2"><i class="fas fa-trash"></i></button>
             </div>
           </div>
-          <div class="glass-panel rounded-lg border border-white/10 p-4 flex items-center">
-            <div class="w-20 h-20 bg-gray-200 rounded flex-shrink-0 flex items-center justify-center text-gray-400">
-              <i class="fas fa-cogs text-3xl"></i>
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-4 flex items-center shadow-sm">
+            <div class="w-20 h-20 bg-slate-100 rounded-xl flex-shrink-0 flex items-center justify-center text-slate-400">
+              <i class="fas fa-cogs text-3xl text-primary-blue"></i>
             </div>
             <div class="ml-4 flex-grow">
-              <h3 class="font-bold text-white">HKS Hi-Power Exhaust</h3>
-              <p class="text-sm text-gray-400">In Stock</p>
-              <p class="font-semibold text-white mt-1">$850.00</p>
+              <h3 class="font-bold text-[#0b1f3a]">HKS Hi-Power Exhaust</h3>
+              <p class="text-xs text-slate-500">In Stock</p>
+              <p class="font-black text-[#0b1f3a] mt-1">$850.00</p>
             </div>
             <div class="ml-4 flex flex-col items-end space-y-2">
-              <button class="text-primary-red hover:underline text-sm font-semibold">Add to Cart</button>
-              <button class="text-gray-400 hover:text-red-500 transition"><i class="fas fa-trash"></i></button>
+              <button class="text-primary-blue hover:underline text-xs font-bold">Add to Cart</button>
+              <button class="text-slate-400 hover:text-rose-600 transition cursor-pointer p-2"><i class="fas fa-trash"></i></button>
             </div>
           </div>
         </div>
@@ -428,16 +431,16 @@
         setActiveTab(event.currentTarget);
       }
       document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-white mb-6">Settings</h1>
-        <div class="glass-panel rounded-lg border border-white/10 p-6">
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Settings</h1>
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
           <form>
-            <div class="mb-4">
-              <label class="block text-gray-200 text-sm font-bold mb-2">Email Notifications</label>
+            <div class="mb-5">
+              <label class="block text-slate-700 text-sm font-bold mb-2">Email Notifications</label>
               <div class="flex items-center">
-                <input type="checkbox" class="mr-2" checked> <span class="text-sm">Receive order updates</span>
+                <input type="checkbox" class="mr-2.5 accent-primary-blue w-4 h-4 rounded" checked> <span class="text-sm text-slate-700 font-medium">Receive order updates</span>
               </div>
             </div>
-            <button class="bg-primary-red hover:bg-red-700 text-white font-bold py-2 px-4 rounded" type="button">Save Settings</button>
+            <button class="btn-3d btn-primary-3d font-bold py-2.5 px-6 rounded-xl cursor-pointer" type="button">Save Settings</button>
           </form>
         </div>
       `;
@@ -446,31 +449,31 @@
     function becomeSupplier() {
       const dashboardContent = document.getElementById('dashboard-content');
       dashboardContent.innerHTML = `
-        <h1 class="text-2xl font-bold text-white mb-6">Supplier Registration</h1>
-        <div class="glass-panel rounded-lg border border-white/10 p-6">
+        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Supplier Registration</h1>
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
           <form onsubmit="submitSupplierForm(event)">
             <div class="mb-4">
-              <label class="block text-gray-200 text-sm font-bold mb-2" for="businessName">Business Name</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="businessName" type="text" placeholder="Enter your business name" required>
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessName">Business Name</label>
+              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="businessName" type="text" placeholder="Enter your business name" required>
             </div>
             <div class="mb-4">
-              <label class="block text-gray-200 text-sm font-bold mb-2" for="businessAddress">Business Address</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="businessAddress" type="text" placeholder="Enter your business address" required>
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessAddress">Business Address</label>
+              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="businessAddress" type="text" placeholder="Enter your business address" required>
             </div>
             <div class="mb-4">
-              <label class="block text-gray-200 text-sm font-bold mb-2" for="contactPerson">Contact Person</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="contactPerson" type="text" placeholder="Enter contact person name" required>
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="contactPerson">Contact Person</label>
+              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="contactPerson" type="text" placeholder="Enter contact person name" required>
+            </div>
+            <div class="mb-4">
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
+              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="phoneNumber" type="tel" placeholder="Enter phone number" required>
             </div>
             <div class="mb-6">
-              <label class="block text-gray-200 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="phoneNumber" type="tel" placeholder="Enter phone number" required>
-            </div>
-            <div class="mb-6">
-              <label class="block text-gray-200 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF)</label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-200 leading-tight focus:outline-none focus:shadow-outline" id="businessRegistration" type="file" accept="application/pdf" required>
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF)</label>
+              <input class="input-3d rounded-xl w-full py-2 px-3 text-slate-800 bg-white border border-slate-200 outline-none" id="businessRegistration" type="file" accept="application/pdf" required>
             </div>
             <div class="flex items-center justify-between">
-              <button class="bg-primary-red hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
+              <button class="btn-3d btn-primary-3d font-bold py-3 px-6 rounded-xl w-full cursor-pointer shadow-sm" type="submit">
                 Submit Registration
               </button>
             </div>

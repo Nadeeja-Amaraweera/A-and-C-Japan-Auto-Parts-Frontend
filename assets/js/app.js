@@ -49,10 +49,10 @@ class App {
     // Show Toast
     showToast(message, type = 'success') {
         const toast = document.createElement('div');
-        const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
-        const icon = type === 'success' ? '<i class="fas fa-check-circle mr-2"></i>' : '<i class="fas fa-exclamation-circle mr-2"></i>';
+        const bgColor = type === 'success' ? 'bg-[#02316e]' : 'bg-red-600';
+        const icon = type === 'success' ? '<i class="fas fa-check-circle mr-2 text-blue-200"></i>' : '<i class="fas fa-exclamation-circle mr-2 text-rose-200"></i>';
 
-        toast.className = `fixed bottom-4 right-4 ${bgColor} text-white px-6 py-3 rounded shadow-lg transform transition-all duration-300 translate-y-full opacity-0 z-[9999] flex items-center`;
+        toast.className = `fixed bottom-4 right-4 ${bgColor} text-white px-5 py-3 rounded-xl shadow-xl transform transition-all duration-300 translate-y-full opacity-0 z-[9999] flex items-center border border-white/20 text-sm font-medium`;
         toast.innerHTML = `${icon} <span>${message}</span>`;
 
         document.body.appendChild(toast);
@@ -143,10 +143,10 @@ class App {
     }
 
     async updateTopbar() {
-        console.log('Updating topbar...');
         const accountNavLink = Topbar.getAccountNavLink();
-        const usernameSpan = document.getElementById('topbar-username');
+        if (!accountNavLink) return;
 
+        const usernameSpan = document.getElementById('topbar-username');
         const result = await authController.validateUser();
 
         if (result.success) {

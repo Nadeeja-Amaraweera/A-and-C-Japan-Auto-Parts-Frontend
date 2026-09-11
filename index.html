@@ -16,41 +16,43 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="text-white">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-car text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading A&C Japan Auto Parts...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
+  <!-- Dynamic Topbar Hook -->
+  <div id="dynamic-topbar"></div>
+
   <!-- Main Header -->
-  <header class="glass-panel sticky top-0 z-50">
+  <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <!-- Logo -->
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
-        <div class="text-xs font-semibold leading-tight text-gray-400 uppercase">
+        <div class="text-xs font-semibold leading-tight text-slate-400 uppercase hidden sm:block">
           Auto Parts<br>& Auctions
         </div>
       </a>
 
       <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn"
-        class="md:hidden text-gray-300 hover:text-primary-red focus:outline-none ml-auto"
+      <button id="mobile-menu-btn" class="md:hidden text-slate-700 hover:text-primary-blue focus:outline-none ml-auto"
         onclick="document.getElementById('mobile-nav').classList.toggle('hidden'); document.getElementById('mobile-search').classList.toggle('hidden');">
         <i class="fas fa-bars text-2xl"></i>
       </button>
@@ -60,15 +62,15 @@
         class="hidden md:flex flex-1 max-w-2xl mx-0 md:mx-8 w-full mt-4 md:mt-0 order-last md:order-none">
         <form class="flex w-full">
           <select
-            class="input-3d py-2 px-2 md:px-4 rounded-l-xl focus:outline-none text-sm md:text-base glass-panel">
+            class="input-3d py-2.5 px-3 md:px-4 rounded-l-xl focus:outline-none text-sm md:text-base bg-white border border-slate-200 text-slate-700">
             <option>All Categories</option>
             <option>Vehicles</option>
             <option>Auto Parts</option>
           </select>
           <input type="text" placeholder="Search for vehicles, parts..."
-            class="flex-1 input-3d py-2 px-4 focus:outline-none text-sm md:text-base border-l-0">
+            class="flex-1 input-3d py-2.5 px-4 focus:outline-none text-sm md:text-base bg-white border border-l-0 border-slate-200 text-slate-800">
           <button type="submit"
-            class="btn-3d btn-primary-3d px-4 md:px-6 rounded-r-xl transition text-white">
+            class="btn-3d btn-primary-3d px-5 md:px-6 rounded-r-xl transition text-white cursor-pointer">
             <i class="fas fa-search"></i>
           </button>
         </form>
@@ -76,59 +78,61 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="border-t border-white/10">
+    <nav class="border-t border-slate-200/70">
       <div class="container mx-auto px-4">
         <ul id="mobile-nav"
-          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-gray-200 pb-4 md:pb-0">
+          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-slate-700 pb-4 md:pb-0">
           <li><a href="index.html"
-              class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-red text-primary-red pl-2 md:pl-0">HOME</a>
+              class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-blue text-primary-blue pl-2 md:pl-0 font-bold">HOME</a>
+          </li>
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">NEW
+              ARRIVALS</a>
+          </li>
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">UNDER
+              $100</a>
           </li>
           <li><a href="listing.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">NEW ARRIVALS</a>
+              class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">DEALS</a></li>
+          <li><a href="buy-now.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">BUY
+              NOW</a></li>
+          <li><a href="profile.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">MY
+              ACCOUNT</a>
           </li>
-          <li><a href="listing.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">UNDER $100</a>
-          </li>
-          <li><a href="listing.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">DEALS</a></li>
-          <li><a href="buy-now.html"
-              class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">BUY NOW</a></li>
-          <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">PAGES</a>
-          </li>
-          <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">CONTACT
-              US</a></li>
-          <li><a href="#" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">ABOUT
-              US</a></li>
+          <li><a href="supplier-dashboard.html"
+              class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">SUPPLIER PORTAL</a></li>
         </ul>
       </div>
     </nav>
   </header>
 
   <!-- Hero Section (Carousel) -->
-  <section class="relative bg-transparent overflow-hidden" style="height: 500px;" id="hero-carousel">
+  <section class="relative bg-slate-100 overflow-hidden" style="height: 520px;" id="hero-carousel">
 
     <!-- Slide 1 -->
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-100 z-10">
       <img src="https://images.unsplash.com/photo-1542362567-b07e54358753?q=80&w=2070&auto=format&fit=crop"
-        alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-primary-dark/90 to-transparent"></div>
+        alt="Hero Background" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/20 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
-          class="max-w-xl text-white transform transition-all duration-1000 translate-y-0 opacity-100 mx-5 slide-content">
+          class="max-w-xl hero-glass-card p-8 md:p-10 rounded-3xl transform transition-all duration-1000 translate-y-0 opacity-100 slide-content">
           <span
-            class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Special
-            Offer</span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">At the lowest
-            price!<br><span class="text-rose-400">Automotive Parts</span></h1>
-          <p class="text-xl mb-6 font-light text-gray-200">High quality Japanese parts and exclusive vehicle auctions.</p>
-          <div class="flex items-end mb-8">
-            <span class="text-gray-400 line-through mr-3">$99.00</span>
-            <span class="text-4xl font-bold text-white">$69.00 <span
-                class="text-sm font-normal text-rose-400">NEW</span></span>
+            class="inline-flex items-center py-1 px-3.5 bg-blue-500/15 backdrop-blur-md text-primary-blue text-xs font-black uppercase tracking-wider rounded-full mb-4 border border-blue-400/30">
+            Special Offer
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black uppercase mb-3 leading-tight text-[#0b1f3a] tracking-tight">At the
+            lowest
+            price!<br><span class="text-primary-blue">Automotive Parts</span></h1>
+          <p class="text-sm md:text-base mb-6 font-medium text-slate-700 leading-relaxed">High quality Japanese parts
+            and exclusive vehicle auctions.</p>
+          <div class="flex items-end mb-6">
+            <span class="text-slate-400 line-through mr-3 text-lg">$99.00</span>
+            <span class="text-3xl font-black text-[#0b1f3a]">$69.00 <span
+                class="text-xs font-bold text-primary-blue bg-blue-100/70 border border-blue-200/60 px-2 py-0.5 rounded-md ml-1.5">NEW</span></span>
           </div>
           <a href="listing.html"
-            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Shop
-            Now <i class="fas fa-arrow-right ml-2"></i></a>
+            class="inline-flex items-center btn-3d btn-primary-3d text-white font-bold py-3.5 px-8 rounded-xl shadow-lg cursor-pointer">Shop
+            Now <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
         </div>
       </div>
     </div>
@@ -136,21 +140,23 @@
     <!-- Slide 2 -->
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?q=80&w=2070&auto=format&fit=crop"
-        alt="JDM Engines" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
+        alt="JDM Engines" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/20 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
-          class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
+          class="max-w-xl hero-glass-card p-8 md:p-10 rounded-3xl transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
           <span
-            class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Import
-            Direct</span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Authentic JDM<br><span
-              class="text-rose-400">Engines & Transmissions</span></h1>
-          <p class="text-xl mb-6 font-light text-gray-200">Legendary powerplants sourced directly from Japan. 2JZ, RB26,
+            class="inline-flex items-center py-1 px-3.5 bg-blue-500/15 backdrop-blur-md text-primary-blue text-xs font-black uppercase tracking-wider rounded-full mb-4 border border-blue-400/30">
+            Import Direct
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black uppercase mb-3 leading-tight text-[#0b1f3a] tracking-tight">
+            Authentic JDM<br><span class="text-primary-blue">Engines & Transmissions</span></h1>
+          <p class="text-sm md:text-base mb-6 font-medium text-slate-700 leading-relaxed">Legendary powerplants sourced
+            directly from Japan. 2JZ, RB26,
             SR20 in stock.</p>
           <a href="listing.html"
-            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">View
-            Inventory <i class="fas fa-arrow-right ml-2"></i></a>
+            class="inline-flex items-center btn-3d btn-primary-3d text-white font-bold py-3.5 px-8 rounded-xl shadow-lg cursor-pointer">View
+            Inventory <i class="fas fa-arrow-right ml-2 text-xs"></i></a>
         </div>
       </div>
     </div>
@@ -158,21 +164,23 @@
     <!-- Slide 3 -->
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?q=80&w=2070&auto=format&fit=crop"
-        alt="Vehicle Auctions" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
+        alt="Vehicle Auctions" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/20 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
-          class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
+          class="max-w-xl hero-glass-card p-8 md:p-10 rounded-3xl transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
           <span
-            class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Live
-            Auctions</span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Bid on Rare<br><span
-              class="text-rose-400">Japanese Classics</span></h1>
-          <p class="text-xl mb-6 font-light text-gray-200">Direct access to Japan's premier auto auctions. Import your dream
+            class="inline-flex items-center py-1 px-3.5 bg-blue-500/15 backdrop-blur-md text-primary-blue text-xs font-black uppercase tracking-wider rounded-full mb-4 border border-blue-400/30">
+            Live Auctions
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black uppercase mb-3 leading-tight text-[#0b1f3a] tracking-tight">Bid on
+            Rare<br><span class="text-primary-blue">Japanese Classics</span></h1>
+          <p class="text-sm md:text-base mb-6 font-medium text-slate-700 leading-relaxed">Direct access to Japan's
+            premier auto auctions. Import your dream
             car today.</p>
           <a href="listing.html"
-            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">View
-            Live Auctions <i class="fas fa-gavel ml-2"></i></a>
+            class="inline-flex items-center btn-3d btn-primary-3d text-white font-bold py-3.5 px-8 rounded-xl shadow-lg cursor-pointer">View
+            Live Auctions <i class="fas fa-gavel ml-2 text-xs"></i></a>
         </div>
       </div>
     </div>
@@ -180,24 +188,26 @@
     <!-- Slide 4 -->
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070&auto=format&fit=crop"
-        alt="Performance Parts" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
+        alt="Performance Parts" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/20 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
-          class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
+          class="max-w-xl hero-glass-card p-8 md:p-10 rounded-3xl transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
           <span
-            class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Performance
-            Upgrades</span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Unleash the<br><span
-              class="text-rose-400">Full Potential</span></h1>
-          <p class="text-xl mb-6 font-light text-gray-200">Premium turbo kits, exhaust systems, and suspension components.
+            class="inline-flex items-center py-1 px-3.5 bg-blue-500/15 backdrop-blur-md text-primary-blue text-xs font-black uppercase tracking-wider rounded-full mb-4 border border-blue-400/30">
+            Performance Upgrades
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black uppercase mb-3 leading-tight text-[#0b1f3a] tracking-tight">Unleash
+            the<br><span class="text-primary-blue">Full Potential</span></h1>
+          <p class="text-sm md:text-base mb-4 font-medium text-slate-700 leading-relaxed">Premium turbo kits, exhaust
+            systems, and suspension components.
           </p>
-          <div class="flex items-end mb-8">
-            <span class="text-4xl font-bold text-white">Up to 20% OFF</span>
+          <div class="flex items-end mb-6">
+            <span class="text-2xl font-black text-[#0b1f3a]">Up to 20% OFF</span>
           </div>
           <a href="listing.html"
-            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Shop
-            Performance <i class="fas fa-bolt ml-2"></i></a>
+            class="inline-flex items-center btn-3d btn-primary-3d text-white font-bold py-3.5 px-8 rounded-xl shadow-lg cursor-pointer">Shop
+            Performance <i class="fas fa-bolt ml-2 text-xs"></i></a>
         </div>
       </div>
     </div>
@@ -205,264 +215,277 @@
     <!-- Slide 5 -->
     <div class="carousel-slide absolute inset-0 transition-opacity duration-1000 opacity-0 z-0">
       <img src="https://images.unsplash.com/photo-1632733711679-529326f6db12?q=80&w=2070&auto=format&fit=crop"
-        alt="OEM Parts" class="absolute inset-0 w-full h-full object-cover opacity-60">
-      <div class="absolute inset-0 bg-gradient-to-r from-[#060913]/95 via-[#060913]/70 to-transparent"></div>
+        alt="OEM Parts" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900/60 via-slate-900/20 to-transparent"></div>
       <div class="container mx-auto px-4 h-full flex items-center relative z-10">
         <div
-          class="max-w-xl text-white transform transition-all duration-1000 translate-y-8 opacity-0 mx-5 slide-content">
+          class="max-w-xl hero-glass-card p-8 md:p-10 rounded-3xl transform transition-all duration-1000 translate-y-8 opacity-0 slide-content">
           <span
-            class="inline-block py-1 px-3 bg-primary-red text-xs font-bold uppercase tracking-wider rounded mb-4">Genuine
-            Quality</span>
-          <h1 class="text-3xl md:text-5xl font-black uppercase mb-4 leading-tight">Perfect Fitment<br><span
-              class="text-rose-400">OEM Body Parts</span></h1>
-          <p class="text-xl mb-6 font-light text-gray-200">Restore your vehicle with genuine bumpers, fenders, lights, and
+            class="inline-flex items-center py-1 px-3.5 bg-blue-500/15 backdrop-blur-md text-primary-blue text-xs font-black uppercase tracking-wider rounded-full mb-4 border border-blue-400/30">
+            Genuine Quality
+          </span>
+          <h1 class="text-3xl md:text-4xl font-black uppercase mb-3 leading-tight text-[#0b1f3a] tracking-tight">Perfect
+            Fitment<br><span class="text-primary-blue">OEM Body Parts</span></h1>
+          <p class="text-sm md:text-base mb-6 font-medium text-slate-700 leading-relaxed">Restore your vehicle with
+            genuine bumpers, fenders, lights, and
             accessories.</p>
           <a href="listing.html"
-            class="inline-block btn-3d btn-primary-3d text-white font-bold py-3 px-8 rounded-xl shadow-xl">Find
-            Your Part <i class="fas fa-search ml-2"></i></a>
+            class="inline-flex items-center btn-3d btn-primary-3d text-white font-bold py-3.5 px-8 rounded-xl shadow-lg cursor-pointer">Find
+            Your Part <i class="fas fa-search ml-2 text-xs"></i></a>
         </div>
       </div>
     </div>
 
     <!-- Carousel Controls -->
-    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-      <button class="carousel-dot w-3 h-3 rounded-full glass-panel transition" onclick="goToSlide(0)"></button>
-      <button class="carousel-dot w-3 h-3 rounded-full glass-panel/50 transition hover:glass-panel/80"
+    <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2.5 z-20">
+      <button class="carousel-dot h-3 rounded-full bg-primary-blue w-7 transition-all cursor-pointer"
+        onclick="goToSlide(0)"></button>
+      <button class="carousel-dot h-3 rounded-full bg-white/80 hover:bg-white w-3 transition-all cursor-pointer"
         onclick="goToSlide(1)"></button>
-      <button class="carousel-dot w-3 h-3 rounded-full glass-panel/50 transition hover:glass-panel/80"
+      <button class="carousel-dot h-3 rounded-full bg-white/80 hover:bg-white w-3 transition-all cursor-pointer"
         onclick="goToSlide(2)"></button>
-      <button class="carousel-dot w-3 h-3 rounded-full glass-panel/50 transition hover:glass-panel/80"
+      <button class="carousel-dot h-3 rounded-full bg-white/80 hover:bg-white w-3 transition-all cursor-pointer"
         onclick="goToSlide(3)"></button>
-      <button class="carousel-dot w-3 h-3 rounded-full glass-panel/50 transition hover:glass-panel/80"
+      <button class="carousel-dot h-3 rounded-full bg-white/80 hover:bg-white w-3 transition-all cursor-pointer"
         onclick="goToSlide(4)"></button>
     </div>
 
     <button
-      class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white text-3xl z-20 transition"
-      onclick="prevSlide()"><i class="fas fa-chevron-left"></i></button>
+      class="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-[#0b1f3a] flex items-center justify-center shadow-lg z-20 transition border border-slate-200 cursor-pointer"
+      onclick="prevSlide()"><i class="fas fa-chevron-left text-sm"></i></button>
     <button
-      class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white text-3xl z-20 transition"
-      onclick="nextSlide()"><i class="fas fa-chevron-right"></i></button>
+      class="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-[#0b1f3a] flex items-center justify-center shadow-lg z-20 transition border border-slate-200 cursor-pointer"
+      onclick="nextSlide()"><i class="fas fa-chevron-right text-sm"></i></button>
   </section>
 
   <!-- Featured Categories & Banners -->
-  <section class="py-12 glass-panel">
+  <section class="py-12 bg-white/60 border-y border-slate-200/80">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
         <!-- Mercedes Banner -->
-        <div class="col-span-1 md:col-span-2 relative rounded-lg overflow-hidden h-64 card-3d group">
+        <div
+          class="col-span-1 md:col-span-2 relative rounded-2xl overflow-hidden h-64 card-3d group shadow-sm border border-slate-200/80">
           <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?q=80&w=2070&auto=format&fit=crop"
             alt="Mercedes Parts"
             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 p-6 text-white w-full">
             <h3 class="text-2xl font-bold mb-1">Mercedes Benz Auto Parts</h3>
-            <p class="text-primary-gold font-semibold text-lg">55% - 70% OFF</p>
+            <p class="text-blue-300 font-bold text-lg">55% - 70% OFF</p>
           </div>
         </div>
         <!-- Ferrari Banner -->
-        <div class="col-span-1 md:col-span-2 relative rounded-lg overflow-hidden h-64 card-3d group">
+        <div
+          class="col-span-1 md:col-span-2 relative rounded-2xl overflow-hidden h-64 card-3d group shadow-sm border border-slate-200/80">
           <img src="https://images.unsplash.com/photo-1592198084033-aade902d1aae?q=80&w=2070&auto=format&fit=crop"
             alt="Ferrari Parts"
             class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
           <div class="absolute bottom-0 left-0 p-6 text-white w-full">
             <h3 class="text-2xl font-bold mb-1">Ferrari Brand Auto Parts</h3>
-            <p class="text-primary-gold font-semibold text-lg">50% OFF</p>
+            <p class="text-blue-300 font-bold text-lg">50% OFF</p>
           </div>
         </div>
       </div>
 
       <!-- Quick Links -->
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 mt-8">
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-compact-disc text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">TIRES & WHEELS</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-compact-disc text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">TIRES &
+            WHEELS</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-cogs text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">COMPONENTS</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-cogs text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span
+            class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">COMPONENTS</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-dharmachakra text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">STEERING WHEEL</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-dharmachakra text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span
+            class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">STEERING</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-car-crash text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">SPORT BRAKE</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-car-crash text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">SPORT
+            BRAKE</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-gas-pump text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">SMART PUMP</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-gas-pump text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">SMART
+            PUMP</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="far fa-lightbulb text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">LIGHTS</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="far fa-lightbulb text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span
+            class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">LIGHTS</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-oil-can text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">LUBRICANTS</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-oil-can text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span
+            class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">LUBRICANTS</span>
         </a>
-        <a href="#"
-          class="flex flex-col items-center justify-center p-4 rounded-lg hover:bg-primary-red hover:text-white transition group border border-white/10">
-          <i class="fas fa-baby-carriage text-3xl mb-3 text-gray-400 group-hover:text-white"></i>
-          <span class="text-xs font-semibold text-center">CAR SEATS</span>
+        <a href="listing.html"
+          class="flex flex-col items-center justify-center p-5 rounded-2xl bg-white/80 hover:bg-blue-50/80 border border-slate-200/80 hover:border-primary-blue transition group shadow-2xs">
+          <i class="fas fa-car text-3xl mb-3 text-primary-blue group-hover:scale-110 transition"></i>
+          <span
+            class="text-xs font-bold text-slate-700 group-hover:text-primary-blue text-center uppercase">VEHICLES</span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Auction Highlights -->
-  <section class="py-12 ">
+  <section class="py-12">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-end mb-8">
         <div>
-          <h2 class="text-3xl font-bold text-white font-bold tracking-wide">Live Auctions</h2>
-          <div class="h-1 w-20 bg-primary-red mt-2"></div>
+          <h2 class="text-3xl font-bold text-[#0b1f3a]">Live Auctions</h2>
+          <div class="h-1 w-20 bg-primary-blue mt-2 rounded-full"></div>
         </div>
-        <a href="listing.html" class="text-primary-red font-semibold hover:underline">View All Auctions <i
+        <a href="listing.html" class="text-primary-blue font-bold hover:underline">View All Auctions <i
             class="fas fa-angle-right"></i></a>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Auction Card 1 -->
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group">
-          <div class="relative">
+        <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm">
+          <div class="relative overflow-hidden">
             <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
-              alt="Car" class="w-full h-48 object-cover">
+              alt="Car" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
             <div
-              class="absolute top-3 left-3 bg-primary-red text-white text-xs font-bold px-2 py-1 rounded">
+              class="absolute top-3 left-3 bg-primary-blue text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
               HOT AUCTION</div>
             <div
-              class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-2 backdrop-blur-sm">
-              <span class="text-sm font-semibold"><i class="far fa-clock text-primary-gold mr-1"></i> Ends
+              class="absolute bottom-0 left-0 w-full bg-white/90 text-[#0b1f3a] text-center py-2 backdrop-blur-sm border-t border-slate-100">
+              <span class="text-xs font-bold"><i class="far fa-clock text-primary-blue mr-1"></i> Ends
                 in: 04:23:15</span>
             </div>
           </div>
           <div class="p-5">
-            <h3 class="text-lg font-bold text-white mb-1"><a href="auction-details.html"
-                class="hover:text-primary-red transition">2020 Chevrolet Corvette Stingray</a></h3>
-            <p class="text-sm text-gray-400 mb-4">12,450 mi • Automatic • Gas</p>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate"><a href="auction-details.html"
+                class="hover:text-primary-blue transition">2020 Chevrolet Corvette Stingray</a></h3>
+            <p class="text-sm text-slate-500 mb-4 truncate">12,450 mi • Automatic • Gas</p>
 
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
               <div>
-                <p class="text-xs text-gray-400">Current Bid</p>
-                <p class="text-xl font-bold text-white font-bold tracking-wide">$54,200</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Current Bid</p>
+                <p class="text-xl font-black text-[#0b1f3a]">$54,200</p>
               </div>
               <div class="text-right">
-                <p class="text-xs text-gray-400">Bidders</p>
-                <p class="text-sm font-semibold text-gray-200">14 Active</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Bidders</p>
+                <p class="text-sm font-bold text-slate-700">14 Active</p>
               </div>
             </div>
 
             <a href="auction-details.html"
-              class="block w-full text-center btn-3d btn-primary-3d font-semibold py-2 rounded transition shadow-md">Place
+              class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm shadow-sm cursor-pointer">Place
               Bid Now</a>
           </div>
         </div>
 
         <!-- Auction Card 2 -->
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group">
-          <div class="relative">
+        <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm">
+          <div class="relative overflow-hidden">
             <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=2070&auto=format&fit=crop"
-              alt="Car" class="w-full h-48 object-cover">
+              alt="Car" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
             <div
-              class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-2 backdrop-blur-sm">
-              <span class="text-sm font-semibold"><i class="far fa-clock text-primary-gold mr-1"></i> Ends
+              class="absolute bottom-0 left-0 w-full bg-white/90 text-[#0b1f3a] text-center py-2 backdrop-blur-sm border-t border-slate-100">
+              <span class="text-xs font-bold"><i class="far fa-clock text-primary-blue mr-1"></i> Ends
                 in: 12:45:00</span>
             </div>
           </div>
           <div class="p-5">
-            <h3 class="text-lg font-bold text-white mb-1"><a href="auction-details.html"
-                class="hover:text-primary-red transition">2018 Nissan GT-R Premium</a></h3>
-            <p class="text-sm text-gray-400 mb-4">24,000 mi • Automatic • Gas</p>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate"><a href="auction-details.html"
+                class="hover:text-primary-blue transition">2018 Nissan GT-R Premium</a></h3>
+            <p class="text-sm text-slate-500 mb-4 truncate">24,000 mi • Automatic • Gas</p>
 
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
               <div>
-                <p class="text-xs text-gray-400">Current Bid</p>
-                <p class="text-xl font-bold text-white font-bold tracking-wide">$78,500</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Current Bid</p>
+                <p class="text-xl font-black text-[#0b1f3a]">$78,500</p>
               </div>
               <div class="text-right">
-                <p class="text-xs text-gray-400">Bidders</p>
-                <p class="text-sm font-semibold text-gray-200">22 Active</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Bidders</p>
+                <p class="text-sm font-bold text-slate-700">22 Active</p>
               </div>
             </div>
 
             <a href="auction-details.html"
-              class="block w-full text-center btn-3d btn-primary-3d font-semibold py-2 rounded transition shadow-md">Place
+              class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm shadow-sm cursor-pointer">Place
               Bid Now</a>
           </div>
         </div>
 
         <!-- Auction Card 3 -->
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group">
-          <div class="relative">
+        <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm">
+          <div class="relative overflow-hidden">
             <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop"
-              alt="Car" class="w-full h-48 object-cover">
+              alt="Car" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
             <div
-              class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-2 backdrop-blur-sm">
-              <span class="text-sm font-semibold"><i class="far fa-clock text-primary-gold mr-1"></i> Ends
+              class="absolute bottom-0 left-0 w-full bg-white/90 text-[#0b1f3a] text-center py-2 backdrop-blur-sm border-t border-slate-100">
+              <span class="text-xs font-bold"><i class="far fa-clock text-primary-blue mr-1"></i> Ends
                 in: 01:12:30</span>
             </div>
           </div>
           <div class="p-5">
-            <h3 class="text-lg font-bold text-white mb-1"><a href="auction-details.html"
-                class="hover:text-primary-red transition">2021 BMW M4 Competition</a></h3>
-            <p class="text-sm text-gray-400 mb-4">5,200 mi • Automatic • Gas</p>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate"><a href="auction-details.html"
+                class="hover:text-primary-blue transition">2021 BMW M4 Competition</a></h3>
+            <p class="text-sm text-slate-500 mb-4 truncate">5,200 mi • Automatic • Gas</p>
 
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
               <div>
-                <p class="text-xs text-gray-400">Current Bid</p>
-                <p class="text-xl font-bold text-white font-bold tracking-wide">$68,900</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Current Bid</p>
+                <p class="text-xl font-black text-[#0b1f3a]">$68,900</p>
               </div>
               <div class="text-right">
-                <p class="text-xs text-gray-400">Bidders</p>
-                <p class="text-sm font-semibold text-gray-200">8 Active</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Bidders</p>
+                <p class="text-sm font-bold text-slate-700">8 Active</p>
               </div>
             </div>
 
             <a href="auction-details.html"
-              class="block w-full text-center btn-3d btn-primary-3d font-semibold py-2 rounded transition shadow-md">Place
+              class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm shadow-sm cursor-pointer">Place
               Bid Now</a>
           </div>
         </div>
 
         <!-- Auction Card 4 -->
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group">
-          <div class="relative">
+        <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm">
+          <div class="relative overflow-hidden">
             <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop"
-              alt="Car" class="w-full h-48 object-cover">
+              alt="Car" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
             <div
-              class="absolute bottom-0 left-0 w-full bg-black/60 text-white text-center py-2 backdrop-blur-sm">
-              <span class="text-sm font-semibold text-primary-red"><i class="far fa-clock mr-1"></i> Ends
+              class="absolute bottom-0 left-0 w-full bg-white/90 text-primary-blue text-center py-2 backdrop-blur-sm border-t border-slate-100">
+              <span class="text-xs font-bold"><i class="far fa-clock mr-1"></i> Ends
                 in: 00:05:42</span>
             </div>
           </div>
           <div class="p-5">
-            <h3 class="text-lg font-bold text-white mb-1"><a href="auction-details.html"
-                class="hover:text-primary-red transition">2019 Audi R8 V10 Plus</a></h3>
-            <p class="text-sm text-gray-400 mb-4">15,800 mi • Automatic • Gas</p>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate"><a href="auction-details.html"
+                class="hover:text-primary-blue transition">2019 Audi R8 V10 Plus</a></h3>
+            <p class="text-sm text-slate-500 mb-4 truncate">15,800 mi • Automatic • Gas</p>
 
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
               <div>
-                <p class="text-xs text-gray-400">Current Bid</p>
-                <p class="text-xl font-bold text-white font-bold tracking-wide">$115,000</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Current Bid</p>
+                <p class="text-xl font-black text-[#0b1f3a]">$115,000</p>
               </div>
               <div class="text-right">
-                <p class="text-xs text-gray-400">Bidders</p>
-                <p class="text-sm font-semibold text-gray-200">35 Active</p>
+                <p class="text-xs text-slate-400 uppercase font-semibold">Bidders</p>
+                <p class="text-sm font-bold text-slate-700">35 Active</p>
               </div>
             </div>
 
             <a href="auction-details.html"
-              class="block w-full text-center btn-3d btn-primary-3d font-semibold py-2 rounded transition shadow-md">Place
+              class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm shadow-sm cursor-pointer">Place
               Bid Now</a>
           </div>
         </div>
@@ -471,95 +494,111 @@
   </section>
 
   <!-- Latest Products -->
-  <section class="py-12 glass-panel">
+  <section class="py-12 bg-white/60 border-y border-slate-200/80">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-end mb-8">
         <div>
-          <h2 class="text-3xl font-bold text-white font-bold tracking-wide">Latest Products</h2>
-          <div class="h-1 w-20 bg-primary-red mt-2"></div>
+          <h2 class="text-3xl font-bold text-[#0b1f3a]">Latest Products</h2>
+          <div class="h-1 w-20 bg-primary-blue mt-2 rounded-full"></div>
         </div>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
         <!-- Product 1 -->
-        <div class="input-3d rounded p-4 hover:shadow-lg transition group relative">
-          <div class="absolute top-2 left-2 bg-primary-red text-white text-xs px-2 py-1 z-10">-15%</div>
-          <div class="h-40 flex items-center justify-center mb-4 overflow-hidden">
+        <div
+          class="glass-panel rounded-2xl card-3d p-4 hover:shadow-md transition group relative border border-white/90 bg-white/85">
+          <div
+            class="absolute top-3 left-3 bg-blue-100 text-primary-blue text-xs font-black px-2 py-0.5 rounded-md z-10">
+            -15%</div>
+          <div class="h-40 flex items-center justify-center mb-4 bg-slate-50 rounded-xl p-2 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1600293144865-950c4bb67f1b?q=80&w=2000&auto=format&fit=crop"
               alt="Part" class="max-h-full object-contain group-hover:scale-110 transition duration-300">
           </div>
-          <h4 class="text-sm font-semibold text-white mb-2 hover:text-primary-red cursor-pointer">Brembo
+          <h4
+            class="text-sm font-bold text-[#0b1f3a] mb-2 hover:text-primary-blue transition line-clamp-2 cursor-pointer">
+            Brembo
             Premium Ceramic Brake Pads</h4>
           <div class="flex justify-between items-center">
-            <div class="text-lg font-bold text-white font-bold tracking-wide">$85.00 <span
-                class="text-xs text-gray-400 line-through font-normal ml-1">$100.00</span></div>
+            <div class="text-lg font-black text-[#0b1f3a]">$85.00 <span
+                class="text-xs text-slate-400 line-through font-normal ml-1">$100.00</span></div>
           </div>
           <button
-            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded text-sm font-medium transition">Add
+            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded-xl text-sm font-bold transition shadow-2xs cursor-pointer">Add
             to Cart</button>
         </div>
         <!-- Product 2 -->
-        <div class="input-3d rounded p-4 hover:shadow-lg transition group relative">
-          <div class="h-40 flex items-center justify-center mb-4 overflow-hidden">
+        <div
+          class="glass-panel rounded-2xl card-3d p-4 hover:shadow-md transition group relative border border-white/90 bg-white/85">
+          <div class="h-40 flex items-center justify-center mb-4 bg-slate-50 rounded-xl p-2 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1622359419918-0b616428c0db?q=80&w=2070&auto=format&fit=crop"
               alt="Part" class="max-h-full object-contain group-hover:scale-110 transition duration-300">
           </div>
-          <h4 class="text-sm font-semibold text-white mb-2 hover:text-primary-red cursor-pointer">NGK
+          <h4
+            class="text-sm font-bold text-[#0b1f3a] mb-2 hover:text-primary-blue transition line-clamp-2 cursor-pointer">
+            NGK
             Iridium IX Spark Plug Set (4pcs)</h4>
           <div class="flex justify-between items-center">
-            <div class="text-lg font-bold text-white font-bold tracking-wide">$32.50</div>
+            <div class="text-lg font-black text-[#0b1f3a]">$32.50</div>
           </div>
           <button
-            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded text-sm font-medium transition">Add
+            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded-xl text-sm font-bold transition shadow-2xs cursor-pointer">Add
             to Cart</button>
         </div>
         <!-- Product 3 -->
-        <div class="input-3d rounded p-4 hover:shadow-lg transition group relative">
-          <div class="h-40 flex items-center justify-center mb-4 overflow-hidden">
+        <div
+          class="glass-panel rounded-2xl card-3d p-4 hover:shadow-md transition group relative border border-white/90 bg-white/85">
+          <div class="h-40 flex items-center justify-center mb-4 bg-slate-50 rounded-xl p-2 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop"
               alt="Part" class="max-h-full object-contain group-hover:scale-110 transition duration-300">
           </div>
-          <h4 class="text-sm font-semibold text-white mb-2 hover:text-primary-red cursor-pointer">Castrol
+          <h4
+            class="text-sm font-bold text-[#0b1f3a] mb-2 hover:text-primary-blue transition line-clamp-2 cursor-pointer">
+            Castrol
             EDGE 5W-30 Advanced Full Synthetic</h4>
           <div class="flex justify-between items-center">
-            <div class="text-lg font-bold text-white font-bold tracking-wide">$28.99</div>
+            <div class="text-lg font-black text-[#0b1f3a]">$28.99</div>
           </div>
           <button
-            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded text-sm font-medium transition">Add
+            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded-xl text-sm font-bold transition shadow-2xs cursor-pointer">Add
             to Cart</button>
         </div>
         <!-- Product 4 -->
-        <div class="input-3d rounded p-4 hover:shadow-lg transition group relative">
+        <div
+          class="glass-panel rounded-2xl card-3d p-4 hover:shadow-md transition group relative border border-white/90 bg-white/85">
           <div
-            class="absolute top-2 left-2 bg-primary-gold text-white font-bold tracking-wide font-bold text-xs px-2 py-1 z-10">
+            class="absolute top-3 left-3 bg-blue-50 text-primary-blue font-bold text-xs px-2 py-0.5 rounded-md border border-blue-100 z-10">
             NEW</div>
-          <div class="h-40 flex items-center justify-center mb-4 overflow-hidden">
+          <div class="h-40 flex items-center justify-center mb-4 bg-slate-50 rounded-xl p-2 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop"
               alt="Part" class="max-h-full object-contain group-hover:scale-110 transition duration-300">
           </div>
-          <h4 class="text-sm font-semibold text-white mb-2 hover:text-primary-red cursor-pointer">K&N High
+          <h4
+            class="text-sm font-bold text-[#0b1f3a] mb-2 hover:text-primary-blue transition line-clamp-2 cursor-pointer">
+            K&N High
             Performance Air Filter</h4>
           <div class="flex justify-between items-center">
-            <div class="text-lg font-bold text-white font-bold tracking-wide">$55.00</div>
+            <div class="text-lg font-black text-[#0b1f3a]">$55.00</div>
           </div>
           <button
-            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded text-sm font-medium transition">Add
+            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded-xl text-sm font-bold transition shadow-2xs cursor-pointer">Add
             to Cart</button>
         </div>
         <!-- Product 5 -->
         <div
-          class="input-3d rounded p-4 hover:shadow-lg transition group relative hidden md:block">
-          <div class="h-40 flex items-center justify-center mb-4 overflow-hidden">
+          class="glass-panel rounded-2xl card-3d p-4 hover:shadow-md transition group relative border border-white/90 bg-white/85 hidden md:block">
+          <div class="h-40 flex items-center justify-center mb-4 bg-slate-50 rounded-xl p-2 overflow-hidden">
             <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=2070&auto=format&fit=crop"
               alt="Part" class="max-h-full object-contain group-hover:scale-110 transition duration-300">
           </div>
-          <h4 class="text-sm font-semibold text-white mb-2 hover:text-primary-red cursor-pointer">Bosch
+          <h4
+            class="text-sm font-bold text-[#0b1f3a] mb-2 hover:text-primary-blue transition line-clamp-2 cursor-pointer">
+            Bosch
             ICON Wiper Blades (Set of 2)</h4>
           <div class="flex justify-between items-center">
-            <div class="text-lg font-bold text-white font-bold tracking-wide">$45.00</div>
+            <div class="text-lg font-black text-[#0b1f3a]">$45.00</div>
           </div>
           <button
-            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded text-sm font-medium transition">Add
+            class="w-full mt-3 btn-3d btn-primary-3d text-white py-2 rounded-xl text-sm font-bold transition shadow-2xs cursor-pointer">Add
             to Cart</button>
         </div>
       </div>
@@ -567,96 +606,95 @@
   </section>
 
   <!-- Footer -->
-  <footer class="glass-panel bg-[#050811]/95 text-gray-300 pt-16 pb-8 border-t border-white/10">
+  <footer class="glass-panel bg-white/90 text-slate-600 pt-16 pb-8 border-t border-slate-200/80 mt-auto">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
         <!-- Company Info -->
         <div>
           <a href="index.html" class="flex items-center space-x-2 mb-6">
-            <div class="text-3xl font-black italic tracking-tighter text-white">
-              A&C <span class="text-primary-red">JAPAN</span>
+            <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+              A&C <span class="text-primary-blue">JAPAN</span>
             </div>
           </a>
-          <p class="text-sm mb-6 leading-relaxed text-gray-400">Your premier destination for high-quality Japanese
+          <p class="text-sm mb-6 leading-relaxed text-slate-500">Your premier destination for high-quality Japanese
             automotive parts and exclusive vehicle auctions. We bridge the gap between quality and
             affordability.</p>
-          <div class="flex space-x-4">
+          <div class="flex space-x-3">
             <a href="#"
-              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
+              class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary-blue hover:text-primary-blue transition text-slate-600 shadow-2xs"><i
                 class="fab fa-facebook-f"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
+              class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary-blue hover:text-primary-blue transition text-slate-600 shadow-2xs"><i
                 class="fab fa-twitter"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
+              class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary-blue hover:text-primary-blue transition text-slate-600 shadow-2xs"><i
                 class="fab fa-instagram"></i></a>
             <a href="#"
-              class="w-10 h-10 rounded-xl glass-panel border border-white/10 flex items-center justify-center hover:border-primary-red/50 hover:bg-primary-red/20 transition text-white"><i
+              class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center hover:border-primary-blue hover:text-primary-blue transition text-slate-600 shadow-2xs"><i
                 class="fab fa-youtube"></i></a>
           </div>
         </div>
 
         <!-- Quick Links -->
         <div>
-          <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">Quick
-            Links<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
+          <h4 class="text-[#0b1f3a] font-bold text-base mb-6 uppercase tracking-wider relative inline-block">Quick
+            Links<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary-blue rounded-full"></span></h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> About Us</a></li>
-            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Contact Us</a></li>
-            <li><a href="listing.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Live Auctions</a>
+            <li><a href="#" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> About Us</a></li>
+            <li><a href="#" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Contact Us</a></li>
+            <li><a href="listing.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Live Auctions</a>
             </li>
-            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Auto Parts</a></li>
-            <li><a href="#" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> FAQs</a></li>
+            <li><a href="buy-now.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Auto Parts</a></li>
+            <li><a href="#" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> FAQs</a></li>
           </ul>
         </div>
 
         <!-- My Account -->
         <div>
-          <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">My
-            Account<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
+          <h4 class="text-[#0b1f3a] font-bold text-base mb-6 uppercase tracking-wider relative inline-block">My
+            Account<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary-blue rounded-full"></span></h4>
           <ul class="space-y-3 text-sm">
-            <li><a href="login.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Login / Register</a>
+            <li><a href="login.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Login / Register</a>
             </li>
-            <li><a href="profile.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Order History</a>
+            <li><a href="profile.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Order History</a>
             </li>
-            <li><a href="profile.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> My Bids</a></li>
-            <li><a href="cart.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Shopping Cart</a>
+            <li><a href="profile.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> My Bids</a></li>
+            <li><a href="cart.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Shopping Cart</a>
             </li>
-            <li><a href="add-auction.html" class="hover:text-rose-400 transition flex items-center"><i
-                  class="fas fa-chevron-right text-xs mr-2 text-primary-red"></i> Sell Vehicle</a>
+            <li><a href="add-auction.html" class="hover:text-primary-blue transition flex items-center font-medium"><i
+                  class="fas fa-chevron-right text-xs mr-2 text-primary-blue"></i> Sell Vehicle</a>
             </li>
           </ul>
         </div>
 
         <!-- Contact Info -->
         <div>
-          <h4 class="text-white font-bold text-lg mb-6 uppercase tracking-wider relative inline-block">Contact
-            Info<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-gradient-to-r from-primary-red to-primary-blue"></span></h4>
-          <ul class="space-y-4 text-sm">
+          <h4 class="text-[#0b1f3a] font-bold text-base mb-6 uppercase tracking-wider relative inline-block">Contact
+            Info<span class="absolute -bottom-2 left-0 w-1/2 h-0.5 bg-primary-blue rounded-full"></span></h4>
+          <ul class="space-y-4 text-sm font-medium">
             <li class="flex items-start">
-              <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-red text-lg"></i>
+              <i class="fas fa-map-marker-alt mt-1 mr-3 text-primary-blue text-base"></i>
               <span>123 Auto Market Street, Tokyo, Japan 100-0001</span>
             </li>
             <li class="flex items-start">
-              <i class="fas fa-phone-alt mt-1 mr-3 text-primary-blue text-lg"></i>
+              <i class="fas fa-phone-alt mt-1 mr-3 text-primary-blue text-base"></i>
               <div>
-                <span class="block">+84 5678 9999</span>
-                <span class="block text-gray-400">(Mon-Fri: 9AM - 6PM)</span>
+                <span class="block text-[#0b1f3a] font-bold">+84 5678 9999</span>
+                <span class="block text-slate-400 text-xs font-normal">(Mon-Fri: 9AM - 6PM)</span>
               </div>
             </li>
             <li class="flex items-start">
-              <i class="fas fa-envelope mt-1 mr-3 text-rose-400 text-lg"></i>
-              <a href="mailto:support@ancjapan.com"
-                class="hover:text-rose-400 transition">support@ancjapan.com</a>
+              <i class="fas fa-envelope mt-1 mr-3 text-primary-blue text-base"></i>
+              <a href="mailto:support@ancjapan.com" class="hover:text-primary-blue transition">support@ancjapan.com</a>
             </li>
           </ul>
         </div>
@@ -664,15 +702,16 @@
 
       <!-- Copyright -->
       <div
-        class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+        class="border-t border-slate-200/80 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
         <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
-        <div class="mt-4 md:mt-0 flex space-x-4">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png"
-            alt="Visa" class="h-6 object-contain glass-panel px-2 py-1 rounded">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png"
-            alt="Mastercard" class="h-6 object-contain glass-panel px-2 py-1 rounded">
+        <div class="mt-4 md:mt-0 flex space-x-3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Visa.svg/1200px-Visa.svg.png" alt="Visa"
+            class="h-6 object-contain bg-white border border-slate-200 px-2 py-0.5 rounded-md">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png"
+            alt="Mastercard" class="h-6 object-contain bg-white border border-slate-200 px-2 py-0.5 rounded-md">
           <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/2560px-PayPal.svg.png"
-            alt="PayPal" class="h-6 object-contain glass-panel px-2 py-1 rounded">
+            alt="PayPal" class="h-6 object-contain bg-white border border-slate-200 px-2 py-0.5 rounded-md">
         </div>
       </div>
     </div>
@@ -681,7 +720,6 @@
   <!-- App Scripts -->
   <script type="module" src="assets/js/app.js"></script>
   <script>
-    // Simple script to handle dynamic UI if needed for the homepage
     // Carousel Script
     let currentSlide = 0;
     const slides = document.querySelectorAll(".carousel-slide");
@@ -695,8 +733,8 @@
       slides[currentSlide].classList.add("opacity-0", "z-0");
       slides[currentSlide].querySelector(".slide-content").classList.remove("translate-y-0", "opacity-100");
       slides[currentSlide].querySelector(".slide-content").classList.add("translate-y-8", "opacity-0");
-      dots[currentSlide].classList.remove("glass-panel");
-      dots[currentSlide].classList.add("glass-panel/50");
+      dots[currentSlide].classList.remove("bg-primary-blue", "w-7");
+      dots[currentSlide].classList.add("bg-white/80", "w-3");
 
       currentSlide = newIndex;
 
@@ -707,8 +745,8 @@
         slides[currentSlide].querySelector(".slide-content").classList.remove("translate-y-8", "opacity-0");
         slides[currentSlide].querySelector(".slide-content").classList.add("translate-y-0", "opacity-100");
       }, 100);
-      dots[currentSlide].classList.remove("glass-panel/50");
-      dots[currentSlide].classList.add("glass-panel");
+      dots[currentSlide].classList.remove("bg-white/80", "w-3");
+      dots[currentSlide].classList.add("bg-primary-blue", "w-7");
     }
 
     function nextSlide() {
@@ -735,10 +773,6 @@
 
     // Start auto-play
     slideInterval = setInterval(nextSlide, 5000);
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-    });
   </script>
 </body>
 

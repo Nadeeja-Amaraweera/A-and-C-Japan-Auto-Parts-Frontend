@@ -12,59 +12,62 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="text-white">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-boxes text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading spare parts...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
-  <header class="glass-panel sticky top-0 z-50">
+  <!-- Dynamic Topbar Hook -->
+  <div id="dynamic-topbar"></div>
+
+  <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
       </a>
 
-      <button class="md:hidden text-gray-300 ml-auto"
+      <button class="md:hidden text-slate-700 ml-auto"
         onclick="document.getElementById('mobile-nav-listing').classList.toggle('hidden'); document.getElementById('mobile-header-links').classList.toggle('hidden');">
         <i class="fas fa-bars text-2xl"></i>
       </button>
 
       <div id="mobile-header-links"
         class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-        <a href="login.html" class="hover:text-primary-red transition"><i class="far fa-user mr-1"></i> My
+        <a href="login.html" class="hover:text-primary-blue transition text-slate-700 font-medium"><i class="far fa-user mr-1 text-primary-blue"></i> My
           Account</a>
-        <a href="cart.html" class="flex items-center hover:text-primary-red transition">
-          <i class="fas fa-shopping-cart text-lg mr-2"></i> My Cart
+        <a href="cart.html" class="flex items-center hover:text-primary-blue transition text-slate-700 font-medium">
+          <i class="fas fa-shopping-cart text-lg mr-2 text-primary-blue"></i> My Cart
         </a>
       </div>
     </div>
     <!-- Navigation -->
-    <nav class="border-t border-white/10">
+    <nav class="border-t border-slate-200/70">
       <div class="container mx-auto px-4">
         <ul id="mobile-nav-listing"
-          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-gray-200 pb-4 md:pb-0">
-          <li><a href="index.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">HOME</a>
+          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-slate-700 pb-4 md:pb-0">
+          <li><a href="index.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">HOME</a>
           </li>
-          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">LIVE
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">LIVE
               AUCTIONS</a>
           </li>
           <li><a href="buy-now.html"
-              class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-red text-primary-red pl-2 md:pl-0">BUY
+              class="block py-2 md:py-3 border-l-4 md:border-l-0 md:border-b-2 border-primary-blue text-primary-blue pl-2 md:pl-0 font-bold">BUY
               NOW (SPARE PARTS)</a></li>
         </ul>
       </div>
@@ -73,30 +76,30 @@
   </header>
 
   <!-- Page Title Banner -->
-  <div class="glass-panel py-10 border-b border-white/10 relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-primary-red/10 via-transparent to-primary-blue/10 pointer-events-none"></div>
+  <div class="glass-panel py-10 border-b border-slate-200/80 bg-white/70 relative overflow-hidden">
+    <div class="absolute inset-0 bg-radial from-blue-100/40 via-transparent to-transparent pointer-events-none"></div>
     <div class="container mx-auto px-4 text-center relative z-10">
-      <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight mb-2">Buy Now - Spare Parts</h1>
-      <p class="text-gray-400 text-sm"><a href="index.html" class="hover:text-white transition">Home</a> / <span class="text-rose-400">Spare Parts</span></p>
+      <h1 class="text-3xl md:text-4xl font-black text-[#0b1f3a] tracking-tight mb-2">Buy Now - Spare Parts</h1>
+      <p class="text-slate-500 text-sm font-medium"><a href="index.html" class="hover:text-primary-blue transition">Home</a> / <span class="text-primary-blue font-semibold">Spare Parts</span></p>
     </div>
   </div>
 
   <!-- Main Content -->
-  <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
+  <main class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8 flex-grow">
 
     <!-- Sidebar Filters -->
     <aside id="filters-aside" class="w-full md:w-1/4">
-      <div class="glass-panel p-5 rounded-lg border border-white/10">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="font-bold text-lg text-white font-bold tracking-wide"><i class="fas fa-filter mr-2"></i> Filters
+      <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+        <div class="flex justify-between items-center mb-5">
+          <h3 class="font-bold text-lg text-[#0b1f3a]"><i class="fas fa-filter mr-2 text-primary-blue"></i> Filters
           </h3>
-          <button class="text-xs text-primary-red hover:underline">Clear All</button>
+          <button class="text-xs text-primary-blue font-bold hover:underline cursor-pointer">Clear All</button>
         </div>
 
         <!-- Brand Filter -->
         <div class="mb-6">
-          <h4 class="font-semibold mb-2 text-sm">Brand</h4>
-          <select class="w-full input-3d rounded p-2 text-sm focus:ring-1 focus:ring-primary-red outline-none">
+          <h4 class="font-bold text-slate-700 mb-2 text-sm">Brand</h4>
+          <select class="w-full input-3d rounded-xl p-2.5 text-sm bg-white border border-slate-200 focus:border-primary-blue outline-none">
             <option>All Brands</option>
             <option>Toyota</option>
             <option>Honda</option>
@@ -109,36 +112,36 @@
 
         <!-- Model Filter -->
         <div class="mb-6">
-          <h4 class="font-semibold mb-2 text-sm">Model</h4>
+          <h4 class="font-bold text-slate-700 mb-2 text-sm">Model</h4>
           <input type="text" placeholder="Search model..."
-            class="w-full input-3d rounded p-2 text-sm focus:ring-1 focus:ring-primary-red outline-none">
+            class="w-full input-3d rounded-xl p-2.5 text-sm bg-white border border-slate-200 focus:border-primary-blue outline-none">
         </div>
 
         <!-- Quality Filter -->
-        <div class="mb-6 border-t border-white/10 pt-4">
-          <h4 class="font-semibold mb-3 text-sm">Quality</h4>
-          <label class="flex items-center mb-2 text-sm cursor-pointer"><input type="checkbox"
-              class="mr-2 accent-primary-red"> Brand New</label>
-          <label class="flex items-center mb-2 text-sm cursor-pointer"><input type="checkbox"
-              class="mr-2 accent-primary-red"> OEM</label>
-          <label class="flex items-center mb-2 text-sm cursor-pointer"><input type="checkbox"
-              class="mr-2 accent-primary-red"> Aftermarket</label>
-          <label class="flex items-center text-sm cursor-pointer"><input type="checkbox"
-              class="mr-2 accent-primary-red"> Used / Refurbished</label>
+        <div class="mb-6 border-t border-slate-100 pt-5">
+          <h4 class="font-bold text-slate-700 mb-3 text-sm">Quality</h4>
+          <label class="flex items-center mb-2.5 text-sm text-slate-700 cursor-pointer"><input type="checkbox"
+              class="mr-2.5 accent-primary-blue w-4 h-4 rounded"> Brand New</label>
+          <label class="flex items-center mb-2.5 text-sm text-slate-700 cursor-pointer"><input type="checkbox"
+              class="mr-2.5 accent-primary-blue w-4 h-4 rounded"> OEM</label>
+          <label class="flex items-center mb-2.5 text-sm text-slate-700 cursor-pointer"><input type="checkbox"
+              class="mr-2.5 accent-primary-blue w-4 h-4 rounded"> Aftermarket</label>
+          <label class="flex items-center text-sm text-slate-700 cursor-pointer"><input type="checkbox"
+              class="mr-2.5 accent-primary-blue w-4 h-4 rounded"> Used / Refurbished</label>
         </div>
 
         <!-- Price Range -->
-        <div class="mb-6 border-t border-white/10 pt-4">
-          <h4 class="font-semibold mb-2 text-sm">Price Range (USD)</h4>
-          <input type="range" class="w-full accent-primary-red mb-2" min="0" max="5000">
-          <div class="flex justify-between text-xs text-gray-400">
+        <div class="mb-6 border-t border-slate-100 pt-5">
+          <h4 class="font-bold text-slate-700 mb-2 text-sm">Price Range (USD)</h4>
+          <input type="range" class="w-full accent-primary-blue mb-2 cursor-pointer" min="0" max="5000">
+          <div class="flex justify-between text-xs text-slate-500 font-semibold">
             <span>$0</span>
             <span>$5,000+</span>
           </div>
         </div>
 
         <button
-          class="w-full bg-primary-dark text-white font-semibold py-2 rounded hover:bg-gray-800 transition text-sm">Apply
+          class="w-full btn-3d btn-primary-3d font-bold py-3 rounded-xl transition text-sm cursor-pointer shadow-sm">Apply
           Filters</button>
       </div>
     </aside>
@@ -148,12 +151,12 @@
 
       <!-- Controls -->
       <div
-        class="glass-panel p-4 rounded-lg border border-white/10 flex flex-col sm:flex-row justify-between items-center mb-6">
-        <p class="text-sm text-gray-400 mb-4 sm:mb-0">Showing 1-12 of 342 spare parts</p>
+        class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 flex flex-col sm:flex-row justify-between items-center mb-6 shadow-sm">
+        <p class="text-sm text-slate-500 font-medium mb-4 sm:mb-0">Showing 1-12 of 342 spare parts</p>
         <div class="flex items-center space-x-4">
           <div class="flex items-center">
-            <label class="text-sm mr-2">Sort by:</label>
-            <select class="input-3d rounded p-1.5 text-sm outline-none">
+            <label class="text-sm font-semibold text-slate-600 mr-2">Sort by:</label>
+            <select class="input-3d rounded-xl p-2 text-sm bg-white border border-slate-200 outline-none">
               <option>Best Match</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
@@ -161,10 +164,10 @@
             </select>
           </div>
           <!-- View Toggles -->
-          <div class="flex input-3d rounded overflow-hidden">
-            <button class="px-3 py-1.5 glass-panel/5 text-white font-bold tracking-wide"><i
+          <div class="flex border border-slate-200 rounded-xl overflow-hidden bg-white">
+            <button class="px-3 py-1.5 bg-blue-50 text-primary-blue font-bold"><i
                 class="fas fa-th"></i></button>
-            <button class="px-3 py-1.5 glass-panel text-gray-400 hover:text-white font-bold tracking-wide"><i
+            <button class="px-3 py-1.5 text-slate-400 hover:text-slate-800 transition"><i
                 class="fas fa-list"></i></button>
           </div>
         </div>
@@ -173,26 +176,26 @@
       <!-- Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        <div class="glass-panel rounded-lg card-3d overflow-hidden group cursor-pointer" onclick="showProductDetails()">
-          <div class="relative">
+        <div class="glass-panel rounded-2xl card-3d overflow-hidden group cursor-pointer border border-white/90 bg-white/85 shadow-sm" onclick="showProductDetails()">
+          <div class="relative overflow-hidden">
             <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop"
-              alt="Car" class="w-full h-48 object-cover">
-            <div class="absolute top-3 left-3 bg-primary-dark text-white text-xs font-bold px-2 py-1 rounded">
+              alt="Car" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-3 left-3 bg-primary-blue text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">
               BUY NOW</div>
           </div>
           <div class="p-5">
-            <h3 class="text-lg font-bold text-white mb-1 truncate"><a href="#"
-                class="hover:text-primary-red transition">2019 Audi R8 V10 Plus</a></h3>
-            <p class="text-sm text-gray-400 mb-3 truncate">15,800 mi • Auto • Gas • Nagoya, JP</p>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate"><a href="#"
+                class="hover:text-primary-blue transition">2019 Audi R8 V10 Plus</a></h3>
+            <p class="text-sm text-slate-500 mb-3 truncate">15,800 mi • Auto • Gas • Nagoya, JP</p>
 
-            <div class="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
               <div>
-                <p class="text-xs text-gray-400">Price</p>
-                <p class="text-lg font-bold text-white font-bold tracking-wide">$125,000</p>
+                <p class="text-xs text-slate-400 font-semibold uppercase">Price</p>
+                <p class="text-xl font-black text-[#0b1f3a]">$125,000</p>
               </div>
             </div>
             <button
-              class="block w-full text-center bg-primary-dark hover:bg-gray-800 text-white font-semibold py-2 rounded transition ">Add
+              class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Add
               to Cart</button>
           </div>
         </div>
@@ -201,15 +204,15 @@
 
       <!-- Pagination -->
       <div class="mt-10 flex justify-center">
-        <nav class="flex items-center space-x-1">
-          <button class="px-3 py-1 rounded border border-white/20 text-gray-400 hover:glass-panel/5 disabled:opacity-50"
+        <nav class="flex items-center space-x-1.5">
+          <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-400 bg-white disabled:opacity-40"
             disabled><i class="fas fa-angle-left"></i></button>
-          <button class="px-3 py-1 rounded border border-primary-red bg-primary-red text-white">1</button>
-          <button class="px-3 py-1 rounded border border-white/20 text-gray-200 hover:glass-panel/5">2</button>
-          <button class="px-3 py-1 rounded border border-white/20 text-gray-200 hover:glass-panel/5">3</button>
-          <span class="px-2">...</span>
-          <button class="px-3 py-1 rounded border border-white/20 text-gray-200 hover:glass-panel/5">12</button>
-          <button class="px-3 py-1 rounded border border-white/20 text-gray-200 hover:glass-panel/5"><i
+          <button class="px-3.5 py-1.5 rounded-xl border border-primary-blue bg-primary-blue text-white font-bold">1</button>
+          <button class="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-medium">2</button>
+          <button class="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-medium">3</button>
+          <span class="px-2 text-slate-400 font-bold">...</span>
+          <button class="px-3.5 py-1.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-medium">12</button>
+          <button class="px-3 py-1.5 rounded-xl border border-slate-200 text-slate-700 bg-white hover:bg-slate-50 font-medium"><i
               class="fas fa-angle-right"></i></button>
         </nav>
       </div>
@@ -232,59 +235,59 @@
 
       // Inject HTML using backticks
       detailsContainer.innerHTML = `
-        <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/90 shadow-sm overflow-hidden">
           <div class="flex flex-col md:flex-row">
             <!-- Image Viewer -->
-            <div class="w-full md:w-1/2 p-6 border-b md:border-b-0 md:border-r border-white/10">
-              <div class="relative rounded-lg overflow-hidden mb-4">
+            <div class="w-full md:w-1/2 p-6 border-b md:border-b-0 md:border-r border-slate-200/80">
+              <div class="relative rounded-2xl overflow-hidden mb-4 border border-slate-200/80">
                 <img id="main-product-image" src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop" alt="Car" class="w-full h-80 object-cover">
-                <div class="absolute top-3 left-3 bg-primary-dark text-white text-xs font-bold px-2 py-1 rounded">BUY NOW</div>
+                <div class="absolute top-3 left-3 bg-primary-blue text-white text-xs font-bold px-2.5 py-1 rounded-full shadow">BUY NOW</div>
               </div>
-              <div class="flex space-x-4 overflow-x-auto pb-2">
-                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop" alt="Thumb 1" class="w-20 h-20 object-cover rounded cursor-pointer border-2 border-primary-red opacity-100 hover:opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
-                <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=2070&auto=format&fit=crop" alt="Thumb 2" class="w-20 h-20 object-cover rounded cursor-pointer border-2 border-transparent opacity-60 hover:opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
-                <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop" alt="Thumb 3" class="w-20 h-20 object-cover rounded cursor-pointer border-2 border-transparent opacity-60 hover:opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
+              <div class="flex space-x-3 overflow-x-auto pb-2">
+                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1974&auto=format&fit=crop" alt="Thumb 1" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-primary-blue opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
+                <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=2070&auto=format&fit=crop" alt="Thumb 2" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
+                <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=2115&auto=format&fit=crop" alt="Thumb 3" class="w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-transparent opacity-70 hover:opacity-100 transition" onclick="document.getElementById('main-product-image').src=this.src">
               </div>
             </div>
             
             <!-- Product Info -->
             <div class="w-full md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
-              <div class="flex items-center space-x-2 text-sm text-gray-400 mb-2">
+              <div class="flex items-center space-x-2 text-sm text-slate-500 mb-2">
                 <span>Home</span>
                 <span>/</span>
                 <span>Spare Parts</span>
                 <span>/</span>
-                <span class="text-white font-medium">2019 Audi R8 V10 Plus</span>
+                <span class="text-[#0b1f3a] font-bold">2019 Audi R8 V10 Plus</span>
               </div>
               
-              <h2 class="text-3xl font-bold text-white mb-2">2019 Audi R8 V10 Plus</h2>
-              <p class="text-gray-400 mb-6">15,800 mi • Auto • Gas • Nagoya, JP</p>
+              <h2 class="text-3xl font-bold text-[#0b1f3a] mb-2">2019 Audi R8 V10 Plus</h2>
+              <p class="text-slate-500 mb-6">15,800 mi • Auto • Gas • Nagoya, JP</p>
               
-              <div class="p-6 rounded-lg mb-8 border border-white/10">
-                <p class="text-sm text-gray-400 mb-1">Price</p>
-                <p class="text-4xl font-black text-white font-bold tracking-wide mb-4">$125,000</p>
+              <div class="p-6 rounded-2xl mb-8 bg-blue-50/50 border border-blue-100">
+                <p class="text-xs text-slate-500 font-bold uppercase mb-1">Price</p>
+                <p class="text-4xl font-black text-[#0b1f3a] mb-4">$125,000</p>
                 
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                  <button class="flex-1 bg-primary-red hover:bg-red-700 text-white font-bold py-3 px-6 rounded transition shadow-md flex justify-center items-center">
+                  <button class="flex-1 btn-3d btn-primary-3d font-bold py-3.5 px-6 rounded-xl transition shadow-md flex justify-center items-center cursor-pointer">
                     <i class="fas fa-shopping-cart mr-2"></i> Add to Cart
                   </button>
-                  <button class="glass-panel text-gray-200 hover:glass-panel/5 border border-white/20 font-bold py-3 px-6 rounded transition flex justify-center items-center">
-                    <i class="far fa-heart"></i>
+                  <button class="border border-slate-200 bg-white text-slate-700 hover:text-primary-blue font-bold py-3.5 px-6 rounded-xl transition flex justify-center items-center cursor-pointer">
+                    <i class="far fa-heart text-lg"></i>
                   </button>
                 </div>
               </div>
               
-              <div class="border-t border-white/10 pt-6">
-                <h3 class="font-bold text-lg mb-4">Product Details</h3>
-                <ul class="space-y-3 text-sm text-gray-300">
-                  <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2 w-5"></i> <strong>Condition:</strong> Excellent</li>
-                  <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2 w-5"></i> <strong>Availability:</strong> In Stock</li>
-                  <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2 w-5"></i> <strong>Shipping:</strong> Worldwide Shipping Available</li>
+              <div class="border-t border-slate-100 pt-6">
+                <h3 class="font-bold text-lg text-[#0b1f3a] mb-4">Product Details</h3>
+                <ul class="space-y-3 text-sm text-slate-600">
+                  <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2.5 w-5"></i> <strong>Condition:</strong>&nbsp;Excellent</li>
+                  <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2.5 w-5"></i> <strong>Availability:</strong>&nbsp;In Stock</li>
+                  <li class="flex items-center"><i class="fas fa-check text-emerald-500 mr-2.5 w-5"></i> <strong>Shipping:</strong>&nbsp;Worldwide Shipping Available</li>
                 </ul>
               </div>
               
               <div class="mt-8">
-                <button onclick="hideProductDetails()" class="text-primary-red hover:underline font-medium text-sm flex items-center">
+                <button onclick="hideProductDetails()" class="text-primary-blue hover:underline font-bold text-sm flex items-center cursor-pointer">
                   <i class="fas fa-arrow-left mr-2"></i> Back to Products
                 </button>
               </div>
@@ -302,7 +305,7 @@
   </script>
 
   <!-- Footer -->
-  <footer class="glass-panel border-t border-white/10 py-6 mt-12 text-center text-sm text-gray-400">
+  <footer class="glass-panel border-t border-slate-200/80 bg-white/70 py-6 mt-12 text-center text-sm text-slate-500 mt-auto">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
 

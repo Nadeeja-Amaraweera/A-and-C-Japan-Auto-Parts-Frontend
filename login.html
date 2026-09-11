@@ -6,142 +6,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login / Register - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="text-white min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-shield-alt text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading secure portal...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
   <!-- Simple Header -->
-  <header class="glass-panel sticky top-0 z-50">
+  <header class="glass-panel sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
       </a>
-      <a href="index.html" class="text-gray-400 hover:text-primary-red transition"><i
-          class="fas fa-arrow-left mr-1"></i> Back to Home</a>
+      <a href="index.html" class="text-slate-500 hover:text-primary-blue transition text-sm font-medium"><i
+          class="fas fa-arrow-left mr-1.5"></i> Back to Home</a>
     </div>
   </header>
 
   <!-- Main Content -->
   <main class="flex-grow flex items-center justify-center py-12 px-4" id="mainLoginpage">
-    <div class="max-w-4xl w-full glass-panel rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row">
+    <div class="max-w-4xl w-full glass-panel rounded-2xl shadow-xl border border-white/90 overflow-hidden flex flex-col md:flex-row bg-white/80">
 
       <!-- Login Section -->
-      <div class="w-full md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-white/10">
-        <h2 class="text-2xl font-bold text-white font-bold tracking-wide mb-2">Welcome Back</h2>
-        <p class="text-gray-400 text-sm mb-8">Sign in to your account to continue</p>
+      <div class="w-full md:w-1/2 p-8 md:p-12 border-b md:border-b-0 md:border-r border-slate-100">
+        <h2 class="text-2xl font-black text-[#0b1f3a] mb-2 tracking-tight">Welcome Back</h2>
+        <p class="text-slate-500 text-sm mb-8">Sign in to your account to continue</p>
 
         <form id="loginForm" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-200 mb-1">Email</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
             <input type="email" required id="loginEmail"
-              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              class="w-full px-4 py-2.5 input-3d outline-none transition"
               placeholder="Enter your email">
           </div>
           <div>
-            <div class="flex justify-between items-center mb-1">
-              <label class="block text-sm font-medium text-gray-200">Password</label>
-              <a href="#" class="text-xs text-primary-red hover:underline">Forgot password?</a>
+            <div class="flex justify-between items-center mb-1.5">
+              <label class="block text-sm font-medium text-slate-700">Password</label>
+              <a href="#" class="text-xs text-primary-blue font-semibold hover:underline">Forgot password?</a>
             </div>
             <div class="relative">
               <input type="password" required id="loginPassword"
-                class="w-full px-4 py-2 pr-10 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                class="w-full px-4 py-2.5 pr-10 input-3d outline-none transition"
                 placeholder="••••••••">
               <button type="button"
                 onclick="const input = document.getElementById('loginPassword'); const icon = this.querySelector('i'); if(input.type === 'password') { input.type = 'text'; icon.classList.remove('fa-eye'); icon.classList.add('fa-eye-slash'); } else { input.type = 'password'; icon.classList.remove('fa-eye-slash'); icon.classList.add('fa-eye'); }"
-                class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-gray-300 focus:outline-none">
+                class="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 focus:outline-none">
                 <i class="fas fa-eye"></i>
               </button>
             </div>
           </div>
           <div class="flex items-center">
             <input type="checkbox" id="remember"
-              class="w-4 h-4 text-primary-red border-white/20 rounded focus:ring-primary-red">
-            <label for="remember" class="ml-2 block text-sm text-gray-300">Remember me</label>
+              class="w-4 h-4 text-primary-blue border-slate-300 rounded focus:ring-primary-blue">
+            <label for="remember" class="ml-2 block text-sm text-slate-600">Remember me</label>
           </div>
           <button type="submit" id="loginButton"
-            class="w-full btn-3d btn-primary-3d font-semibold py-3 rounded transition shadow-md">Login</button>
+            class="w-full btn-3d btn-primary-3d font-semibold py-3 rounded-xl transition shadow-md">Login</button>
         </form>
       </div>
 
       <!-- Register Section -->
-      <div class="w-full md:w-1/2 p-8 md:p-12 ">
-        <h2 class="text-2xl font-bold text-white font-bold tracking-wide mb-2">Create Account</h2>
-        <p class="text-gray-400 text-sm mb-8">Join us to start bidding and buying</p>
+      <div class="w-full md:w-1/2 p-8 md:p-12">
+        <h2 class="text-2xl font-black text-[#0b1f3a] mb-2 tracking-tight">Create Account</h2>
+        <p class="text-slate-500 text-sm mb-8">Join us to start bidding and buying</p>
 
         <form id="registerForm" class="space-y-4">
           <div>
-            <label class="block text-sm font-medium text-gray-200 mb-1">Full Name</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Full Name</label>
             <input type="text" required id="regName"
-              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              class="w-full px-4 py-2.5 input-3d outline-none transition"
               placeholder="John Doe">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-200 mb-1">Email Address</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Email Address</label>
             <input type="email" required id="regEmail"
-              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              class="w-full px-4 py-2.5 input-3d outline-none transition"
               placeholder="john@example.com">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-200 mb-1">Phone Number</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Phone Number</label>
             <input type="tel" required id="regPhone"
-              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              class="w-full px-4 py-2.5 input-3d outline-none transition"
               placeholder="+1 234 567 8900">
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-200 mb-1">Address</label>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Address</label>
             <input type="text" required id="regAddress"
-              class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+              class="w-full px-4 py-2.5 input-3d outline-none transition"
               placeholder="123 Main St, City, Country">
           </div>
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-gray-200 mb-1">Password</label>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
               <input type="password" required id="regPassword"
-                class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                class="w-full px-4 py-2.5 input-3d outline-none transition"
                 placeholder="••••••••">
             </div>
             <div>
-              <label class="block text-sm font-medium text-gray-200 mb-1">Confirm Password</label>
+              <label class="block text-sm font-medium text-slate-700 mb-1.5">Confirm Password</label>
               <input type="password" required id="regConfirmPassword"
-                class="w-full px-4 py-2 input-3d rounded focus:ring-1 focus:ring-primary-red focus:border-primary-red outline-none transition"
+                class="w-full px-4 py-2.5 input-3d outline-none transition"
                 placeholder="••••••••">
             </div>
           </div>
           <div class="flex items-start mt-4">
             <div class="flex items-center h-5">
               <input id="regTerms" type="checkbox" required
-                class="w-4 h-4 text-primary-red border-white/20 rounded focus:ring-primary-red">
+                class="w-4 h-4 text-primary-blue border-slate-300 rounded focus:ring-primary-blue">
             </div>
             <div class="ml-2 text-sm">
-              <label for="regTerms" class="text-gray-300">I agree to the <a href="#"
-                  class="text-primary-red hover:underline">Terms & Conditions</a> and Privacy
+              <label for="regTerms" class="text-slate-600">I agree to the <a href="#"
+                  class="text-primary-blue font-semibold hover:underline">Terms & Conditions</a> and Privacy
                 Policy.</label>
             </div>
           </div>
           <button type="submit"
-            class="w-full btn-3d btn-primary-3d  font-semibold py-3 rounded  transition shadow-md mt-2">Create
+            class="w-full btn-3d btn-primary-3d font-semibold py-3 rounded-xl transition shadow-md mt-2">Create
             Account</button>
         </form>
       </div>
@@ -150,7 +150,7 @@
   </main>
 
   <!-- Simple Footer -->
-  <footer class="glass-panel border-t border-white/10 py-6 text-center text-sm text-gray-400">
+  <footer class="glass-panel border-t border-slate-200/70 py-6 text-center text-sm text-slate-500">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
 

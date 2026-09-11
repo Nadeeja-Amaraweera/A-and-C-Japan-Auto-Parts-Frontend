@@ -12,58 +12,61 @@
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body class="text-white">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-car text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading auction details...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
-  <header class="glass-panel sticky top-0 z-50">
+  <!-- Dynamic Topbar Hook -->
+  <div id="dynamic-topbar"></div>
+
+  <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-3xl font-black italic tracking-tighter text-white font-bold tracking-wide">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <div class="text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
       </a>
 
-      <button class="md:hidden text-gray-300 ml-auto"
+      <button class="md:hidden text-slate-700 ml-auto"
         onclick="document.getElementById('mobile-nav-listing').classList.toggle('hidden'); document.getElementById('mobile-header-links').classList.toggle('hidden');">
         <i class="fas fa-bars text-2xl"></i>
       </button>
 
       <div id="mobile-header-links"
         class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-        <a href="login.html" class="hover:text-primary-red transition"><i class="far fa-user mr-1"></i> My Account</a>
-        <a href="cart.html" class="flex items-center hover:text-primary-red transition">
-          <i class="fas fa-shopping-cart text-lg mr-2"></i> My Cart
+        <a href="login.html" class="hover:text-primary-blue transition text-slate-700 font-medium"><i class="far fa-user mr-1 text-primary-blue"></i> My Account</a>
+        <a href="cart.html" class="flex items-center hover:text-primary-blue transition text-slate-700 font-medium">
+          <i class="fas fa-shopping-cart text-lg mr-2 text-primary-blue"></i> My Cart
         </a>
       </div>
     </div>
     <!-- Navigation -->
-    <nav class="border-t border-white/10">
+    <nav class="border-t border-slate-200/70">
       <div class="container mx-auto px-4">
         <ul id="mobile-nav-listing"
-          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-gray-200 pb-4 md:pb-0">
-          <li><a href="index.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">HOME</a>
+          class="hidden md:flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-8 text-sm font-semibold text-slate-700 pb-4 md:pb-0">
+          <li><a href="index.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">HOME</a>
           </li>
-          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">NEW
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">NEW
               ARRIVALS</a></li>
-          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">UNDER
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">UNDER
               $100</a></li>
-          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-red transition pl-2 md:pl-0">DEALS</a>
+          <li><a href="listing.html" class="block py-2 md:py-3 hover:text-primary-blue transition pl-2 md:pl-0">DEALS</a>
           </li>
         </ul>
       </div>
@@ -72,17 +75,17 @@
   </header>
 
   <!-- Breadcrumbs -->
-  <div class="glass-panel/5 py-3 border-b border-white/10">
-    <div class="container mx-auto px-4 text-sm text-gray-400">
-      <a href="index.html" class="hover:text-primary-red">Home</a> <i class="fas fa-chevron-right text-xs mx-2"></i>
-      <a href="listing.html" class="hover:text-primary-red">Vehicles</a> <i
-        class="fas fa-chevron-right text-xs mx-2"></i>
-      <span class="text-white">2020 Chevrolet Corvette Stingray</span>
+  <div class="bg-white/60 py-3 border-b border-slate-200/70">
+    <div class="container mx-auto px-4 text-sm text-slate-500 font-medium">
+      <a href="index.html" class="hover:text-primary-blue">Home</a> <i class="fas fa-chevron-right text-xs mx-2 text-slate-400"></i>
+      <a href="listing.html" class="hover:text-primary-blue">Vehicles</a> <i
+        class="fas fa-chevron-right text-xs mx-2 text-slate-400"></i>
+      <span class="text-[#0b1f3a] font-semibold">2020 Chevrolet Corvette Stingray</span>
     </div>
   </div>
 
   <!-- Main Content -->
-  <main class="container mx-auto px-4 py-8">
+  <main class="container mx-auto px-4 py-8 flex-grow">
 
     <div class="flex flex-col lg:flex-row gap-8 mb-12">
 
@@ -91,105 +94,105 @@
         <!-- Title & Basic Info -->
         <div class="mb-4">
           <div class="flex justify-between items-start">
-            <h1 class="text-3xl font-bold text-white mb-2">2020 Chevrolet Corvette Stingray</h1>
-            <button class="text-gray-400 hover:text-primary-red text-xl"><i class="far fa-heart"></i></button>
+            <h1 class="text-3xl font-bold text-[#0b1f3a] mb-2">2020 Chevrolet Corvette Stingray</h1>
+            <button class="text-slate-400 hover:text-primary-blue text-xl transition"><i class="far fa-heart"></i></button>
           </div>
-          <p class="text-gray-300"><i class="fas fa-map-marker-alt text-primary-red mr-1"></i> Tokyo, Japan | VIN:
+          <p class="text-slate-600 text-sm"><i class="fas fa-map-marker-alt text-primary-blue mr-1"></i> Tokyo, Japan | VIN:
             1G1YXXXXXXX123456</p>
         </div>
 
         <!-- Image Gallery -->
         <div class="mb-8">
           <!-- Main Image -->
-          <div class="w-full h-96 bg-gray-200 rounded-lg overflow-hidden mb-4 relative">
+          <div class="w-full h-96 bg-slate-100 rounded-2xl overflow-hidden mb-4 relative shadow-sm border border-slate-200/80">
             <img id="mainImage"
               src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
               alt="Corvette Stingray" class="w-full h-full object-cover">
-            <div class="absolute top-4 left-4 bg-primary-red text-white text-xs font-bold px-3 py-1 rounded shadow">HOT
+            <div class="absolute top-4 left-4 bg-primary-blue text-white text-xs font-bold px-3 py-1.5 rounded-full shadow">HOT
               AUCTION</div>
           </div>
           <!-- Thumbnails -->
           <div class="grid grid-cols-5 gap-2">
             <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop"
-              class="w-full h-20 object-cover rounded cursor-pointer border-2 border-primary-red"
+              class="w-full h-20 object-cover rounded-xl cursor-pointer border-2 border-primary-blue"
               onclick="changeImage(this)">
             <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?q=80&w=2070&auto=format&fit=crop"
-              class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition"
+              class="w-full h-20 object-cover rounded-xl cursor-pointer opacity-70 hover:opacity-100 transition border-2 border-transparent"
               onclick="changeImage(this)">
             <img src="https://images.unsplash.com/photo-1593460354583-4224ab273ef3?q=80&w=2071&auto=format&fit=crop"
-              class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition"
+              class="w-full h-20 object-cover rounded-xl cursor-pointer opacity-70 hover:opacity-100 transition border-2 border-transparent"
               onclick="changeImage(this)">
             <img src="https://images.unsplash.com/photo-1606103856616-95240c5f2b80?q=80&w=1924&auto=format&fit=crop"
-              class="w-full h-20 object-cover rounded cursor-pointer opacity-70 hover:opacity-100 transition"
+              class="w-full h-20 object-cover rounded-xl cursor-pointer opacity-70 hover:opacity-100 transition border-2 border-transparent"
               onclick="changeImage(this)">
             <div
-              class="w-full h-20 bg-gray-200 rounded flex items-center justify-center cursor-pointer hover:bg-gray-300 transition relative">
-              <span class="text-sm font-semibold text-gray-300">+5 Photos</span>
+              class="w-full h-20 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center cursor-pointer hover:bg-slate-200/80 transition relative">
+              <span class="text-sm font-semibold text-slate-600">+5 Photos</span>
             </div>
           </div>
         </div>
 
         <!-- Vehicle Details Tabs -->
-        <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
-          <div class="flex border-b border-white/10">
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+          <div class="flex border-b border-slate-200/80 bg-slate-50/50">
             <button
-              class="px-6 py-4 font-semibold text-primary-red border-b-2 border-primary-red focus:outline-none">Overview</button>
+              class="px-6 py-4 font-bold text-primary-blue border-b-2 border-primary-blue focus:outline-none">Overview</button>
             <button
-              class="px-6 py-4 font-semibold text-gray-400 hover:text-white focus:outline-none transition">Features</button>
+              class="px-6 py-4 font-semibold text-slate-500 hover:text-slate-800 focus:outline-none transition">Features</button>
             <button
-              class="px-6 py-4 font-semibold text-gray-400 hover:text-white focus:outline-none transition">Condition
+              class="px-6 py-4 font-semibold text-slate-500 hover:text-slate-800 focus:outline-none transition">Condition
               Report</button>
           </div>
 
           <div class="p-6">
-            <h3 class="text-lg font-bold mb-4">Vehicle Specifications</h3>
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-4">Vehicle Specifications</h3>
             <div class="grid grid-cols-2 md:grid-cols-3 gap-y-4 gap-x-8 mb-8 text-sm">
               <div>
-                <p class="text-gray-400 mb-1">Make / Model</p>
-                <p class="font-semibold">Chevrolet Corvette</p>
+                <p class="text-slate-500 mb-1">Make / Model</p>
+                <p class="font-bold text-[#0b1f3a]">Chevrolet Corvette</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Year</p>
-                <p class="font-semibold">2020</p>
+                <p class="text-slate-500 mb-1">Year</p>
+                <p class="font-bold text-[#0b1f3a]">2020</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Mileage</p>
-                <p class="font-semibold">12,450 mi</p>
+                <p class="text-slate-500 mb-1">Mileage</p>
+                <p class="font-bold text-[#0b1f3a]">12,450 mi</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Transmission</p>
-                <p class="font-semibold">8-Speed Dual-Clutch</p>
+                <p class="text-slate-500 mb-1">Transmission</p>
+                <p class="font-bold text-[#0b1f3a]">8-Speed Dual-Clutch</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Engine</p>
-                <p class="font-semibold">6.2L V8</p>
+                <p class="text-slate-500 mb-1">Engine</p>
+                <p class="font-bold text-[#0b1f3a]">6.2L V8</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Drivetrain</p>
-                <p class="font-semibold">RWD</p>
+                <p class="text-slate-500 mb-1">Drivetrain</p>
+                <p class="font-bold text-[#0b1f3a]">RWD</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Fuel Type</p>
-                <p class="font-semibold">Gasoline</p>
+                <p class="text-slate-500 mb-1">Fuel Type</p>
+                <p class="font-bold text-[#0b1f3a]">Gasoline</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Exterior Color</p>
-                <p class="font-semibold">Torch Red</p>
+                <p class="text-slate-500 mb-1">Exterior Color</p>
+                <p class="font-bold text-[#0b1f3a]">Torch Red</p>
               </div>
               <div>
-                <p class="text-gray-400 mb-1">Interior Color</p>
-                <p class="font-semibold">Jet Black</p>
+                <p class="text-slate-500 mb-1">Interior Color</p>
+                <p class="font-bold text-[#0b1f3a]">Jet Black</p>
               </div>
             </div>
 
-            <h3 class="text-lg font-bold mb-2">Description</h3>
-            <p class="text-gray-300 text-sm leading-relaxed mb-4">
+            <h3 class="text-lg font-bold text-[#0b1f3a] mb-2">Description</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
               Stunning 2020 Chevrolet Corvette Stingray 2LT package finished in Torch Red over Jet Black leather.
               Powered by a mid-mounted 6.2-liter LT2 V8 paired with an eight-speed dual-clutch transaxle. Features
               include the Z51 Performance Package, magnetic ride control, GT2 bucket seats, carbon-fiber interior trim,
               a performance data and video recorder, front lift system with memory, and a Bose 14-speaker audio system.
             </p>
-            <p class="text-gray-300 text-sm leading-relaxed">
+            <p class="text-slate-600 text-sm leading-relaxed">
               This C8 is in pristine condition with only 12,450 miles. Regularly serviced and garaged. Clean title in
               hand.
             </p>
@@ -201,107 +204,107 @@
       <div class="w-full lg:w-1/3">
 
         <!-- Bidding Panel -->
-        <div class="glass-panel rounded-lg shadow-lg border border-white/10 p-6 mb-6">
+        <div class="glass-panel card-3d rounded-2xl shadow-sm border border-white/90 bg-white/85 p-6 mb-6">
 
           <!-- Timer -->
-          <div class="flex flex-col items-center justify-center p-4 rounded-lg mb-6 border border-white/10">
-            <p class="text-sm text-gray-400 mb-1 uppercase font-semibold tracking-wider">Auction Ends In</p>
-            <div class="flex space-x-3 text-2xl font-black text-white font-bold tracking-wide">
-              <div class="flex flex-col items-center"><span class="text-primary-red">01</span><span
-                  class="text-xs font-normal text-gray-400">DAYS</span></div><span>:</span>
-              <div class="flex flex-col items-center"><span>04</span><span
-                  class="text-xs font-normal text-gray-400">HRS</span></div><span>:</span>
-              <div class="flex flex-col items-center"><span>23</span><span
-                  class="text-xs font-normal text-gray-400">MIN</span></div><span>:</span>
-              <div class="flex flex-col items-center"><span>15</span><span
-                  class="text-xs font-normal text-gray-400">SEC</span></div>
+          <div class="flex flex-col items-center justify-center p-4 rounded-xl mb-6 bg-blue-50/60 border border-blue-100/80">
+            <p class="text-xs text-slate-500 mb-1 uppercase font-bold tracking-wider">Auction Ends In</p>
+            <div class="flex space-x-3 text-2xl font-black text-[#0b1f3a]">
+              <div class="flex flex-col items-center"><span class="text-primary-blue">01</span><span
+                  class="text-xs font-semibold text-slate-500">DAYS</span></div><span>:</span>
+              <div class="flex flex-col items-center"><span class="text-[#0b1f3a]">04</span><span
+                  class="text-xs font-semibold text-slate-500">HRS</span></div><span>:</span>
+              <div class="flex flex-col items-center"><span class="text-[#0b1f3a]">23</span><span
+                  class="text-xs font-semibold text-slate-500">MIN</span></div><span>:</span>
+              <div class="flex flex-col items-center"><span class="text-[#0b1f3a]">15</span><span
+                  class="text-xs font-semibold text-slate-500">SEC</span></div>
             </div>
           </div>
 
           <!-- Current Bid -->
           <div class="mb-6">
-            <p class="text-sm text-gray-400 mb-1">Current Bid (14 Bids)</p>
-            <div class="text-4xl font-black text-white font-bold tracking-wide mb-2">$54,200</div>
-            <p class="text-sm text-green-600 font-semibold"><i class="fas fa-check-circle mr-1"></i> Reserve Met</p>
+            <p class="text-sm text-slate-500 mb-1">Current Bid (14 Bids)</p>
+            <div class="text-4xl font-black text-[#0b1f3a] mb-2">$54,200</div>
+            <p class="text-sm text-emerald-600 font-bold"><i class="fas fa-check-circle mr-1"></i> Reserve Met</p>
           </div>
 
           <!-- Place Bid Input -->
           <div class="mb-4">
             <div class="relative">
-              <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 font-bold">$</span>
+              <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 font-bold">$</span>
               <input type="number" id="bidAmount" min="54300" step="100"
-                class="w-full border-2 border-white/20 rounded-lg py-3 pl-8 pr-4 text-lg font-bold text-white focus:border-primary-red focus:outline-none transition"
+                class="w-full border-2 border-slate-200 bg-white rounded-xl py-3 pl-8 pr-4 text-lg font-bold text-[#0b1f3a] focus:border-primary-blue focus:ring-4 focus:ring-blue-100 outline-none transition"
                 value="54300">
             </div>
-            <p class="text-xs text-gray-400 mt-2">Enter US $54,300 or more</p>
+            <p class="text-xs text-slate-500 mt-2">Enter US $54,300 or more</p>
           </div>
 
           <button onclick="openBidModal()"
-            class="w-full bg-primary-red hover:bg-red-700 text-white font-bold py-4 rounded-lg shadow-lg card-3d transition text-lg mb-4">
+            class="w-full btn-3d btn-primary-3d font-bold py-4 rounded-xl text-lg mb-4 cursor-pointer">
             Place Bid Now
           </button>
 
-          <p class="text-xs text-center text-gray-400">By placing a bid, you're committing to buy this item if you win.
+          <p class="text-xs text-center text-slate-500">By placing a bid, you're committing to buy this item if you win.
           </p>
         </div>
 
         <!-- Bid History -->
-        <div class="glass-panel rounded-lg border border-white/10 p-6 mb-6">
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 mb-6 shadow-sm">
           <div class="flex justify-between items-center mb-4">
-            <h3 class="font-bold text-lg text-white font-bold tracking-wide">Recent Bidders</h3>
-            <a href="#" class="text-xs text-primary-red hover:underline">View All 14 Bids</a>
+            <h3 class="font-bold text-lg text-[#0b1f3a]">Recent Bidders</h3>
+            <a href="#" class="text-xs text-primary-blue font-bold hover:underline">View All 14 Bids</a>
           </div>
 
           <ul class="space-y-4">
-            <li class="flex justify-between items-center pb-3 border-b border-white/10">
+            <li class="flex justify-between items-center pb-3 border-b border-slate-100">
               <div>
-                <p class="font-semibold text-sm">j***k (15 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
-                <p class="text-xs text-gray-400">Oct 24, 2023 - 14:32:01</p>
+                <p class="font-semibold text-sm text-slate-800">j***k (15 <i class="fas fa-star text-amber-500 text-xs"></i>)</p>
+                <p class="text-xs text-slate-500">Oct 24, 2023 - 14:32:01</p>
               </div>
-              <span class="font-bold text-white">$54,200</span>
+              <span class="font-bold text-[#0b1f3a]">$54,200</span>
             </li>
-            <li class="flex justify-between items-center pb-3 border-b border-white/10">
+            <li class="flex justify-between items-center pb-3 border-b border-slate-100">
               <div>
-                <p class="font-semibold text-sm">m***9 (42 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
-                <p class="text-xs text-gray-400">Oct 24, 2023 - 11:15:45</p>
+                <p class="font-semibold text-sm text-slate-800">m***9 (42 <i class="fas fa-star text-amber-500 text-xs"></i>)</p>
+                <p class="text-xs text-slate-500">Oct 24, 2023 - 11:15:45</p>
               </div>
-              <span class="font-bold text-white">$54,000</span>
+              <span class="font-bold text-[#0b1f3a]">$54,000</span>
             </li>
-            <li class="flex justify-between items-center pb-3 border-b border-white/10">
+            <li class="flex justify-between items-center pb-3 border-b border-slate-100">
               <div>
-                <p class="font-semibold text-sm">j***k (15 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
-                <p class="text-xs text-gray-400">Oct 23, 2023 - 09:22:11</p>
+                <p class="font-semibold text-sm text-slate-800">j***k (15 <i class="fas fa-star text-amber-500 text-xs"></i>)</p>
+                <p class="text-xs text-slate-500">Oct 23, 2023 - 09:22:11</p>
               </div>
-              <span class="font-bold text-white">$53,500</span>
+              <span class="font-bold text-[#0b1f3a]">$53,500</span>
             </li>
             <li class="flex justify-between items-center">
               <div>
-                <p class="font-semibold text-sm">t***r (3 <i class="fas fa-star text-primary-gold text-xs"></i>)</p>
-                <p class="text-xs text-gray-400">Oct 22, 2023 - 18:05:30</p>
+                <p class="font-semibold text-sm text-slate-800">t***r (3 <i class="fas fa-star text-amber-500 text-xs"></i>)</p>
+                <p class="text-xs text-slate-500">Oct 22, 2023 - 18:05:30</p>
               </div>
-              <span class="font-bold text-white">$52,000</span>
+              <span class="font-bold text-[#0b1f3a]">$52,000</span>
             </li>
           </ul>
         </div>
 
         <!-- Seller Info -->
-        <div class="glass-panel rounded-lg border border-white/10 p-6">
-          <h3 class="font-bold text-lg text-white font-bold tracking-wide mb-4">Seller Information</h3>
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
+          <h3 class="font-bold text-lg text-[#0b1f3a] mb-4">Seller Information</h3>
           <div class="flex items-center mb-4">
             <div
-              class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-xl font-bold text-gray-400 mr-4">
+              class="w-12 h-12 bg-blue-100 text-primary-blue rounded-full flex items-center justify-center text-lg font-black mr-4 shadow-inner">
               TA
             </div>
             <div>
-              <p class="font-bold text-white"><a href="#"
-                  class="hover:text-primary-red transition">TokyoAuto_Official</a></p>
-              <p class="text-sm text-gray-400">100% Positive Feedback (450 reviews)</p>
+              <p class="font-bold text-[#0b1f3a]"><a href="#"
+                  class="hover:text-primary-blue transition">TokyoAuto_Official</a></p>
+              <p class="text-sm text-slate-500">100% Positive Feedback (450 reviews)</p>
             </div>
           </div>
           <a href="#"
-            class="block w-full text-center border border-white/20 text-gray-200 font-semibold py-2 rounded hover: transition text-sm mb-2">Contact
+            class="block w-full text-center border border-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl hover:bg-slate-100 transition text-sm mb-2">Contact
             Seller</a>
-          <a href="#" class="block w-full text-center text-primary-red text-sm hover:underline">View other items</a>
+          <a href="#" class="block w-full text-center text-primary-blue font-semibold text-sm hover:underline">View other items</a>
         </div>
 
       </div>
@@ -310,37 +313,37 @@
   </main>
 
   <!-- Footer -->
-  <footer class="glass-panel border-t border-white/10 py-6 text-center text-sm text-gray-400">
+  <footer class="glass-panel border-t border-slate-200/80 bg-white/70 py-6 text-center text-sm text-slate-500 mt-auto">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
 
   <!-- Bid Confirmation Modal -->
-  <div id="bidModal" class="fixed inset-0 bg-black/60 z-[100] flex items-center justify-center hidden backdrop-blur-sm">
-    <div class="glass-panel rounded-xl shadow-2xl p-8 max-w-md w-full mx-4">
-      <h3 class="text-2xl font-bold text-white font-bold tracking-wide mb-2">Confirm Your Bid</h3>
-      <p class="text-gray-300 text-sm mb-6">You are about to place a legally binding bid on the 2020 Chevrolet Corvette
+  <div id="bidModal" class="fixed inset-0 bg-slate-900/40 z-[100] flex items-center justify-center hidden backdrop-blur-sm">
+    <div class="glass-panel rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 bg-white/95 border border-white">
+      <h3 class="text-2xl font-bold text-[#0b1f3a] mb-2">Confirm Your Bid</h3>
+      <p class="text-slate-600 text-sm mb-6">You are about to place a legally binding bid on the 2020 Chevrolet Corvette
         Stingray.</p>
 
-      <div class="p-4 rounded-lg border border-white/10 mb-6">
+      <div class="p-4 rounded-xl border border-slate-200/80 bg-slate-50 mb-6">
         <div class="flex justify-between items-center mb-2">
-          <span class="text-gray-400 text-sm">Your Bid Amount:</span>
-          <span class="text-2xl font-bold text-white font-bold tracking-wide" id="modalBidAmount">$54,300</span>
+          <span class="text-slate-500 text-sm">Your Bid Amount:</span>
+          <span class="text-2xl font-bold text-[#0b1f3a]" id="modalBidAmount">$54,300</span>
         </div>
         <div class="flex justify-between items-center text-sm">
-          <span class="text-gray-400">Buyer's Premium (5%):</span>
-          <span class="text-gray-200 font-semibold" id="modalFee">$2,715</span>
+          <span class="text-slate-500">Buyer's Premium (5%):</span>
+          <span class="text-slate-700 font-semibold" id="modalFee">$2,715</span>
         </div>
-        <div class="border-t border-white/10 my-2 pt-2 flex justify-between items-center">
-          <span class="font-bold text-white">Total Commitment:</span>
-          <span class="font-bold text-primary-red text-lg" id="modalTotal">$57,015</span>
+        <div class="border-t border-slate-200 my-2 pt-2 flex justify-between items-center">
+          <span class="font-bold text-[#0b1f3a]">Total Commitment:</span>
+          <span class="font-black text-primary-blue text-lg" id="modalTotal">$57,015</span>
         </div>
       </div>
 
       <div class="flex space-x-4">
         <button onclick="closeBidModal()"
-          class="flex-1 glass-panel border border-white/20 text-gray-200 font-bold py-3 rounded hover: transition">Cancel</button>
+          class="flex-1 border border-slate-200 text-slate-700 font-bold py-3 rounded-xl hover:bg-slate-100 transition cursor-pointer">Cancel</button>
         <button onclick="confirmBid()"
-          class="flex-1 bg-primary-red hover:bg-red-700 text-white font-bold py-3 rounded shadow-lg transition">Confirm
+          class="flex-1 btn-3d btn-primary-3d font-bold py-3 rounded-xl transition cursor-pointer">Confirm
           Bid</button>
       </div>
     </div>
@@ -358,13 +361,13 @@
 
       // Reset borders/opacity
       thumbs.forEach(t => {
-        t.classList.remove('border-2', 'border-primary-red');
-        t.classList.add('opacity-70');
+        t.classList.remove('border-2', 'border-primary-blue');
+        t.classList.add('opacity-70', 'border-transparent');
       });
 
       // Highlight active
-      element.classList.remove('opacity-70');
-      element.classList.add('border-2', 'border-primary-red');
+      element.classList.remove('opacity-70', 'border-transparent');
+      element.classList.add('border-2', 'border-primary-blue');
     }
 
     // Modal Logic
@@ -399,8 +402,7 @@
     }
 
     function confirmBid() {
-      // Mock API Call using config
-      console.log("Placing bid via: " + API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.AUCTIONS.PLACE_BID.replace('{id}', '1'));
+      // Mock API Call
       alert('Bid placed successfully! (Mock Action)');
       closeBidModal();
     }

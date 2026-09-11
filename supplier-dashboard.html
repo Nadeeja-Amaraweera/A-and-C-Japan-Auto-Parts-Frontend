@@ -5,52 +5,52 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Supplier Dashboard - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="text-white min-h-screen flex flex-col">
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-800">
 
   <!-- Page Loading Overlay -->
   <div id="page-loader"
-    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl transition-opacity duration-500">
     <div class="relative flex items-center justify-center mb-4">
       <!-- Spinning Outer Ring -->
-      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <div class="w-16 h-16 border-4 border-slate-200 border-t-[#02316e] rounded-full animate-spin"></div>
       <!-- Inner Icon -->
-      <div class="absolute text-primary-red">
+      <div class="absolute text-primary-blue">
         <i class="fas fa-chart-line text-lg"></i>
       </div>
     </div>
-    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+    <p class="text-[#0b1f3a] text-sm font-bold tracking-wider uppercase animate-pulse">
       Loading supplier portal...
     </p>
-    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+    <p class="text-xs text-slate-500 mt-1">Please wait a moment</p>
   </div>
 
   <!-- Header -->
-  <header class="glass-panel sticky top-0 z-50 border-b border-white/10 bg-[#050811]/90 backdrop-blur-md">
+  <header class="glass-panel sticky top-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
-        <button class="md:hidden text-white mr-2" onclick="document.getElementById('supplier-sidebar').classList.toggle('hidden'); document.getElementById('supplier-sidebar').classList.toggle('absolute'); document.getElementById('supplier-sidebar').classList.toggle('z-40'); document.getElementById('supplier-sidebar').classList.toggle('w-full');"><i class="fas fa-bars text-xl"></i></button>
-        <div class="text-2xl sm:text-3xl font-black italic tracking-tighter text-white">
-          A&C <span class="text-primary-red">JAPAN</span>
+        <button class="md:hidden text-slate-700 mr-2" onclick="document.getElementById('supplier-sidebar').classList.toggle('hidden'); document.getElementById('supplier-sidebar').classList.toggle('absolute'); document.getElementById('supplier-sidebar').classList.toggle('z-40'); document.getElementById('supplier-sidebar').classList.toggle('w-full');"><i class="fas fa-bars text-xl"></i></button>
+        <div class="text-2xl sm:text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
+          A&C <span class="text-primary-blue">JAPAN</span>
         </div>
-        <div class="hidden sm:block ml-2 pl-2 border-l border-white/20 text-xs font-bold tracking-widest text-primary-red uppercase">Supplier Portal</div>
+        <div class="hidden sm:block ml-2 pl-2 border-l border-slate-300 text-xs font-bold tracking-widest text-primary-blue uppercase">Supplier Portal</div>
       </a>
       <div class="flex items-center space-x-4 sm:space-x-6 text-sm">
-        <a href="#" class="relative w-9 h-9 rounded-lg glass-panel border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition">
+        <a href="#" class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs">
           <i class="far fa-bell text-sm"></i>
-          <span class="absolute -top-1 -right-1 bg-primary-red rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold text-white shadow">5</span>
+          <span class="absolute -top-1 -right-1 bg-primary-blue rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold text-white shadow">5</span>
         </a>
-        <a href="#" class="relative w-9 h-9 rounded-lg glass-panel border border-white/10 flex items-center justify-center text-gray-300 hover:text-white transition">
+        <a href="#" class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs">
           <i class="far fa-envelope text-sm"></i>
           <span class="absolute -top-1 -right-1 bg-primary-blue rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-bold text-white shadow">2</span>
         </a>
-        <div class="flex items-center cursor-pointer glass-panel px-3 py-1.5 rounded-xl border border-white/10 hover:border-white/20 transition">
-          <img src="https://ui-avatars.com/api/?name=Tokyo+Auto&background=730505&color=fff" alt="Avatar" class="w-7 h-7 rounded-full border border-white/30 mr-2">
-          <span class="font-semibold text-xs hidden sm:inline text-gray-200">TokyoAuto_Official</span>
-          <i class="fas fa-chevron-down ml-2 text-[10px] text-gray-400"></i>
+        <div class="flex items-center cursor-pointer bg-white px-3 py-1.5 rounded-xl border border-slate-200 hover:border-slate-300 transition shadow-xs">
+          <img src="https://ui-avatars.com/api/?name=Tokyo+Auto&background=02316e&color=fff" alt="Avatar" class="w-7 h-7 rounded-full border border-blue-200 mr-2">
+          <span class="font-bold text-xs hidden sm:inline text-slate-800">TokyoAuto_Official</span>
+          <i class="fas fa-chevron-down ml-2 text-[10px] text-slate-400"></i>
         </div>
       </div>
     </div>
@@ -61,18 +61,18 @@
     
     <!-- Sidebar Navigation -->
     <aside id="supplier-sidebar" class="w-64 hidden md:block shrink-0 h-full">
-      <div class="glass-panel rounded-2xl border border-white/10 p-4 sticky top-24">
+      <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-4 sticky top-24 shadow-sm">
         <div class="flex justify-end md:hidden mb-4">
-          <button class="text-gray-400 hover:text-white" onclick="document.getElementById('supplier-sidebar').classList.add('hidden'); document.getElementById('supplier-sidebar').classList.remove('absolute', 'z-40', 'w-full');"><i class="fas fa-times text-xl"></i></button>
+          <button class="text-slate-400 hover:text-slate-700" onclick="document.getElementById('supplier-sidebar').classList.add('hidden'); document.getElementById('supplier-sidebar').classList.remove('absolute', 'z-40', 'w-full');"><i class="fas fa-times text-xl"></i></button>
         </div>
         <nav class="space-y-1">
-          <a href="#" class="flex items-center px-4 py-2.5 bg-gradient-to-r from-primary-red/30 to-primary-blue/30 text-white font-semibold rounded-xl border-l-4 border-primary-red shadow-sm"><i class="fas fa-chart-pie w-6 text-center mr-2 text-rose-400"></i> Overview</a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-car w-6 text-center mr-2 text-gray-400"></i> My Vehicles</a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-boxes w-6 text-center mr-2 text-gray-400"></i> Parts Inventory</a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-gavel w-6 text-center mr-2 text-gray-400"></i> Active Auctions</a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-file-invoice-dollar w-6 text-center mr-2 text-gray-400"></i> Sales & Orders</a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition relative"><i class="far fa-comments w-6 text-center mr-2 text-gray-400"></i> Messages <span class="absolute right-4 bg-primary-red text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">2</span></a>
-          <a href="#" class="flex items-center px-4 py-2.5 text-gray-300 hover:bg-white/5 hover:text-white font-medium rounded-xl transition"><i class="fas fa-cog w-6 text-center mr-2 text-gray-400"></i> Settings</a>
+          <a href="#" class="flex items-center px-4 py-2.5 bg-blue-50/80 text-primary-blue font-bold rounded-xl border-l-4 border-primary-blue shadow-xs"><i class="fas fa-chart-pie w-6 text-center mr-2 text-primary-blue"></i> Overview</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition"><i class="fas fa-car w-6 text-center mr-2 text-slate-400"></i> My Vehicles</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition"><i class="fas fa-boxes w-6 text-center mr-2 text-slate-400"></i> Parts Inventory</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition"><i class="fas fa-gavel w-6 text-center mr-2 text-slate-400"></i> Active Auctions</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition"><i class="fas fa-file-invoice-dollar w-6 text-center mr-2 text-slate-400"></i> Sales & Orders</a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition relative"><i class="far fa-comments w-6 text-center mr-2 text-slate-400"></i> Messages <span class="absolute right-4 bg-primary-blue text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">2</span></a>
+          <a href="#" class="flex items-center px-4 py-2.5 text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium rounded-xl transition"><i class="fas fa-cog w-6 text-center mr-2 text-slate-400"></i> Settings</a>
         </nav>
       </div>
     </aside>
@@ -83,14 +83,14 @@
       <!-- Top Actions & Title -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
         <div>
-          <h1 class="text-2xl font-bold text-white">Supplier Dashboard</h1>
-          <p class="text-sm text-gray-400">Welcome back, here's what's happening with your store today.</p>
+          <h1 class="text-2xl font-bold text-[#0b1f3a]">Supplier Dashboard</h1>
+          <p class="text-sm text-slate-500 font-medium">Welcome back, here's what's happening with your store today.</p>
         </div>
         <div class="mt-4 sm:mt-0 flex space-x-3">
-          <a href="add-auction.html" class="btn-3d btn-primary-3d text-white font-semibold py-2 px-4 rounded-xl shadow transition flex items-center text-sm">
+          <a href="add-auction.html" class="btn-3d btn-primary-3d text-white font-bold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center text-sm cursor-pointer">
             <i class="fas fa-plus mr-2"></i> Add Vehicle
           </a>
-          <a href="#" class="glass-panel border border-white/10 hover:border-white/20 text-white font-semibold py-2 px-4 rounded-xl shadow transition flex items-center text-sm">
+          <a href="#" class="btn-3d btn-secondary-3d font-bold py-2.5 px-4 rounded-xl shadow-sm transition flex items-center text-sm cursor-pointer">
             <i class="fas fa-box-open mr-2 text-primary-blue"></i> Add Part
           </a>
         </div>
@@ -99,48 +99,48 @@
       <!-- Stats Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         
-        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Total Revenue</p>
-              <h3 class="text-2xl font-black text-white tracking-tight">$142,500</h3>
+              <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Revenue</p>
+              <h3 class="text-2xl font-black text-[#0b1f3a] tracking-tight">$142,500</h3>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-lg"><i class="fas fa-dollar-sign"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-dollar-sign"></i></div>
           </div>
-          <p class="text-xs text-emerald-400 font-semibold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +12.5% <span class="text-gray-400 font-normal ml-1">from last month</span></p>
+          <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +12.5% <span class="text-slate-500 font-medium ml-1">from last month</span></p>
         </div>
 
-        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
-              <h3 class="text-2xl font-black text-white tracking-tight">12</h3>
+              <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
+              <h3 class="text-2xl font-black text-[#0b1f3a] tracking-tight">12</h3>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-primary-red/20 border border-primary-red/30 flex items-center justify-center text-rose-400 text-lg"><i class="fas fa-gavel"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
           </div>
-          <p class="text-xs text-rose-400/90 font-medium mt-3">4 ending within 24 hours</p>
+          <p class="text-xs text-primary-blue font-bold mt-3">4 ending within 24 hours</p>
         </div>
 
-        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Total Bids</p>
-              <h3 class="text-2xl font-black text-white tracking-tight">284</h3>
+              <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Bids</p>
+              <h3 class="text-2xl font-black text-[#0b1f3a] tracking-tight">284</h3>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-primary-blue/20 border border-primary-blue/30 flex items-center justify-center text-blue-400 text-lg"><i class="fas fa-users"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-users"></i></div>
           </div>
-          <p class="text-xs text-emerald-400 font-semibold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +5.2% <span class="text-gray-400 font-normal ml-1">from last month</span></p>
+          <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +5.2% <span class="text-slate-500 font-medium ml-1">from last month</span></p>
         </div>
 
-        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/10 relative overflow-hidden">
+        <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm relative overflow-hidden">
           <div class="flex justify-between items-start">
             <div>
-              <p class="text-[11px] text-gray-400 uppercase font-bold tracking-wider mb-1">Items Sold</p>
-              <h3 class="text-2xl font-black text-white tracking-tight">45</h3>
+              <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Items Sold</p>
+              <h3 class="text-2xl font-black text-[#0b1f3a] tracking-tight">45</h3>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-300 text-lg"><i class="fas fa-shopping-cart"></i></div>
+            <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner"><i class="fas fa-shopping-cart"></i></div>
           </div>
-          <p class="text-xs text-gray-400 mt-3">3 pending fulfillment</p>
+          <p class="text-xs text-slate-500 font-medium mt-3">3 pending fulfillment</p>
         </div>
 
       </div>
@@ -149,73 +149,73 @@
         
         <!-- Main Activity Area -->
         <div class="lg:col-span-2">
-          <div class="glass-panel rounded-lg border border-white/10 overflow-hidden">
-            <div class="p-5 border-b border-white/10 flex justify-between items-center ">
-              <h3 class="font-bold text-white">Active Auctions (Vehicles)</h3>
-              <a href="#" class="text-sm text-primary-red hover:underline font-semibold">View All</a>
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+              <h3 class="font-bold text-[#0b1f3a]">Active Auctions (Vehicles)</h3>
+              <a href="#" class="text-sm text-primary-blue hover:underline font-bold">View All</a>
             </div>
             
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[800px]">
                 <thead>
-                  <tr class="text-xs text-gray-400 uppercase border-b border-white/10 glass-panel">
-                    <th class="py-3 px-5 font-semibold">Vehicle</th>
-                    <th class="py-3 px-5 font-semibold">Current Bid</th>
-                    <th class="py-3 px-5 font-semibold">Bids</th>
-                    <th class="py-3 px-5 font-semibold">Time Left</th>
-                    <th class="py-3 px-5 font-semibold text-right">Action</th>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Vehicle</th>
+                    <th class="py-3 px-5">Current Bid</th>
+                    <th class="py-3 px-5">Bids</th>
+                    <th class="py-3 px-5">Time Left</th>
+                    <th class="py-3 px-5 text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody class="text-sm">
-                  <tr class="border-b border-white/10 hover: transition">
+                  <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
                     <td class="py-4 px-5">
                       <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded object-cover mr-3">
+                        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded-xl object-cover mr-3 border border-slate-200">
                         <div>
-                          <p class="font-bold text-white">2020 Corvette Stingray</p>
-                          <p class="text-xs text-gray-400">ID: #AUC-2045</p>
+                          <p class="font-bold text-[#0b1f3a]">2020 Corvette Stingray</p>
+                          <p class="text-xs text-slate-400 font-medium">ID: #AUC-2045</p>
                         </div>
                       </div>
                     </td>
-                    <td class="py-4 px-5 font-bold text-white">$54,200</td>
-                    <td class="py-4 px-5"><span class="bg-gray-200 text-gray-200 px-2 py-0.5 rounded-full text-xs font-bold">14</span></td>
-                    <td class="py-4 px-5 font-semibold text-primary-red">04:23:15</td>
+                    <td class="py-4 px-5 font-black text-[#0b1f3a]">$54,200</td>
+                    <td class="py-4 px-5"><span class="bg-blue-50 text-primary-blue px-2.5 py-0.5 rounded-full text-xs font-bold">14</span></td>
+                    <td class="py-4 px-5 font-bold text-primary-blue">04:23:15</td>
                     <td class="py-4 px-5 text-right">
-                      <button class="text-gray-400 hover:text-white font-bold tracking-wide transition"><i class="fas fa-ellipsis-v"></i></button>
+                      <button class="text-slate-400 hover:text-slate-700 transition cursor-pointer p-1"><i class="fas fa-ellipsis-v"></i></button>
                     </td>
                   </tr>
-                  <tr class="border-b border-white/10 hover: transition">
+                  <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
                     <td class="py-4 px-5">
                       <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded object-cover mr-3">
+                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded-xl object-cover mr-3 border border-slate-200">
                         <div>
-                          <p class="font-bold text-white">2018 Nissan GT-R</p>
-                          <p class="text-xs text-gray-400">ID: #AUC-2046</p>
+                          <p class="font-bold text-[#0b1f3a]">2018 Nissan GT-R</p>
+                          <p class="text-xs text-slate-400 font-medium">ID: #AUC-2046</p>
                         </div>
                       </div>
                     </td>
-                    <td class="py-4 px-5 font-bold text-white">$78,500</td>
-                    <td class="py-4 px-5"><span class="bg-gray-200 text-gray-200 px-2 py-0.5 rounded-full text-xs font-bold">22</span></td>
-                    <td class="py-4 px-5 text-gray-300">12:45:00</td>
+                    <td class="py-4 px-5 font-black text-[#0b1f3a]">$78,500</td>
+                    <td class="py-4 px-5"><span class="bg-blue-50 text-primary-blue px-2.5 py-0.5 rounded-full text-xs font-bold">22</span></td>
+                    <td class="py-4 px-5 text-slate-600 font-semibold">12:45:00</td>
                     <td class="py-4 px-5 text-right">
-                      <button class="text-gray-400 hover:text-white font-bold tracking-wide transition"><i class="fas fa-ellipsis-v"></i></button>
+                      <button class="text-slate-400 hover:text-slate-700 transition cursor-pointer p-1"><i class="fas fa-ellipsis-v"></i></button>
                     </td>
                   </tr>
-                  <tr class="hover: transition">
+                  <tr class="hover:bg-blue-50/30 transition">
                     <td class="py-4 px-5">
                       <div class="flex items-center">
-                        <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded object-cover mr-3">
+                        <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?q=80&w=150&auto=format&fit=crop" class="w-12 h-10 rounded-xl object-cover mr-3 border border-slate-200">
                         <div>
-                          <p class="font-bold text-white">2021 BMW M4</p>
-                          <p class="text-xs text-gray-400">ID: #AUC-2047</p>
+                          <p class="font-bold text-[#0b1f3a]">2021 BMW M4</p>
+                          <p class="text-xs text-slate-400 font-medium">ID: #AUC-2047</p>
                         </div>
                       </div>
                     </td>
-                    <td class="py-4 px-5 font-bold text-white">$68,900</td>
-                    <td class="py-4 px-5"><span class="bg-gray-200 text-gray-200 px-2 py-0.5 rounded-full text-xs font-bold">8</span></td>
-                    <td class="py-4 px-5 text-gray-300">22:10:30</td>
+                    <td class="py-4 px-5 font-black text-[#0b1f3a]">$68,900</td>
+                    <td class="py-4 px-5"><span class="bg-blue-50 text-primary-blue px-2.5 py-0.5 rounded-full text-xs font-bold">8</span></td>
+                    <td class="py-4 px-5 text-slate-600 font-semibold">22:10:30</td>
                     <td class="py-4 px-5 text-right">
-                      <button class="text-gray-400 hover:text-white font-bold tracking-wide transition"><i class="fas fa-ellipsis-v"></i></button>
+                      <button class="text-slate-400 hover:text-slate-700 transition cursor-pointer p-1"><i class="fas fa-ellipsis-v"></i></button>
                     </td>
                   </tr>
                 </tbody>
@@ -228,59 +228,59 @@
         <div class="space-y-6">
           
           <!-- Recent Bids Activity -->
-          <div class="glass-panel rounded-lg border border-white/10 p-5">
-            <h3 class="font-bold text-white border-b border-white/10 pb-3 mb-4">Recent Bid Activity</h3>
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-5 shadow-sm">
+            <h3 class="font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-4">Recent Bid Activity</h3>
             
             <div class="space-y-4">
               <div class="flex items-start">
-                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0">jk</div>
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-primary-blue flex items-center justify-center font-bold text-xs mr-3 shrink-0">jk</div>
                 <div>
-                  <p class="text-sm text-white"><span class="font-bold">j***k</span> placed a bid of <span class="font-bold text-green-600">$54,200</span></p>
-                  <p class="text-xs text-gray-400 mt-1">on 2020 Corvette Stingray • 2m ago</p>
+                  <p class="text-sm text-slate-800"><span class="font-bold text-[#0b1f3a]">j***k</span> placed a bid of <span class="font-bold text-emerald-600">$54,200</span></p>
+                  <p class="text-xs text-slate-400 mt-0.5 font-medium">on 2020 Corvette Stingray • 2m ago</p>
                 </div>
               </div>
               <div class="flex items-start">
-                <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0">m9</div>
+                <div class="w-8 h-8 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-xs mr-3 shrink-0">m9</div>
                 <div>
-                  <p class="text-sm text-white"><span class="font-bold">m***9</span> placed a bid of <span class="font-bold text-green-600">$78,500</span></p>
-                  <p class="text-xs text-gray-400 mt-1">on 2018 Nissan GT-R • 15m ago</p>
+                  <p class="text-sm text-slate-800"><span class="font-bold text-[#0b1f3a]">m***9</span> placed a bid of <span class="font-bold text-emerald-600">$78,500</span></p>
+                  <p class="text-xs text-slate-400 mt-0.5 font-medium">on 2018 Nissan GT-R • 15m ago</p>
                 </div>
               </div>
               <div class="flex items-start">
-                <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs mr-3 shrink-0">jk</div>
+                <div class="w-8 h-8 rounded-full bg-blue-100 text-primary-blue flex items-center justify-center font-bold text-xs mr-3 shrink-0">jk</div>
                 <div>
-                  <p class="text-sm text-white"><span class="font-bold">j***k</span> placed a bid of <span class="font-bold text-green-600">$54,000</span></p>
-                  <p class="text-xs text-gray-400 mt-1">on 2020 Corvette Stingray • 1h ago</p>
+                  <p class="text-sm text-slate-800"><span class="font-bold text-[#0b1f3a]">j***k</span> placed a bid of <span class="font-bold text-emerald-600">$54,000</span></p>
+                  <p class="text-xs text-slate-400 mt-0.5 font-medium">on 2020 Corvette Stingray • 1h ago</p>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Pending Orders (Parts) -->
-          <div class="glass-panel rounded-lg border border-white/10 p-5">
-            <h3 class="font-bold text-white border-b border-white/10 pb-3 mb-4">Pending Part Orders</h3>
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-5 shadow-sm">
+            <h3 class="font-bold text-[#0b1f3a] border-b border-slate-100 pb-3 mb-4">Pending Part Orders</h3>
             
             <div class="space-y-3">
-              <div class="p-3 rounded border border-white/10 flex justify-between items-center">
+              <div class="p-3 rounded-xl border border-slate-100 bg-slate-50/60 flex justify-between items-center">
                 <div>
-                  <p class="text-sm font-bold text-white">#ORD-9082</p>
-                  <p class="text-xs text-gray-400">Brembo Brake Pads</p>
+                  <p class="text-sm font-bold text-[#0b1f3a]">#ORD-9082</p>
+                  <p class="text-xs text-slate-500 font-medium">Brembo Brake Pads</p>
                 </div>
-                <button class="glass-panel border border-white/20 text-gray-200 text-xs font-semibold px-3 py-1.5 rounded hover:glass-panel/5 transition">Fulfill</button>
+                <button class="border border-slate-200 bg-white text-slate-700 hover:text-primary-blue text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer shadow-2xs">Fulfill</button>
               </div>
-              <div class="p-3 rounded border border-white/10 flex justify-between items-center">
+              <div class="p-3 rounded-xl border border-slate-100 bg-slate-50/60 flex justify-between items-center">
                 <div>
-                  <p class="text-sm font-bold text-white">#ORD-9085</p>
-                  <p class="text-xs text-gray-400">K&N Air Filter</p>
+                  <p class="text-sm font-bold text-[#0b1f3a]">#ORD-9085</p>
+                  <p class="text-xs text-slate-500 font-medium">K&N Air Filter</p>
                 </div>
-                <button class="glass-panel border border-white/20 text-gray-200 text-xs font-semibold px-3 py-1.5 rounded hover:glass-panel/5 transition">Fulfill</button>
+                <button class="border border-slate-200 bg-white text-slate-700 hover:text-primary-blue text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer shadow-2xs">Fulfill</button>
               </div>
-              <div class="p-3 rounded border border-white/10 flex justify-between items-center">
+              <div class="p-3 rounded-xl border border-slate-100 bg-slate-50/60 flex justify-between items-center">
                 <div>
-                  <p class="text-sm font-bold text-white">#ORD-9088</p>
-                  <p class="text-xs text-gray-400">NGK Spark Plugs</p>
+                  <p class="text-sm font-bold text-[#0b1f3a]">#ORD-9088</p>
+                  <p class="text-xs text-slate-500 font-medium">NGK Spark Plugs</p>
                 </div>
-                <button class="glass-panel border border-white/20 text-gray-200 text-xs font-semibold px-3 py-1.5 rounded hover:glass-panel/5 transition">Fulfill</button>
+                <button class="border border-slate-200 bg-white text-slate-700 hover:text-primary-blue text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer shadow-2xs">Fulfill</button>
               </div>
             </div>
           </div>

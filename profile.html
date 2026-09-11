@@ -13,6 +13,22 @@
 
 <body class="text-white min-h-screen flex flex-col">
 
+  <!-- Full-Screen Profile Loading Overlay -->
+  <div id="profile-loader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-950/80 backdrop-blur-md transition-opacity duration-500">
+    <div class="relative flex items-center justify-center mb-4">
+      <!-- Spinning Outer Ring -->
+      <div class="w-16 h-16 border-4 border-white/10 border-t-primary-red rounded-full animate-spin"></div>
+      <!-- Inner Icon -->
+      <div class="absolute text-primary-red">
+        <i class="fas fa-car text-lg"></i>
+      </div>
+    </div>
+    <p class="text-white text-sm font-semibold tracking-wider uppercase animate-pulse">
+      Loading your profile...
+    </p>
+    <p class="text-xs text-gray-400 mt-1">Please wait a moment</p>
+  </div>
+
   <!-- Header -->
   <header class="glass-panel sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
@@ -46,13 +62,13 @@
       <aside class="w-full md:w-1/4">
         <div class="glass-panel rounded-lg border border-white/10 p-6 mb-6">
           <div class="flex items-center mb-6">
-            <div
+            <div id="profile-avatar"
               class="w-16 h-16 bg-primary-dark text-white rounded-full flex items-center justify-center text-2xl font-bold mr-4">
-              JD
+              --
             </div>
             <div>
-              <h2 class="text-lg font-bold text-white">John Doe</h2>
-              <p class="text-xs text-gray-400">Member since 2023</p>
+              <h2 id="profile-name" class="text-lg font-bold text-white">Loading...</h2>
+              <p id="profile-role" class="text-xs text-gray-400">Member</p>
             </div>
           </div>
 
@@ -61,16 +77,16 @@
               class="nav-tab block px-4 py-2 text-primary-red font-semibold rounded transition"><i
                 class="far fa-user w-6"></i> Profile Dashboard</a>
             <a href="#" onclick="showOrderHistory(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover: hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
                 class="fas fa-shopping-bag w-6"></i> Order History</a>
             <a href="#" onclick="showMyBids(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover: hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
                 class="fas fa-gavel w-6"></i> My Bids</a>
             <a href="#" onclick="showWishlist(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover: hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
                 class="far fa-heart w-6"></i> Wishlist</a>
             <a href="#" onclick="showSettings(event)"
-              class="nav-tab block px-4 py-2 text-gray-300 hover: hover:text-primary-red font-medium rounded transition"><i
+              class="nav-tab block px-4 py-2 text-gray-300 hover:text-primary-red font-medium rounded transition"><i
                 class="fas fa-cog w-6"></i> Settings</a>
             <button id="logoutBtn"
               class="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 hover:text-red-700 font-medium rounded transition flex items-center cursor-pointer">
@@ -203,20 +219,19 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
             <div>
               <p class="text-gray-400 mb-1">Full Name</p>
-              <p class="font-semibold text-white">John Doe</p>
+              <p id="info-fullname" class="font-semibold text-white">--</p>
             </div>
             <div>
               <p class="text-gray-400 mb-1">Email Address</p>
-              <p class="font-semibold text-white">john.doe@example.com</p>
+              <p id="info-email" class="font-semibold text-white">--</p>
             </div>
             <div>
               <p class="text-gray-400 mb-1">Phone Number</p>
-              <p class="font-semibold text-white">+1 234 567 8900</p>
+              <p id="info-phone" class="font-semibold text-white">--</p>
             </div>
             <div>
               <p class="text-gray-400 mb-1">Shipping Address</p>
-              <p class="font-semibold text-white">123 Main St, Apt 4B<br>New York, NY 10001<br>United
-                States</p>
+              <p id="info-address" class="font-semibold text-white">--</p>
             </div>
           </div>
         </div>
@@ -233,17 +248,24 @@
 
   <script type="module" src="assets/js/app.js"></script>
   <script>
-    let profileDashboardHTML = '';
+    window.profileDashboardHTML = '';
     
+    window.updateProfileDashboardCache = function() {
+      const el = document.getElementById('dashboard-content');
+      if (el) {
+        window.profileDashboardHTML = el.innerHTML;
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
-      profileDashboardHTML = document.getElementById('dashboard-content').innerHTML;
+      window.updateProfileDashboardCache();
     });
 
     function setActiveTab(clickedElement) {
       if (!clickedElement) return;
       
       const tabs = document.querySelectorAll('.nav-tab');
-      const activeClasses = ['', 'text-primary-red', 'font-semibold'];
+      const activeClasses = ['text-primary-red', 'font-semibold'];
       const inactiveClasses = ['text-gray-300', 'font-medium'];
 
       tabs.forEach(tab => {
@@ -260,7 +282,7 @@
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
-      document.getElementById('dashboard-content').innerHTML = profileDashboardHTML;
+      document.getElementById('dashboard-content').innerHTML = window.profileDashboardHTML;
     }
 
     function showOrderHistory(event) {

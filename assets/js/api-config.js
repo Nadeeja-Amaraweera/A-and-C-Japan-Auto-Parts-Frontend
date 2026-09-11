@@ -33,12 +33,12 @@ export const API_CONFIG = {
         USERS: {
             REGISTER: '/users/register',
             GET_ALL: '/users',
-            GET_BY_ID: '/users/{id}',
+            GET_BY_ID: '/users/get/{userId}',
             CREATE: '/users',
             UPDATE: '/users/{id}',
             DELETE: '/users/{id}',
-            GET_PROFILE: '/users/profile',
-            UPDATE_PROFILE: '/users/profile',
+            GET_PROFILE: '/users/profile/{id}',
+            UPDATE_PROFILE: '/users/profile/update',
             BECOME_SUPPLIER: '/users/{id}/become-supplier',
             GET_SUPPLIER_STATUS: '/users/{id}/supplier-status',
             UPLOAD_DOCUMENTS: '/users/{id}/documents'

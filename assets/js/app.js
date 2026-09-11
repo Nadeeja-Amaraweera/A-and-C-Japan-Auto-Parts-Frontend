@@ -1,5 +1,8 @@
 import { Topbar } from './components/Topbar.js';
 import { authController } from './controllers/AuthController.js';
+import { userController } from './controllers/UserController.js';
+import { apiService } from './api-service.js';
+import { API_CONFIG } from './api-config.js';
 
 class App {
 
@@ -9,7 +12,13 @@ class App {
         this.setupLoginForm();
         this.setupRegisterForm();
         this.updateTopbar();
+
+        if (window.location.pathname.includes('profile.html')) {
+            this.loadProfilePage();
+        }
     }
+
+
 
     // Show Toast
     showToast(message, type = 'success') {
@@ -116,7 +125,6 @@ class App {
 
         if (result.success) {
             console.log("User is validated successfully!!!!");
-            console.log("User:", result.user);
 
             if (usernameSpan) {
                 usernameSpan.textContent = result.user.name;
@@ -135,6 +143,82 @@ class App {
     logout() {
 
     }
+
+    async loadProfilePage() {
+
+        const loader = document.getElementById('profile-loader');
+
+        try {
+            // 1. Validate session
+            const authResult = await authController.validateUser();
+
+            if (!authResult.success) {
+                // If not logged in, redirect to login page
+                this.showToast('Please log in to view your profile', 'error');
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1000);
+                return;
+            }
+
+            const userDetails = await userController.getUserDetails(authResult.user.id);
+
+            const user = authResult.user;
+
+            // 2. Extract profile details from UserDetails instance
+            const details = userDetails?.userdetails || userDetails?.userDetails;
+
+            // 3. Populate DOM elements
+            const name = details?.getUserName?.() || details?.userName || user?.name || 'User';
+            const email = details?.getUserEmail?.() || details?.userEmail || 'N/A';
+            const phone = details?.getUserPhone?.() || details?.userPhone || 'N/A';
+            const address = details?.getUserAddress?.() || details?.userAddress || 'N/A';
+            const role = details?.getUserRole?.() || details?.userRole || 'Member';
+
+            // Calculate initials
+            const initials = name
+                .split(' ')
+                .map(n => n[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2) || 'U';
+
+            // Update DOM
+            const avatarEl = document.getElementById('profile-avatar');
+            const nameEl = document.getElementById('profile-name');
+            const roleEl = document.getElementById('profile-role');
+            const fullNameEl = document.getElementById('info-fullname');
+            const emailEl = document.getElementById('info-email');
+            const phoneEl = document.getElementById('info-phone');
+            const addressEl = document.getElementById('info-address');
+
+            if (avatarEl) avatarEl.textContent = initials;
+            if (nameEl) nameEl.textContent = name;
+            if (roleEl) roleEl.textContent = role;
+            if (fullNameEl) fullNameEl.textContent = name;
+            if (emailEl) emailEl.textContent = email;
+            if (phoneEl) phoneEl.textContent = phone;
+            if (addressEl) addressEl.textContent = address;
+
+            if (window.updateProfileDashboardCache) {
+                window.updateProfileDashboardCache();
+            }
+
+        } catch (error) {
+            console.error('Error loading profile:', error);
+            this.showToast('Failed to load profile data', 'error');
+        } finally {
+            // 4. Hide Loader with smooth fade-out
+            if (loader) {
+                loader.classList.add('opacity-0', 'pointer-events-none');
+                setTimeout(() => {
+                    loader.remove(); // or loader.classList.add('hidden');
+                }, 500);
+            }
+        }
+    }
+
+
 }
 
 // Initialize app when DOM is ready

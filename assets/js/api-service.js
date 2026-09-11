@@ -13,10 +13,9 @@ class ApiService {
 
         const skipAuth = options.skipAuth ?? true;
 
-        console.log(`🔑 Skip auth: ${skipAuth}`); // Debug log
 
         if (!skipAuth) {
-            console.log("true")
+            console.log(`🔑 Skip auth: ${skipAuth}`); // Debug log
             const token = storage.getToken();
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;

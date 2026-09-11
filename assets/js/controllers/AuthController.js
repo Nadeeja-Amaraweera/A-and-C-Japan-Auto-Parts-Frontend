@@ -117,7 +117,6 @@ class AuthController {
         try {
             const response = await apiService.get(API_CONFIG.ENDPOINTS.AUTH.VALIDATE, {}, false);
             if (response.status === 0) {
-                console.log('✅ User validated successfully!', response.body);
                 this.user = new User(response.body);
                 this.isAuthenticated = true;
                 return {

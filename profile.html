@@ -92,7 +92,7 @@
             <a href="#" onclick="showSettings(event)"
               class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="fas fa-cog w-6"></i> Settings</a>
-            <button id="logoutBtn"
+            <button id="logoutBtn" data-action="logout" onclick="if(window.logout){window.logout();}else if(window.app && window.app.logout){window.app.logout();}"
               class="w-full text-left px-4 py-2.5 text-rose-600 hover:bg-rose-50 font-semibold rounded-xl transition flex items-center cursor-pointer">
               <i class="fas fa-sign-out-alt w-6"></i> Log Out
             </button>

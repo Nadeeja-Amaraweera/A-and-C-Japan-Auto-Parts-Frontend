@@ -179,6 +179,7 @@ export const API_CONFIG = {
         TOKEN: 'authToken',
         REFRESH_TOKEN: 'refreshToken',
         USER: 'userData',
+        USER_DETAILS: 'userDetails',
         CART: 'cartData',
         THEME: 'themePreference',
         LANGUAGE: 'languagePreference',

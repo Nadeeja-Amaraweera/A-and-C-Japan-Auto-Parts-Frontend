@@ -133,10 +133,10 @@ class AuthController {
 
     async logout() {
         try {
-            storage.removeToken();
-            storage.removeUser();
+            storage.clearAuth();
         } catch (error) {
             console.error('Logout error:', error);
+            storage.clearAuth();
         } finally {
             this.user = null;
             this.isAuthenticated = false;

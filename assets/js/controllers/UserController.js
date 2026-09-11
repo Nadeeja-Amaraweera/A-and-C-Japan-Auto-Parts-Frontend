@@ -22,6 +22,7 @@ class UserController {
             const response = await apiService.get(API_CONFIG.ENDPOINTS.USERS.GET_BY_ID.replace('{userId}', userId));
             if (response.status === 0) {
                 this.userdetails = UserDetails.fromJSON(response.body);
+                storage.setUserDetails(response.body);
                 return {
                     success: true,
                     userdetails: this.userdetails,
@@ -32,6 +33,12 @@ class UserController {
         } catch (error) {
             return { success: false, error: error.message };
         }
+    }
+
+    clearUserDetails() {
+        this.userDetails = null;
+        this.userdetails = null;
+        storage.removeUserDetails();
     }
 }
 

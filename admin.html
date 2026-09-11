@@ -88,7 +88,7 @@
           class="w-10 h-10 rounded-full mr-3 border border-blue-200">
         <div>
           <p class="text-sm font-bold text-[#0b1f3a]">Super Admin</p>
-          <a href="login.html" class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold"><i class="fas fa-sign-out-alt mr-1"></i>
+          <a href="login.html" id="adminLogoutBtn" data-action="logout" onclick="if(window.logout){event.preventDefault(); window.logout();}else if(window.app && window.app.logout){event.preventDefault(); window.app.logout();}" class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold cursor-pointer"><i class="fas fa-sign-out-alt mr-1"></i>
             Logout</a>
         </div>
       </div>

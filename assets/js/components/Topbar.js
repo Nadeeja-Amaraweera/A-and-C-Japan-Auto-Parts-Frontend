@@ -24,6 +24,10 @@ export class Topbar {
                             <i class="far fa-user mr-1.5 text-primary-blue"></i>
                             <span id="topbar-username" class="hidden sm:inline">My Account</span>
                         </a>
+                        <button id="topbarLogoutBtn" data-action="logout" class="hidden text-rose-600 hover:text-rose-700 hover:bg-rose-50 px-2 py-1 rounded-lg transition font-bold items-center cursor-pointer text-xs" title="Log Out">
+                            <i class="fas fa-sign-out-alt mr-1"></i>
+                            <span class="hidden sm:inline">Logout</span>
+                        </button>
                     </div>
                 </div>
             </div>

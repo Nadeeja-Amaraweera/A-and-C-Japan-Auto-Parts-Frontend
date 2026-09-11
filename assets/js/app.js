@@ -3,6 +3,7 @@ import { authController } from './controllers/AuthController.js';
 import { userController } from './controllers/UserController.js';
 import { apiService } from './api-service.js';
 import { API_CONFIG } from './api-config.js';
+import { storage } from './utils/storage.js';
 
 class App {
 
@@ -11,8 +12,11 @@ class App {
 
         this.setupLoginForm();
         this.setupRegisterForm();
+        this.setupLogoutButtons();
         this.updateTopbar();
         this.initPageLoader();
+
+        window.logout = () => this.logout();
 
         if (window.location.pathname.includes('profile.html')) {
             this.loadProfilePage();
@@ -147,6 +151,7 @@ class App {
         if (!accountNavLink) return;
 
         const usernameSpan = document.getElementById('topbar-username');
+        const topbarLogoutBtn = document.getElementById('topbarLogoutBtn');
         const result = await authController.validateUser();
 
         if (result.success) {
@@ -157,17 +162,87 @@ class App {
                 console.log('Username:', usernameSpan.textContent);
             }
             accountNavLink.href = "profile.html";
+
+            if (topbarLogoutBtn) {
+                topbarLogoutBtn.classList.remove('hidden');
+                topbarLogoutBtn.classList.add('flex');
+            }
         } else {
             console.log("User validation failed:", result.error);
             accountNavLink.href = "login.html";
             if (usernameSpan) {
                 usernameSpan.textContent = 'Login';
             }
+            if (topbarLogoutBtn) {
+                topbarLogoutBtn.classList.add('hidden');
+                topbarLogoutBtn.classList.remove('flex');
+            }
         }
     }
 
-    logout() {
+    setupLogoutButtons() {
+        // Document-level delegated click listener for any logout element
+        if (!this._logoutDelegated) {
+            this._logoutDelegated = true;
+            document.addEventListener('click', async (e) => {
+                const btn = e.target.closest('#logoutBtn, .logout-btn, [data-action="logout"], #topbarLogoutBtn, #adminLogoutBtn');
+                if (btn) {
+                    e.preventDefault();
+                    await this.logout();
+                }
+            });
+        }
 
+        const logoutSelectors = ['#logoutBtn', '.logout-btn', '[data-action="logout"]', '#topbarLogoutBtn', '#adminLogoutBtn'];
+        logoutSelectors.forEach(selector => {
+            document.querySelectorAll(selector).forEach(btn => {
+                if (!btn.dataset.logoutBound) {
+                    btn.dataset.logoutBound = 'true';
+                    btn.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        await this.logout();
+                    });
+                }
+            });
+        });
+    }
+
+    async logout() {
+        try {
+            console.log("🚪 Logging out user...");
+            // 1. Controller logout
+            await authController.logout();
+            userController.clearUserDetails();
+
+            // 2. Remove all storage items: token, user, userDetails
+            storage.removeToken();
+            storage.removeUser();
+            storage.removeUserDetails();
+            storage.clearAuth();
+
+            // 3. Immediately reflect in Topbar if present
+            const usernameSpan = document.getElementById('topbar-username');
+            const topbarLogoutBtn = document.getElementById('topbarLogoutBtn');
+            const accountNavLink = document.getElementById('myAccountNav');
+            if (usernameSpan) usernameSpan.textContent = 'Login';
+            if (accountNavLink) accountNavLink.href = 'login.html';
+            if (topbarLogoutBtn) {
+                topbarLogoutBtn.classList.add('hidden');
+                topbarLogoutBtn.classList.remove('flex');
+            }
+
+            // 4. User feedback
+            this.showToast('Logged out successfully', 'success');
+
+            // 5. Smooth redirect
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 600);
+        } catch (error) {
+            console.error('Logout error:', error);
+            storage.clearAuth();
+            window.location.href = 'login.html';
+        }
     }
 
     async loadProfilePage() {
@@ -252,6 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const app = new App();
     app.init();
     window.app = app;
+    window.logout = () => app.logout();
 });
 
 export default App;

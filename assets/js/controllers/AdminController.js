@@ -92,6 +92,34 @@ class AdminController {
             return { success: false, error: error.message };
         }
     }
+
+    async getSupplierBusinessDocumentBlob(supplierId) {
+        try {
+            const token = (await import('../utils/storage.js')).storage.getToken();
+            const url = `${API_CONFIG.BASE_URL}${API_CONFIG.API_PREFIX}${API_CONFIG.VERSION}/admin/suppliers/${supplierId}/business-document`;
+            const response = await fetch(url, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                let errMsg = `Failed to fetch document (HTTP ${response.status})`;
+                try {
+                    const errJson = await response.json();
+                    errMsg = errJson.message || errMsg;
+                } catch(e) {}
+                return { success: false, error: errMsg };
+            }
+
+            const contentType = response.headers.get('Content-Type') || 'application/octet-stream';
+            const blob = await response.blob();
+            return { success: true, blob, contentType };
+        } catch (error) {
+            console.error('getSupplierBusinessDocumentBlob error:', error);
+            return { success: false, error: error.message || 'Error fetching document' };
+        }
+    }
 }
 
 export const adminController = new AdminController();

@@ -47,9 +47,12 @@
       </button>
       <div id="mobile-header-links"
         class="hidden md:flex w-full md:w-auto mt-4 md:mt-0 flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm">
-        <a href="index.html" class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Home</a>
-        <a href="listing.html" class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Auctions</a>
-        <a href="cart.html" class="block md:inline flex items-center hover:text-primary-blue transition text-slate-700 font-medium">
+        <a href="index.html"
+          class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Home</a>
+        <a href="listing.html"
+          class="block md:inline hover:text-primary-blue transition text-slate-700 font-medium">Auctions</a>
+        <a href="cart.html"
+          class="block md:inline flex items-center hover:text-primary-blue transition text-slate-700 font-medium">
           <i class="fas fa-shopping-cart text-lg mr-2 text-primary-blue"></i> Cart
         </a>
       </div>
@@ -92,19 +95,23 @@
             <a href="#" onclick="showSettings(event)"
               class="nav-tab block px-4 py-2.5 text-slate-600 hover:text-primary-blue hover:bg-slate-50 font-medium rounded-xl transition"><i
                 class="fas fa-cog w-6"></i> Settings</a>
-            <button id="logoutBtn" data-action="logout" onclick="if(window.logout){window.logout();}else if(window.app && window.app.logout){window.app.logout();}"
+            <button id="logoutBtn" data-action="logout"
+              onclick="if(window.logout){window.logout();}else if(window.app && window.app.logout){window.app.logout();}"
               class="w-full text-left px-4 py-2.5 text-rose-600 hover:bg-rose-50 font-semibold rounded-xl transition flex items-center cursor-pointer">
               <i class="fas fa-sign-out-alt w-6"></i> Log Out
             </button>
           </nav>
         </div>
 
-        <div id="sidebar-role-card" class="bg-gradient-to-br from-blue-50 to-indigo-50/70 border border-blue-200/70 rounded-2xl p-6 text-center shadow-xs">
+        <div id="sidebar-role-card"
+          class="bg-gradient-to-br from-blue-50 to-indigo-50/70 border border-blue-200/70 rounded-2xl p-6 text-center shadow-xs">
           <i class="fas fa-store text-4xl text-primary-blue mb-3"></i>
           <h3 class="text-lg font-bold text-[#0b1f3a] mb-2">Want to sell?</h3>
-          <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">Upgrade your account to a Supplier to list vehicles and parts.</p>
+          <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">Upgrade your account to a Supplier to list
+            vehicles and parts.</p>
           <button onclick="becomeSupplier()"
-            class="w-full btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Become a Supplier</button>
+            class="w-full btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Become
+            a Supplier</button>
         </div>
       </aside>
 
@@ -115,8 +122,10 @@
 
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
-            <div class="w-12 h-12 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
+          <div
+            class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="fas fa-shopping-bag"></i>
             </div>
             <div>
@@ -124,7 +133,8 @@
               <p id="profile-stat-orders" class="text-2xl font-black text-[#0b1f3a]">0</p>
             </div>
           </div>
-          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
+          <div
+            class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
             <div
               class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="fas fa-gavel"></i>
@@ -134,7 +144,8 @@
               <p id="profile-stat-bids" class="text-2xl font-black text-[#0b1f3a]">0</p>
             </div>
           </div>
-          <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
+          <div
+            class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
             <div
               class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl mr-4 font-bold shadow-inner">
               <i class="far fa-heart"></i>
@@ -157,7 +168,8 @@
           <div class="p-0 overflow-x-auto">
             <table class="w-full text-left border-collapse">
               <thead>
-                <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
+                <tr
+                  class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
                   <th class="py-3 px-6">Order ID</th>
                   <th class="py-3 px-6">Date</th>
                   <th class="py-3 px-6">Items</th>
@@ -167,7 +179,9 @@
                 </tr>
               </thead>
               <tbody id="profile-orders-tbody" class="text-sm">
-                <tr><td colspan="6" class="py-6 text-center text-slate-400 font-medium">Loading orders...</td></tr>
+                <tr>
+                  <td colspan="6" class="py-6 text-center text-slate-400 font-medium">Loading orders...</td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -180,7 +194,8 @@
               <h3 class="font-bold text-lg text-[#0b1f3a]">Personal Information</h3>
               <p class="text-xs text-slate-500 font-medium">Your account details</p>
             </div>
-            <button id="edit-profile-btn" onclick="openEditProfileModal()" class="text-sm text-primary-blue font-bold hover:underline cursor-pointer flex items-center">
+            <button id="edit-profile-btn" onclick="openEditProfileModal()"
+              class="text-sm text-primary-blue font-bold hover:underline cursor-pointer flex items-center">
               <i class="fas fa-edit mr-1.5"></i> Edit Profile
             </button>
           </div>
@@ -206,13 +221,15 @@
         </div>
 
         <!-- Supplier Business Information (For Suppliers) -->
-        <div id="supplier-info-section" class="mt-8 glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm hidden">
+        <div id="supplier-info-section"
+          class="mt-8 glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm hidden">
           <div class="flex justify-between items-center mb-6">
             <div>
               <h3 class="font-bold text-lg text-[#0b1f3a]">Supplier Business Details</h3>
               <p class="text-xs text-slate-500 font-medium">Verified automotive supplier information</p>
             </div>
-            <span id="info-supplier-status" class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wider">APPROVED</span>
+            <span id="info-supplier-status"
+              class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wider">APPROVED</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
@@ -246,51 +263,71 @@
   </footer>
 
   <!-- Edit Profile Modal -->
-  <div id="editProfileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+  <div id="editProfileModal"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
+    <div
+      class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-5">
         <h3 class="text-xl font-bold text-[#0b1f3a]">Edit Profile</h3>
-        <button type="button" onclick="closeEditProfileModal()" class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
+        <button type="button" onclick="closeEditProfileModal()"
+          class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
       </div>
       <form id="editProfileForm" onsubmit="saveProfileChanges(event)">
         <div class="space-y-4">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-fullname">Full Name</label>
-            <input id="edit-fullname" type="text" required class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-fullname">Full
+              Name</label>
+            <input id="edit-fullname" type="text" required
+              class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-email">Email Address</label>
-            <input id="edit-email" type="email" disabled class="w-full py-2.5 px-3.5 rounded-xl border border-slate-200 bg-slate-100 text-sm text-slate-500 cursor-not-allowed">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-email">Email
+              Address</label>
+            <input id="edit-email" type="email" disabled
+              class="w-full py-2.5 px-3.5 rounded-xl border border-slate-200 bg-slate-100 text-sm text-slate-500 cursor-not-allowed">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-phone">Phone Number</label>
-            <input id="edit-phone" type="tel" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-phone">Phone
+              Number</label>
+            <input id="edit-phone" type="tel"
+              class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-address">Shipping Address</label>
-            <textarea id="edit-address" rows="2" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800"></textarea>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
+              for="edit-address">Shipping Address</label>
+            <textarea id="edit-address" rows="2"
+              class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800"></textarea>
           </div>
-          
+
           <!-- Supplier specific edit fields -->
           <div id="edit-supplier-fields" class="space-y-4 pt-4 border-t border-slate-100 hidden">
             <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary-blue">Supplier Business Details</h4>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-name">Business Name</label>
-              <input id="edit-business-name" type="text" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
+                for="edit-business-name">Business Name</label>
+              <input id="edit-business-name" type="text"
+                class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-address">Business Address</label>
-              <input id="edit-business-address" type="text" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
+                for="edit-business-address">Business Address</label>
+              <input id="edit-business-address" type="text"
+                class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-phone">Business Contact Phone</label>
-              <input id="edit-business-phone" type="tel" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1"
+                for="edit-business-phone">Business Contact Phone</label>
+              <input id="edit-business-phone" type="tel"
+                class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
             </div>
           </div>
         </div>
         <div class="mt-6 flex justify-end space-x-3">
-          <button type="button" onclick="closeEditProfileModal()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Cancel</button>
-          <button type="submit" id="save-profile-btn" class="btn-3d btn-primary-3d px-6 py-2.5 rounded-xl font-bold text-sm text-white transition cursor-pointer shadow-sm">Save Changes</button>
+          <button type="button" onclick="closeEditProfileModal()"
+            class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Cancel</button>
+          <button type="submit" id="save-profile-btn"
+            class="btn-3d btn-primary-3d px-6 py-2.5 rounded-xl font-bold text-sm text-white transition cursor-pointer shadow-sm">Save
+            Changes</button>
         </div>
       </form>
     </div>
@@ -390,38 +427,195 @@
     function becomeSupplier() {
       const dashboardContent = document.getElementById('dashboard-content');
       dashboardContent.innerHTML = `
-        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Supplier Registration</h1>
-        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
-          <form onsubmit="submitSupplierForm(event)">
-            <div class="mb-4">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessName">Business Name</label>
-              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="businessName" type="text" placeholder="Enter your business name" required>
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h1 class="text-2xl font-bold text-[#0b1f3a]">Supplier Registration</h1>
+            <p class="text-xs text-slate-500 mt-1">Upgrade your account to list vehicles and auto parts on our marketplace</p>
+          </div>
+          <a href="profile.html" class="text-xs font-bold text-slate-500 hover:text-primary-blue transition flex items-center">
+            <i class="fas fa-arrow-left mr-1.5"></i> Back to Profile
+          </a>
+        </div>
+
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 md:p-8 shadow-sm max-w-2xl mx-auto">
+          <form id="supplierRegistrationForm" onsubmit="submitSupplierForm(event)" novalidate>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-2" for="businessName">
+                  Business Name <span class="text-rose-500">*</span>
+                </label>
+                <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none text-sm" id="businessName" type="text" placeholder="e.g. Nippon Motors Co., Ltd." required>
+              </div>
+
+              <div>
+                <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-2" for="businessAddress">
+                  Business Address <span class="text-rose-500">*</span>
+                </label>
+                <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none text-sm" id="businessAddress" type="text" placeholder="e.g. 123 Yokohama Port Road, Kanagawa" required>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-2" for="contactPerson">
+                    Contact Person <span class="text-rose-500">*</span>
+                  </label>
+                  <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none text-sm" id="contactPerson" type="text" placeholder="e.g. Kenji Sato" required>
+                </div>
+                <div>
+                  <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-2" for="phoneNumber">
+                    Phone Number <span class="text-rose-500">*</span>
+                  </label>
+                  <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none text-sm" id="phoneNumber" type="tel" placeholder="e.g. +81 3 1234 5678" required>
+                </div>
+              </div>
+
+              <!-- Required Business Registration Document Upload -->
+              <div class="pt-2">
+                <label class="block text-slate-700 text-xs font-bold uppercase tracking-wider mb-1" for="businessRegistrationDoc">
+                  Business Registration Document <span class="text-rose-500">*</span>
+                </label>
+                <p class="text-[11px] text-slate-500 mb-2">Upload official business registration certificate, trade license, or incorporation document (PDF, JPG, JPEG, PNG - Max 10MB).</p>
+
+                <div id="document-dropzone" class="border-2 border-dashed border-slate-300 hover:border-primary-blue rounded-2xl p-5 text-center transition bg-slate-50/60 cursor-pointer relative group">
+                  <input type="file" id="businessRegistrationDoc" name="businessRegistrationDocument" accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="window.handleSupplierDocChange(event)" required>
+                  
+                  <!-- Empty State -->
+                  <div id="doc-upload-prompt" class="flex flex-col items-center justify-center space-y-2 py-2">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-primary-blue flex items-center justify-center text-xl group-hover:scale-105 transition shadow-inner">
+                      <i class="fas fa-file-upload"></i>
+                    </div>
+                    <div>
+                      <p class="text-sm font-bold text-slate-700">Click to upload or drag and drop</p>
+                      <p class="text-xs text-slate-400 mt-0.5">PDF, PNG, JPG or JPEG (up to 10MB)</p>
+                    </div>
+                    <span class="inline-block mt-2 px-3 py-1 bg-white border border-slate-200 rounded-lg text-xs font-semibold text-primary-blue shadow-2xs">Browse File</span>
+                  </div>
+
+                  <!-- File Selected State (Hidden by default) -->
+                  <div id="doc-file-info" class="hidden flex items-center justify-between p-3 bg-white rounded-xl border border-blue-200 shadow-xs relative z-20">
+                    <div class="flex items-center space-x-3 overflow-hidden">
+                      <div id="doc-icon-container" class="w-10 h-10 rounded-lg bg-blue-50 text-primary-blue flex items-center justify-center text-lg shrink-0">
+                        <i id="doc-type-icon" class="fas fa-file-pdf"></i>
+                      </div>
+                      <div class="text-left truncate">
+                        <p id="doc-filename" class="text-sm font-bold text-[#0b1f3a] truncate">document.pdf</p>
+                        <p id="doc-filesize" class="text-xs text-slate-400">1.2 MB</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2 shrink-0 ml-3">
+                      <button type="button" onclick="window.triggerDocChange(event)" class="text-xs font-bold text-primary-blue hover:underline cursor-pointer px-2 py-1">Change</button>
+                      <button type="button" onclick="window.clearSupplierDoc(event)" class="text-xs font-bold text-rose-500 hover:text-rose-700 cursor-pointer p-1"><i class="fas fa-times"></i></button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Validation Error Notice -->
+                <div id="doc-validation-error" class="hidden mt-2 p-2.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-700 font-medium flex items-center">
+                  <i class="fas fa-exclamation-circle mr-2 text-rose-500 shrink-0"></i>
+                  <span id="doc-validation-msg">Business registration document is required.</span>
+                </div>
+              </div>
             </div>
-            <div class="mb-4">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessAddress">Business Address</label>
-              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="businessAddress" type="text" placeholder="Enter your business address" required>
-            </div>
-            <div class="mb-4">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="contactPerson">Contact Person</label>
-              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="contactPerson" type="text" placeholder="Enter contact person name" required>
-            </div>
-            <div class="mb-4">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="phoneNumber">Phone Number</label>
-              <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="phoneNumber" type="tel" placeholder="Enter phone number" required>
-            </div>
-            <div class="mb-6">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF or Document)</label>
-              <input class="input-3d rounded-xl w-full py-2 px-3 text-slate-800 bg-white border border-slate-200 outline-none" id="businessRegistration" type="text" placeholder="Certificate reference or upload URL (e.g. docs/reg_cert.pdf)">
-            </div>
-            <div class="flex items-center justify-between">
-              <button class="btn-3d btn-primary-3d font-bold py-3 px-6 rounded-xl w-full cursor-pointer shadow-sm" type="submit">
-                Submit Registration
+
+            <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+              <a href="profile.html" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Cancel</a>
+              <button id="submitSupplierBtn" class="btn-3d btn-primary-3d font-bold py-2.5 px-6 rounded-xl cursor-pointer shadow-sm text-sm text-white flex items-center" type="submit">
+                <span id="submitSupplierBtnText">Submit Application</span>
+                <i class="fas fa-arrow-right ml-2 text-xs"></i>
               </button>
             </div>
           </form>
         </div>
       `;
     }
+
+    // Helper functions for document selection
+    window.handleSupplierDocChange = (event) => {
+      const fileInput = event.target;
+      const file = fileInput.files && fileInput.files[0];
+      const errorContainer = document.getElementById('doc-validation-error');
+      const errorMsg = document.getElementById('doc-validation-msg');
+      const promptEl = document.getElementById('doc-upload-prompt');
+      const infoEl = document.getElementById('doc-file-info');
+      const filenameEl = document.getElementById('doc-filename');
+      const filesizeEl = document.getElementById('doc-filesize');
+      const iconEl = document.getElementById('doc-type-icon');
+
+      if (!file) {
+        if (infoEl) infoEl.classList.add('hidden');
+        if (promptEl) promptEl.classList.remove('hidden');
+        return;
+      }
+
+      // Validate extension & MIME type
+      const allowedExts = ['pdf', 'jpg', 'jpeg', 'png'];
+      const ext = file.name.split('.').pop().toLowerCase();
+      const maxSizeBytes = 10 * 1024 * 1024; // 10MB
+
+      if (!allowedExts.includes(ext)) {
+        if (errorContainer && errorMsg) {
+          errorMsg.textContent = `Unsupported file type '.${ext}'. Please upload a PDF, JPG, JPEG, or PNG document.`;
+          errorContainer.classList.remove('hidden');
+        }
+        fileInput.value = '';
+        if (infoEl) infoEl.classList.add('hidden');
+        if (promptEl) promptEl.classList.remove('hidden');
+        return;
+      }
+
+      if (file.size > maxSizeBytes) {
+        if (errorContainer && errorMsg) {
+          errorMsg.textContent = 'Document size exceeds maximum limit of 10MB.';
+          errorContainer.classList.remove('hidden');
+        }
+        fileInput.value = '';
+        if (infoEl) infoEl.classList.add('hidden');
+        if (promptEl) promptEl.classList.remove('hidden');
+        return;
+      }
+
+      // Clear any previous error
+      if (errorContainer) errorContainer.classList.add('hidden');
+
+      // Update UI with file details
+      if (filenameEl) filenameEl.textContent = file.name;
+      if (filesizeEl) {
+        const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+        filesizeEl.textContent = sizeMb >= 1 ? `${sizeMb} MB` : `${(file.size / 1024).toFixed(1)} KB`;
+      }
+
+      if (iconEl) {
+        if (ext === 'pdf') {
+          iconEl.className = 'fas fa-file-pdf text-rose-500';
+        } else {
+          iconEl.className = 'fas fa-file-image text-emerald-500';
+        }
+      }
+
+      if (promptEl) promptEl.classList.add('hidden');
+      if (infoEl) infoEl.classList.remove('hidden');
+    };
+
+    window.triggerDocChange = (event) => {
+      if (event) event.stopPropagation();
+      const input = document.getElementById('businessRegistrationDoc');
+      if (input) input.click();
+    };
+
+    window.clearSupplierDoc = (event) => {
+      if (event) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      const input = document.getElementById('businessRegistrationDoc');
+      if (input) input.value = '';
+      const promptEl = document.getElementById('doc-upload-prompt');
+      const infoEl = document.getElementById('doc-file-info');
+      const errorContainer = document.getElementById('doc-validation-error');
+      if (infoEl) infoEl.classList.add('hidden');
+      if (promptEl) promptEl.classList.remove('hidden');
+      if (errorContainer) errorContainer.classList.add('hidden');
+    };
 
     function submitSupplierForm(event) {
       if (window.submitSupplierForm) {

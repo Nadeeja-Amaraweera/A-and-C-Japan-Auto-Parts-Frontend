@@ -6,19 +6,33 @@ class SupplierController {
     async applyToBeSupplier(supplierData) {
         try {
             const user = storage.getUser();
-            const userId = supplierData.userId || (user ? (user.id || user.userId) : null);
+            let userId = null;
+            if (supplierData instanceof FormData) {
+                userId = supplierData.get('userId') || (user ? (user.id || user.userId) : null);
+            } else {
+                userId = supplierData.userId || (user ? (user.id || user.userId) : null);
+            }
+
             if (!userId) {
                 return { success: false, error: 'User ID is required' };
             }
             const endpoint = `/users/${userId}/become-supplier`;
-            const response = await apiService.post(endpoint, supplierData);
+
+            let response;
+            if (supplierData instanceof FormData) {
+                response = await apiService.upload(endpoint, supplierData);
+            } else {
+                response = await apiService.post(endpoint, supplierData);
+            }
+
             if (response && response.status === 0) {
                 return { success: true, data: response.body, message: response.message || 'Application submitted successfully!' };
             }
             return { success: false, error: response?.message || 'Failed to submit supplier application' };
         } catch (error) {
             console.error('applyToBeSupplier error:', error);
-            return { success: false, error: error.message || 'An error occurred' };
+            const msg = error.data?.message || error.message || 'An error occurred';
+            return { success: false, error: msg };
         }
     }
 

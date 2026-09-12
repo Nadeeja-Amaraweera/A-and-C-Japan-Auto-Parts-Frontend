@@ -1755,6 +1755,11 @@ class App {
                             const regDate = sup.createdAt ? new Date(sup.createdAt).toLocaleDateString() : 'Recent';
                             const status = sup.supplierStatus || 'PENDING';
 
+                            const hasDoc = Boolean(sup.hasBusinessDocument || (sup.businessRegistrationDocument && !sup.businessRegistrationDocument.includes('registration_doc.pdf')) || (sup.registrationDocUrl && !sup.registrationDocUrl.includes('registration_doc.pdf')));
+                            const docHtml = hasDoc
+                                ? `<button onclick="window.viewSupplierDocument(${supId})" class="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-bold px-2.5 py-1.5 rounded-xl transition cursor-pointer flex items-center space-x-1.5"><i class="fas fa-file-contract text-indigo-600"></i><span>View Document</span></button>`
+                                : `<span class="text-xs text-slate-400 italic font-medium">No document</span>`;
+
                             return `
                                 <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
                                     <td class="py-4 px-4 font-bold text-[#0b1f3a]">
@@ -1769,6 +1774,7 @@ class App {
                                     <td class="py-4 px-4 font-bold text-slate-800 text-sm">${businessName}</td>
                                     <td class="py-4 px-4 text-slate-600 text-xs">${email}</td>
                                     <td class="py-4 px-4 text-slate-600 text-xs font-medium">${phone}</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">${docHtml}</td>
                                     <td class="py-4 px-4 text-slate-500 text-xs">${regDate}</td>
                                     <td class="py-4 px-4">
                                         <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[11px] font-bold px-2.5 py-1 rounded-full">${status}</span>
@@ -1782,7 +1788,7 @@ class App {
                             `;
                         }).join('');
                     } else {
-                        pendingSuppliersTbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>`;
+                        pendingSuppliersTbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>`;
                     }
                 }
 
@@ -1806,6 +1812,7 @@ class App {
             const address = sup.address || sup.businessAddress || sup.supplierBusinessAddress || 'N/A';
             const regDate = sup.createdAt ? new Date(sup.createdAt).toLocaleString() : 'N/A';
             const status = sup.supplierStatus || 'PENDING';
+            const hasDoc = Boolean(sup.hasBusinessDocument || (sup.businessRegistrationDocument && !sup.businessRegistrationDocument.includes('registration_doc.pdf')) || (sup.registrationDocUrl && !sup.registrationDocUrl.includes('registration_doc.pdf')));
 
             const modal = document.getElementById('supplierDetailsModal');
             if (!modal) return;
@@ -1820,6 +1827,20 @@ class App {
             document.getElementById('modal-business-phone').textContent = phone;
             document.getElementById('modal-registered-date').textContent = regDate;
             document.getElementById('modal-user-id').textContent = sup.userId ? `User #${sup.userId}` : 'N/A';
+
+            const docStatusEl = document.getElementById('modal-document-status');
+            const docActionEl = document.getElementById('modal-document-action');
+            if (docStatusEl && docActionEl) {
+                if (hasDoc) {
+                    docStatusEl.textContent = 'Document Uploaded & Available';
+                    docStatusEl.className = 'text-xs text-emerald-600 font-bold';
+                    docActionEl.innerHTML = `<button type="button" onclick="window.viewSupplierDocument(${supId})" class="bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-200 text-xs font-bold px-2.5 py-1 rounded-xl transition cursor-pointer flex items-center space-x-1"><i class="fas fa-file-contract"></i><span>View Document</span></button>`;
+                } else {
+                    docStatusEl.textContent = 'No document uploaded';
+                    docStatusEl.className = 'text-xs text-slate-400 italic font-medium';
+                    docActionEl.innerHTML = '';
+                }
+            }
 
             const approveBtn = document.getElementById('modal-approve-btn');
             const rejectBtn = document.getElementById('modal-reject-btn');
@@ -1838,6 +1859,107 @@ class App {
 
             modal.classList.remove('hidden');
         };
+
+        // Secure Document Preview Handling
+        let currentDocBlobUrl = null;
+
+        window.closeDocumentPreviewModal = () => {
+            const modal = document.getElementById('documentPreviewModal');
+            if (modal) modal.classList.add('hidden');
+            if (currentDocBlobUrl) {
+                URL.revokeObjectURL(currentDocBlobUrl);
+                currentDocBlobUrl = null;
+            }
+            const pdfFrame = document.getElementById('doc-pdf-frame');
+            if (pdfFrame) pdfFrame.src = 'about:blank';
+            const imgPreview = document.getElementById('doc-image-preview');
+            if (imgPreview) imgPreview.src = '';
+        };
+
+        window.viewSupplierDocument = async (supplierId) => {
+            const modal = document.getElementById('documentPreviewModal');
+            if (!modal) return;
+
+            // Revoke any previously generated blob url
+            if (currentDocBlobUrl) {
+                URL.revokeObjectURL(currentDocBlobUrl);
+                currentDocBlobUrl = null;
+            }
+
+            const sup = cachedPendingSuppliers.find(s => (s.supplierId || s.id) == supplierId);
+            const titleEl = document.getElementById('doc-preview-title');
+            const subtitleEl = document.getElementById('doc-preview-subtitle');
+            const loadingEl = document.getElementById('doc-preview-loading');
+            const errorEl = document.getElementById('doc-preview-error');
+            const errorMsgEl = document.getElementById('doc-preview-error-msg');
+            const pdfFrame = document.getElementById('doc-pdf-frame');
+            const imgPreview = document.getElementById('doc-image-preview');
+            const openTabBtn = document.getElementById('doc-open-tab-btn');
+            const downloadBtn = document.getElementById('doc-download-btn');
+
+            if (titleEl) titleEl.textContent = 'Business Registration Document';
+            if (subtitleEl) subtitleEl.textContent = sup ? `${sup.businessName || sup.supplierBusinessName || 'Supplier'} (#SUP-${supplierId})` : `Supplier #${supplierId}`;
+
+            // Reset modal states
+            loadingEl?.classList.remove('hidden');
+            errorEl?.classList.add('hidden');
+            pdfFrame?.classList.add('hidden');
+            if (pdfFrame) pdfFrame.src = 'about:blank';
+            imgPreview?.classList.add('hidden');
+            if (imgPreview) imgPreview.src = '';
+            openTabBtn?.classList.add('hidden');
+            downloadBtn?.classList.add('hidden');
+
+            modal.classList.remove('hidden');
+
+            try {
+                const result = await adminController.getSupplierBusinessDocumentBlob(supplierId);
+                if (!result.success || !result.blob) {
+                    throw new Error(result.error || 'Failed to retrieve supplier business document');
+                }
+
+                const blob = result.blob;
+                const contentType = result.contentType || blob.type || '';
+                const blobUrl = URL.createObjectURL(blob);
+                currentDocBlobUrl = blobUrl;
+
+                loadingEl?.classList.add('hidden');
+
+                // Configure Open-in-Tab & Download buttons
+                if (openTabBtn) {
+                    openTabBtn.href = blobUrl;
+                    openTabBtn.classList.remove('hidden');
+                }
+                if (downloadBtn) {
+                    downloadBtn.href = blobUrl;
+                    const isPdf = contentType.toLowerCase().includes('pdf') || blob.type === 'application/pdf';
+                    const isPng = contentType.toLowerCase().includes('png');
+                    const ext = isPdf ? 'pdf' : (isPng ? 'png' : 'jpg');
+                    downloadBtn.download = `supplier_${supplierId}_business_document.${ext}`;
+                    downloadBtn.classList.remove('hidden');
+                }
+
+                if (contentType.toLowerCase().includes('pdf') || blob.type === 'application/pdf') {
+                    if (pdfFrame) {
+                        pdfFrame.src = blobUrl;
+                        pdfFrame.classList.remove('hidden');
+                    }
+                } else {
+                    if (imgPreview) {
+                        imgPreview.src = blobUrl;
+                        imgPreview.classList.remove('hidden');
+                    }
+                }
+            } catch (err) {
+                console.error('Error opening supplier document:', err);
+                loadingEl?.classList.add('hidden');
+                if (errorEl) {
+                    if (errorMsgEl) errorMsgEl.textContent = err.message || 'The document could not be retrieved from secure storage.';
+                    errorEl.classList.remove('hidden');
+                }
+            }
+        };
+
 
         window.approveAuction = async (id) => {
             const res = await adminController.approveAuction(id);
@@ -2184,29 +2306,113 @@ class App {
                 const bAddress = document.getElementById('businessAddress')?.value.trim();
                 const contact = document.getElementById('contactPerson')?.value.trim();
                 const bPhone = document.getElementById('phoneNumber')?.value.trim();
+                const docInput = document.getElementById('businessRegistrationDoc');
+                const file = docInput?.files && docInput.files[0];
 
-                const supplierData = {
-                    businessName: bName,
-                    address: bAddress,
-                    contactPerson: contact,
-                    phone: bPhone
-                };
+                const errorContainer = document.getElementById('doc-validation-error');
+                const errorMsg = document.getElementById('doc-validation-msg');
 
-                const res = await supplierController.applyToBeSupplier(supplierData);
-                if (res.success) {
-                    this.showToast('Supplier application submitted successfully!', 'success');
-                    const dashboardContent = document.getElementById('dashboard-content');
-                    if (dashboardContent) {
-                        dashboardContent.innerHTML = `
-                            <div class="glass-panel p-8 rounded-2xl border border-emerald-200 bg-emerald-50/60 text-center">
-                                <i class="fas fa-check-circle text-4xl text-emerald-600 mb-3"></i>
-                                <h2 class="text-2xl font-bold text-emerald-900 mb-2">Application Received!</h2>
-                                <p class="text-sm text-emerald-700">Your supplier registration is currently under review by our admin team.</p>
-                            </div>
-                        `;
+                // Validate basic fields
+                if (!bName) {
+                    this.showToast('Please enter your business name.', 'error');
+                    document.getElementById('businessName')?.focus();
+                    return;
+                }
+                if (!bAddress) {
+                    this.showToast('Please enter your business address.', 'error');
+                    document.getElementById('businessAddress')?.focus();
+                    return;
+                }
+                if (!contact) {
+                    this.showToast('Please enter contact person name.', 'error');
+                    document.getElementById('contactPerson')?.focus();
+                    return;
+                }
+                if (!bPhone) {
+                    this.showToast('Please enter contact phone number.', 'error');
+                    document.getElementById('phoneNumber')?.focus();
+                    return;
+                }
+
+                // Validate required document
+                if (!file) {
+                    if (errorContainer && errorMsg) {
+                        errorMsg.textContent = 'Business registration document is required.';
+                        errorContainer.classList.remove('hidden');
                     }
-                } else {
-                    this.showToast(res.error || 'Failed to submit application', 'error');
+                    this.showToast('Business registration document is required.', 'error');
+                    docInput?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+
+                // Validate allowed file extensions
+                const allowedExts = ['pdf', 'jpg', 'jpeg', 'png'];
+                const ext = file.name.split('.').pop().toLowerCase();
+                if (!allowedExts.includes(ext)) {
+                    if (errorContainer && errorMsg) {
+                        errorMsg.textContent = `Unsupported document type '.${ext}'. Allowed formats: PDF, JPG, JPEG, PNG.`;
+                        errorContainer.classList.remove('hidden');
+                    }
+                    this.showToast('Unsupported document type.', 'error');
+                    return;
+                }
+
+                // Validate max file size (10MB)
+                const maxSizeBytes = 10 * 1024 * 1024;
+                if (file.size > maxSizeBytes) {
+                    if (errorContainer && errorMsg) {
+                        errorMsg.textContent = 'Document size exceeds maximum allowed size of 10MB.';
+                        errorContainer.classList.remove('hidden');
+                    }
+                    this.showToast('Document size exceeds maximum 10MB.', 'error');
+                    return;
+                }
+
+                if (errorContainer) errorContainer.classList.add('hidden');
+
+                const submitBtn = document.getElementById('submitSupplierBtn');
+                const submitBtnText = document.getElementById('submitSupplierBtnText');
+                if (submitBtn) submitBtn.disabled = true;
+                if (submitBtnText) submitBtnText.textContent = 'Uploading & Submitting...';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('businessName', bName);
+                    formData.append('businessAddress', bAddress);
+                    formData.append('contactPerson', contact);
+                    formData.append('phoneNumber', bPhone);
+                    formData.append('businessRegistrationDocument', file);
+
+                    const res = await supplierController.applyToBeSupplier(formData);
+                    if (res.success) {
+                        this.showToast('Supplier application submitted successfully!', 'success');
+                        const dashboardContent = document.getElementById('dashboard-content');
+                        if (dashboardContent) {
+                            dashboardContent.innerHTML = `
+                                <div class="glass-panel card-3d p-8 rounded-2xl border border-emerald-200 bg-emerald-50/60 text-center max-w-xl mx-auto shadow-sm">
+                                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mx-auto mb-4">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <h2 class="text-2xl font-bold text-emerald-900 mb-2">Application Received!</h2>
+                                    <p class="text-sm text-emerald-700 leading-relaxed mb-6">Your business registration document has been securely uploaded and your supplier application is under review by our admin team.</p>
+                                    <a href="profile.html" class="inline-block btn-3d btn-primary-3d text-white font-bold py-2.5 px-6 rounded-xl text-xs">Return to Profile</a>
+                                </div>
+                            `;
+                        }
+                    } else {
+                        const errMsg = res.error || 'Failed to submit supplier application';
+                        this.showToast(errMsg, 'error');
+                        if (errorContainer && errorMsg) {
+                            errorMsg.textContent = errMsg;
+                            errorContainer.classList.remove('hidden');
+                        }
+                    }
+                } catch (err) {
+                    console.error('Error submitting supplier form:', err);
+                    this.showToast(err.message || 'An unexpected error occurred', 'error');
+                } finally {
+                    if (submitBtn) submitBtn.disabled = false;
+                    if (submitBtnText) submitBtnText.textContent = 'Submit Application';
                 }
             };
 

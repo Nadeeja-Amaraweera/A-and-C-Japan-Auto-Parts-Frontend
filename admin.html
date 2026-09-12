@@ -50,9 +50,15 @@
     <div class="flex-grow overflow-y-auto py-4">
       <p class="px-6 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Main Menu</p>
       <nav class="space-y-1 mb-6 px-3">
-        <a href="#" data-admin-nav="dashboard"
+        <a href="admin.html" data-admin-nav="dashboard"
           class="flex items-center px-4 py-2.5 rounded-xl bg-blue-50/80 text-primary-blue border-l-4 border-primary-blue font-bold shadow-xs transition"><i
             class="fas fa-tachometer-alt w-6 text-primary-blue"></i> Dashboard</a>
+        <a href="profile.html"
+          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
+            class="far fa-user w-6 text-slate-400"></i> My Profile</a>
+        <a href="index.html"
+          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
+            class="fas fa-store w-6 text-slate-400"></i> Store Front</a>
         <a href="#" data-admin-nav="users"
           class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
             class="fas fa-users w-6 text-slate-400"></i> Users Management</a>
@@ -84,12 +90,15 @@
     <!-- User Profile -->
     <div class="p-4 bg-slate-50/80 border-t border-slate-200/80 backdrop-blur-md">
       <div class="flex items-center">
-        <img src="https://ui-avatars.com/api/?name=Admin+User&background=02316e&color=fff"
+        <img id="admin-sidebar-avatar" src="https://ui-avatars.com/api/?name=Admin+User&background=02316e&color=fff"
           class="w-10 h-10 rounded-full mr-3 border border-blue-200">
         <div>
-          <p class="text-sm font-bold text-[#0b1f3a]">Super Admin</p>
-          <a href="login.html" id="adminLogoutBtn" data-action="logout" onclick="if(window.logout){event.preventDefault(); window.logout();}else if(window.app && window.app.logout){event.preventDefault(); window.app.logout();}" class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold cursor-pointer"><i class="fas fa-sign-out-alt mr-1"></i>
-            Logout</a>
+          <p id="admin-sidebar-name" class="text-sm font-bold text-[#0b1f3a]">Super Admin</p>
+          <div class="flex items-center space-x-2">
+            <a href="profile.html" class="text-xs text-primary-blue hover:underline font-semibold">Profile</a>
+            <span class="text-slate-300">•</span>
+            <a href="login.html" id="adminLogoutBtn" data-action="logout" onclick="if(window.logout){event.preventDefault(); window.logout();}else if(window.app && window.app.logout){event.preventDefault(); window.app.logout();}" class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold cursor-pointer"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
+          </div>
         </div>
       </div>
     </div>
@@ -145,37 +154,37 @@
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Users</p>
-                <h3 class="text-2xl font-black text-[#0b1f3a]">1,420</h3>
+                <h3 id="admin-total-users" class="text-2xl font-black text-[#0b1f3a]">0</h3>
               </div>
               <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-users"></i></div>
             </div>
-            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +8.4% <span class="text-slate-400 font-normal ml-1">vs last month</span></p>
+            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Registered accounts</p>
           </div>
           <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
-                <h3 class="text-2xl font-black text-[#0b1f3a]">38</h3>
+                <h3 id="admin-active-auctions" class="text-2xl font-black text-[#0b1f3a]">0</h3>
               </div>
               <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
             </div>
-            <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">6 ending today</p>
+            <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Live on marketplace</p>
           </div>
           <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Revenue</p>
-                <h3 class="text-2xl font-black text-[#0b1f3a]">$892,400</h3>
+                <h3 id="admin-gross-revenue" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
               </div>
               <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-chart-line"></i></div>
             </div>
-            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> +14.2% <span class="text-slate-400 font-normal ml-1">growth</span></p>
+            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Platform volume</p>
           </div>
           <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
             <div class="flex justify-between items-start">
               <div>
                 <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Pending Approvals</p>
-                <h3 class="text-2xl font-black text-[#0b1f3a]">7</h3>
+                <h3 id="admin-pending-approvals" class="text-2xl font-black text-[#0b1f3a]">0</h3>
               </div>
               <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner"><i class="fas fa-clock"></i></div>
             </div>
@@ -186,41 +195,51 @@
         <!-- Recent Submissions Table -->
         <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
           <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
-            <h3 class="font-bold text-[#0b1f3a]">Pending Vehicle & Part Approvals</h3>
+            <h3 class="font-bold text-[#0b1f3a]">Pending Vehicle Auctions</h3>
             <span class="text-xs font-bold text-primary-blue uppercase tracking-wider">Live Moderation</span>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse min-w-[700px]">
               <thead>
                 <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
-                  <th class="py-3 px-5">Item</th>
-                  <th class="py-3 px-5">Supplier</th>
-                  <th class="py-3 px-5">Category</th>
-                  <th class="py-3 px-5">Submitted Price</th>
+                  <th class="py-3 px-5">Auction / Vehicle</th>
+                  <th class="py-3 px-5">Starting Price</th>
+                  <th class="py-3 px-5">Start Date</th>
+                  <th class="py-3 px-5">End Date</th>
                   <th class="py-3 px-5 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody class="text-sm">
-                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                  <td class="py-4 px-5 font-bold text-[#0b1f3a]">2022 Porsche 911 GT3</td>
-                  <td class="py-4 px-5 text-slate-600 font-medium">TokyoAuto_Official</td>
-                  <td class="py-4 px-5"><span class="bg-blue-50 text-primary-blue px-2.5 py-0.5 rounded-full text-xs font-bold">Vehicle Auction</span></td>
-                  <td class="py-4 px-5 font-black text-[#0b1f3a]">$195,000</td>
-                  <td class="py-4 px-5 text-right space-x-2">
-                    <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer">Approve</button>
-                    <button class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer">Reject</button>
-                  </td>
+              <tbody id="admin-pending-tbody" class="text-sm">
+                <tr><td colspan="5" class="py-4 px-5 text-center text-slate-400">No pending vehicle auctions</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pending Suppliers Table -->
+        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+          <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+            <div>
+              <h3 class="font-bold text-[#0b1f3a]">Pending Supplier Applications</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Review registered businesses applying to sell on the marketplace</p>
+            </div>
+            <span class="text-xs font-bold text-primary-blue uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Verification Queue</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse min-w-[850px]">
+              <thead>
+                <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <th class="py-3 px-4">Supplier</th>
+                  <th class="py-3 px-4">Business Name</th>
+                  <th class="py-3 px-4">Email</th>
+                  <th class="py-3 px-4">Contact / Phone</th>
+                  <th class="py-3 px-4">Registered</th>
+                  <th class="py-3 px-4">Status</th>
+                  <th class="py-3 px-4 text-right">Actions</th>
                 </tr>
-                <tr class="hover:bg-blue-50/30 transition">
-                  <td class="py-4 px-5 font-bold text-[#0b1f3a]">Titanium Exhaust System - R35</td>
-                  <td class="py-4 px-5 text-slate-600 font-medium">Osaka_Tuning_Lab</td>
-                  <td class="py-4 px-5"><span class="bg-indigo-50 text-indigo-700 px-2.5 py-0.5 rounded-full text-xs font-bold">Spare Part</span></td>
-                  <td class="py-4 px-5 font-black text-[#0b1f3a]">$3,400</td>
-                  <td class="py-4 px-5 text-right space-x-2">
-                    <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer">Approve</button>
-                    <button class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-xs font-bold px-3 py-1.5 rounded-xl transition cursor-pointer">Reject</button>
-                  </td>
-                </tr>
+              </thead>
+              <tbody id="admin-pending-suppliers-tbody" class="text-sm">
+                <tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>
               </tbody>
             </table>
           </div>
@@ -228,6 +247,72 @@
       </div>
     </main>
   </div>
+
+  <!-- Supplier Request Details Modal -->
+  <div id="supplierDetailsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-5">
+        <div>
+          <h3 class="text-xl font-bold text-[#0b1f3a]">Supplier Request Details</h3>
+          <p class="text-xs text-slate-400 mt-0.5">Application ID: <span id="modal-supplier-id" class="font-bold text-primary-blue">#SUP-0</span></p>
+        </div>
+        <button type="button" onclick="closeSupplierDetailsModal()" class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-blue-50/60 border border-blue-100 p-4 rounded-2xl flex items-center space-x-3">
+          <div class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center font-bold text-lg" id="modal-supplier-avatar">S</div>
+          <div>
+            <h4 class="font-bold text-[#0b1f3a]" id="modal-supplier-contact">Supplier Name</h4>
+            <p class="text-xs text-slate-500" id="modal-supplier-email">email@domain.com</p>
+          </div>
+          <div class="ml-auto">
+            <span id="modal-supplier-status" class="bg-amber-100 text-amber-800 font-bold text-xs px-2.5 py-1 rounded-full">PENDING</span>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-sm">
+          <div class="border-b border-slate-100 pb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Business Name</span>
+            <p class="font-bold text-[#0b1f3a]" id="modal-business-name">N/A</p>
+          </div>
+          <div class="border-b border-slate-100 pb-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Business Address</span>
+            <p class="text-slate-700" id="modal-business-address">N/A</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 border-b border-slate-100 pb-2">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Contact Phone</span>
+              <p class="text-slate-700 font-semibold" id="modal-business-phone">N/A</p>
+            </div>
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Registration Date</span>
+              <p class="text-slate-700 font-semibold" id="modal-registered-date">N/A</p>
+            </div>
+          </div>
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Associated User ID</span>
+            <p class="text-slate-700 font-medium" id="modal-user-id">N/A</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+        <button type="button" onclick="closeSupplierDetailsModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Close</button>
+        <div class="space-x-2" id="modal-actions-container">
+          <button type="button" id="modal-reject-btn" class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-sm font-bold px-4 py-2.5 rounded-xl transition cursor-pointer">Reject</button>
+          <button type="button" id="modal-approve-btn" class="btn-3d btn-primary-3d text-white font-bold text-sm px-5 py-2.5 rounded-xl transition cursor-pointer shadow-sm">Approve</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function closeSupplierDetailsModal() {
+      const modal = document.getElementById('supplierDetailsModal');
+      if (modal) modal.classList.add('hidden');
+    }
+  </script>
 
   <script type="module" src="assets/js/app.js"></script>
 </body>

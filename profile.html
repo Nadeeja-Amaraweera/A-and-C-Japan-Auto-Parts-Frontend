@@ -99,14 +99,12 @@
           </nav>
         </div>
 
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50/70 border border-blue-200/70 rounded-2xl p-6 text-center shadow-xs">
+        <div id="sidebar-role-card" class="bg-gradient-to-br from-blue-50 to-indigo-50/70 border border-blue-200/70 rounded-2xl p-6 text-center shadow-xs">
           <i class="fas fa-store text-4xl text-primary-blue mb-3"></i>
           <h3 class="text-lg font-bold text-[#0b1f3a] mb-2">Want to sell?</h3>
-          <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">Upgrade your account to a Supplier to list vehicles and parts.
-          </p>
+          <p class="text-xs text-slate-600 mb-4 font-medium leading-relaxed">Upgrade your account to a Supplier to list vehicles and parts.</p>
           <button onclick="becomeSupplier()"
-            class="w-full btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Become
-            a Supplier</button>
+            class="w-full btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm cursor-pointer shadow-sm">Become a Supplier</button>
         </div>
       </aside>
 
@@ -123,7 +121,7 @@
             </div>
             <div>
               <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Total Orders</p>
-              <p class="text-2xl font-black text-[#0b1f3a]">12</p>
+              <p id="profile-stat-orders" class="text-2xl font-black text-[#0b1f3a]">0</p>
             </div>
           </div>
           <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
@@ -133,7 +131,7 @@
             </div>
             <div>
               <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Active Bids</p>
-              <p class="text-2xl font-black text-[#0b1f3a]">3</p>
+              <p id="profile-stat-bids" class="text-2xl font-black text-[#0b1f3a]">0</p>
             </div>
           </div>
           <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 flex items-center shadow-sm">
@@ -143,7 +141,7 @@
             </div>
             <div>
               <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">Wishlist Items</p>
-              <p class="text-2xl font-black text-[#0b1f3a]">8</p>
+              <p id="profile-stat-wishlist" class="text-2xl font-black text-[#0b1f3a]">0</p>
             </div>
           </div>
         </div>
@@ -153,9 +151,7 @@
           <div class="flex border-b border-slate-200/80 bg-slate-50/50">
             <button
               class="px-6 py-4 font-bold text-primary-blue border-b-2 border-primary-blue focus:outline-none">Recent
-              Orders (Parts)</button>
-            <button class="px-6 py-4 font-semibold text-slate-500 hover:text-slate-800 focus:outline-none transition">Active
-              Bids (Vehicles)</button>
+              Orders</button>
           </div>
 
           <div class="p-0 overflow-x-auto">
@@ -170,40 +166,8 @@
                   <th class="py-3 px-6">Action</th>
                 </tr>
               </thead>
-              <tbody class="text-sm">
-                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-9082</td>
-                  <td class="py-4 px-6 text-slate-500">Oct 24, 2023</td>
-                  <td class="py-4 px-6 text-slate-700">Brembo Brake Pads (x1)</td>
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$85.00</td>
-                  <td class="py-4 px-6"><span
-                      class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">Processing</span>
-                  </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
-                  </td>
-                </tr>
-                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8933</td>
-                  <td class="py-4 px-6 text-slate-500">Oct 15, 2023</td>
-                  <td class="py-4 px-6 text-slate-700">NGK Spark Plugs (x4)</td>
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$130.00</td>
-                  <td class="py-4 px-6"><span
-                      class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span>
-                  </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
-                  </td>
-                </tr>
-                <tr class="hover:bg-blue-50/30 transition">
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8511</td>
-                  <td class="py-4 px-6 text-slate-500">Sep 28, 2023</td>
-                  <td class="py-4 px-6 text-slate-700">Castrol EDGE 5W-30 (x2)</td>
-                  <td class="py-4 px-6 font-bold text-[#0b1f3a]">$57.98</td>
-                  <td class="py-4 px-6"><span
-                      class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span>
-                  </td>
-                  <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a>
-                  </td>
-                </tr>
+              <tbody id="profile-orders-tbody" class="text-sm">
+                <tr><td colspan="6" class="py-6 text-center text-slate-400 font-medium">Loading orders...</td></tr>
               </tbody>
             </table>
           </div>
@@ -212,9 +176,13 @@
         <!-- Personal Information -->
         <div class="mt-8 glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm">
           <div class="flex justify-between items-center mb-6">
-            <h3 class="font-bold text-lg text-[#0b1f3a]">Personal Information</h3>
-            <button class="text-sm text-primary-blue font-bold hover:underline cursor-pointer"><i class="fas fa-edit mr-1"></i>
-              Edit</button>
+            <div>
+              <h3 class="font-bold text-lg text-[#0b1f3a]">Personal Information</h3>
+              <p class="text-xs text-slate-500 font-medium">Your account details</p>
+            </div>
+            <button id="edit-profile-btn" onclick="openEditProfileModal()" class="text-sm text-primary-blue font-bold hover:underline cursor-pointer flex items-center">
+              <i class="fas fa-edit mr-1.5"></i> Edit Profile
+            </button>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
@@ -237,6 +205,36 @@
           </div>
         </div>
 
+        <!-- Supplier Business Information (For Suppliers) -->
+        <div id="supplier-info-section" class="mt-8 glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-6 shadow-sm hidden">
+          <div class="flex justify-between items-center mb-6">
+            <div>
+              <h3 class="font-bold text-lg text-[#0b1f3a]">Supplier Business Details</h3>
+              <p class="text-xs text-slate-500 font-medium">Verified automotive supplier information</p>
+            </div>
+            <span id="info-supplier-status" class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-bold uppercase tracking-wider">APPROVED</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+            <div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Business Name</p>
+              <p id="info-business-name" class="font-bold text-[#0b1f3a]">--</p>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Business Address</p>
+              <p id="info-business-address" class="font-bold text-[#0b1f3a]">--</p>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Contact Phone</p>
+              <p id="info-business-phone" class="font-bold text-[#0b1f3a]">--</p>
+            </div>
+            <div>
+              <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Registered Since</p>
+              <p id="info-supplier-date" class="font-bold text-[#0b1f3a]">--</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -246,6 +244,57 @@
   <footer class="glass-panel border-t border-slate-200/80 bg-white/70 py-6 text-center text-sm text-slate-500 mt-auto">
     <p>&copy; 2026 A&C Japan Auto Parts. All Rights Reserved.</p>
   </footer>
+
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-5">
+        <h3 class="text-xl font-bold text-[#0b1f3a]">Edit Profile</h3>
+        <button type="button" onclick="closeEditProfileModal()" class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
+      </div>
+      <form id="editProfileForm" onsubmit="saveProfileChanges(event)">
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-fullname">Full Name</label>
+            <input id="edit-fullname" type="text" required class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-email">Email Address</label>
+            <input id="edit-email" type="email" disabled class="w-full py-2.5 px-3.5 rounded-xl border border-slate-200 bg-slate-100 text-sm text-slate-500 cursor-not-allowed">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-phone">Phone Number</label>
+            <input id="edit-phone" type="tel" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-address">Shipping Address</label>
+            <textarea id="edit-address" rows="2" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800"></textarea>
+          </div>
+          
+          <!-- Supplier specific edit fields -->
+          <div id="edit-supplier-fields" class="space-y-4 pt-4 border-t border-slate-100 hidden">
+            <h4 class="text-xs font-extrabold uppercase tracking-wider text-primary-blue">Supplier Business Details</h4>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-name">Business Name</label>
+              <input id="edit-business-name" type="text" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-address">Business Address</label>
+              <input id="edit-business-address" type="text" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1" for="edit-business-phone">Business Contact Phone</label>
+              <input id="edit-business-phone" type="tel" class="input-3d w-full py-2.5 px-3.5 rounded-xl border border-slate-200 outline-none text-sm text-slate-800">
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-end space-x-3">
+          <button type="button" onclick="closeEditProfileModal()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Cancel</button>
+          <button type="submit" id="save-profile-btn" class="btn-3d btn-primary-3d px-6 py-2.5 rounded-xl font-bold text-sm text-white transition cursor-pointer shadow-sm">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
   <script type="module" src="assets/js/app.js"></script>
   <script>
@@ -257,10 +306,6 @@
         window.profileDashboardHTML = el.innerHTML;
       }
     };
-
-    document.addEventListener('DOMContentLoaded', () => {
-      window.updateProfileDashboardCache();
-    });
 
     function setActiveTab(clickedElement) {
       if (!clickedElement) return;
@@ -283,7 +328,12 @@
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
-      document.getElementById('dashboard-content').innerHTML = window.profileDashboardHTML;
+      if (window.profileDashboardHTML) {
+        document.getElementById('dashboard-content').innerHTML = window.profileDashboardHTML;
+      }
+      if (window.app && window.app.renderProfileData) {
+        window.app.renderProfileData();
+      }
     }
 
     function showOrderHistory(event) {
@@ -291,49 +341,9 @@
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
-      document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Order History</h1>
-        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 overflow-hidden shadow-sm">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
-                <th class="py-3 px-6">Order ID</th>
-                <th class="py-3 px-6">Date</th>
-                <th class="py-3 px-6">Items</th>
-                <th class="py-3 px-6">Total</th>
-                <th class="py-3 px-6">Status</th>
-                <th class="py-3 px-6">Action</th>
-              </tr>
-            </thead>
-            <tbody class="text-sm">
-              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-9082</td>
-                <td class="py-4 px-6 text-slate-500">Oct 24, 2023</td>
-                <td class="py-4 px-6 text-slate-700">Brembo Brake Pads (x1)</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$85.00</td>
-                <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">Processing</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
-              </tr>
-              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8933</td>
-                <td class="py-4 px-6 text-slate-500">Oct 15, 2023</td>
-                <td class="py-4 px-6 text-slate-700">NGK Spark Plugs (x4)</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$130.00</td>
-                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
-              </tr>
-              <tr class="hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#ORD-8511</td>
-                <td class="py-4 px-6 text-slate-500">Sep 28, 2023</td>
-                <td class="py-4 px-6 text-slate-700">Castrol EDGE 5W-30 (x2)</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$57.98</td>
-                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Delivered</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      `;
+      if (window.app && window.app.renderOrderHistoryTab) {
+        window.app.renderOrderHistoryTab();
+      }
     }
 
     function showMyBids(event) {
@@ -341,49 +351,9 @@
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
-      document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">My Bids</h1>
-        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 overflow-hidden shadow-sm">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-slate-50/80 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200/80">
-                <th class="py-3 px-6">Auction ID</th>
-                <th class="py-3 px-6">Vehicle</th>
-                <th class="py-3 px-6">My Bid</th>
-                <th class="py-3 px-6">Current Highest</th>
-                <th class="py-3 px-6">Status</th>
-                <th class="py-3 px-6">Action</th>
-              </tr>
-            </thead>
-            <tbody class="text-sm">
-              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-2104</td>
-                <td class="py-4 px-6 text-slate-700 font-medium">2018 Toyota Supra RZ</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$42,500</td>
-                <td class="py-4 px-6 font-bold text-rose-600">$43,000</td>
-                <td class="py-4 px-6"><span class="bg-rose-100 text-rose-700 py-1 px-2.5 rounded-full text-xs font-bold">Outbid</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">Increase Bid</a></td>
-              </tr>
-              <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-1988</td>
-                <td class="py-4 px-6 text-slate-700 font-medium">Nissan Skyline GT-R R34</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$120,000</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$120,000</td>
-                <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 py-1 px-2.5 rounded-full text-xs font-bold">Winning</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-primary-blue font-bold hover:underline">View</a></td>
-              </tr>
-              <tr class="hover:bg-blue-50/30 transition">
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">#AUC-1502</td>
-                <td class="py-4 px-6 text-slate-700 font-medium">Honda Civic Type R (EK9)</td>
-                <td class="py-4 px-6 font-bold text-[#0b1f3a]">$25,000</td>
-                <td class="py-4 px-6 font-bold text-slate-700">$28,500</td>
-                <td class="py-4 px-6"><span class="bg-slate-100 text-slate-600 py-1 px-2.5 rounded-full text-xs font-bold">Ended</span></td>
-                <td class="py-4 px-6"><a href="#" class="text-slate-500 font-bold hover:underline">Details</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      `;
+      if (window.app && window.app.renderMyBidsTab) {
+        window.app.renderMyBidsTab();
+      }
     }
 
     function showWishlist(event) {
@@ -391,38 +361,9 @@
         event.preventDefault();
         setActiveTab(event.currentTarget);
       }
-      document.getElementById('dashboard-content').innerHTML = `
-        <h1 class="text-2xl font-bold text-[#0b1f3a] mb-6">Wishlist</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-4 flex items-center shadow-sm">
-            <div class="w-20 h-20 bg-slate-100 rounded-xl flex-shrink-0 flex items-center justify-center text-slate-400">
-              <i class="fas fa-car text-3xl text-primary-blue"></i>
-            </div>
-            <div class="ml-4 flex-grow">
-              <h3 class="font-bold text-[#0b1f3a]">Subaru Impreza WRX STI</h3>
-              <p class="text-xs text-slate-500">Auction ends in 2 days</p>
-              <p class="font-black text-primary-blue mt-1">Current Bid: $18,500</p>
-            </div>
-            <div class="ml-4">
-              <button class="text-slate-400 hover:text-rose-600 transition cursor-pointer p-2"><i class="fas fa-trash"></i></button>
-            </div>
-          </div>
-          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 p-4 flex items-center shadow-sm">
-            <div class="w-20 h-20 bg-slate-100 rounded-xl flex-shrink-0 flex items-center justify-center text-slate-400">
-              <i class="fas fa-cogs text-3xl text-primary-blue"></i>
-            </div>
-            <div class="ml-4 flex-grow">
-              <h3 class="font-bold text-[#0b1f3a]">HKS Hi-Power Exhaust</h3>
-              <p class="text-xs text-slate-500">In Stock</p>
-              <p class="font-black text-[#0b1f3a] mt-1">$850.00</p>
-            </div>
-            <div class="ml-4 flex flex-col items-end space-y-2">
-              <button class="text-primary-blue hover:underline text-xs font-bold">Add to Cart</button>
-              <button class="text-slate-400 hover:text-rose-600 transition cursor-pointer p-2"><i class="fas fa-trash"></i></button>
-            </div>
-          </div>
-        </div>
-      `;
+      if (window.app && window.app.renderWishlistTab) {
+        window.app.renderWishlistTab();
+      }
     }
 
     function showSettings(event) {
@@ -437,10 +378,10 @@
             <div class="mb-5">
               <label class="block text-slate-700 text-sm font-bold mb-2">Email Notifications</label>
               <div class="flex items-center">
-                <input type="checkbox" class="mr-2.5 accent-primary-blue w-4 h-4 rounded" checked> <span class="text-sm text-slate-700 font-medium">Receive order updates</span>
+                <input type="checkbox" class="mr-2.5 accent-primary-blue w-4 h-4 rounded" checked> <span class="text-sm text-slate-700 font-medium">Receive order and auction status updates</span>
               </div>
             </div>
-            <button class="btn-3d btn-primary-3d font-bold py-2.5 px-6 rounded-xl cursor-pointer" type="button">Save Settings</button>
+            <button class="btn-3d btn-primary-3d font-bold py-2.5 px-6 rounded-xl cursor-pointer" type="button" onclick="if(window.app){window.app.showToast('Settings saved successfully!','success');}">Save Settings</button>
           </form>
         </div>
       `;
@@ -469,8 +410,8 @@
               <input class="input-3d rounded-xl w-full py-2.5 px-3.5 text-slate-800 bg-white border border-slate-200 outline-none" id="phoneNumber" type="tel" placeholder="Enter phone number" required>
             </div>
             <div class="mb-6">
-              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF)</label>
-              <input class="input-3d rounded-xl w-full py-2 px-3 text-slate-800 bg-white border border-slate-200 outline-none" id="businessRegistration" type="file" accept="application/pdf" required>
+              <label class="block text-slate-700 text-sm font-bold mb-2" for="businessRegistration">Business Registration Certificate (PDF or Document)</label>
+              <input class="input-3d rounded-xl w-full py-2 px-3 text-slate-800 bg-white border border-slate-200 outline-none" id="businessRegistration" type="text" placeholder="Certificate reference or upload URL (e.g. docs/reg_cert.pdf)">
             </div>
             <div class="flex items-center justify-between">
               <button class="btn-3d btn-primary-3d font-bold py-3 px-6 rounded-xl w-full cursor-pointer shadow-sm" type="submit">
@@ -483,9 +424,26 @@
     }
 
     function submitSupplierForm(event) {
-      event.preventDefault();
-      alert("Supplier registration submitted successfully!");
-      window.location.href = "supplier-dashboard.html";
+      if (window.submitSupplierForm) {
+        window.submitSupplierForm(event);
+      }
+    }
+
+    function openEditProfileModal() {
+      if (window.openEditProfileModal) {
+        window.openEditProfileModal();
+      }
+    }
+
+    function closeEditProfileModal() {
+      const modal = document.getElementById('editProfileModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function saveProfileChanges(event) {
+      if (window.saveProfileChanges) {
+        window.saveProfileChanges(event);
+      }
     }
   </script>
 </body>

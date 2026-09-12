@@ -11,21 +11,13 @@ class ApiService {
 
         const headers = { ...API_CONFIG.HEADERS, ...(options.headers || {}) };
 
-        const skipAuth = options.skipAuth ?? true;
-
+        const skipAuth = options.skipAuth === true;
 
         if (!skipAuth) {
-            console.log(`🔑 Skip auth: ${skipAuth}`); // Debug log
             const token = storage.getToken();
             if (token) {
                 headers['Authorization'] = `Bearer ${token}`;
-                console.log('🔑 Token attached to request');
-            } else {
-                console.warn('⚠️ No token available for protected request');
             }
-        } else {
-            console.log('🔓 Public request - No token attached');
-            delete headers['Authorization'];
         }
 
         const config = {
@@ -116,6 +108,45 @@ class ApiService {
             config.body = JSON.stringify(options.data);
         }
         return this.request(endpoint, config);
+    }
+
+    async upload(endpoint, formData) {
+        const url = `${API_CONFIG.BASE_URL}${API_CONFIG.API_PREFIX}${API_CONFIG.VERSION}${endpoint}`;
+        const headers = {};
+        const token = storage.getToken();
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers,
+                body: formData
+            });
+
+            if (response.status === API_CONFIG.STATUS.UNAUTHORIZED) {
+                const error = new Error('Unauthorized');
+                error.status = 401;
+                throw error;
+            }
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                const error = new Error(errorData.message || `HTTP Error ${response.status}`);
+                error.status = response.status;
+                error.data = errorData;
+                throw error;
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`API Upload failed for ${endpoint}`, error);
+            if (!error.status) {
+                error.status = 500;
+            }
+            throw error;
+        }
     }
 }
 

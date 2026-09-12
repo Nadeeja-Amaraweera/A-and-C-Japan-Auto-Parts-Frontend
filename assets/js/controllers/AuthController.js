@@ -44,6 +44,8 @@ class AuthController {
                 const userData = {
                     userId: response.body.userId || response.body.id,
                     username: response.body.username || response.body.userName || response.body.name,
+                    email: response.body.userEmail || response.body.email,
+                    role: response.body.userRole || response.body.role,
                     token: response.body.token
                 };
 

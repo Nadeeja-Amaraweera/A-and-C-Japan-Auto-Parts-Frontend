@@ -36,6 +36,7 @@ export const API_CONFIG = {
             GET_BY_ID: '/users/get/{userId}',
             CREATE: '/users',
             UPDATE: '/users/{id}',
+            UPDATE_USER: '/users/update',
             DELETE: '/users/{id}',
             GET_PROFILE: '/users/profile/{id}',
             UPDATE_PROFILE: '/users/profile/update',

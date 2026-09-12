@@ -6,7 +6,11 @@
 export class User {
     constructor(data = {}) {
         this.id = data.userId || data.id || null;
+        this.userId = this.id;
         this.name = data.username || data.userName || data.name || '';
+        this.email = data.userEmail || data.email || '';
+        this.role = data.userRole || data.role || 'CUSTOMER';
+        this.supplierStatus = data.supplierStatus || null;
         this.token = data.token || null;
     }
 
@@ -15,11 +19,11 @@ export class User {
     }
 
     isSupplier() {
-        return this.role === 'SUPPLIER' && this.supplierStatus === 'APPROVED';
+        return this.role === 'SUPPLIER';
     }
 
     canSell() {
-        return this.isSupplier() || this.role === 'ADMIN';
+        return this.role === 'SUPPLIER' || this.role === 'ADMIN';
     }
 
     isVerified() {
@@ -37,8 +41,15 @@ export class User {
 
     toJSON() {
         return {
+            id: this.id,
             userId: this.id,
+            name: this.name,
             username: this.name,
+            email: this.email,
+            userEmail: this.email,
+            role: this.role,
+            userRole: this.role,
+            supplierStatus: this.supplierStatus,
             token: this.token
         };
     }

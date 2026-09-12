@@ -70,84 +70,20 @@
         <div class="glass-panel rounded-2xl border border-white/90 shadow-sm overflow-hidden mb-6 bg-white/80">
 
           <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-            <h3 class="font-bold text-[#0b1f3a] text-base">Items in Cart (3)</h3>
-            <button class="text-xs font-semibold text-red-600 hover:underline">Clear Cart</button>
+            <h3 id="cart-items-heading" class="font-bold text-[#0b1f3a] text-base">Items in Cart (0)</h3>
+            <button id="clear-cart-btn" onclick="window.clearUserCart()" class="text-xs font-semibold text-red-600 hover:underline cursor-pointer">Clear Cart</button>
           </div>
 
-          <div class="divide-y divide-slate-100">
-            <!-- Item 1 -->
-            <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center">
-              <img src="https://images.unsplash.com/photo-1600293144865-950c4bb67f1b?q=80&w=200&auto=format&fit=crop"
-                class="w-24 h-24 object-contain rounded-xl border border-slate-200 bg-slate-50 p-2 mr-6 mb-4 sm:mb-0">
-              <div class="flex-1">
-                <h4 class="font-bold text-[#0b1f3a] text-lg mb-1 leading-snug"><a href="#" class="hover:text-primary-blue transition">Brembo Premium Ceramic Brake Pads</a></h4>
-                <p class="text-xs text-slate-500 mb-3">Part No: BR-CP883</p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
-                    <button class="px-3 py-1 text-slate-500 hover:bg-slate-100 transition text-sm font-bold">-</button>
-                    <input type="text" value="1" class="w-10 text-center py-1 outline-none text-xs font-bold text-slate-800">
-                    <button class="px-3 py-1 text-slate-500 hover:bg-slate-100 transition text-sm font-bold">+</button>
-                  </div>
-                  <div class="text-right">
-                    <p class="font-black text-lg text-[#0b1f3a] tracking-tight">$85.00</p>
-                  </div>
-                </div>
-              </div>
-              <button class="text-slate-400 hover:text-red-600 transition sm:ml-6 mt-4 sm:mt-0 p-2" title="Remove"><i
-                  class="fas fa-trash-alt"></i></button>
+          <div id="cart-items-container" class="divide-y divide-slate-100">
+            <div class="p-12 text-center text-slate-400">
+              <i class="fas fa-shopping-basket text-4xl mb-3 text-slate-300"></i>
+              <p class="font-bold text-slate-600">Your cart is currently empty</p>
+              <p class="text-xs text-slate-400 mt-1">Browse our auto parts and add items to your cart</p>
             </div>
-
-            <!-- Item 2 -->
-            <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center">
-              <img src="https://images.unsplash.com/photo-1622359419918-0b616428c0db?q=80&w=200&auto=format&fit=crop"
-                class="w-24 h-24 object-contain rounded-xl border border-slate-200 bg-slate-50 p-2 mr-6 mb-4 sm:mb-0">
-              <div class="flex-1">
-                <h4 class="font-bold text-[#0b1f3a] text-lg mb-1 leading-snug"><a href="#" class="hover:text-primary-blue transition">NGK Iridium IX Spark Plug Set (4pcs)</a></h4>
-                <p class="text-xs text-slate-500 mb-3">Part No: NGK-IR99</p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
-                    <button class="px-3 py-1 text-slate-500 hover:bg-slate-100 transition text-sm font-bold">-</button>
-                    <input type="text" value="2" class="w-10 text-center py-1 outline-none text-xs font-bold text-slate-800">
-                    <button class="px-3 py-1 text-slate-500 hover:bg-slate-100 transition text-sm font-bold">+</button>
-                  </div>
-                  <div class="text-right">
-                    <p class="font-black text-lg text-[#0b1f3a] tracking-tight">$65.00</p>
-                    <p class="text-xs text-slate-400">$32.50 / each</p>
-                  </div>
-                </div>
-              </div>
-              <button class="text-slate-400 hover:text-red-600 transition sm:ml-6 mt-4 sm:mt-0 p-2" title="Remove"><i
-                  class="fas fa-trash-alt"></i></button>
-            </div>
-
-            <!-- Item 3 (Buy Now Vehicle Deposit) -->
-            <div class="p-6 flex flex-col sm:flex-row items-start sm:items-center bg-blue-50/40">
-              <div class="relative w-24 h-24 mr-6 mb-4 sm:mb-0 shrink-0">
-                <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=200&auto=format&fit=crop"
-                  class="w-full h-full object-cover rounded-xl border border-slate-200 shadow-xs">
-                <div class="absolute top-1.5 left-1.5 bg-[#02316e] text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow">VEHICLE</div>
-              </div>
-              <div class="flex-1">
-                <h4 class="font-bold text-[#0b1f3a] text-lg mb-1 leading-snug"><a href="#" class="hover:text-primary-blue transition">2019 Audi R8 V10 Plus (Deposit)</a></h4>
-                <p class="text-xs text-slate-500 mb-3">Total Price: $125,000 | Deposit secures purchase</p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center text-xs font-bold text-[#02316e] bg-blue-100/60 px-3 py-1.5 rounded-lg border border-blue-200/60">
-                    Qty: 1 (Fixed Deposit)
-                  </div>
-                  <div class="text-right">
-                    <p class="font-black text-lg text-[#0b1f3a] tracking-tight">$5,000.00</p>
-                    <p class="text-xs text-emerald-600 font-semibold mt-0.5"><i class="fas fa-shield-alt"></i> Refundable</p>
-                  </div>
-                </div>
-              </div>
-              <button class="text-slate-400 hover:text-red-600 transition sm:ml-6 mt-4 sm:mt-0 p-2" title="Remove"><i
-                  class="fas fa-trash-alt"></i></button>
-            </div>
-
           </div>
         </div>
 
-        <a href="index.html" class="text-primary-blue font-semibold hover:underline inline-flex items-center text-sm"><i
+        <a href="buy-now.html" class="text-primary-blue font-semibold hover:underline inline-flex items-center text-sm"><i
             class="fas fa-arrow-left mr-2"></i> Continue Shopping</a>
       </div>
 
@@ -158,39 +94,35 @@
 
           <div class="space-y-3 mb-6 text-sm">
             <div class="flex justify-between text-slate-600">
-              <span>Subtotal (3 items)</span>
-              <span class="font-bold text-slate-900" id="subtotal">$5,150.00</span>
+              <span id="subtotal-label">Subtotal</span>
+              <span class="font-bold text-slate-900" id="subtotal">$0.00</span>
             </div>
             <div class="flex justify-between text-slate-600">
               <span>Shipping estimate</span>
-              <span class="font-bold text-slate-900">$15.00</span>
+              <span class="font-bold text-slate-900" id="shipping-cost">$15.00</span>
             </div>
             <div class="flex justify-between text-slate-600">
-              <span>Tax (Calculated at checkout)</span>
-              <span class="font-semibold text-slate-400">--</span>
+              <span>Tax</span>
+              <span class="font-semibold text-slate-400" id="tax-cost">$0.00</span>
             </div>
           </div>
 
-          <!-- Promo Code -->
-          <div class="mb-6 border-t border-slate-100 pt-5">
-            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">Promo Code</label>
-            <div class="flex">
-              <input type="text" placeholder="Enter code"
-                class="flex-1 input-3d rounded-r-none py-2 px-3 text-sm focus:outline-none">
-              <button
-                class="btn-3d btn-secondary-3d px-4 py-2 rounded-l-none rounded-r-xl text-xs font-bold transition">Apply</button>
-            </div>
+          <!-- Shipping Address for Checkout -->
+          <div class="mb-5 border-t border-slate-100 pt-4">
+            <label class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">Shipping Address <span class="text-rose-500">*</span></label>
+            <input type="text" id="checkout-shipping-address" placeholder="123 Main St, Tokyo, Japan"
+              class="w-full input-3d rounded-xl py-2 px-3 text-sm focus:outline-none bg-white border border-slate-200">
           </div>
 
           <div class="border-t border-slate-100 pt-4 mb-6">
             <div class="flex justify-between items-center">
               <span class="font-bold text-[#0b1f3a]">Total</span>
-              <span class="font-black text-2xl text-primary-blue">$5,165.00</span>
+              <span id="total-amount" class="font-black text-2xl text-primary-blue">$0.00</span>
             </div>
           </div>
 
-          <button onclick="checkout()"
-            class="w-full btn-3d btn-primary-3d font-bold py-3.5 rounded-xl shadow-lg transition text-base mb-5">
+          <button id="checkoutBtn" onclick="window.proceedToCheckout()"
+            class="w-full btn-3d btn-primary-3d font-bold py-3.5 rounded-xl shadow-lg transition text-base mb-5 cursor-pointer">
             Proceed to Checkout <i class="fas fa-lock ml-2 text-xs opacity-80"></i>
           </button>
 
@@ -215,9 +147,9 @@
   <script type="module" src="assets/js/app.js"></script>
   <script>
     function checkout() {
-      console.log("Processing checkout via: " + API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.ORDERS.CREATE);
-      alert("Proceeding to secure checkout payment gateway! (Mock)");
-      // window.location.href = 'checkout.html';
+      if (window.proceedToCheckout) {
+        window.proceedToCheckout();
+      }
     }
   </script>
 </body>

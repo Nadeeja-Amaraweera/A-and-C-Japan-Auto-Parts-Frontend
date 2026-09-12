@@ -55,7 +55,25 @@ export const storage = {
     },
 
     // User specific helpers
-    getUser: () => storage.get(API_CONFIG.STORAGE_KEYS.USER) || storage.get('user'),
+    getUser: () => {
+        let user = storage.get(API_CONFIG.STORAGE_KEYS.USER) || storage.get('user');
+        if (user && !user.role) {
+            user.role = user.userRole;
+        }
+        if (user && !user.role) {
+            const token = storage.getToken();
+            if (token) {
+                try {
+                    const payload = JSON.parse(atob(token.split('.')[1]));
+                    if (payload && payload.role) {
+                        user.role = payload.role;
+                        user.userRole = payload.role;
+                    }
+                } catch (_) {}
+            }
+        }
+        return user;
+    },
     setUser: (user) => {
         storage.set(API_CONFIG.STORAGE_KEYS.USER, user);
         storage.set('user', user);

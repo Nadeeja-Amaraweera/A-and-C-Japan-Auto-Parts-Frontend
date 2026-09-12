@@ -9,6 +9,15 @@ export class UserDetails {
         this.userAddress = data.userAddress || '';
         this.userRole = data.userRole || '';
         this.userStatus = data.userStatus || '';
+        this.supplier = data.supplier || null;
+    }
+
+    getSupplier() {
+        return this.supplier;
+    }
+
+    setSupplier(supplier) {
+        this.supplier = supplier;
     }
 
     getUserId() {
@@ -84,7 +93,8 @@ export class UserDetails {
             userPhone: this.userPhone,
             userAddress: this.userAddress,
             userRole: this.userRole,
-            userStatus: this.userStatus
+            userStatus: this.userStatus,
+            supplier: this.supplier
         };
     }
 

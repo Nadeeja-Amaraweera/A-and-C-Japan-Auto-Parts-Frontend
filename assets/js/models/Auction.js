@@ -5,20 +5,26 @@
 
 export class Auction {
     constructor(data = {}) {
-        this.id = data.id || null;
+        this.id = data.id || data.auctionId || null;
+        this.auctionId = data.auctionId || data.id || null;
         this.title = data.title || '';
         this.vehicleId = data.vehicleId || null;
         this.vehicle = data.vehicle || null;
         this.type = data.type || 'VEHICLE'; // VEHICLE, PARTS, COLLECTIBLE
-        this.startingPrice = data.startingPrice || 0;
+        this.startingPrice = data.startingPrice != null ? data.startingPrice : (data.startPrice || 0);
+        this.startPrice = this.startingPrice;
         this.reservePrice = data.reservePrice || null;
-        this.currentBid = data.currentBid || 0;
+        this.currentBid = data.currentBid != null ? data.currentBid : (data.highestBid || this.startingPrice);
+        this.highestBid = this.currentBid;
         this.minBidIncrement = data.minBidIncrement || 100;
         this.buyItNowPrice = data.buyItNowPrice || null;
-        this.startDate = data.startDate || new Date().toISOString();
-        this.endDate = data.endDate || new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
+        this.startDate = data.startDate || null;
+        this.endDate = data.endDate || data.endTime || null;
+        this.endTime = this.endDate;
+        this.timeLeftSeconds = data.timeLeftSeconds != null ? data.timeLeftSeconds : null;
+        this.serverTime = data.serverTime || null;
         this.extendedEndDate = data.extendedEndDate || null;
-        this.status = data.status || 'SCHEDULED'; // SCHEDULED, ACTIVE, ENDED, CANCELLED
+        this.status = data.status || 'ACTIVE'; // SCHEDULED, ACTIVE, ENDED, CANCELLED
         this.bidCount = data.bidCount || 0;
         this.bidderCount = data.bidderCount || 0;
         this.views = data.views || 0;

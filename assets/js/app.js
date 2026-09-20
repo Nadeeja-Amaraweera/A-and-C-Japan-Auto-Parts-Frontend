@@ -2143,19 +2143,26 @@ class App {
                     ordersTbody.innerHTML = orders.map(ord => {
                         const dateStr = ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'Recent';
                         const itemsCount = ord.items ? ord.items.length : 1;
+                        const realOrderId = ord.id || ord.orderId;
                         return `
                             <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                                <td class="py-4 px-6 font-bold text-[#0b1f3a]">${ord.orderNumber || '#ORD-' + ord.orderId}</td>
+                                <td class="py-4 px-6 font-bold text-[#0b1f3a]">${ord.orderNumber || '#ORD-' + realOrderId}</td>
                                 <td class="py-4 px-6 text-slate-500 text-xs">${dateStr}</td>
                                 <td class="py-4 px-6 text-slate-700 text-xs">${itemsCount} Item(s)</td>
                                 <td class="py-4 px-6 font-bold text-[#0b1f3a]">$${Number(ord.totalAmount || 0).toFixed(2)}</td>
                                 <td class="py-4 px-6"><span class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">${ord.orderStatus || 'PENDING'}</span></td>
-                                <td class="py-4 px-6 text-xs text-primary-blue font-bold">Confirmed</td>
+                                <td class="py-4 px-6">
+                                    <button type="button" onclick="window.viewOrderDetails(${realOrderId})"
+                                        class="btn-3d btn-primary-3d px-3.5 py-1.5 rounded-xl text-xs font-bold text-white shadow-xs flex items-center space-x-1.5 cursor-pointer hover:opacity-90 transition">
+                                        <i class="fas fa-eye text-[11px]"></i>
+                                        <span>View Details</span>
+                                    </button>
+                                </td>
                             </tr>
                         `;
                     }).join('');
                 } else {
-                    ordersTbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No orders found</td></tr>`;
+                    ordersTbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No recent orders found.</td></tr>`;
                 }
             }
 
@@ -2245,29 +2252,449 @@ class App {
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="text-xs text-slate-400 uppercase font-bold tracking-wider border-b border-slate-100">
-                                        <th class="pb-4">Order ID</th>
-                                        <th class="pb-4">Date</th>
-                                        <th class="pb-4">Items</th>
-                                        <th class="pb-4">Total Amount</th>
-                                        <th class="pb-4">Status</th>
+                                        <th class="pb-4 px-4">Order ID</th>
+                                        <th class="pb-4 px-4">Date</th>
+                                        <th class="pb-4 px-4">Items</th>
+                                        <th class="pb-4 px-4">Total Amount</th>
+                                        <th class="pb-4 px-4">Status</th>
+                                        <th class="pb-4 px-4">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${userOrders && userOrders.length > 0 ? userOrders.map(ord => `
+                                    ${userOrders && userOrders.length > 0 ? userOrders.map(ord => {
+                                        const realOrderId = ord.id || ord.orderId;
+                                        return `
                                         <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
-                                            <td class="py-4 font-bold text-[#0b1f3a]">${ord.orderNumber || '#ORD-' + ord.orderId}</td>
-                                            <td class="py-4 text-slate-500 text-xs">${ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'Recent'}</td>
-                                            <td class="py-4 text-slate-700 text-xs">${ord.items ? ord.items.length : 1} Item(s)</td>
-                                            <td class="py-4 font-bold text-[#0b1f3a]">$${Number(ord.totalAmount || 0).toFixed(2)}</td>
-                                            <td class="py-4"><span class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">${ord.orderStatus || 'PENDING'}</span></td>
+                                            <td class="py-4 px-4 font-bold text-[#0b1f3a]">${ord.orderNumber || '#ORD-' + realOrderId}</td>
+                                            <td class="py-4 px-4 text-slate-500 text-xs">${ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'Recent'}</td>
+                                            <td class="py-4 px-4 text-slate-700 text-xs">${ord.items ? ord.items.length : 1} Item(s)</td>
+                                            <td class="py-4 px-4 font-bold text-[#0b1f3a]">$${Number(ord.totalAmount || 0).toFixed(2)}</td>
+                                            <td class="py-4 px-4"><span class="bg-blue-100 text-blue-800 py-1 px-2.5 rounded-full text-xs font-bold">${ord.orderStatus || 'PENDING'}</span></td>
+                                            <td class="py-4 px-4">
+                                                <button type="button" onclick="window.viewOrderDetails(${realOrderId})"
+                                                    class="btn-3d btn-primary-3d px-3.5 py-1.5 rounded-xl text-xs font-bold text-white shadow-xs flex items-center space-x-1.5 cursor-pointer hover:opacity-90 transition">
+                                                    <i class="fas fa-eye text-[11px]"></i>
+                                                    <span>View Details</span>
+                                                </button>
+                                            </td>
                                         </tr>
-                                    `).join('') : '<tr><td colspan="5" class="py-8 text-center text-slate-400 font-medium">No orders found</td></tr>'}
+                                    `;
+                                    }).join('') : '<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No recent orders found.</td></tr>'}
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 `;
             };
+
+            // Order Details Modal & Lightbox Logic
+            window.currentLightboxImages = [];
+            window.currentLightboxIndex = 0;
+            window.currentMainGalleryIndex = 0;
+
+            const resolveImgUrl = (img) => {
+                if (!img) return '';
+                if (typeof img === 'object' && img !== null) img = img.imageUrl || img.url;
+                if (typeof img !== 'string') return '';
+                if (img.startsWith('/')) return `${API_CONFIG.BASE_URL}${img}`;
+                return img;
+            };
+
+            window.closeOrderDetailsModal = () => {
+                const modal = document.getElementById('orderDetailsModal');
+                if (modal) modal.classList.add('hidden');
+            };
+
+            window.viewOrderDetails = async (orderId) => {
+                if (!orderId) return;
+                const modal = document.getElementById('orderDetailsModal');
+                const loadingEl = document.getElementById('order-modal-loading');
+                const errorEl = document.getElementById('order-modal-error');
+                const errorTitleEl = document.getElementById('order-modal-error-title');
+                const errorMsgEl = document.getElementById('order-modal-error-msg');
+                const contentEl = document.getElementById('order-modal-content');
+                const orderNumEl = document.getElementById('order-modal-number');
+                const orderDateEl = document.getElementById('order-modal-date');
+
+                if (!modal) return;
+
+                // Reset & show loading state
+                modal.classList.remove('hidden');
+                if (loadingEl) loadingEl.classList.remove('hidden');
+                if (errorEl) errorEl.classList.add('hidden');
+                if (contentEl) contentEl.classList.add('hidden');
+                if (orderNumEl) orderNumEl.textContent = `#ORD-${orderId}`;
+                if (orderDateEl) orderDateEl.textContent = 'Loading...';
+
+                try {
+                    const result = await orderController.getOrderById(orderId);
+                    if (!result || !result.success || !result.order) {
+                        if (loadingEl) loadingEl.classList.add('hidden');
+                        if (errorEl) errorEl.classList.remove('hidden');
+                        if (result?.status === 404) {
+                            if (errorTitleEl) errorTitleEl.textContent = 'Order Not Found';
+                            if (errorMsgEl) errorMsgEl.textContent = 'Order not found.';
+                        } else if (result?.status === 403) {
+                            if (errorTitleEl) errorTitleEl.textContent = 'Access Denied';
+                            if (errorMsgEl) errorMsgEl.textContent = result?.error || 'Access denied: You do not have permission to view this order.';
+                        } else {
+                            if (errorTitleEl) errorTitleEl.textContent = 'Unable to load order details';
+                            if (errorMsgEl) errorMsgEl.textContent = result?.error || 'Unable to load order details. Please try again.';
+                        }
+                        return;
+                    }
+
+                    const ord = result.order;
+
+                    // Header Info
+                    if (orderNumEl) orderNumEl.textContent = ord.orderNumber || `#ORD-${ord.orderId || ord.id}`;
+                    if (orderDateEl) orderDateEl.textContent = `Placed on ${ord.createdAt ? new Date(ord.createdAt).toLocaleString() : 'Recent'}`;
+
+                    // Status Bar
+                    const statusEl = document.getElementById('order-modal-status');
+                    const payStatusEl = document.getElementById('order-modal-payment-status');
+                    const payMethodEl = document.getElementById('order-modal-payment-method');
+
+                    if (statusEl) {
+                        const statusVal = ord.orderStatus || ord.status || 'PENDING';
+                        statusEl.textContent = statusVal;
+                        statusEl.className = (statusVal === 'CONFIRMED' || statusVal === 'COMPLETED')
+                            ? 'bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-black uppercase'
+                            : (statusVal === 'CANCELLED'
+                                ? 'bg-rose-100 text-rose-800 py-1 px-3 rounded-full text-xs font-black uppercase'
+                                : 'bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-xs font-black uppercase');
+                    }
+                    if (payStatusEl) {
+                        const payVal = ord.paymentStatus || 'PENDING';
+                        payStatusEl.textContent = payVal;
+                        payStatusEl.className = payVal === 'PAID'
+                            ? 'bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-black uppercase'
+                            : (payVal === 'FAILED'
+                                ? 'bg-rose-100 text-rose-800 py-1 px-3 rounded-full text-xs font-black uppercase'
+                                : 'bg-amber-100 text-amber-800 py-1 px-3 rounded-full text-xs font-black uppercase');
+                    }
+                    if (payMethodEl) {
+                        const method = ord.paymentMethod ? String(ord.paymentMethod).replace(/_/g, ' ') : 'Bank Transfer / Card';
+                        payMethodEl.textContent = method;
+                    }
+
+                    // Delivery & Customer Information
+                    const recipEl = document.getElementById('order-modal-recipient');
+                    const phoneEl = document.getElementById('order-modal-phone');
+                    const addrEl = document.getElementById('order-modal-address');
+
+                    if (recipEl) recipEl.textContent = ord.shippingRecipientName || ord.userName || 'N/A';
+                    if (phoneEl) phoneEl.textContent = ord.shippingPhone || 'N/A';
+                    if (addrEl) addrEl.textContent = ord.shippingAddress || 'No shipping address recorded';
+
+                    // Payment Summary
+                    const txEl = document.getElementById('order-modal-txnid');
+                    const subEl = document.getElementById('order-modal-subtotal');
+                    const shipEl = document.getElementById('order-modal-shipping');
+                    const taxEl = document.getElementById('order-modal-tax');
+                    const totalEl = document.getElementById('order-modal-total');
+
+                    if (txEl) txEl.textContent = ord.transactionId || 'N/A';
+                    if (subEl) subEl.textContent = `$${Number(ord.subtotal != null ? ord.subtotal : ord.totalAmount || 0).toFixed(2)}`;
+                    if (shipEl) shipEl.textContent = `$${Number(ord.shippingCost || 0).toFixed(2)}`;
+                    if (taxEl) taxEl.textContent = `$${Number(ord.taxAmount || 0).toFixed(2)}`;
+                    if (totalEl) totalEl.textContent = `$${Number(ord.totalAmount || 0).toFixed(2)}`;
+
+                    // Order Items
+                    const itemsTbody = document.getElementById('order-modal-items-tbody');
+                    const items = ord.items || ord.orderItems || [];
+                    if (itemsTbody) {
+                        if (items.length > 0) {
+                            itemsTbody.innerHTML = items.map(item => {
+                                const rawItemImg = item.imageUrl || item.vehicle?.primaryImage || (item.vehicle?.images && item.vehicle.images[0]);
+                                const itemImg = resolveImgUrl(rawItemImg);
+                                const imgHtml = itemImg
+                                    ? `<img src="${itemImg}" alt="${item.itemTitle || 'Item'}" class="w-10 h-10 rounded-lg object-cover border border-slate-200 shrink-0">`
+                                    : `<div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center text-slate-400 shrink-0"><i class="fas fa-box"></i></div>`;
+                                const title = item.itemTitle || item.productTitle || (item.vehicle ? item.vehicle.title : 'Order Item');
+                                const type = item.itemType || (item.vehicleId ? 'VEHICLE' : 'PART');
+                                const qty = item.quantity || 1;
+                                const unitPrice = Number(item.unitPrice || 0).toFixed(2);
+                                const subtotal = Number(item.subtotal || item.totalPrice || (qty * (item.unitPrice || 0))).toFixed(2);
+
+                                return `
+                                    <tr class="border-b border-slate-100 hover:bg-slate-50/50 transition">
+                                        <td class="py-3 px-4 flex items-center space-x-3">
+                                            ${imgHtml}
+                                            <div class="truncate">
+                                                <p class="font-bold text-[#0b1f3a] truncate">${title}</p>
+                                                ${item.partNumber ? `<p class="text-[10px] text-slate-400 font-mono">SKU: ${item.partNumber}</p>` : ''}
+                                            </div>
+                                        </td>
+                                        <td class="py-3 px-4">
+                                            <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${type.includes('VEHICLE') ? 'bg-indigo-50 text-indigo-700' : 'bg-slate-100 text-slate-700'}">${type}</span>
+                                        </td>
+                                        <td class="py-3 px-4 text-center font-bold text-slate-700">${qty}</td>
+                                        <td class="py-3 px-4 text-right font-bold text-slate-700">$${unitPrice}</td>
+                                        <td class="py-3 px-4 text-right font-black text-[#0b1f3a]">$${subtotal}</td>
+                                    </tr>
+                                `;
+                            }).join('');
+                        } else {
+                            itemsTbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-400 font-medium">No item details available</td></tr>`;
+                        }
+                    }
+
+                    // Vehicle Specifications Resolution
+                    let vehicle = ord.vehicle || null;
+                    if (!vehicle && items.length > 0) {
+                        const vehicleItem = items.find(i => i.vehicle);
+                        if (vehicleItem) vehicle = vehicleItem.vehicle;
+                    }
+
+                    const vehicleCard = document.getElementById('order-modal-vehicle-card');
+                    const gallerySection = document.getElementById('order-modal-gallery-section');
+                    const galleryCard = document.getElementById('order-modal-gallery-card');
+                    const galleryBadge = document.getElementById('order-gallery-count-badge');
+
+                    if (!vehicle) {
+                        if (vehicleCard) {
+                            vehicleCard.innerHTML = `
+                                <div class="py-6 text-center text-slate-400 text-xs font-medium flex items-center justify-center space-x-2">
+                                    <i class="fas fa-info-circle text-slate-300 text-base"></i>
+                                    <span>Vehicle information is not available for this order.</span>
+                                </div>
+                            `;
+                        }
+                        if (gallerySection) gallerySection.classList.add('hidden');
+                    } else {
+                        if (vehicleCard) {
+                            const vTitle = vehicle.title || `${vehicle.brand || vehicle.make || ''} ${vehicle.model || ''} (${vehicle.year || ''})`.trim();
+                            const make = vehicle.brand || vehicle.make || 'N/A';
+                            const model = vehicle.model || 'N/A';
+                            const year = vehicle.year || 'N/A';
+                            const condition = vehicle.condition || vehicle.vehicleCondition || 'USED';
+                            const mileage = vehicle.mileage != null ? `${Number(vehicle.mileage).toLocaleString()} km` : 'N/A';
+                            const fuel = vehicle.fuelType || 'GASOLINE';
+                            const transmission = vehicle.transmission || 'AUTOMATIC';
+                            const price = vehicle.price != null ? `$${Number(vehicle.price).toFixed(2)}` : `$${Number(ord.totalAmount || 0).toFixed(2)}`;
+                            const isAuction = ord.auctionId || ord.auctionTitle;
+
+                            vehicleCard.innerHTML = `
+                                <div class="space-y-4">
+                                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                                        <div>
+                                            <h5 class="text-base font-bold text-[#0b1f3a]">${vTitle}</h5>
+                                            <p class="text-xs text-slate-500 font-medium">${make} • ${model} • Year ${year}</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-xs text-slate-400 font-medium block">Price / Value</span>
+                                            <span class="text-lg font-black text-primary-blue">${price}</span>
+                                        </div>
+                                    </div>
+
+                                    ${isAuction ? `
+                                        <div class="p-3 bg-amber-50/80 border border-amber-200/70 rounded-xl flex items-center space-x-3 text-xs text-amber-900">
+                                            <i class="fas fa-gavel text-amber-600 text-base shrink-0"></i>
+                                            <div>
+                                                <span class="font-bold">Won via Auction:</span>
+                                                <span>${ord.auctionTitle || 'Auction Listing'}</span>
+                                                <span class="text-amber-700 font-mono ml-1">(Auction #${ord.auctionId})</span>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+
+                                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Make</span>
+                                            <span class="font-bold text-[#0b1f3a]">${make}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Model</span>
+                                            <span class="font-bold text-[#0b1f3a]">${model}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Year</span>
+                                            <span class="font-bold text-[#0b1f3a]">${year}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Condition</span>
+                                            <span class="font-bold text-[#0b1f3a]">${condition}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Mileage</span>
+                                            <span class="font-bold text-[#0b1f3a]">${mileage}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Fuel Type</span>
+                                            <span class="font-bold text-[#0b1f3a]">${fuel}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Transmission</span>
+                                            <span class="font-bold text-[#0b1f3a]">${transmission}</span>
+                                        </div>
+                                        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-100">
+                                            <span class="text-slate-400 font-medium block text-[10px] uppercase tracking-wider">Status</span>
+                                            <span class="font-bold text-emerald-600">${vehicle.status || 'APPROVED'}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }
+
+                        // Real images collection
+                        let rawImages = [];
+                        if (Array.isArray(vehicle.images) && vehicle.images.length > 0) {
+                            rawImages = vehicle.images;
+                        } else if (Array.isArray(vehicle.imageUrls) && vehicle.imageUrls.length > 0) {
+                            rawImages = vehicle.imageUrls;
+                        } else if (Array.isArray(vehicle.imageDetails) && vehicle.imageDetails.length > 0) {
+                            rawImages = vehicle.imageDetails.map(d => d.imageUrl);
+                        } else if (vehicle.primaryImage && !vehicle.primaryImage.includes('unsplash.com')) {
+                            rawImages = [vehicle.primaryImage];
+                        }
+
+                        const resolvedImages = rawImages.map(img => resolveImgUrl(img)).filter(Boolean);
+
+                        if (gallerySection) gallerySection.classList.remove('hidden');
+
+                        if (resolvedImages.length === 0) {
+                            if (galleryBadge) galleryBadge.textContent = '0 Photos';
+                            if (galleryCard) {
+                                galleryCard.innerHTML = `
+                                    <div class="py-8 text-center text-slate-400 text-xs font-medium space-y-2">
+                                        <i class="fas fa-image text-3xl text-slate-300 block"></i>
+                                        <p>No vehicle images available.</p>
+                                    </div>
+                                `;
+                            }
+                            window.currentLightboxImages = [];
+                        } else {
+                            window.currentLightboxImages = resolvedImages;
+                            window.currentMainGalleryIndex = 0;
+                            if (galleryBadge) galleryBadge.textContent = `${resolvedImages.length} Photo${resolvedImages.length > 1 ? 's' : ''}`;
+
+                            if (galleryCard) {
+                                const mainImgUrl = resolvedImages[0];
+                                const vTitle = vehicle.title || 'Vehicle Photo';
+                                galleryCard.innerHTML = `
+                                    <div class="space-y-4">
+                                        <!-- Main Large Image Display -->
+                                        <div class="relative rounded-2xl overflow-hidden bg-slate-900/5 group cursor-pointer border border-slate-200"
+                                            onclick="window.openVehicleLightbox(window.currentMainGalleryIndex || 0)">
+                                            <img id="gallery-main-preview-img" src="${mainImgUrl}" alt="${vTitle}"
+                                                class="w-full h-64 md:h-80 object-cover group-hover:scale-105 transition duration-500">
+                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition flex items-center justify-center">
+                                                <span class="opacity-0 group-hover:opacity-100 transition bg-black/70 text-white text-xs font-bold px-4 py-2 rounded-xl backdrop-blur-xs flex items-center space-x-2">
+                                                    <i class="fas fa-search-plus"></i>
+                                                    <span>Click to Enlarge Full Screen</span>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Thumbnails Strip -->
+                                        <div class="flex items-center space-x-3 overflow-x-auto pb-2 pt-1">
+                                            ${resolvedImages.map((imgUrl, idx) => `
+                                                <button type="button" onclick="window.selectGalleryImage(${idx})"
+                                                    class="gallery-thumb-btn shrink-0 w-20 h-16 rounded-xl overflow-hidden border-2 transition cursor-pointer ${idx === 0 ? 'border-primary-blue ring-2 ring-blue-100' : 'border-transparent hover:border-slate-300 opacity-70 hover:opacity-100'}"
+                                                    data-index="${idx}">
+                                                    <img src="${imgUrl}" alt="Thumbnail ${idx + 1}" class="w-full h-full object-cover">
+                                                </button>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                `;
+                            }
+                        }
+                    }
+
+                    // Reveal content
+                    if (loadingEl) loadingEl.classList.add('hidden');
+                    if (contentEl) contentEl.classList.remove('hidden');
+
+                } catch (err) {
+                    console.error('viewOrderDetails error:', err);
+                    if (loadingEl) loadingEl.classList.add('hidden');
+                    if (errorEl) errorEl.classList.remove('hidden');
+                    if (errorTitleEl) errorTitleEl.textContent = 'Unable to load order details';
+                    if (errorMsgEl) errorMsgEl.textContent = 'Unable to load order details. Please try again.';
+                }
+            };
+
+            window.selectGalleryImage = (index) => {
+                if (!window.currentLightboxImages || !window.currentLightboxImages[index]) return;
+                window.currentMainGalleryIndex = index;
+                const mainImg = document.getElementById('gallery-main-preview-img');
+                if (mainImg) {
+                    mainImg.src = window.currentLightboxImages[index];
+                }
+                const thumbs = document.querySelectorAll('.gallery-thumb-btn');
+                thumbs.forEach((t, i) => {
+                    if (i === index) {
+                        t.className = 'gallery-thumb-btn shrink-0 w-20 h-16 rounded-xl overflow-hidden border-2 transition cursor-pointer border-primary-blue ring-2 ring-blue-100 opacity-100';
+                    } else {
+                        t.className = 'gallery-thumb-btn shrink-0 w-20 h-16 rounded-xl overflow-hidden border-2 transition cursor-pointer border-transparent hover:border-slate-300 opacity-70 hover:opacity-100';
+                    }
+                });
+            };
+
+            window.openVehicleLightbox = (index = 0) => {
+                if (!window.currentLightboxImages || window.currentLightboxImages.length === 0) return;
+                window.currentLightboxIndex = index;
+                const lightbox = document.getElementById('vehicleImageLightbox');
+                const imgEl = document.getElementById('lightbox-img');
+                const counterEl = document.getElementById('lightbox-counter');
+                const prevBtn = document.getElementById('lightbox-prev-btn');
+                const nextBtn = document.getElementById('lightbox-next-btn');
+
+                if (imgEl) imgEl.src = window.currentLightboxImages[index];
+                if (counterEl) counterEl.textContent = `${index + 1} / ${window.currentLightboxImages.length}`;
+
+                if (window.currentLightboxImages.length <= 1) {
+                    if (prevBtn) prevBtn.classList.add('hidden');
+                    if (nextBtn) nextBtn.classList.add('hidden');
+                } else {
+                    if (prevBtn) prevBtn.classList.remove('hidden');
+                    if (nextBtn) nextBtn.classList.remove('hidden');
+                }
+
+                if (lightbox) lightbox.classList.remove('hidden');
+            };
+
+            window.closeVehicleLightbox = () => {
+                const lightbox = document.getElementById('vehicleImageLightbox');
+                if (lightbox) lightbox.classList.add('hidden');
+            };
+
+            window.nextVehicleImage = () => {
+                if (!window.currentLightboxImages || window.currentLightboxImages.length <= 1) return;
+                window.currentLightboxIndex = (window.currentLightboxIndex + 1) % window.currentLightboxImages.length;
+                window.openVehicleLightbox(window.currentLightboxIndex);
+            };
+
+            window.prevVehicleImage = () => {
+                if (!window.currentLightboxImages || window.currentLightboxImages.length <= 1) return;
+                window.currentLightboxIndex = (window.currentLightboxIndex - 1 + window.currentLightboxImages.length) % window.currentLightboxImages.length;
+                window.openVehicleLightbox(window.currentLightboxIndex);
+            };
+
+            // Keyboard navigation for lightbox & order modal
+            if (!window._orderModalKeyHandlerAdded) {
+                window._orderModalKeyHandlerAdded = true;
+                document.addEventListener('keydown', (e) => {
+                    const lightbox = document.getElementById('vehicleImageLightbox');
+                    const orderModal = document.getElementById('orderDetailsModal');
+
+                    if (lightbox && !lightbox.classList.contains('hidden')) {
+                        if (e.key === 'Escape') {
+                            window.closeVehicleLightbox();
+                        } else if (e.key === 'ArrowRight') {
+                            window.nextVehicleImage();
+                        } else if (e.key === 'ArrowLeft') {
+                            window.prevVehicleImage();
+                        }
+                    } else if (orderModal && !orderModal.classList.contains('hidden')) {
+                        if (e.key === 'Escape') {
+                            window.closeOrderDetailsModal();
+                        }
+                    }
+                });
+            }
 
             window.app.renderMyBidsTab = async () => {
                 const dc = document.getElementById('dashboard-content');

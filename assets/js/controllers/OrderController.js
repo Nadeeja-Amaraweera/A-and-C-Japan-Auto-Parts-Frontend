@@ -40,12 +40,31 @@ class OrderController {
         try {
             const response = await apiService.get(`/orders/${orderId}`);
             if (response && response.status === 0) {
-                return response.body;
+                return { success: true, order: response.body, data: response.body };
             }
-            return null;
+            return {
+                success: false,
+                order: null,
+                error: response?.message || 'Order not found',
+                status: response?.status
+            };
         } catch (error) {
             console.error('getOrderById error:', error);
-            return null;
+            const status = error.status || error.data?.status;
+            let errorMsg = 'Unable to load order details. Please try again.';
+            if (status === 404) {
+                errorMsg = 'Order not found.';
+            } else if (status === 403) {
+                errorMsg = 'Access denied: You do not have permission to view this order.';
+            } else if (error.data?.message) {
+                errorMsg = error.data.message;
+            }
+            return {
+                success: false,
+                order: null,
+                error: errorMsg,
+                status: status
+            };
         }
     }
 

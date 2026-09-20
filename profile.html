@@ -333,6 +333,229 @@
     </div>
   </div>
 
+  <!-- Order Details Modal -->
+  <div id="orderDetailsModal"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4 sm:p-6 transition-opacity duration-300">
+    <div
+      class="bg-white rounded-3xl max-w-4xl w-full p-6 md:p-8 shadow-2xl border border-slate-100 max-h-[92vh] flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-4 shrink-0">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-lg font-bold shadow-inner">
+            <i class="fas fa-file-invoice"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-xl font-bold text-[#0b1f3a]">Order Details</h3>
+              <span id="order-modal-number" class="text-xs font-bold text-primary-blue bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">#ORD</span>
+            </div>
+            <p id="order-modal-date" class="text-xs text-slate-500 font-medium mt-0.5">Placed on --</p>
+          </div>
+        </div>
+        <button type="button" onclick="window.closeOrderDetailsModal()"
+          class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-2 rounded-xl hover:bg-slate-100 transition"><i class="fas fa-times"></i></button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="overflow-y-auto pr-1 flex-1 space-y-6">
+
+        <!-- Loading State -->
+        <div id="order-modal-loading" class="py-16 flex flex-col items-center justify-center space-y-3">
+          <div class="w-12 h-12 border-4 border-slate-200 border-t-primary-blue rounded-full animate-spin"></div>
+          <p class="text-sm font-bold text-[#0b1f3a]">Loading order details...</p>
+          <p class="text-xs text-slate-400">Please wait while we fetch the order and vehicle data.</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="order-modal-error" class="hidden py-12 flex flex-col items-center justify-center text-center space-y-3 px-4">
+          <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-2xl">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h4 id="order-modal-error-title" class="text-lg font-bold text-[#0b1f3a]">Unable to load order details</h4>
+          <p id="order-modal-error-msg" class="text-xs text-slate-500 max-w-md">Please try again later.</p>
+          <button type="button" onclick="window.closeOrderDetailsModal()" class="mt-2 px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition cursor-pointer">Close</button>
+        </div>
+
+        <!-- Loaded Content State -->
+        <div id="order-modal-content" class="hidden space-y-6">
+
+          <!-- Order Status Bar -->
+          <div class="glass-panel p-4 rounded-2xl border border-slate-200/80 bg-slate-50/60 flex flex-wrap gap-4 items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Order Status:</span>
+              <span id="order-modal-status" class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Payment Status:</span>
+              <span id="order-modal-payment-status" class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
+            </div>
+            <div class="flex items-center space-x-2 text-xs text-slate-600">
+              <i class="fas fa-credit-card text-primary-blue"></i>
+              <span id="order-modal-payment-method" class="font-bold">--</span>
+            </div>
+          </div>
+
+          <!-- Customer and Delivery Info & Financial Summary Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <!-- Delivery & Recipient Card -->
+            <div class="p-5 rounded-2xl border border-slate-100 bg-white shadow-2xs space-y-3">
+              <div class="flex items-center space-x-2 text-primary-blue font-bold text-sm">
+                <i class="fas fa-shipping-fast"></i>
+                <h4 class="text-[#0b1f3a]">Delivery & Recipient</h4>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div>
+                  <span class="text-slate-400 font-medium">Recipient:</span>
+                  <span id="order-modal-recipient" class="font-bold text-[#0b1f3a] ml-1">--</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 font-medium">Phone:</span>
+                  <span id="order-modal-phone" class="font-bold text-[#0b1f3a] ml-1">--</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 font-medium block mb-0.5">Shipping Address:</span>
+                  <span id="order-modal-address" class="font-bold text-[#0b1f3a] block bg-slate-50 p-2.5 rounded-xl border border-slate-100 leading-relaxed">--</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Financial Breakdown Card -->
+            <div class="p-5 rounded-2xl border border-slate-100 bg-white shadow-2xs space-y-3">
+              <div class="flex items-center space-x-2 text-primary-blue font-bold text-sm">
+                <i class="fas fa-receipt"></i>
+                <h4 class="text-[#0b1f3a]">Payment Summary</h4>
+              </div>
+              <div class="space-y-2 text-xs">
+                <div class="flex justify-between py-1 border-b border-slate-50">
+                  <span class="text-slate-500">Transaction Reference:</span>
+                  <span id="order-modal-txnid" class="font-mono font-bold text-slate-700">--</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-50">
+                  <span class="text-slate-500">Subtotal:</span>
+                  <span id="order-modal-subtotal" class="font-bold text-slate-800">$0.00</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-50">
+                  <span class="text-slate-500">Shipping Cost:</span>
+                  <span id="order-modal-shipping" class="font-bold text-slate-800">$0.00</span>
+                </div>
+                <div class="flex justify-between py-1 border-b border-slate-50">
+                  <span class="text-slate-500">Tax / Fees:</span>
+                  <span id="order-modal-tax" class="font-bold text-slate-800">$0.00</span>
+                </div>
+                <div class="flex justify-between pt-2 text-sm font-black text-[#0b1f3a]">
+                  <span>Total Paid:</span>
+                  <span id="order-modal-total" class="text-primary-blue text-base">$0.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Order Items Section -->
+          <div class="space-y-3">
+            <h4 class="text-sm font-bold text-[#0b1f3a] uppercase tracking-wider flex items-center">
+              <i class="fas fa-box-open mr-2 text-primary-blue"></i> Order Items
+            </h4>
+            <div class="border border-slate-200/80 rounded-2xl overflow-hidden bg-white shadow-2xs">
+              <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                  <thead>
+                    <tr class="bg-slate-50/90 text-slate-500 text-[11px] font-bold uppercase tracking-wider border-b border-slate-100">
+                      <th class="py-3 px-4">Item</th>
+                      <th class="py-3 px-4">Type</th>
+                      <th class="py-3 px-4 text-center">Qty</th>
+                      <th class="py-3 px-4 text-right">Unit Price</th>
+                      <th class="py-3 px-4 text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="order-modal-items-tbody" class="text-xs">
+                    <!-- Dynamic Items -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vehicle Information Section -->
+          <div id="order-modal-vehicle-section" class="space-y-3 pt-2">
+            <h4 class="text-sm font-bold text-[#0b1f3a] uppercase tracking-wider flex items-center">
+              <i class="fas fa-car mr-2 text-primary-blue"></i> Associated Vehicle Information
+            </h4>
+            <div id="order-modal-vehicle-card" class="glass-panel p-5 rounded-2xl border border-slate-200/80 bg-white/90 shadow-2xs">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Vehicle Images Gallery Section -->
+          <div id="order-modal-gallery-section" class="space-y-3 pt-2">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-[#0b1f3a] uppercase tracking-wider flex items-center">
+                <i class="fas fa-images mr-2 text-primary-blue"></i> Vehicle Images Gallery
+              </h4>
+              <span id="order-gallery-count-badge" class="text-[11px] font-bold text-slate-500">--</span>
+            </div>
+            <div id="order-modal-gallery-card" class="p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 shadow-2xs">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="pt-4 border-t border-slate-100 mt-4 flex justify-end shrink-0">
+        <button type="button" onclick="window.closeOrderDetailsModal()"
+          class="px-6 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs transition cursor-pointer">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vehicle Image Lightbox Modal -->
+  <div id="vehicleImageLightbox"
+    class="fixed inset-0 bg-black/92 backdrop-blur-md flex flex-col justify-between z-[100] hidden p-4 md:p-6 transition-opacity duration-300">
+    <!-- Top Lightbox Bar -->
+    <div class="flex justify-between items-center text-white shrink-0 pb-2">
+      <div class="flex items-center space-x-3">
+        <span class="text-xs font-black uppercase tracking-widest text-blue-400 flex items-center">
+          <i class="fas fa-car mr-2"></i> Vehicle Photo Preview
+        </span>
+        <span id="lightbox-counter" class="bg-white/15 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider text-white">1 / 1</span>
+      </div>
+      <button type="button" onclick="window.closeVehicleLightbox()"
+        class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg cursor-pointer transition shadow-lg">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- Middle Lightbox Image Container -->
+    <div class="relative flex-1 flex items-center justify-center p-2 my-auto overflow-hidden">
+      <!-- Prev Button -->
+      <button type="button" id="lightbox-prev-btn" onclick="window.prevVehicleImage()"
+        class="absolute left-2 md:left-6 z-20 w-12 h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center text-xl cursor-pointer transition shadow-2xl backdrop-blur-xs">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+
+      <!-- Main Image Display -->
+      <div class="max-h-[75vh] max-w-[85vw] flex items-center justify-center">
+        <img id="lightbox-img" src="" alt="Vehicle photo preview"
+          class="max-h-[75vh] max-w-[85vw] object-contain rounded-2xl shadow-2xl border border-white/10 transition-transform duration-300">
+      </div>
+
+      <!-- Next Button -->
+      <button type="button" id="lightbox-next-btn" onclick="window.nextVehicleImage()"
+        class="absolute right-2 md:right-6 z-20 w-12 h-12 rounded-full bg-white/15 hover:bg-white/30 text-white flex items-center justify-center text-xl cursor-pointer transition shadow-2xl backdrop-blur-xs">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Bottom Lightbox Navigation Info -->
+    <div class="text-center text-slate-400 text-xs py-2 shrink-0 flex items-center justify-center space-x-4">
+      <span><kbd class="bg-white/10 px-2 py-0.5 rounded text-[10px] text-white">←</kbd> Previous</span>
+      <span><kbd class="bg-white/10 px-2 py-0.5 rounded text-[10px] text-white">→</kbd> Next</span>
+      <span><kbd class="bg-white/10 px-2 py-0.5 rounded text-[10px] text-white">Esc</kbd> Close</span>
+    </div>
+  </div>
+
   <script type="module" src="assets/js/app.js"></script>
   <script>
     window.profileDashboardHTML = '';

@@ -360,53 +360,105 @@ class App {
         const liveAuctionsGrid = document.getElementById('home-live-auctions-grid');
         const productsGrid = document.getElementById('home-products-grid');
 
-        // Load active auctions
+        // Load database auctions
         if (liveAuctionsGrid) {
             try {
-                const auctions = await auctionController.getActiveAuctions();
+                // Fetch active auctions; if none active, fallback to all database auctions
+                let auctions = await auctionController.getActiveAuctions();
+                if (!auctions || auctions.length === 0) {
+                    auctions = await auctionController.getAllAuctions();
+                }
+
                 if (auctions && auctions.length > 0) {
                     liveAuctionsGrid.innerHTML = auctions.slice(0, 4).map(auc => {
                         const aucId = auc.auctionId || auc.id;
                         const vehicle = auc.vehicle || {};
                         const img = this.getVehicleImageUrl(vehicle);
-                        const make = vehicle.make || vehicle.brand || '';
-                        const title = `${vehicle.year || ''} ${make} ${vehicle.model || 'Vehicle'}`.trim();
+
+                        // Format Title matching the screenshot card (e.g. 2026 Toyota Land Cruiser)
+                        const yr = vehicle.year ? `${vehicle.year} ` : '';
+                        const mk = (vehicle.make && vehicle.make !== 'Unknown') ? `${vehicle.make} ` : (vehicle.brand && vehicle.brand !== 'Unknown' ? `${vehicle.brand} ` : '');
+                        const md = vehicle.model || vehicle.title || auc.title || 'Vehicle';
+                        let title = `${yr}${mk}${md}`.trim();
+                        if (!title) title = auc.title || 'Vehicle Auction';
+
+                        // Format Specs Subtitle matching the screenshot (e.g. 12,450 mi • Automatic • Gas)
+                        const specs = [];
+                        if (vehicle.mileage != null) specs.push(`${Number(vehicle.mileage).toLocaleString()} mi`);
+                        if (vehicle.transmission) {
+                            const tr = vehicle.transmission.toLowerCase();
+                            specs.push(tr.charAt(0).toUpperCase() + tr.slice(1));
+                        }
+                        if (vehicle.fuelType) {
+                            const fuel = vehicle.fuelType.toLowerCase();
+                            specs.push(fuel.charAt(0).toUpperCase() + fuel.slice(1));
+                        } else if (vehicle.locationCountry || vehicle.locationCity) {
+                            specs.push(vehicle.locationCity || vehicle.locationCountry);
+                        }
+                        const specLine = specs.length > 0 ? specs.join(' • ') : 'Verified Japanese Import';
+
+                        // Pricing and Bidders
                         const currentBid = auc.currentBid != null ? auc.currentBid : (auc.startingPrice || 0);
-                        const bids = auc.bidCount || 0;
-                        const timeLeft = this.formatTimeRemaining(auc.endDate, auc.timeLeftSeconds);
+                        const bidderCount = auc.bidderCount != null ? auc.bidderCount : (auc.bidCount || (auc.recentBidders ? auc.recentBidders.length : 0));
+                        const biddersText = `${bidderCount} Active`;
+
+                        // Status and Time Remaining
+                        const isEnded = auc.status === 'ENDED';
+                        const timeLeft = isEnded ? '00:00:00' : this.formatAuctionClock(auc.endDate, auc.timeLeftSeconds);
+                        const badgeText = isEnded ? 'ENDED' : (auc.isFeatured ? 'HOT AUCTION' : 'HOT AUCTION');
+                        const badgeBg = isEnded ? 'bg-slate-700' : 'bg-primary-blue';
 
                         return `
-                            <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm">
+                            <div class="glass-panel rounded-2xl card-3d overflow-hidden group border border-white/90 bg-white/85 shadow-sm hover:shadow-md transition flex flex-col justify-between">
                                 <div class="relative overflow-hidden">
                                     <img src="${img}" alt="${title}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070&auto=format&fit=crop'" class="w-full h-48 object-cover group-hover:scale-105 transition duration-500">
-                                    <div class="absolute top-3 left-3 bg-primary-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">HOT AUCTION</div>
+                                    <div class="absolute top-3 left-3 ${badgeBg} text-white text-xs font-bold px-2.5 py-1 rounded-full shadow tracking-wider uppercase">${badgeText}</div>
                                     <button onclick="window.toggleWatchlist(${aucId}, this)" class="absolute top-3 right-3 bg-white/90 backdrop-blur-md w-8 h-8 rounded-full flex items-center justify-center text-slate-400 hover:text-rose-600 shadow cursor-pointer transition">
                                         <i class="far fa-heart text-sm"></i>
                                     </button>
-                                    <div class="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-md text-[#0b1f3a] text-center py-1.5 border-t border-slate-100">
-                                        <span class="text-xs font-bold flex items-center justify-center"><i class="far fa-clock text-primary-blue mr-1.5"></i> Ends in: <span class="text-primary-blue ml-1">${timeLeft}</span></span>
+                                    <div class="absolute bottom-0 left-0 w-full bg-white/90 text-[#0b1f3a] text-center py-2 backdrop-blur-sm border-t border-slate-100 flex items-center justify-center font-bold text-xs">
+                                        <span class="text-xs font-bold flex items-center justify-center">
+                                            <i class="far fa-clock text-primary-blue mr-1.5"></i> Ends in: <span class="home-auction-timer ml-1 font-bold" data-end="${auc.endDate || ''}" data-ended="${isEnded ? '1' : '0'}">${timeLeft}</span>
+                                        </span>
                                     </div>
                                 </div>
-                                <div class="p-5">
-                                    <h3 class="text-base font-bold text-[#0b1f3a] mb-1 truncate leading-snug">
-                                        <a href="auction-details.html?id=${aucId}" class="hover:text-primary-blue transition">${title}</a>
-                                    </h3>
-                                    <p class="text-xs text-slate-500 mb-4 truncate">${vehicle.mileage ? vehicle.mileage.toLocaleString() + ' mi • ' : ''}${vehicle.transmission || 'Auto'} • ${vehicle.location || 'Tokyo, JP'}</p>
-                                    <div class="flex justify-between items-center mb-4 pb-4 border-t border-slate-100 pt-3">
-                                        <div>
-                                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Current Bid</p>
-                                            <p class="text-lg font-black text-[#0b1f3a] tracking-tight">$${Number(currentBid).toLocaleString()}</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <p class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Bids</p>
-                                            <p class="text-xs font-bold text-primary-blue">${bids}</p>
-                                        </div>
+                                <div class="p-5 flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="text-lg font-bold text-[#0b1f3a] mb-1 truncate">
+                                            <a href="auction-details.html?id=${aucId}" class="hover:text-primary-blue transition">${title}</a>
+                                        </h3>
+                                        <p class="text-sm text-slate-500 mb-4 truncate">${specLine}</p>
                                     </div>
-                                    <a href="auction-details.html?id=${aucId}" class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl shadow-md transition text-xs">Bid Now</a>
+                                    <div>
+                                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-slate-100">
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-semibold">Current Bid</p>
+                                                <p class="text-xl font-black text-[#0b1f3a]">$${Number(currentBid).toLocaleString()}</p>
+                                            </div>
+                                            <div class="text-right">
+                                                <p class="text-xs text-slate-400 uppercase font-semibold">Bidders</p>
+                                                <p class="text-sm font-bold text-slate-700">${biddersText}</p>
+                                            </div>
+                                        </div>
+                                        <a href="auction-details.html?id=${aucId}" class="block w-full text-center btn-3d btn-primary-3d font-bold py-2.5 rounded-xl transition text-sm shadow-sm cursor-pointer">${isEnded ? 'View Auction' : 'Place Bid Now'}</a>
+                                    </div>
                                 </div>
                             </div>
                         `;
                     }).join('');
+
+                    this.startHomeAuctionsCountdown();
+                } else {
+                    liveAuctionsGrid.innerHTML = `
+                        <div class="col-span-full text-center py-12 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-xs">
+                            <div class="w-14 h-14 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center mx-auto mb-3 text-xl shadow-xs">
+                                <i class="fas fa-gavel"></i>
+                            </div>
+                            <h4 class="text-base font-bold text-[#0b1f3a]">No Live Auctions Available</h4>
+                            <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Active vehicle auctions will appear here as soon as suppliers list them.</p>
+                            <a href="listing.html" class="inline-block mt-4 px-4 py-2 bg-primary-blue text-white rounded-xl text-xs font-bold shadow hover:bg-blue-700 transition">Browse Vehicles</a>
+                        </div>
+                    `;
                 }
             } catch (err) {
                 console.error('Error rendering live auctions:', err);
@@ -1001,6 +1053,61 @@ class App {
             return `${days}d ${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
         }
         return `${String(hours).padStart(2, '0')}h ${String(minutes).padStart(2, '0')}m ${String(seconds).padStart(2, '0')}s`;
+    }
+
+    formatAuctionClock(endDateStr, timeLeftSeconds) {
+        let remainingSeconds = 0;
+        if (timeLeftSeconds != null) {
+            remainingSeconds = Math.max(0, timeLeftSeconds);
+        } else if (endDateStr) {
+            const diffMs = new Date(endDateStr).getTime() - Date.now();
+            remainingSeconds = Math.max(0, Math.floor(diffMs / 1000));
+        }
+
+        if (remainingSeconds <= 0) return '00:00:00';
+
+        const days = Math.floor(remainingSeconds / 86400);
+        const hours = Math.floor((remainingSeconds % 86400) / 3600);
+        const minutes = Math.floor((remainingSeconds % 3600) / 60);
+        const seconds = Math.floor(remainingSeconds % 60);
+
+        if (days > 0) {
+            return `${days}d ${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+        return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    startHomeAuctionsCountdown() {
+        if (this._homeTimerInterval) clearInterval(this._homeTimerInterval);
+        this._homeTimerInterval = setInterval(() => {
+            const timerEls = document.querySelectorAll('#home-live-auctions-grid .home-auction-timer');
+            if (!timerEls || timerEls.length === 0) {
+                clearInterval(this._homeTimerInterval);
+                return;
+            }
+            timerEls.forEach(el => {
+                if (el.dataset.ended === '1') return;
+                const end = el.dataset.end;
+                if (end) {
+                    const diffMs = new Date(end).getTime() - Date.now();
+                    const sec = Math.floor(diffMs / 1000);
+                    if (sec <= 0) {
+                        el.textContent = '00:00:00';
+                        el.dataset.ended = '1';
+                    } else {
+                        const days = Math.floor(sec / 86400);
+                        const hours = Math.floor((sec % 86400) / 3600);
+                        const mins = Math.floor((sec % 3600) / 60);
+                        const s = sec % 60;
+                        if (days > 0) {
+                            el.textContent = `${days}d ${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                        } else {
+                            el.textContent = `${String(hours).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                        }
+                    }
+                }
+            });
+        }, 1000);
     }
 
     // ==========================================

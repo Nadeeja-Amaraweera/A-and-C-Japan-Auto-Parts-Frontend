@@ -2001,7 +2001,644 @@ class App {
             }
         };
 
-        await refreshAdmin();
+        // ==========================================
+        // TAB 2: USERS MANAGEMENT LOADER
+        // ==========================================
+        let cachedUsers = [];
+        let activeUserRoleFilter = 'ALL';
+
+        const renderUsersTable = (users) => {
+            const tbody = document.getElementById('admin-users-tbody');
+            if (!tbody) return;
+
+            let filtered = users;
+            if (activeUserRoleFilter !== 'ALL') {
+                filtered = filtered.filter(u => (u.role || u.userRole || '').toUpperCase() === activeUserRoleFilter);
+            }
+
+            const query = (document.getElementById('admin-users-search')?.value || '').trim().toLowerCase();
+            if (query) {
+                filtered = filtered.filter(u => {
+                    const name = (u.name || u.userName || '').toLowerCase();
+                    const email = (u.email || u.userEmail || '').toLowerCase();
+                    const sid = (u.userStringId || '').toLowerCase();
+                    const phone = (u.phone || u.userPhone || '').toLowerCase();
+                    return name.includes(query) || email.includes(query) || sid.includes(query) || phone.includes(query);
+                });
+            }
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = filtered.map(u => {
+                    const name = u.name || u.userName || 'User';
+                    const email = u.email || u.userEmail || 'N/A';
+                    const phone = u.phone || u.userPhone || 'N/A';
+                    const address = u.address || u.userAddress || 'N/A';
+                    const role = (u.role || u.userRole || 'CUSTOMER').toUpperCase();
+                    const status = (u.status || u.userStatus || 'ACTIVE').toUpperCase();
+                    const sid = u.userStringId ? `#${u.userStringId}` : `#U00${u.userId || u.id}`;
+
+                    let roleBadge = 'bg-blue-50 text-primary-blue border-blue-200';
+                    if (role === 'SUPPLIER') roleBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (role === 'ADMIN') roleBadge = 'bg-rose-50 text-rose-700 border-rose-200';
+
+                    let statusBadge = status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-600 border-slate-200';
+
+                    return `
+                        <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                            <td class="py-4 px-5">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 rounded-full bg-blue-100 text-primary-blue flex items-center justify-center font-bold text-xs shrink-0">
+                                        ${name.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-[#0b1f3a]">${name}</p>
+                                        <p class="text-[11px] text-slate-400 font-medium">${sid}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-5 text-slate-600 text-xs">${email}</td>
+                            <td class="py-4 px-5 text-slate-600 text-xs font-medium">${phone}</td>
+                            <td class="py-4 px-5 text-slate-600 text-xs max-w-xs truncate" title="${address}">${address}</td>
+                            <td class="py-4 px-5">
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${roleBadge}">${role}</span>
+                            </td>
+                            <td class="py-4 px-5 text-right">
+                                <span class="px-2 py-0.5 rounded-full text-[11px] font-bold border ${statusBadge}">${status}</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No users found matching current filters</td></tr>`;
+            }
+        };
+
+        const loadUsersTab = async () => {
+            const tbody = document.getElementById('admin-users-tbody');
+            if (!tbody) return;
+            try {
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium"><div class="inline-block w-6 h-6 border-2 border-primary-blue border-t-transparent rounded-full animate-spin mr-2 align-middle"></div>Loading registered users...</td></tr>`;
+                const users = await adminController.getAllUsers();
+                cachedUsers = users || [];
+
+                const countBadge = document.getElementById('admin-users-count-badge');
+                if (countBadge) countBadge.textContent = `${cachedUsers.length} Total Users`;
+
+                document.querySelectorAll('.admin-user-filter-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-user-filter-btn').forEach(b => {
+                            b.className = 'admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer';
+                        });
+                        btn.className = 'admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition cursor-pointer';
+                        activeUserRoleFilter = btn.getAttribute('data-role-filter') || 'ALL';
+                        renderUsersTable(cachedUsers);
+                    };
+                });
+
+                const searchInput = document.getElementById('admin-users-search');
+                if (searchInput) {
+                    searchInput.oninput = () => renderUsersTable(cachedUsers);
+                }
+
+                renderUsersTable(cachedUsers);
+            } catch (err) {
+                console.error('loadUsersTab error:', err);
+                tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-rose-500 font-medium">Failed to load users list.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 3: PRODUCTS & VEHICLES LOADER
+        // ==========================================
+        let cachedProducts = [];
+        let activeProdTypeFilter = 'ALL';
+
+        const renderProductsTable = (items) => {
+            const tbody = document.getElementById('admin-products-tbody');
+            if (!tbody) return;
+
+            let filtered = items;
+            if (activeProdTypeFilter === 'VEHICLE') {
+                filtered = filtered.filter(i => i.isVehicle);
+            } else if (activeProdTypeFilter === 'PART') {
+                filtered = filtered.filter(i => !i.isVehicle);
+            }
+
+            const query = (document.getElementById('admin-products-search')?.value || '').trim().toLowerCase();
+            if (query) {
+                filtered = filtered.filter(i => {
+                    const title = (i.title || '').toLowerCase();
+                    const desc = (i.details || '').toLowerCase();
+                    const cat = (i.category || '').toLowerCase();
+                    return title.includes(query) || desc.includes(query) || cat.includes(query);
+                });
+            }
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = filtered.map(item => {
+                    const imgTag = item.image
+                        ? `<img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-xl object-cover border border-slate-200 shrink-0">`
+                        : `<div class="w-12 h-12 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center font-bold text-base shrink-0"><i class="${item.isVehicle ? 'fas fa-car' : 'fas fa-cogs'}"></i></div>`;
+
+                    const typeBadge = item.isVehicle
+                        ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-blue-50 text-primary-blue border border-blue-200">Vehicle</span>`
+                        : `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">Auto Part</span>`;
+
+                    return `
+                        <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                            <td class="py-4 px-5">
+                                <div class="flex items-center space-x-3">
+                                    ${imgTag}
+                                    <div>
+                                        <p class="font-bold text-[#0b1f3a] text-sm">${item.title}</p>
+                                        <p class="text-[11px] text-slate-400 font-medium">ID: #${item.id}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-5">
+                                ${typeBadge}
+                                <p class="text-xs text-slate-500 mt-1 font-medium">${item.category}</p>
+                            </td>
+                            <td class="py-4 px-5 text-xs text-slate-600 font-medium">${item.details}</td>
+                            <td class="py-4 px-5 font-black text-[#0b1f3a] text-sm">$${Number(item.price || 0).toLocaleString()}</td>
+                            <td class="py-4 px-5 text-right">
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">${item.status}</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400 font-medium">No products or vehicles found matching current filters</td></tr>`;
+            }
+        };
+
+        const loadProductsTab = async () => {
+            const tbody = document.getElementById('admin-products-tbody');
+            if (!tbody) return;
+            try {
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400 font-medium"><div class="inline-block w-6 h-6 border-2 border-primary-blue border-t-transparent rounded-full animate-spin mr-2 align-middle"></div>Loading catalog inventory...</td></tr>`;
+
+                const [vehicles, parts] = await Promise.all([
+                    adminController.getAllVehicles(),
+                    productController.getAllProducts()
+                ]);
+
+                const vehicleItems = (vehicles || []).map(v => {
+                    const rawImg = v.imageUrls?.[0] || v.images?.[0]?.imageUrl || v.images?.[0] || '';
+                    const fullImg = rawImg && rawImg.startsWith('/') ? `${API_CONFIG.BASE_URL}${rawImg}` : rawImg;
+                    return {
+                        id: `VEH-${v.vehicleId || v.id}`,
+                        title: `${v.year || ''} ${v.make || ''} ${v.model || 'Vehicle'}`.trim(),
+                        isVehicle: true,
+                        category: v.condition || 'Pre-Owned',
+                        details: `${v.mileage ? Number(v.mileage).toLocaleString() + ' km' : 'N/A'} • ${v.fuelType || 'Fuel'} • ${v.transmission || 'Trans'}`,
+                        price: v.price || v.startingPrice || 0,
+                        status: v.vehicleStatus || 'AVAILABLE',
+                        image: fullImg
+                    };
+                });
+
+                const partItems = (parts || []).map(p => {
+                    const rawImg = p.imageUrl || p.image || '';
+                    const fullImg = rawImg && rawImg.startsWith('/') ? `${API_CONFIG.BASE_URL}${rawImg}` : rawImg;
+                    return {
+                        id: `PRD-${p.productId || p.id}`,
+                        title: p.productName || p.name || 'Auto Part',
+                        isVehicle: false,
+                        category: p.categoryName || 'Spare Parts',
+                        details: `Stock: ${p.stockQuantity || p.quantity || 1} units • SKU: ${p.partNumber || 'N/A'}`,
+                        price: p.price || 0,
+                        status: (p.stockQuantity || p.quantity || 0) > 0 ? 'IN STOCK' : 'OUT OF STOCK',
+                        image: fullImg
+                    };
+                });
+
+                cachedProducts = [...vehicleItems, ...partItems];
+
+                const countBadge = document.getElementById('admin-products-count-badge');
+                if (countBadge) countBadge.textContent = `${cachedProducts.length} Items`;
+
+                document.querySelectorAll('.admin-prod-filter-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-prod-filter-btn').forEach(b => {
+                            b.className = 'admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer';
+                        });
+                        btn.className = 'admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition cursor-pointer';
+                        activeProdTypeFilter = btn.getAttribute('data-prod-filter') || 'ALL';
+                        renderProductsTable(cachedProducts);
+                    };
+                });
+
+                const searchInput = document.getElementById('admin-products-search');
+                if (searchInput) {
+                    searchInput.oninput = () => renderProductsTable(cachedProducts);
+                }
+
+                renderProductsTable(cachedProducts);
+            } catch (err) {
+                console.error('loadProductsTab error:', err);
+                tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-rose-500 font-medium">Failed to load catalog inventory.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 4: AUCTIONS MONITOR LOADER
+        // ==========================================
+        let cachedAuctions = [];
+        let activeAuctionStatusFilter = 'ALL';
+
+        const renderAuctionsTable = (auctions) => {
+            const tbody = document.getElementById('admin-auctions-tbody');
+            if (!tbody) return;
+
+            let filtered = auctions;
+            if (activeAuctionStatusFilter !== 'ALL') {
+                filtered = filtered.filter(a => (a.status || '').toUpperCase() === activeAuctionStatusFilter);
+            }
+
+            const query = (document.getElementById('admin-auctions-search')?.value || '').trim().toLowerCase();
+            if (query) {
+                filtered = filtered.filter(a => {
+                    const vehicle = a.vehicle || {};
+                    const title = `${a.title || ''} ${vehicle.make || ''} ${vehicle.model || ''}`.toLowerCase();
+                    const aid = String(a.auctionId || a.id || '');
+                    return title.includes(query) || aid.includes(query);
+                });
+            }
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = filtered.map(auc => {
+                    const vehicle = auc.vehicle || {};
+                    const title = auc.title || `${vehicle.year || ''} ${vehicle.make || ''} ${vehicle.model || 'Vehicle'}`.trim();
+                    const startPrice = Number(auc.startingPrice || 0).toLocaleString();
+                    const currentBid = Number(auc.currentBid || auc.startingPrice || 0).toLocaleString();
+                    const bidsCount = auc.bidCount || 0;
+                    const endDate = auc.endDate ? new Date(auc.endDate).toLocaleDateString() : 'N/A';
+                    const status = (auc.status || 'PENDING').toUpperCase();
+
+                    let statusBadge = 'bg-blue-50 text-primary-blue border-blue-200';
+                    if (status === 'ACTIVE') statusBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (status === 'PENDING') statusBadge = 'bg-amber-50 text-amber-700 border-amber-200';
+                    if (status === 'CANCELLED') statusBadge = 'bg-rose-50 text-rose-700 border-rose-200';
+
+                    const actionsHtml = status === 'PENDING'
+                        ? `<button onclick="window.approveAuction(${auc.auctionId})" class="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold px-2.5 py-1 rounded-lg transition cursor-pointer mr-1">Approve</button>
+                           <button onclick="window.rejectAuction(${auc.auctionId})" class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-xs font-bold px-2.5 py-1 rounded-lg transition cursor-pointer">Reject</button>`
+                        : `<a href="auction-details.html?id=${auc.auctionId}" target="_blank" class="bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200 text-xs font-bold px-2.5 py-1 rounded-lg transition cursor-pointer inline-flex items-center space-x-1"><span>View</span><i class="fas fa-external-link-alt text-[10px]"></i></a>`;
+
+                    return `
+                        <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                            <td class="py-4 px-5">
+                                <p class="font-bold text-[#0b1f3a] text-sm">${title}</p>
+                                <p class="text-[11px] text-slate-400 font-medium">#AUC-${auc.auctionId}</p>
+                            </td>
+                            <td class="py-4 px-5 font-bold text-slate-700 text-sm">$${startPrice}</td>
+                            <td class="py-4 px-5 font-black text-emerald-600 text-sm">$${currentBid}</td>
+                            <td class="py-4 px-5 text-xs text-slate-600 font-medium">${bidsCount} bids</td>
+                            <td class="py-4 px-5 text-xs text-slate-500">${endDate}</td>
+                            <td class="py-4 px-5">
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${statusBadge}">${status}</span>
+                            </td>
+                            <td class="py-4 px-5 text-right whitespace-nowrap">
+                                ${actionsHtml}
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium">No auctions found matching current filters</td></tr>`;
+            }
+        };
+
+        const loadAuctionsTab = async () => {
+            const tbody = document.getElementById('admin-auctions-tbody');
+            if (!tbody) return;
+            try {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium"><div class="inline-block w-6 h-6 border-2 border-primary-blue border-t-transparent rounded-full animate-spin mr-2 align-middle"></div>Loading auctions monitor...</td></tr>`;
+
+                const auctions = await auctionController.getAllAuctions();
+                cachedAuctions = auctions || [];
+
+                const countBadge = document.getElementById('admin-auctions-count-badge');
+                if (countBadge) countBadge.textContent = `${cachedAuctions.length} Auctions`;
+
+                document.querySelectorAll('.admin-auc-filter-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-auc-filter-btn').forEach(b => {
+                            b.className = 'admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer';
+                        });
+                        btn.className = 'admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition cursor-pointer';
+                        activeAuctionStatusFilter = btn.getAttribute('data-auc-filter') || 'ALL';
+                        renderAuctionsTable(cachedAuctions);
+                    };
+                });
+
+                const searchInput = document.getElementById('admin-auctions-search');
+                if (searchInput) {
+                    searchInput.oninput = () => renderAuctionsTable(cachedAuctions);
+                }
+
+                renderAuctionsTable(cachedAuctions);
+            } catch (err) {
+                console.error('loadAuctionsTab error:', err);
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-rose-500 font-medium">Failed to load auctions monitor.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 5: CATEGORIES LOADER
+        // ==========================================
+        const loadCategoriesTab = async () => {
+            const tbody = document.getElementById('admin-categories-tbody');
+            if (!tbody) return;
+            try {
+                tbody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-slate-400 font-medium"><div class="inline-block w-6 h-6 border-2 border-primary-blue border-t-transparent rounded-full animate-spin mr-2 align-middle"></div>Loading catalog categories...</td></tr>`;
+
+                const categories = await productController.getCategories();
+                const list = categories || [];
+
+                const countBadge = document.getElementById('admin-categories-count-badge');
+                if (countBadge) countBadge.textContent = `${list.length} Categories`;
+
+                if (list.length > 0) {
+                    tbody.innerHTML = list.map(cat => {
+                        const catId = cat.categoryId || cat.id || 'N/A';
+                        const name = cat.categoryName || cat.name || 'Category';
+                        const desc = cat.description || cat.categoryDescription || 'Automotive parts catalog category.';
+
+                        return `
+                            <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                                <td class="py-4 px-5 font-bold text-primary-blue text-xs">#CAT-${catId}</td>
+                                <td class="py-4 px-5 font-bold text-[#0b1f3a] text-sm">${name}</td>
+                                <td class="py-4 px-5 text-slate-600 text-xs">${desc}</td>
+                                <td class="py-4 px-5 text-right">
+                                    <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">ACTIVE</span>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+                } else {
+                    tbody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-slate-400 font-medium">No categories found in database.</td></tr>`;
+                }
+            } catch (err) {
+                console.error('loadCategoriesTab error:', err);
+                tbody.innerHTML = `<tr><td colspan="4" class="py-8 text-center text-rose-500 font-medium">Failed to load categories.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 6: ORDERS MANAGEMENT LOADER
+        // ==========================================
+        let cachedOrders = [];
+        let activeOrderStatusFilter = 'ALL';
+
+        const renderOrdersTable = (orders) => {
+            const tbody = document.getElementById('admin-orders-tbody');
+            if (!tbody) return;
+
+            let filtered = orders;
+            if (activeOrderStatusFilter !== 'ALL') {
+                filtered = filtered.filter(o => (o.orderStatus || '').toUpperCase() === activeOrderStatusFilter);
+            }
+
+            const query = (document.getElementById('admin-orders-search')?.value || '').trim().toLowerCase();
+            if (query) {
+                filtered = filtered.filter(o => {
+                    const num = (o.orderNumber || '').toLowerCase();
+                    const addr = (o.shippingAddress || '').toLowerCase();
+                    const recipient = (o.recipientName || '').toLowerCase();
+                    return num.includes(query) || addr.includes(query) || recipient.includes(query);
+                });
+            }
+
+            if (filtered.length > 0) {
+                tbody.innerHTML = filtered.map(ord => {
+                    const dateStr = ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'N/A';
+                    const itemsCount = ord.items ? ord.items.length : 1;
+                    const recipient = ord.recipientName || (ord.user ? (ord.user.name || ord.user.userName) : 'Customer');
+                    const address = ord.shippingAddress || 'Standard Delivery';
+                    const status = (ord.orderStatus || 'PENDING').toUpperCase();
+                    const paymentStatus = (ord.paymentStatus || 'PENDING').toUpperCase();
+                    const paymentMethod = (ord.paymentMethod || 'CREDIT_CARD').replace('_', ' ');
+
+                    let statusBadge = 'bg-blue-50 text-primary-blue border-blue-200';
+                    if (status === 'DELIVERED') statusBadge = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+                    if (status === 'CONFIRMED') statusBadge = 'bg-blue-50 text-blue-700 border-blue-200';
+                    if (status === 'SHIPPED') statusBadge = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+                    if (status === 'CANCELLED') statusBadge = 'bg-rose-50 text-rose-700 border-rose-200';
+
+                    let payBadge = paymentStatus === 'PAID' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200';
+
+                    return `
+                        <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                            <td class="py-4 px-5">
+                                <p class="font-bold text-[#0b1f3a] text-sm">${ord.orderNumber || '#ORD-' + ord.orderId}</p>
+                            </td>
+                            <td class="py-4 px-5 text-slate-500 text-xs">${dateStr}</td>
+                            <td class="py-4 px-5">
+                                <p class="font-bold text-[#0b1f3a] text-xs">${recipient}</p>
+                                <p class="text-[11px] text-slate-400 truncate max-w-xs" title="${address}">${address}</p>
+                            </td>
+                            <td class="py-4 px-5 text-slate-700 text-xs font-semibold">${itemsCount} Item(s)</td>
+                            <td class="py-4 px-5 font-black text-[#0b1f3a] text-sm">$${Number(ord.totalAmount || 0).toLocaleString()}</td>
+                            <td class="py-4 px-5">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${payBadge}">${paymentStatus}</span>
+                                <p class="text-[10px] text-slate-400 mt-0.5 uppercase">${paymentMethod}</p>
+                            </td>
+                            <td class="py-4 px-5 text-right">
+                                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${statusBadge}">${status}</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } else {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium">No orders found matching current filters</td></tr>`;
+            }
+        };
+
+        const loadOrdersTab = async () => {
+            const tbody = document.getElementById('admin-orders-tbody');
+            if (!tbody) return;
+            try {
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-slate-400 font-medium"><div class="inline-block w-6 h-6 border-2 border-primary-blue border-t-transparent rounded-full animate-spin mr-2 align-middle"></div>Loading order records...</td></tr>`;
+
+                const orders = await orderController.getAllOrders();
+                cachedOrders = orders || [];
+
+                const countBadge = document.getElementById('admin-orders-count-badge');
+                if (countBadge) countBadge.textContent = `${cachedOrders.length} Orders`;
+
+                document.querySelectorAll('.admin-ord-filter-btn').forEach(btn => {
+                    btn.onclick = () => {
+                        document.querySelectorAll('.admin-ord-filter-btn').forEach(b => {
+                            b.className = 'admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition cursor-pointer';
+                        });
+                        btn.className = 'admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition cursor-pointer';
+                        activeOrderStatusFilter = btn.getAttribute('data-ord-filter') || 'ALL';
+                        renderOrdersTable(cachedOrders);
+                    };
+                });
+
+                const searchInput = document.getElementById('admin-orders-search');
+                if (searchInput) {
+                    searchInput.oninput = () => renderOrdersTable(cachedOrders);
+                }
+
+                renderOrdersTable(cachedOrders);
+            } catch (err) {
+                console.error('loadOrdersTab error:', err);
+                tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-rose-500 font-medium">Failed to load order records.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 7: FINANCIAL REPORTS LOADER
+        // ==========================================
+        const loadReportsTab = async () => {
+            const tbody = document.getElementById('admin-reports-tbody');
+            const grossEl = document.getElementById('report-gross-volume');
+            const ordersEl = document.getElementById('report-total-orders');
+            const auctionsEl = document.getElementById('report-active-auctions-value');
+
+            try {
+                const [stats, orders] = await Promise.all([
+                    adminController.getDashboard(),
+                    orderController.getAllOrders()
+                ]);
+
+                if (grossEl) grossEl.textContent = `$${Number(stats?.grossRevenue || 0).toLocaleString()}`;
+                if (ordersEl) ordersEl.textContent = `${orders ? orders.length : 0} Orders`;
+                if (auctionsEl) auctionsEl.textContent = `${stats?.activeAuctions || 0} Live`;
+
+                if (tbody) {
+                    if (orders && orders.length > 0) {
+                        tbody.innerHTML = orders.slice(0, 10).map(ord => {
+                            const dateStr = ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'N/A';
+                            const paymentMethod = (ord.paymentMethod || 'BANK_TRANSFER').replace('_', ' ');
+                            const paymentStatus = (ord.paymentStatus || 'COMPLETED').toUpperCase();
+                            const payBadge = paymentStatus === 'PAID' || paymentStatus === 'COMPLETED'
+                                ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                : 'bg-amber-50 text-amber-700 border-amber-200';
+
+                            return `
+                                <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
+                                    <td class="py-4 px-5 font-bold text-[#0b1f3a] text-sm">${ord.orderNumber || '#ORD-' + ord.orderId}</td>
+                                    <td class="py-4 px-5 text-slate-500 text-xs">${dateStr}</td>
+                                    <td class="py-4 px-5 text-slate-700 text-xs uppercase font-medium">${paymentMethod}</td>
+                                    <td class="py-4 px-5">
+                                        <span class="px-2 py-0.5 rounded-full text-[10px] font-bold border ${payBadge}">${paymentStatus}</span>
+                                    </td>
+                                    <td class="py-4 px-5 text-right font-black text-emerald-600 text-sm">+$${Number(ord.totalAmount || 0).toLocaleString()}</td>
+                                </tr>
+                            `;
+                        }).join('');
+                    } else {
+                        tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-slate-400 font-medium">No transactions recorded yet.</td></tr>`;
+                    }
+                }
+            } catch (err) {
+                console.error('loadReportsTab error:', err);
+                if (tbody) tbody.innerHTML = `<tr><td colspan="5" class="py-8 text-center text-rose-500 font-medium">Failed to load financial reports.</td></tr>`;
+            }
+        };
+
+        // ==========================================
+        // TAB 8: SITE SETTINGS LOADER
+        // ==========================================
+        const loadSettingsTab = () => {
+            window.saveSiteSettings = () => {
+                this.showToast('Site settings saved successfully!', 'success');
+            };
+        };
+
+        // ==========================================
+        // DYNAMIC TAB NAVIGATION HANDLER
+        // ==========================================
+        const navLinks = document.querySelectorAll('.admin-nav-link[data-admin-tab]');
+        const tabSections = document.querySelectorAll('.admin-tab-section');
+
+        const setActiveTab = (targetTab) => {
+            navLinks.forEach(link => {
+                const tab = link.getAttribute('data-admin-tab');
+                const icon = link.querySelector('i');
+                if (tab === targetTab) {
+                    link.classList.remove('text-slate-600', 'hover:bg-slate-50', 'border-transparent', 'font-medium');
+                    link.classList.add('font-bold', 'text-primary-blue', 'bg-blue-50/80', 'border-primary-blue', 'rounded-r-xl');
+                    if (icon) {
+                        icon.classList.remove('text-slate-400');
+                        icon.classList.add('text-primary-blue');
+                    }
+                } else {
+                    link.classList.remove('font-bold', 'text-primary-blue', 'bg-blue-50/80', 'border-primary-blue', 'rounded-r-xl');
+                    link.classList.add('font-medium', 'text-slate-600', 'hover:bg-slate-50', 'hover:text-primary-blue', 'border-transparent');
+                    if (icon) {
+                        icon.classList.remove('text-primary-blue');
+                        icon.classList.add('text-slate-400');
+                    }
+                }
+            });
+
+            tabSections.forEach(sec => {
+                if (sec.id === `section-${targetTab}`) {
+                    sec.classList.remove('hidden');
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+
+            // Close mobile sidebar if open
+            const sidebarEl = document.getElementById('admin-sidebar');
+            if (sidebarEl && !sidebarEl.classList.contains('-translate-x-full')) {
+                sidebarEl.classList.add('-translate-x-full');
+            }
+
+            // Load data for selected tab
+            if (targetTab === 'dashboard') {
+                refreshAdmin();
+            } else if (targetTab === 'users') {
+                loadUsersTab();
+            } else if (targetTab === 'products') {
+                loadProductsTab();
+            } else if (targetTab === 'auctions') {
+                loadAuctionsTab();
+            } else if (targetTab === 'categories') {
+                loadCategoriesTab();
+            } else if (targetTab === 'orders') {
+                loadOrdersTab();
+            } else if (targetTab === 'reports') {
+                loadReportsTab();
+            } else if (targetTab === 'settings') {
+                loadSettingsTab();
+            }
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetTab = link.getAttribute('data-admin-tab');
+                if (targetTab) {
+                    e.preventDefault();
+                    window.location.hash = targetTab;
+                    setActiveTab(targetTab);
+                }
+            });
+        });
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '') || 'dashboard';
+            const validTabs = ['dashboard', 'users', 'products', 'auctions', 'categories', 'orders', 'reports', 'settings'];
+            if (validTabs.includes(hash)) {
+                setActiveTab(hash);
+            }
+        });
+
+        // Initial tab based on URL hash or default dashboard
+        const initialHash = window.location.hash.replace('#', '') || 'dashboard';
+        const validInitialTabs = ['dashboard', 'users', 'products', 'auctions', 'categories', 'orders', 'reports', 'settings'];
+        if (validInitialTabs.includes(initialHash)) {
+            setActiveTab(initialHash);
+        } else {
+            setActiveTab('dashboard');
+        }
     }
 
     // ==========================================

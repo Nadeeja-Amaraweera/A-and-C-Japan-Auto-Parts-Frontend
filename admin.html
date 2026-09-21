@@ -32,72 +32,116 @@
 
   <!-- Sidebar -->
   <aside id="admin-sidebar"
-    class="w-64 bg-admin-side text-slate-700 flex flex-col h-full shrink-0 shadow-sm z-20 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-slate-200/80">
-    <!-- Logo -->
-    <div class="h-16 flex items-center justify-between px-6 bg-white/70 border-b border-slate-200/80 backdrop-blur-md">
-      <a href="index.html" class="flex items-center space-x-2">
-        <div class="text-xl font-black italic tracking-tighter text-[#0b1f3a]">
-          A&C <span class="text-primary-blue">JAPAN</span>
-        </div>
-        <span class="text-[10px] font-bold text-primary-blue uppercase tracking-widest ml-1 px-2 py-0.5 rounded-full bg-blue-50 border border-blue-200">Admin</span>
-      </a>
-      <button class="md:hidden text-slate-400 hover:text-slate-700 transition"
-        onclick="document.getElementById('admin-sidebar').classList.add('-translate-x-full');"><i
-          class="fas fa-times text-xl"></i></button>
+    class="w-68 bg-white text-slate-700 flex flex-col h-full shrink-0 shadow-sm z-30 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-slate-200/80">
+    
+    <!-- Brand / Header -->
+    <div class="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white shrink-0">
+      <div class="flex items-center space-x-2.5">
+        <a href="index.html" class="flex items-center space-x-2.5 group">
+          <div class="text-xl font-black italic tracking-tighter text-[#0b1f3a]">
+            A&C <span class="text-primary-blue">JAPAN</span>
+          </div>
+          <span class="text-[11px] font-bold text-primary-blue uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">ADMIN</span>
+        </a>
+      </div>
+      <button class="md:hidden text-slate-400 hover:text-slate-700 transition p-1 cursor-pointer"
+        onclick="document.getElementById('admin-sidebar').classList.add('-translate-x-full');">
+        <i class="fas fa-times text-lg"></i>
+      </button>
     </div>
 
-    <!-- Navigation -->
-    <div class="flex-grow overflow-y-auto py-4">
-      <p class="px-6 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Main Menu</p>
-      <nav class="space-y-1 mb-6 px-3">
-        <a href="admin.html" data-admin-nav="dashboard"
-          class="flex items-center px-4 py-2.5 rounded-xl bg-blue-50/80 text-primary-blue border-l-4 border-primary-blue font-bold shadow-xs transition"><i
-            class="fas fa-tachometer-alt w-6 text-primary-blue"></i> Dashboard</a>
+    <!-- Navigation List -->
+    <div class="flex-grow overflow-y-auto py-3">
+      <!-- Section: MAIN MENU -->
+      <div class="px-6 pt-3 pb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+        Main Menu
+      </div>
+      <nav class="space-y-1 mb-4">
+        <!-- 1. ADMIN DASHBOARD -->
+        <a href="#dashboard" data-admin-tab="dashboard"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-bold text-primary-blue bg-blue-50/80 border-l-4 border-primary-blue rounded-r-xl transition-all select-none">
+          <i class="fas fa-th-large w-5 text-center mr-3.5 text-base text-primary-blue"></i>
+          <span>ADMIN DASHBOARD</span>
+        </a>
+        <!-- 2. My Profile -->
         <a href="profile.html"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="far fa-user w-6 text-slate-400"></i> My Profile</a>
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="far fa-user w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>My Profile</span>
+        </a>
+        <!-- 3. Store Front -->
         <a href="index.html"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-store w-6 text-slate-400"></i> Store Front</a>
-        <a href="#" data-admin-nav="users"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-users w-6 text-slate-400"></i> Users Management</a>
-        <a href="#" data-admin-nav="products"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-box w-6 text-slate-400"></i> Products & Vehicles</a>
-        <a href="#" data-admin-nav="auctions"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-gavel w-6 text-slate-400"></i> Auctions Monitor</a>
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-store w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Store Front</span>
+        </a>
+        <!-- 4. Users Management -->
+        <a href="#users" data-admin-tab="users"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-users w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Users Management</span>
+        </a>
+        <!-- 5. Products & Vehicles -->
+        <a href="#products" data-admin-tab="products"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-box w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Products & Vehicles</span>
+        </a>
+        <!-- 6. Auctions Monitor -->
+        <a href="#auctions" data-admin-tab="auctions"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-gavel w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Auctions Monitor</span>
+        </a>
       </nav>
 
-      <p class="px-6 text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Configuration</p>
-      <nav class="space-y-1 px-3">
-        <a href="#" data-admin-nav="categories"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-tags w-6 text-slate-400"></i> Categories</a>
-        <a href="#" data-admin-nav="orders"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-shopping-cart w-6 text-slate-400"></i> Orders Management</a>
-        <a href="#" data-admin-nav="reports"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-chart-line w-6 text-slate-400"></i> Financial Reports</a>
-        <a href="#" data-admin-nav="settings"
-          class="flex items-center px-4 py-2.5 rounded-xl text-slate-600 hover:bg-slate-50 hover:text-primary-blue font-medium transition"><i
-            class="fas fa-cog w-6 text-slate-400"></i> Site Settings</a>
+      <!-- Section: CONFIGURATION -->
+      <div class="px-6 pt-3 pb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+        Configuration
+      </div>
+      <nav class="space-y-1 mb-4">
+        <!-- 7. Categories -->
+        <a href="#categories" data-admin-tab="categories"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-tags w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Categories</span>
+        </a>
+        <!-- 8. Orders Management -->
+        <a href="#orders" data-admin-tab="orders"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-shopping-cart w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Orders Management</span>
+        </a>
+        <!-- 9. Financial Reports -->
+        <a href="#reports" data-admin-tab="reports"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-chart-line w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Financial Reports</span>
+        </a>
+        <!-- 10. Site Settings -->
+        <a href="#settings" data-admin-tab="settings"
+          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
+          <i class="fas fa-cog w-5 text-center mr-3.5 text-base text-slate-400"></i>
+          <span>Site Settings</span>
+        </a>
       </nav>
     </div>
 
-    <!-- User Profile -->
-    <div class="p-4 bg-slate-50/80 border-t border-slate-200/80 backdrop-blur-md">
+    <!-- Admin User / Logout Footer -->
+    <div class="p-4 bg-slate-50/80 border-t border-slate-200/80 shrink-0">
       <div class="flex items-center">
         <img id="admin-sidebar-avatar" src="https://ui-avatars.com/api/?name=Admin+User&background=02316e&color=fff"
-          class="w-10 h-10 rounded-full mr-3 border border-blue-200">
-        <div>
-          <p id="admin-sidebar-name" class="text-sm font-bold text-[#0b1f3a]">Super Admin</p>
+          class="w-10 h-10 rounded-full mr-3 border border-blue-200 object-cover">
+        <div class="min-w-0 flex-1">
+          <p id="admin-sidebar-name" class="text-sm font-bold text-[#0b1f3a] truncate">Super Admin</p>
           <div class="flex items-center space-x-2">
             <a href="profile.html" class="text-xs text-primary-blue hover:underline font-semibold">Profile</a>
             <span class="text-slate-300">•</span>
-            <a href="login.html" id="adminLogoutBtn" data-action="logout" onclick="if(window.logout){event.preventDefault(); window.logout();}else if(window.app && window.app.logout){event.preventDefault(); window.app.logout();}" class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold cursor-pointer"><i class="fas fa-sign-out-alt mr-1"></i> Logout</a>
+            <a href="login.html" id="adminLogoutBtn" data-action="logout"
+              onclick="if(window.logout){event.preventDefault(); window.logout();}else if(window.app && window.app.logout){event.preventDefault(); window.app.logout();}"
+              class="text-xs text-slate-500 hover:text-primary-blue transition font-semibold cursor-pointer">
+              <i class="fas fa-sign-out-alt mr-1"></i> Logout
+            </a>
           </div>
         </div>
       </div>
@@ -148,101 +192,486 @@
     <!-- Main Dashboard View -->
     <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 bg-slate-50/50">
       <div id="admin-content" class="w-full space-y-6">
-        <!-- Top Stat Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Users</p>
-                <h3 id="admin-total-users" class="text-2xl font-black text-[#0b1f3a]">0</h3>
+        <!-- TAB 1: ADMIN DASHBOARD -->
+        <div id="section-dashboard" class="admin-tab-section space-y-6">
+          <!-- Top Stat Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Users</p>
+                  <h3 id="admin-total-users" class="text-2xl font-black text-[#0b1f3a]">0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-users"></i></div>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-users"></i></div>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Registered accounts</p>
             </div>
-            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Registered accounts</p>
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
+                  <h3 id="admin-active-auctions" class="text-2xl font-black text-[#0b1f3a]">0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
+              </div>
+              <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Live on marketplace</p>
+            </div>
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Revenue</p>
+                  <h3 id="admin-gross-revenue" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-chart-line"></i></div>
+              </div>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Platform volume</p>
+            </div>
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Pending Approvals</p>
+                  <h3 id="admin-pending-approvals" class="text-2xl font-black text-[#0b1f3a]">0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner"><i class="fas fa-clock"></i></div>
+              </div>
+              <p class="text-xs text-amber-600 font-bold mt-3 flex items-center">Requires review</p>
+            </div>
           </div>
-          <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
-                <h3 id="admin-active-auctions" class="text-2xl font-black text-[#0b1f3a]">0</h3>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
+
+          <!-- Recent Submissions Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+              <h3 class="font-bold text-[#0b1f3a]">Pending Vehicle Auctions</h3>
+              <span class="text-xs font-bold text-primary-blue uppercase tracking-wider">Live Moderation</span>
             </div>
-            <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Live on marketplace</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Auction / Vehicle</th>
+                    <th class="py-3 px-5">Starting Price</th>
+                    <th class="py-3 px-5">Start Date</th>
+                    <th class="py-3 px-5">End Date</th>
+                    <th class="py-3 px-5 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-pending-tbody" class="text-sm">
+                  <tr><td colspan="5" class="py-4 px-5 text-center text-slate-400">No pending vehicle auctions</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
-          <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
-            <div class="flex justify-between items-start">
+
+          <!-- Pending Suppliers Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
               <div>
-                <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Revenue</p>
-                <h3 id="admin-gross-revenue" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
+                <h3 class="font-bold text-[#0b1f3a]">Pending Supplier Applications</h3>
+                <p class="text-xs text-slate-500 mt-0.5">Review registered businesses applying to sell on the marketplace</p>
               </div>
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-chart-line"></i></div>
+              <span class="text-xs font-bold text-primary-blue uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Verification Queue</span>
             </div>
-            <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Platform volume</p>
-          </div>
-          <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Pending Approvals</p>
-                <h3 id="admin-pending-approvals" class="text-2xl font-black text-[#0b1f3a]">0</h3>
-              </div>
-              <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner"><i class="fas fa-clock"></i></div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[850px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-4">Supplier</th>
+                    <th class="py-3 px-4">Business Name</th>
+                    <th class="py-3 px-4">Email</th>
+                    <th class="py-3 px-4">Contact / Phone</th>
+                    <th class="py-3 px-4">Business Document</th>
+                    <th class="py-3 px-4">Registered</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-pending-suppliers-tbody" class="text-sm">
+                  <tr><td colspan="8" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>
+                </tbody>
+              </table>
             </div>
-            <p class="text-xs text-amber-600 font-bold mt-3 flex items-center">Requires review</p>
           </div>
         </div>
 
-        <!-- Recent Submissions Table -->
-        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
-          <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
-            <h3 class="font-bold text-[#0b1f3a]">Pending Vehicle Auctions</h3>
-            <span class="text-xs font-bold text-primary-blue uppercase tracking-wider">Live Moderation</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[700px]">
-              <thead>
-                <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
-                  <th class="py-3 px-5">Auction / Vehicle</th>
-                  <th class="py-3 px-5">Starting Price</th>
-                  <th class="py-3 px-5">Start Date</th>
-                  <th class="py-3 px-5">End Date</th>
-                  <th class="py-3 px-5 text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody id="admin-pending-tbody" class="text-sm">
-                <tr><td colspan="5" class="py-4 px-5 text-center text-slate-400">No pending vehicle auctions</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Pending Suppliers Table -->
-        <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
-          <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+        <!-- TAB 2: USERS MANAGEMENT -->
+        <div id="section-users" class="admin-tab-section space-y-6 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 class="font-bold text-[#0b1f3a]">Pending Supplier Applications</h3>
-              <p class="text-xs text-slate-500 mt-0.5">Review registered businesses applying to sell on the marketplace</p>
+              <h2 class="text-xl font-black text-[#0b1f3a]">Users Management</h2>
+              <p class="text-xs text-slate-500 mt-0.5">View and manage registered accounts across customer, supplier, and administrator roles</p>
             </div>
-            <span class="text-xs font-bold text-primary-blue uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Verification Queue</span>
+            <div class="flex items-center space-x-2">
+              <span id="admin-users-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Total Users</span>
+            </div>
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse min-w-[850px]">
-              <thead>
-                <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
-                  <th class="py-3 px-4">Supplier</th>
-                  <th class="py-3 px-4">Business Name</th>
-                  <th class="py-3 px-4">Email</th>
-                  <th class="py-3 px-4">Contact / Phone</th>
-                  <th class="py-3 px-4">Business Document</th>
-                  <th class="py-3 px-4">Registered</th>
-                  <th class="py-3 px-4">Status</th>
-                  <th class="py-3 px-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="admin-pending-suppliers-tbody" class="text-sm">
-                <tr><td colspan="8" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>
-              </tbody>
-            </table>
+
+          <!-- User Filters & Search -->
+          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1 max-w-md">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="admin-users-search" placeholder="Search by name, email, or user ID..."
+                class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5" id="admin-users-role-filters">
+              <button type="button" data-role-filter="ALL" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-role-filter="CUSTOMER" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Customers</button>
+              <button type="button" data-role-filter="SUPPLIER" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Suppliers</button>
+              <button type="button" data-role-filter="ADMIN" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Admins</button>
+            </div>
+          </div>
+
+          <!-- Users Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[750px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">User</th>
+                    <th class="py-3 px-5">Email</th>
+                    <th class="py-3 px-5">Phone</th>
+                    <th class="py-3 px-5">Address</th>
+                    <th class="py-3 px-5">Role</th>
+                    <th class="py-3 px-5 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-tbody" class="text-sm">
+                  <tr><td colspan="6" class="py-8 text-center text-slate-400">Loading registered users...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: PRODUCTS & VEHICLES -->
+        <div id="section-products" class="admin-tab-section space-y-6 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-black text-[#0b1f3a]">Products & Vehicles Inventory</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Platform catalog of vehicles, auction inventory, and spare auto parts</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span id="admin-products-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Items</span>
+            </div>
+          </div>
+
+          <!-- Inventory Filter Tabs -->
+          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1 max-w-md">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="admin-products-search" placeholder="Search by make, model, title, or category..."
+                class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
+            </div>
+            <div class="flex items-center gap-1.5" id="admin-products-type-filters">
+              <button type="button" data-prod-filter="ALL" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All Items</button>
+              <button type="button" data-prod-filter="VEHICLE" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Vehicles</button>
+              <button type="button" data-prod-filter="PART" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Auto Parts</button>
+            </div>
+          </div>
+
+          <!-- Products Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[800px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Item</th>
+                    <th class="py-3 px-5">Category / Type</th>
+                    <th class="py-3 px-5">Specs / Details</th>
+                    <th class="py-3 px-5">Price</th>
+                    <th class="py-3 px-5 text-right">Status / Stock</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-products-tbody" class="text-sm">
+                  <tr><td colspan="5" class="py-8 text-center text-slate-400">Loading catalog inventory...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: AUCTIONS MONITOR -->
+        <div id="section-auctions" class="admin-tab-section space-y-6 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-black text-[#0b1f3a]">Auctions Monitor</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Live oversight and moderation of marketplace bidding auctions</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span id="admin-auctions-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Auctions</span>
+            </div>
+          </div>
+
+          <!-- Auction Filters -->
+          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1 max-w-md">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="admin-auctions-search" placeholder="Search by auction ID, vehicle title..."
+                class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
+            </div>
+            <div class="flex items-center gap-1.5" id="admin-auctions-status-filters">
+              <button type="button" data-auc-filter="ALL" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-auc-filter="ACTIVE" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Active</button>
+              <button type="button" data-auc-filter="PENDING" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
+              <button type="button" data-auc-filter="COMPLETED" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Completed</button>
+            </div>
+          </div>
+
+          <!-- Auctions Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[850px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Auction / Vehicle</th>
+                    <th class="py-3 px-5">Starting Price</th>
+                    <th class="py-3 px-5">Current Bid</th>
+                    <th class="py-3 px-5">Bids</th>
+                    <th class="py-3 px-5">End Date</th>
+                    <th class="py-3 px-5">Status</th>
+                    <th class="py-3 px-5 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-auctions-tbody" class="text-sm">
+                  <tr><td colspan="7" class="py-8 text-center text-slate-400">Loading auction records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: CATEGORIES -->
+        <div id="section-categories" class="admin-tab-section space-y-6 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-black text-[#0b1f3a]">Categories Management</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Catalog taxonomy and classifications for auto parts</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span id="admin-categories-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Categories</span>
+            </div>
+          </div>
+
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[650px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">ID</th>
+                    <th class="py-3 px-5">Category Name</th>
+                    <th class="py-3 px-5">Description</th>
+                    <th class="py-3 px-5 text-right">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-categories-tbody" class="text-sm">
+                  <tr><td colspan="4" class="py-8 text-center text-slate-400">Loading catalog categories...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 6: ORDERS MANAGEMENT -->
+        <div id="section-orders" class="admin-tab-section space-y-6 hidden">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-xl font-black text-[#0b1f3a]">Orders Management</h2>
+              <p class="text-xs text-slate-500 mt-0.5">Track and manage all customer marketplace orders and payments</p>
+            </div>
+            <div class="flex items-center space-x-2">
+              <span id="admin-orders-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Orders</span>
+            </div>
+          </div>
+
+          <!-- Orders Filters -->
+          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div class="relative flex-1 max-w-md">
+              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="admin-orders-search" placeholder="Search by order #, customer, or address..."
+                class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
+            </div>
+            <div class="flex items-center gap-1.5" id="admin-orders-status-filters">
+              <button type="button" data-ord-filter="ALL" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-ord-filter="CONFIRMED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Confirmed</button>
+              <button type="button" data-ord-filter="PENDING" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
+              <button type="button" data-ord-filter="SHIPPED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Shipped</button>
+              <button type="button" data-ord-filter="DELIVERED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Delivered</button>
+            </div>
+          </div>
+
+          <!-- Orders Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[850px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Order #</th>
+                    <th class="py-3 px-5">Date</th>
+                    <th class="py-3 px-5">Customer / Address</th>
+                    <th class="py-3 px-5">Items</th>
+                    <th class="py-3 px-5">Total</th>
+                    <th class="py-3 px-5">Payment</th>
+                    <th class="py-3 px-5 text-right">Order Status</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-tbody" class="text-sm">
+                  <tr><td colspan="7" class="py-8 text-center text-slate-400">Loading order records...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 7: FINANCIAL REPORTS -->
+        <div id="section-reports" class="admin-tab-section space-y-6 hidden">
+          <div>
+            <h2 class="text-xl font-black text-[#0b1f3a]">Financial Reports</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Gross revenue metrics, transaction volume, and platform financial health</p>
+          </div>
+
+          <!-- Financial KPI Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Platform Volume</p>
+                  <h3 id="report-gross-volume" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-dollar-sign"></i></div>
+              </div>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-check-circle mr-1"></i> Lifetime total transactions</p>
+            </div>
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Orders Processed</p>
+                  <h3 id="report-total-orders" class="text-2xl font-black text-[#0b1f3a]">0</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-receipt"></i></div>
+              </div>
+              <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Marketplace orders</p>
+            </div>
+            <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions Value</p>
+                  <h3 id="report-active-auctions-value" class="text-2xl font-black text-[#0b1f3a]">0 Live</h3>
+                </div>
+                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
+              </div>
+              <p class="text-xs text-indigo-600 font-bold mt-3 flex items-center">Bidding in progress</p>
+            </div>
+          </div>
+
+          <!-- Financial Breakdown Table -->
+          <div class="glass-panel card-3d rounded-2xl border border-white/90 bg-white/85 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
+              <h3 class="font-bold text-[#0b1f3a]">Recent Transaction Ledger</h3>
+              <span class="text-xs font-bold text-slate-500">Live Backend Feed</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse min-w-[700px]">
+                <thead>
+                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                    <th class="py-3 px-5">Transaction / Order #</th>
+                    <th class="py-3 px-5">Date</th>
+                    <th class="py-3 px-5">Payment Method</th>
+                    <th class="py-3 px-5">Payment Status</th>
+                    <th class="py-3 px-5 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-reports-tbody" class="text-sm">
+                  <tr><td colspan="5" class="py-8 text-center text-slate-400">Loading ledger data...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 8: SITE SETTINGS -->
+        <div id="section-settings" class="admin-tab-section space-y-6 hidden">
+          <div>
+            <h2 class="text-xl font-black text-[#0b1f3a]">Site Settings</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Platform configuration, operational parameters, and marketplace controls</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Platform Identity -->
+            <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm space-y-4">
+              <h3 class="font-bold text-base text-[#0b1f3a] border-b border-slate-100 pb-2 flex items-center">
+                <i class="fas fa-globe mr-2 text-primary-blue"></i> Platform Identity
+              </h3>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Marketplace Name</label>
+                  <input type="text" id="setting-site-name" value="A&C Japan Auto Parts" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Support Email</label>
+                  <input type="email" id="setting-support-email" value="support@acjapan.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Contact Hotline</label>
+                  <input type="text" id="setting-phone" value="+81 3-5555-0199" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                </div>
+              </div>
+            </div>
+
+            <!-- Regional & Currency -->
+            <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm space-y-4">
+              <h3 class="font-bold text-base text-[#0b1f3a] border-b border-slate-100 pb-2 flex items-center">
+                <i class="fas fa-coins mr-2 text-primary-blue"></i> Currency & Regional
+              </h3>
+              <div class="space-y-3 text-xs">
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Default Currency</label>
+                  <select class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                    <option value="USD" selected>USD ($) - United States Dollar</option>
+                    <option value="JPY">JPY (¥) - Japanese Yen</option>
+                    <option value="LKR">LKR (Rs) - Sri Lankan Rupee</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">System Timezone</label>
+                  <input type="text" value="Asia/Tokyo (JST, UTC+09:00)" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 font-medium outline-none cursor-not-allowed">
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Platform Status</label>
+                  <div class="flex items-center space-x-2 pt-1">
+                    <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span class="text-emerald-700 font-bold">Online & Operational</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Operational Policies -->
+            <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm space-y-4 lg:col-span-2">
+              <h3 class="font-bold text-base text-[#0b1f3a] border-b border-slate-100 pb-2 flex items-center">
+                <i class="fas fa-sliders-h mr-2 text-primary-blue"></i> Auction & Approval Policies
+              </h3>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Default Auction Duration</label>
+                  <input type="text" value="7 Days" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Min Bid Increment</label>
+                  <input type="text" value="$100.00" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                </div>
+                <div>
+                  <label class="font-bold text-slate-700 block mb-1">Supplier Auto-Approval</label>
+                  <select class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                    <option value="manual" selected>Manual Verification Required</option>
+                    <option value="auto">Auto-Approve with verified document</option>
+                  </select>
+                </div>
+              </div>
+              <div class="pt-3 border-t border-slate-100 flex justify-end">
+                <button type="button" onclick="window.saveSiteSettings && window.saveSiteSettings()" class="btn-3d btn-primary-3d text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-xs transition cursor-pointer">
+                  Save Changes
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

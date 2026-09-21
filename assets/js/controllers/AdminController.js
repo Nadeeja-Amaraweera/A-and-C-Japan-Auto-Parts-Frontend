@@ -120,6 +120,32 @@ class AdminController {
             return { success: false, error: error.message || 'Error fetching document' };
         }
     }
+
+    async getAllUsers() {
+        try {
+            const response = await apiService.get('/admin/users');
+            if (response && response.status === 0) {
+                return response.body || [];
+            }
+            return [];
+        } catch (error) {
+            console.error('getAllUsers error:', error);
+            return [];
+        }
+    }
+
+    async getAllVehicles() {
+        try {
+            const response = await apiService.get('/vehicles');
+            if (response && response.status === 0) {
+                return response.body || [];
+            }
+            return [];
+        } catch (error) {
+            console.error('getAllVehicles error:', error);
+            return [];
+        }
+    }
 }
 
 export const adminController = new AdminController();

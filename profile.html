@@ -37,7 +37,8 @@
   <header class="glass-panel sticky top-0 z-50 bg-white/80 border-b border-slate-200/80 backdrop-blur-md shadow-xs">
     <div class="container mx-auto px-4 py-4 flex flex-wrap md:flex-nowrap justify-between items-center">
       <a href="index.html" class="brand-link group flex items-center space-x-3 transition-all duration-300">
-        <img src="assets/images/logo.png" alt="A&C Japan Auto Parts Logo" class="brand-logo-img h-10 sm:h-11 w-auto object-contain">
+        <img src="assets/images/logo.png" alt="A&C Japan Auto Parts Logo"
+          class="brand-logo-img h-10 sm:h-11 w-auto object-contain">
         <div class="brand-text-wrap text-3xl font-black italic tracking-tighter text-[#0b1f3a]">
           A&C <span class="text-primary-blue ml-1.5">JAPAN</span>
         </div>
@@ -342,19 +343,22 @@
       <!-- Modal Header -->
       <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-4 shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-lg font-bold shadow-inner">
+          <div
+            class="w-10 h-10 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-lg font-bold shadow-inner">
             <i class="fas fa-file-invoice"></i>
           </div>
           <div>
             <div class="flex items-center space-x-2">
               <h3 class="text-xl font-bold text-[#0b1f3a]">Order Details</h3>
-              <span id="order-modal-number" class="text-xs font-bold text-primary-blue bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">#ORD</span>
+              <span id="order-modal-number"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-100">#ORD</span>
             </div>
             <p id="order-modal-date" class="text-xs text-slate-500 font-medium mt-0.5">Placed on --</p>
           </div>
         </div>
         <button type="button" onclick="window.closeOrderDetailsModal()"
-          class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-2 rounded-xl hover:bg-slate-100 transition"><i class="fas fa-times"></i></button>
+          class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-2 rounded-xl hover:bg-slate-100 transition"><i
+            class="fas fa-times"></i></button>
       </div>
 
       <!-- Modal Body (Scrollable) -->
@@ -368,27 +372,32 @@
         </div>
 
         <!-- Error State -->
-        <div id="order-modal-error" class="hidden py-12 flex flex-col items-center justify-center text-center space-y-3 px-4">
+        <div id="order-modal-error"
+          class="hidden py-12 flex flex-col items-center justify-center text-center space-y-3 px-4">
           <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-2xl">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
           <h4 id="order-modal-error-title" class="text-lg font-bold text-[#0b1f3a]">Unable to load order details</h4>
           <p id="order-modal-error-msg" class="text-xs text-slate-500 max-w-md">Please try again later.</p>
-          <button type="button" onclick="window.closeOrderDetailsModal()" class="mt-2 px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition cursor-pointer">Close</button>
+          <button type="button" onclick="window.closeOrderDetailsModal()"
+            class="mt-2 px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition cursor-pointer">Close</button>
         </div>
 
         <!-- Loaded Content State -->
         <div id="order-modal-content" class="hidden space-y-6">
 
           <!-- Order Status Bar -->
-          <div class="glass-panel p-4 rounded-2xl border border-slate-200/80 bg-slate-50/60 flex flex-wrap gap-4 items-center justify-between">
+          <div
+            class="glass-panel p-4 rounded-2xl border border-slate-200/80 bg-slate-50/60 flex flex-wrap gap-4 items-center justify-between">
             <div class="flex items-center space-x-3">
               <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Order Status:</span>
-              <span id="order-modal-status" class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
+              <span id="order-modal-status"
+                class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
             </div>
             <div class="flex items-center space-x-3">
               <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Payment Status:</span>
-              <span id="order-modal-payment-status" class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
+              <span id="order-modal-payment-status"
+                class="bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full text-xs font-black uppercase">--</span>
             </div>
             <div class="flex items-center space-x-2 text-xs text-slate-600">
               <i class="fas fa-credit-card text-primary-blue"></i>
@@ -415,7 +424,8 @@
                 </div>
                 <div>
                   <span class="text-slate-400 font-medium block mb-0.5">Shipping Address:</span>
-                  <span id="order-modal-address" class="font-bold text-[#0b1f3a] block bg-slate-50 p-2.5 rounded-xl border border-slate-100 leading-relaxed">--</span>
+                  <span id="order-modal-address"
+                    class="font-bold text-[#0b1f3a] block bg-slate-50 p-2.5 rounded-xl border border-slate-100 leading-relaxed">--</span>
                 </div>
               </div>
             </div>
@@ -460,7 +470,8 @@
               <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                   <thead>
-                    <tr class="bg-slate-50/90 text-slate-500 text-[11px] font-bold uppercase tracking-wider border-b border-slate-100">
+                    <tr
+                      class="bg-slate-50/90 text-slate-500 text-[11px] font-bold uppercase tracking-wider border-b border-slate-100">
                       <th class="py-3 px-4">Item</th>
                       <th class="py-3 px-4">Type</th>
                       <th class="py-3 px-4 text-center">Qty</th>
@@ -481,7 +492,8 @@
             <h4 class="text-sm font-bold text-[#0b1f3a] uppercase tracking-wider flex items-center">
               <i class="fas fa-car mr-2 text-primary-blue"></i> Associated Vehicle Information
             </h4>
-            <div id="order-modal-vehicle-card" class="glass-panel p-5 rounded-2xl border border-slate-200/80 bg-white/90 shadow-2xs">
+            <div id="order-modal-vehicle-card"
+              class="glass-panel p-5 rounded-2xl border border-slate-200/80 bg-white/90 shadow-2xs">
               <!-- Rendered dynamically -->
             </div>
           </div>
@@ -494,7 +506,8 @@
               </h4>
               <span id="order-gallery-count-badge" class="text-[11px] font-bold text-slate-500">--</span>
             </div>
-            <div id="order-modal-gallery-card" class="p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 shadow-2xs">
+            <div id="order-modal-gallery-card"
+              class="p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 shadow-2xs">
               <!-- Rendered dynamically -->
             </div>
           </div>
@@ -520,7 +533,8 @@
         <span class="text-xs font-black uppercase tracking-widest text-blue-400 flex items-center">
           <i class="fas fa-car mr-2"></i> Vehicle Photo Preview
         </span>
-        <span id="lightbox-counter" class="bg-white/15 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider text-white">1 / 1</span>
+        <span id="lightbox-counter"
+          class="bg-white/15 px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider text-white">1 / 1</span>
       </div>
       <button type="button" onclick="window.closeVehicleLightbox()"
         class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg cursor-pointer transition shadow-lg">
@@ -863,6 +877,27 @@
         window.saveProfileChanges(event);
       }
     }
+
+    window.setActiveTab = setActiveTab;
+    window.showOrderHistory = showOrderHistory;
+    window.showProfileDashboard = showProfileDashboard;
+    window.showMyBids = showMyBids;
+    window.showWishlist = showWishlist;
+    window.showSettings = showSettings;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const tab = (urlParams.get('tab') || window.location.hash.replace('#', '')).toLowerCase();
+      if (tab === 'orders' || tab === 'order-history' || tab === 'my-orders') {
+        const checkReady = setInterval(() => {
+          if (window.app && window.app.renderOrderHistoryTab) {
+            clearInterval(checkReady);
+            showOrderHistory();
+          }
+        }, 50);
+        setTimeout(() => clearInterval(checkReady), 4000);
+      }
+    });
   </script>
 </body>
 

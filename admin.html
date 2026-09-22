@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard - A&C Japan Auto Parts</title>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <script src="https://kit.fontawesome.com/160cb449a7.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -33,17 +34,19 @@
   <!-- Sidebar -->
   <aside id="admin-sidebar"
     class="w-68 bg-white text-slate-700 flex flex-col h-full shrink-0 shadow-sm z-30 fixed inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out border-r border-slate-200/80">
-    
+
     <!-- Brand / Header -->
     <div class="h-16 flex items-center justify-between px-6 border-b border-slate-100 bg-white shrink-0">
       <div class="flex items-center space-x-2.5">
         <a href="index.html" class="brand-link group flex items-center space-x-2.5 transition-all duration-300">
-          <img src="assets/images/logo.png" alt="A&C Japan Auto Parts Logo" class="brand-logo-img h-8 sm:h-9 w-auto object-contain">
+          <img src="assets/images/logo.png" alt="A&C Japan Auto Parts Logo"
+            class="brand-logo-img h-8 sm:h-9 w-auto object-contain">
           <div class="brand-text-wrap flex items-center space-x-2">
             <div class="text-xl font-black italic tracking-tighter text-[#0b1f3a]">
               A&C <span class="text-primary-blue">JAPAN</span>
             </div>
-            <span class="text-[11px] font-bold text-primary-blue uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">ADMIN</span>
+            <span
+              class="text-[11px] font-bold text-primary-blue uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200">ADMIN</span>
           </div>
         </a>
       </div>
@@ -65,18 +68,6 @@
           class="admin-nav-link flex items-center px-6 py-3 text-sm font-bold text-primary-blue bg-blue-50/80 border-l-4 border-primary-blue rounded-r-xl transition-all select-none">
           <i class="fas fa-th-large w-5 text-center mr-3.5 text-base text-primary-blue"></i>
           <span>ADMIN DASHBOARD</span>
-        </a>
-        <!-- 2. My Profile -->
-        <a href="profile.html"
-          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
-          <i class="far fa-user w-5 text-center mr-3.5 text-base text-slate-400"></i>
-          <span>My Profile</span>
-        </a>
-        <!-- 3. Store Front -->
-        <a href="index.html"
-          class="admin-nav-link flex items-center px-6 py-3 text-sm font-medium text-slate-600 hover:bg-slate-50 hover:text-primary-blue border-l-4 border-transparent transition-all select-none">
-          <i class="fas fa-store w-5 text-center mr-3.5 text-base text-slate-400"></i>
-          <span>Store Front</span>
         </a>
         <!-- 4. Users Management -->
         <a href="#users" data-admin-tab="users"
@@ -155,7 +146,8 @@
   <div class="flex-1 flex flex-col h-full overflow-hidden min-w-0">
 
     <!-- Top Header (Fixed/Sticky) -->
-    <header class="sticky top-0 z-30 h-16 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between px-6 shrink-0 shadow-xs">
+    <header
+      class="sticky top-0 z-30 h-16 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex items-center justify-between px-6 shrink-0 shadow-xs">
       <div class="flex items-center">
         <button class="text-slate-500 hover:text-slate-800 md:hidden mr-4 p-1 cursor-pointer"
           onclick="document.getElementById('admin-sidebar').classList.toggle('-translate-x-full');">
@@ -169,12 +161,14 @@
       </div>
 
       <div class="flex items-center space-x-3">
-        <button class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs cursor-pointer">
+        <button
+          class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs cursor-pointer">
           <i class="far fa-bell text-sm"></i>
           <span
             class="absolute -top-1 -right-1 bg-primary-blue text-white w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shadow">12</span>
         </button>
-        <button class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs cursor-pointer">
+        <button
+          class="relative w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-600 hover:text-primary-blue transition shadow-xs cursor-pointer">
           <i class="far fa-envelope text-sm"></i>
           <span
             class="absolute -top-1 -right-1 bg-primary-blue text-white w-4 h-4 rounded-full text-[10px] font-bold flex items-center justify-center shadow">4</span>
@@ -205,9 +199,12 @@
                   <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Users</p>
                   <h3 id="admin-total-users" class="text-2xl font-black text-[#0b1f3a]">0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-users"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner">
+                  <i class="fas fa-users"></i></div>
               </div>
-              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Registered accounts</p>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i>
+                Registered accounts</p>
             </div>
             <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
               <div class="flex justify-between items-start">
@@ -215,7 +212,9 @@
                   <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions</p>
                   <h3 id="admin-active-auctions" class="text-2xl font-black text-[#0b1f3a]">0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner">
+                  <i class="fas fa-gavel"></i></div>
               </div>
               <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Live on marketplace</p>
             </div>
@@ -225,9 +224,12 @@
                   <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Revenue</p>
                   <h3 id="admin-gross-revenue" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-chart-line"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner">
+                  <i class="fas fa-chart-line"></i></div>
               </div>
-              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i> Platform volume</p>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-arrow-up mr-1"></i>
+                Platform volume</p>
             </div>
             <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
               <div class="flex justify-between items-start">
@@ -235,7 +237,9 @@
                   <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Pending Approvals</p>
                   <h3 id="admin-pending-approvals" class="text-2xl font-black text-[#0b1f3a]">0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner"><i class="fas fa-clock"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-lg shadow-inner">
+                  <i class="fas fa-clock"></i></div>
               </div>
               <p class="text-xs text-amber-600 font-bold mt-3 flex items-center">Requires review</p>
             </div>
@@ -250,7 +254,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[700px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">Auction / Vehicle</th>
                     <th class="py-3 px-5">Starting Price</th>
                     <th class="py-3 px-5">Start Date</th>
@@ -259,7 +264,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-pending-tbody" class="text-sm">
-                  <tr><td colspan="5" class="py-4 px-5 text-center text-slate-400">No pending vehicle auctions</td></tr>
+                  <tr>
+                    <td colspan="5" class="py-4 px-5 text-center text-slate-400">No pending vehicle auctions</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -270,14 +277,18 @@
             <div class="p-5 border-b border-slate-200/80 flex justify-between items-center bg-slate-50/50">
               <div>
                 <h3 class="font-bold text-[#0b1f3a]">Pending Supplier Applications</h3>
-                <p class="text-xs text-slate-500 mt-0.5">Review registered businesses applying to sell on the marketplace</p>
+                <p class="text-xs text-slate-500 mt-0.5">Review registered businesses applying to sell on the
+                  marketplace</p>
               </div>
-              <span class="text-xs font-bold text-primary-blue uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Verification Queue</span>
+              <span
+                class="text-xs font-bold text-primary-blue uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Verification
+                Queue</span>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[850px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-4">Supplier</th>
                     <th class="py-3 px-4">Business Name</th>
                     <th class="py-3 px-4">Email</th>
@@ -289,7 +300,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-pending-suppliers-tbody" class="text-sm">
-                  <tr><td colspan="8" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td></tr>
+                  <tr>
+                    <td colspan="8" class="py-8 text-center text-slate-400 font-medium">No supplier requests found</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -301,25 +314,33 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h2 class="text-xl font-black text-[#0b1f3a]">Users Management</h2>
-              <p class="text-xs text-slate-500 mt-0.5">View and manage registered accounts across customer, supplier, and administrator roles</p>
+              <p class="text-xs text-slate-500 mt-0.5">View and manage registered accounts across customer, supplier,
+                and administrator roles</p>
             </div>
             <div class="flex items-center space-x-2">
-              <span id="admin-users-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Total Users</span>
+              <span id="admin-users-count-badge"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0
+                Total Users</span>
             </div>
           </div>
 
           <!-- User Filters & Search -->
-          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div
+            class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="relative flex-1 max-w-md">
               <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
               <input type="text" id="admin-users-search" placeholder="Search by name, email, or user ID..."
                 class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
             </div>
             <div class="flex flex-wrap items-center gap-1.5" id="admin-users-role-filters">
-              <button type="button" data-role-filter="ALL" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
-              <button type="button" data-role-filter="CUSTOMER" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Customers</button>
-              <button type="button" data-role-filter="SUPPLIER" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Suppliers</button>
-              <button type="button" data-role-filter="ADMIN" class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Admins</button>
+              <button type="button" data-role-filter="ALL"
+                class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-role-filter="CUSTOMER"
+                class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Customers</button>
+              <button type="button" data-role-filter="SUPPLIER"
+                class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Suppliers</button>
+              <button type="button" data-role-filter="ADMIN"
+                class="admin-user-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Admins</button>
             </div>
           </div>
 
@@ -328,7 +349,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[750px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">User</th>
                     <th class="py-3 px-5">Email</th>
                     <th class="py-3 px-5">Phone</th>
@@ -338,7 +360,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-users-tbody" class="text-sm">
-                  <tr><td colspan="6" class="py-8 text-center text-slate-400">Loading registered users...</td></tr>
+                  <tr>
+                    <td colspan="6" class="py-8 text-center text-slate-400">Loading registered users...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -350,24 +374,33 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h2 class="text-xl font-black text-[#0b1f3a]">Products & Vehicles Inventory</h2>
-              <p class="text-xs text-slate-500 mt-0.5">Platform catalog of vehicles, auction inventory, and spare auto parts</p>
+              <p class="text-xs text-slate-500 mt-0.5">Platform catalog of vehicles, auction inventory, and spare auto
+                parts</p>
             </div>
             <div class="flex items-center space-x-2">
-              <span id="admin-products-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Items</span>
+              <span id="admin-products-count-badge"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0
+                Items</span>
             </div>
           </div>
 
           <!-- Inventory Filter Tabs -->
-          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div
+            class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="relative flex-1 max-w-md">
               <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
               <input type="text" id="admin-products-search" placeholder="Search by make, model, title, or category..."
                 class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
             </div>
             <div class="flex items-center gap-1.5" id="admin-products-type-filters">
-              <button type="button" data-prod-filter="ALL" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All Items</button>
-              <button type="button" data-prod-filter="VEHICLE" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Vehicles</button>
-              <button type="button" data-prod-filter="PART" class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Auto Parts</button>
+              <button type="button" data-prod-filter="ALL"
+                class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All
+                Items</button>
+              <button type="button" data-prod-filter="VEHICLE"
+                class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Vehicles</button>
+              <button type="button" data-prod-filter="PART"
+                class="admin-prod-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Auto
+                Parts</button>
             </div>
           </div>
 
@@ -376,7 +409,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[800px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">Item</th>
                     <th class="py-3 px-5">Category / Type</th>
                     <th class="py-3 px-5">Specs / Details</th>
@@ -385,7 +419,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-products-tbody" class="text-sm">
-                  <tr><td colspan="5" class="py-8 text-center text-slate-400">Loading catalog inventory...</td></tr>
+                  <tr>
+                    <td colspan="5" class="py-8 text-center text-slate-400">Loading catalog inventory...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -400,22 +436,29 @@
               <p class="text-xs text-slate-500 mt-0.5">Live oversight and moderation of marketplace bidding auctions</p>
             </div>
             <div class="flex items-center space-x-2">
-              <span id="admin-auctions-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Auctions</span>
+              <span id="admin-auctions-count-badge"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0
+                Auctions</span>
             </div>
           </div>
 
           <!-- Auction Filters -->
-          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div
+            class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="relative flex-1 max-w-md">
               <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
               <input type="text" id="admin-auctions-search" placeholder="Search by auction ID, vehicle title..."
                 class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
             </div>
             <div class="flex items-center gap-1.5" id="admin-auctions-status-filters">
-              <button type="button" data-auc-filter="ALL" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
-              <button type="button" data-auc-filter="ACTIVE" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Active</button>
-              <button type="button" data-auc-filter="PENDING" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
-              <button type="button" data-auc-filter="COMPLETED" class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Completed</button>
+              <button type="button" data-auc-filter="ALL"
+                class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-auc-filter="ACTIVE"
+                class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Active</button>
+              <button type="button" data-auc-filter="PENDING"
+                class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
+              <button type="button" data-auc-filter="COMPLETED"
+                class="admin-auc-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Completed</button>
             </div>
           </div>
 
@@ -424,7 +467,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[850px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">Auction / Vehicle</th>
                     <th class="py-3 px-5">Starting Price</th>
                     <th class="py-3 px-5">Current Bid</th>
@@ -435,7 +479,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-auctions-tbody" class="text-sm">
-                  <tr><td colspan="7" class="py-8 text-center text-slate-400">Loading auction records...</td></tr>
+                  <tr>
+                    <td colspan="7" class="py-8 text-center text-slate-400">Loading auction records...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -450,7 +496,9 @@
               <p class="text-xs text-slate-500 mt-0.5">Catalog taxonomy and classifications for auto parts</p>
             </div>
             <div class="flex items-center space-x-2">
-              <span id="admin-categories-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Categories</span>
+              <span id="admin-categories-count-badge"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0
+                Categories</span>
             </div>
           </div>
 
@@ -458,7 +506,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[650px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">ID</th>
                     <th class="py-3 px-5">Category Name</th>
                     <th class="py-3 px-5">Description</th>
@@ -466,7 +515,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-categories-tbody" class="text-sm">
-                  <tr><td colspan="4" class="py-8 text-center text-slate-400">Loading catalog categories...</td></tr>
+                  <tr>
+                    <td colspan="4" class="py-8 text-center text-slate-400">Loading catalog categories...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -481,23 +532,31 @@
               <p class="text-xs text-slate-500 mt-0.5">Track and manage all customer marketplace orders and payments</p>
             </div>
             <div class="flex items-center space-x-2">
-              <span id="admin-orders-count-badge" class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0 Orders</span>
+              <span id="admin-orders-count-badge"
+                class="text-xs font-bold text-primary-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">0
+                Orders</span>
             </div>
           </div>
 
           <!-- Orders Filters -->
-          <div class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div
+            class="glass-panel card-3d p-4 rounded-2xl border border-white/90 bg-white/85 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div class="relative flex-1 max-w-md">
               <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
               <input type="text" id="admin-orders-search" placeholder="Search by order #, customer, or address..."
                 class="w-full pl-9 pr-4 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 focus:bg-white focus:border-primary-blue outline-none transition">
             </div>
             <div class="flex items-center gap-1.5" id="admin-orders-status-filters">
-              <button type="button" data-ord-filter="ALL" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
-              <button type="button" data-ord-filter="CONFIRMED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Confirmed</button>
-              <button type="button" data-ord-filter="PENDING" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
-              <button type="button" data-ord-filter="SHIPPED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Shipped</button>
-              <button type="button" data-ord-filter="DELIVERED" class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Delivered</button>
+              <button type="button" data-ord-filter="ALL"
+                class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary-blue text-white transition">All</button>
+              <button type="button" data-ord-filter="CONFIRMED"
+                class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Confirmed</button>
+              <button type="button" data-ord-filter="PENDING"
+                class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Pending</button>
+              <button type="button" data-ord-filter="SHIPPED"
+                class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Shipped</button>
+              <button type="button" data-ord-filter="DELIVERED"
+                class="admin-ord-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 transition">Delivered</button>
             </div>
           </div>
 
@@ -506,7 +565,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[850px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">Order #</th>
                     <th class="py-3 px-5">Date</th>
                     <th class="py-3 px-5">Customer / Address</th>
@@ -517,7 +577,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-orders-tbody" class="text-sm">
-                  <tr><td colspan="7" class="py-8 text-center text-slate-400">Loading order records...</td></tr>
+                  <tr>
+                    <td colspan="7" class="py-8 text-center text-slate-400">Loading order records...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -528,7 +590,8 @@
         <div id="section-reports" class="admin-tab-section space-y-6 hidden">
           <div>
             <h2 class="text-xl font-black text-[#0b1f3a]">Financial Reports</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Gross revenue metrics, transaction volume, and platform financial health</p>
+            <p class="text-xs text-slate-500 mt-0.5">Gross revenue metrics, transaction volume, and platform financial
+              health</p>
           </div>
 
           <!-- Financial KPI Cards -->
@@ -536,30 +599,40 @@
             <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
               <div class="flex justify-between items-start">
                 <div>
-                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Platform Volume</p>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Gross Platform Volume
+                  </p>
                   <h3 id="report-gross-volume" class="text-2xl font-black text-[#0b1f3a]">$0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner"><i class="fas fa-dollar-sign"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-lg shadow-inner">
+                  <i class="fas fa-dollar-sign"></i></div>
               </div>
-              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i class="fas fa-check-circle mr-1"></i> Lifetime total transactions</p>
+              <p class="text-xs text-emerald-600 font-bold mt-3 flex items-center"><i
+                  class="fas fa-check-circle mr-1"></i> Lifetime total transactions</p>
             </div>
             <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
               <div class="flex justify-between items-start">
                 <div>
-                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Orders Processed</p>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Total Orders Processed
+                  </p>
                   <h3 id="report-total-orders" class="text-2xl font-black text-[#0b1f3a]">0</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner"><i class="fas fa-receipt"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-primary-blue text-lg shadow-inner">
+                  <i class="fas fa-receipt"></i></div>
               </div>
               <p class="text-xs text-primary-blue font-bold mt-3 flex items-center">Marketplace orders</p>
             </div>
             <div class="glass-panel card-3d p-5 rounded-2xl border border-white/90 bg-white/85 shadow-sm">
               <div class="flex justify-between items-start">
                 <div>
-                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions Value</p>
+                  <p class="text-[11px] text-slate-500 uppercase font-bold tracking-wider mb-1">Active Auctions Value
+                  </p>
                   <h3 id="report-active-auctions-value" class="text-2xl font-black text-[#0b1f3a]">0 Live</h3>
                 </div>
-                <div class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner"><i class="fas fa-gavel"></i></div>
+                <div
+                  class="w-10 h-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 text-lg shadow-inner">
+                  <i class="fas fa-gavel"></i></div>
               </div>
               <p class="text-xs text-indigo-600 font-bold mt-3 flex items-center">Bidding in progress</p>
             </div>
@@ -574,7 +647,8 @@
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse min-w-[700px]">
                 <thead>
-                  <tr class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
+                  <tr
+                    class="text-xs text-slate-600 uppercase font-bold tracking-wider border-b border-slate-200/80 bg-slate-50/80">
                     <th class="py-3 px-5">Transaction / Order #</th>
                     <th class="py-3 px-5">Date</th>
                     <th class="py-3 px-5">Payment Method</th>
@@ -583,7 +657,9 @@
                   </tr>
                 </thead>
                 <tbody id="admin-reports-tbody" class="text-sm">
-                  <tr><td colspan="5" class="py-8 text-center text-slate-400">Loading ledger data...</td></tr>
+                  <tr>
+                    <td colspan="5" class="py-8 text-center text-slate-400">Loading ledger data...</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -594,7 +670,8 @@
         <div id="section-settings" class="admin-tab-section space-y-6 hidden">
           <div>
             <h2 class="text-xl font-black text-[#0b1f3a]">Site Settings</h2>
-            <p class="text-xs text-slate-500 mt-0.5">Platform configuration, operational parameters, and marketplace controls</p>
+            <p class="text-xs text-slate-500 mt-0.5">Platform configuration, operational parameters, and marketplace
+              controls</p>
           </div>
 
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -606,15 +683,18 @@
               <div class="space-y-3 text-xs">
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Marketplace Name</label>
-                  <input type="text" id="setting-site-name" value="A&C Japan Auto Parts" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <input type="text" id="setting-site-name" value="A&C Japan Auto Parts"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Support Email</label>
-                  <input type="email" id="setting-support-email" value="support@acjapan.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <input type="email" id="setting-support-email" value="support@acjapan.com"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Contact Hotline</label>
-                  <input type="text" id="setting-phone" value="+81 3-5555-0199" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <input type="text" id="setting-phone" value="+81 3-5555-0199"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                 </div>
               </div>
             </div>
@@ -627,7 +707,8 @@
               <div class="space-y-3 text-xs">
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Default Currency</label>
-                  <select class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <select
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                     <option value="USD" selected>USD ($) - United States Dollar</option>
                     <option value="JPY">JPY (¥) - Japanese Yen</option>
                     <option value="LKR">LKR (Rs) - Sri Lankan Rupee</option>
@@ -635,7 +716,8 @@
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">System Timezone</label>
-                  <input type="text" value="Asia/Tokyo (JST, UTC+09:00)" readonly class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 font-medium outline-none cursor-not-allowed">
+                  <input type="text" value="Asia/Tokyo (JST, UTC+09:00)" readonly
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-600 font-medium outline-none cursor-not-allowed">
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Platform Status</label>
@@ -648,29 +730,34 @@
             </div>
 
             <!-- Operational Policies -->
-            <div class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm space-y-4 lg:col-span-2">
+            <div
+              class="glass-panel card-3d p-6 rounded-2xl border border-white/90 bg-white/85 shadow-sm space-y-4 lg:col-span-2">
               <h3 class="font-bold text-base text-[#0b1f3a] border-b border-slate-100 pb-2 flex items-center">
                 <i class="fas fa-sliders-h mr-2 text-primary-blue"></i> Auction & Approval Policies
               </h3>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Default Auction Duration</label>
-                  <input type="text" value="7 Days" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <input type="text" value="7 Days"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Min Bid Increment</label>
-                  <input type="text" value="$100.00" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <input type="text" value="$100.00"
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                 </div>
                 <div>
                   <label class="font-bold text-slate-700 block mb-1">Supplier Auto-Approval</label>
-                  <select class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
+                  <select
+                    class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-medium outline-none focus:border-primary-blue focus:bg-white transition">
                     <option value="manual" selected>Manual Verification Required</option>
                     <option value="auto">Auto-Approve with verified document</option>
                   </select>
                 </div>
               </div>
               <div class="pt-3 border-t border-slate-100 flex justify-end">
-                <button type="button" onclick="window.saveSiteSettings && window.saveSiteSettings()" class="btn-3d btn-primary-3d text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-xs transition cursor-pointer">
+                <button type="button" onclick="window.saveSiteSettings && window.saveSiteSettings()"
+                  class="btn-3d btn-primary-3d text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-xs transition cursor-pointer">
                   Save Changes
                 </button>
               </div>
@@ -682,25 +769,32 @@
   </div>
 
   <!-- Supplier Request Details Modal -->
-  <div id="supplierDetailsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
-    <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
+  <div id="supplierDetailsModal"
+    class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center z-50 hidden p-4">
+    <div
+      class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-5">
         <div>
           <h3 class="text-xl font-bold text-[#0b1f3a]">Supplier Request Details</h3>
-          <p class="text-xs text-slate-400 mt-0.5">Application ID: <span id="modal-supplier-id" class="font-bold text-primary-blue">#SUP-0</span></p>
+          <p class="text-xs text-slate-400 mt-0.5">Application ID: <span id="modal-supplier-id"
+              class="font-bold text-primary-blue">#SUP-0</span></p>
         </div>
-        <button type="button" onclick="closeSupplierDetailsModal()" class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
+        <button type="button" onclick="closeSupplierDetailsModal()"
+          class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1"><i class="fas fa-times"></i></button>
       </div>
 
       <div class="space-y-4">
         <div class="bg-blue-50/60 border border-blue-100 p-4 rounded-2xl flex items-center space-x-3">
-          <div class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center font-bold text-lg" id="modal-supplier-avatar">S</div>
+          <div
+            class="w-12 h-12 rounded-full bg-primary-blue text-white flex items-center justify-center font-bold text-lg"
+            id="modal-supplier-avatar">S</div>
           <div>
             <h4 class="font-bold text-[#0b1f3a]" id="modal-supplier-contact">Supplier Name</h4>
             <p class="text-xs text-slate-500" id="modal-supplier-email">email@domain.com</p>
           </div>
           <div class="ml-auto">
-            <span id="modal-supplier-status" class="bg-amber-100 text-amber-800 font-bold text-xs px-2.5 py-1 rounded-full">PENDING</span>
+            <span id="modal-supplier-status"
+              class="bg-amber-100 text-amber-800 font-bold text-xs px-2.5 py-1 rounded-full">PENDING</span>
           </div>
         </div>
 
@@ -719,13 +813,15 @@
               <p class="text-slate-700 font-semibold" id="modal-business-phone">N/A</p>
             </div>
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Registration Date</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Registration
+                Date</span>
               <p class="text-slate-700 font-semibold" id="modal-registered-date">N/A</p>
             </div>
           </div>
           <div class="border-b border-slate-100 pb-2 flex items-center justify-between">
             <div>
-              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Business Registration Document</span>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-1">Business Registration
+                Document</span>
               <span id="modal-document-status" class="text-xs text-slate-500 font-medium">Checking document...</span>
             </div>
             <div id="modal-document-action"></div>
@@ -738,21 +834,27 @@
       </div>
 
       <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-        <button type="button" onclick="closeSupplierDetailsModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Close</button>
+        <button type="button" onclick="closeSupplierDetailsModal()"
+          class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Close</button>
         <div class="space-x-2" id="modal-actions-container">
-          <button type="button" id="modal-reject-btn" class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-sm font-bold px-4 py-2.5 rounded-xl transition cursor-pointer">Reject</button>
-          <button type="button" id="modal-approve-btn" class="btn-3d btn-primary-3d text-white font-bold text-sm px-5 py-2.5 rounded-xl transition cursor-pointer shadow-sm">Approve</button>
+          <button type="button" id="modal-reject-btn"
+            class="bg-rose-50 text-rose-700 hover:bg-rose-100 border border-rose-200 text-sm font-bold px-4 py-2.5 rounded-xl transition cursor-pointer">Reject</button>
+          <button type="button" id="modal-approve-btn"
+            class="btn-3d btn-primary-3d text-white font-bold text-sm px-5 py-2.5 rounded-xl transition cursor-pointer shadow-sm">Approve</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Business Registration Document Preview Modal -->
-  <div id="documentPreviewModal" class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center z-50 hidden p-3 md:p-6">
-    <div class="bg-white rounded-3xl max-w-4xl w-full p-5 md:p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[92vh]">
+  <div id="documentPreviewModal"
+    class="fixed inset-0 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center z-50 hidden p-3 md:p-6">
+    <div
+      class="bg-white rounded-3xl max-w-4xl w-full p-5 md:p-6 shadow-2xl border border-slate-100 flex flex-col max-h-[92vh]">
       <div class="flex justify-between items-center pb-4 border-b border-slate-100 mb-4 shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-lg shrink-0">
+          <div
+            class="w-10 h-10 rounded-xl bg-blue-50 text-primary-blue flex items-center justify-center text-lg shrink-0">
             <i class="fas fa-file-contract"></i>
           </div>
           <div>
@@ -761,18 +863,23 @@
           </div>
         </div>
         <div class="flex items-center space-x-2">
-          <a id="doc-open-tab-btn" href="#" target="_blank" rel="noopener noreferrer" class="hidden text-xs font-bold text-primary-blue bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition flex items-center cursor-pointer">
+          <a id="doc-open-tab-btn" href="#" target="_blank" rel="noopener noreferrer"
+            class="hidden text-xs font-bold text-primary-blue bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg border border-blue-200 transition flex items-center cursor-pointer">
             <i class="fas fa-external-link-alt mr-1.5"></i> Open in Tab
           </a>
-          <a id="doc-download-btn" href="#" download="business_registration_document" class="hidden text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center cursor-pointer">
+          <a id="doc-download-btn" href="#" download="business_registration_document"
+            class="hidden text-xs font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 transition flex items-center cursor-pointer">
             <i class="fas fa-download mr-1.5"></i> Download
           </a>
-          <button type="button" onclick="closeDocumentPreviewModal()" class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1.5 rounded-lg hover:bg-slate-100 transition"><i class="fas fa-times"></i></button>
+          <button type="button" onclick="closeDocumentPreviewModal()"
+            class="text-slate-400 hover:text-slate-700 text-lg cursor-pointer p-1.5 rounded-lg hover:bg-slate-100 transition"><i
+              class="fas fa-times"></i></button>
         </div>
       </div>
 
       <!-- Preview Content Area -->
-      <div class="relative flex-1 overflow-hidden min-h-[360px] flex items-center justify-center bg-slate-50/80 rounded-2xl border border-slate-200 p-2">
+      <div
+        class="relative flex-1 overflow-hidden min-h-[360px] flex items-center justify-center bg-slate-50/80 rounded-2xl border border-slate-200 p-2">
         <!-- Loading State -->
         <div id="doc-preview-loading" class="flex flex-col items-center justify-center py-12 space-y-3">
           <div class="w-10 h-10 border-3 border-primary-blue border-t-transparent rounded-full animate-spin"></div>
@@ -780,23 +887,27 @@
         </div>
 
         <!-- Error State -->
-        <div id="doc-preview-error" class="hidden flex flex-col items-center justify-center py-12 px-6 text-center space-y-3">
+        <div id="doc-preview-error"
+          class="hidden flex flex-col items-center justify-center py-12 px-6 text-center space-y-3">
           <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center text-xl">
             <i class="fas fa-exclamation-triangle"></i>
           </div>
           <h4 class="text-base font-bold text-slate-800">Unable to load document</h4>
-          <p id="doc-preview-error-msg" class="text-xs text-slate-500 max-w-sm">The document file could not be retrieved or is missing.</p>
+          <p id="doc-preview-error-msg" class="text-xs text-slate-500 max-w-sm">The document file could not be retrieved
+            or is missing.</p>
         </div>
 
         <!-- PDF Frame -->
         <iframe id="doc-pdf-frame" class="hidden w-full h-[65vh] rounded-xl border-none"></iframe>
 
         <!-- Image Preview -->
-        <img id="doc-image-preview" alt="Supplier Business Registration Document" class="hidden max-h-[65vh] max-w-full rounded-xl object-contain shadow-sm" />
+        <img id="doc-image-preview" alt="Supplier Business Registration Document"
+          class="hidden max-h-[65vh] max-w-full rounded-xl object-contain shadow-sm" />
       </div>
 
       <div class="mt-4 pt-3 border-t border-slate-100 flex justify-end shrink-0">
-        <button type="button" onclick="closeDocumentPreviewModal()" class="px-5 py-2 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Close</button>
+        <button type="button" onclick="closeDocumentPreviewModal()"
+          class="px-5 py-2 rounded-xl border border-slate-200 text-slate-600 font-bold text-sm hover:bg-slate-50 transition cursor-pointer">Close</button>
       </div>
     </div>
   </div>

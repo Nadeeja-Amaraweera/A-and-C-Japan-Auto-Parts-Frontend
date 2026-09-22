@@ -82,6 +82,21 @@ class App {
         window.orderController = orderController;
         window.supplierController = supplierController;
         window.adminController = adminController;
+
+        window.showOrderHistory = (event) => {
+            if (event && event.preventDefault) event.preventDefault();
+            if (window.location.pathname.toLowerCase().includes('profile.html')) {
+                const orderTab = document.getElementById('tab-order-history') || document.querySelector('a[onclick*="showOrderHistory"]');
+                if (orderTab && window.setActiveTab) {
+                    window.setActiveTab(orderTab);
+                }
+                if (window.app && window.app.renderOrderHistoryTab) {
+                    window.app.renderOrderHistoryTab();
+                }
+            } else {
+                window.location.href = 'profile.html?tab=orders';
+            }
+        };
     }
 
     // Auto-dismiss page loader if present
@@ -92,7 +107,7 @@ class App {
                 if (loader && !loader.classList.contains('opacity-0')) {
                     loader.classList.add('opacity-0', 'pointer-events-none');
                     setTimeout(() => {
-                        try { loader.remove(); } catch (_) {}
+                        try { loader.remove(); } catch (_) { }
                     }, 500);
                 }
             };
@@ -313,7 +328,7 @@ class App {
                 const response = await authController.register(userData);
                 if (response.success) {
                     this.showToast(response.message || 'Registration successful!', 'success');
-                    setTimeout(() => window.location.href = "index.html", 1500);
+                    // setTimeout(() => window.location.href = "index.html", 1500);
                 } else {
                     const errorMsg = response.message || response.error || 'Registration failed';
                     this.showToast(errorMsg, 'error');
@@ -566,9 +581,28 @@ class App {
                             </div>
                         `;
                     }).join('');
+                } else {
+                    productsGrid.innerHTML = `
+                        <div class="col-span-full text-center py-10 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-xs">
+                            <div class="w-12 h-12 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center mx-auto mb-2 text-lg shadow-xs">
+                                <i class="fas fa-boxes-stacked"></i>
+                            </div>
+                            <h4 class="text-sm font-bold text-[#0b1f3a]">No Products Available</h4>
+                            <p class="text-xs text-slate-500 mt-1">Check back soon for new parts and accessories.</p>
+                        </div>
+                    `;
                 }
             } catch (err) {
                 console.error('Error rendering latest products:', err);
+                productsGrid.innerHTML = `
+                    <div class="col-span-full text-center py-10 bg-white/70 backdrop-blur-sm rounded-2xl border border-slate-200/80 shadow-xs">
+                        <div class="w-12 h-12 bg-blue-50 text-primary-blue rounded-full flex items-center justify-center mx-auto mb-2 text-lg shadow-xs">
+                            <i class="fas fa-boxes-stacked"></i>
+                        </div>
+                        <h4 class="text-sm font-bold text-[#0b1f3a]">No Products Available</h4>
+                        <p class="text-xs text-slate-500 mt-1">Check back soon for new parts and accessories.</p>
+                    </div>
+                `;
             }
         }
     }
@@ -912,9 +946,9 @@ class App {
                                             <p class="text-xs text-emerald-100">Your winning bid: $${Number(winningBid).toLocaleString()}. ${orderNumber ? `Order #${orderNumber} has been automatically placed for you!` : 'Your winning order has been generated.'}</p>
                                         </div>
                                     </div>
-                                    <a href="my-orders.html" class="px-5 py-2.5 bg-white text-emerald-700 font-black rounded-xl text-xs hover:bg-emerald-50 transition shadow-sm whitespace-nowrap">
+                                    <button type="button" onclick="showOrderHistory(event)" class="px-5 py-2.5 bg-white text-emerald-700 font-black rounded-xl text-xs hover:bg-emerald-50 transition shadow-sm whitespace-nowrap cursor-pointer">
                                         View My Orders <i class="fas fa-arrow-right ml-1"></i>
-                                    </a>
+                                    </button>
                                 </div>
                             `;
                         } else {
@@ -3083,8 +3117,8 @@ class App {
                                 </thead>
                                 <tbody>
                                     ${userOrders && userOrders.length > 0 ? userOrders.map(ord => {
-                                        const realOrderId = ord.id || ord.orderId;
-                                        return `
+                    const realOrderId = ord.id || ord.orderId;
+                    return `
                                         <tr class="border-b border-slate-100 hover:bg-blue-50/30 transition">
                                             <td class="py-4 px-4 font-bold text-[#0b1f3a]">${ord.orderNumber || '#ORD-' + realOrderId}</td>
                                             <td class="py-4 px-4 text-slate-500 text-xs">${ord.createdAt ? new Date(ord.createdAt).toLocaleDateString() : 'Recent'}</td>
@@ -3100,7 +3134,7 @@ class App {
                                             </td>
                                         </tr>
                                     `;
-                                    }).join('') : '<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No recent orders found.</td></tr>'}
+                }).join('') : '<tr><td colspan="6" class="py-8 text-center text-slate-400 font-medium">No recent orders found.</td></tr>'}
                                 </tbody>
                             </table>
                         </div>

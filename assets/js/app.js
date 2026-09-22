@@ -214,38 +214,115 @@ class App {
     // Setup Register Form
     setupRegisterForm() {
         const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-            registerForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = document.getElementById('regName').value;
-                const email = document.getElementById('regEmail').value;
-                const phone = document.getElementById('regPhone').value;
-                const password = document.getElementById('regPassword').value;
-                const address = document.getElementById('regAddress').value;
+        if (!registerForm) return;
 
-                const userData = {
-                    userName: name,
-                    userEmail: email,
-                    userPassword: password,
-                    userPhone: phone,
-                    userAddress: address
-                };
+        const regPassword = document.getElementById('regPassword');
+        const regConfirmPassword = document.getElementById('regConfirmPassword');
+        const matchMsg = document.getElementById('passwordMatchMsg');
 
-                try {
-                    const response = await authController.register(userData);
-                    if (response.success) {
-                        this.showToast(response.message || 'Registration successful!', 'success');
-                        setTimeout(() => window.location.href = "index.html", 1500);
-                    } else {
-                        const errorMsg = response.message || response.error || 'Registration failed';
-                        this.showToast(errorMsg, 'error');
-                    }
-                } catch (error) {
-                    console.error('❌ Registration error:', error);
-                    this.showToast('An unexpected error occurred during registration', 'error');
+        const validatePasswordMatch = () => {
+            if (!regPassword || !regConfirmPassword) return true;
+
+            const password = regPassword.value;
+            const confirmPassword = regConfirmPassword.value;
+
+            // If confirm password field hasn't been typed in yet, keep neutral
+            if (confirmPassword.length === 0) {
+                regConfirmPassword.classList.remove('is-valid', 'is-invalid');
+                if (matchMsg) {
+                    matchMsg.className = 'text-xs mt-1.5 font-medium transition-all duration-200 hidden';
+                    matchMsg.innerHTML = '';
+                }
+                return false;
+            }
+
+            if (password === confirmPassword) {
+                regConfirmPassword.classList.remove('is-invalid');
+                regConfirmPassword.classList.add('is-valid');
+                if (matchMsg) {
+                    matchMsg.className = 'text-xs mt-1.5 font-semibold text-emerald-600 flex items-center gap-1.5 transition-all duration-200';
+                    matchMsg.innerHTML = '<i class="fas fa-check-circle"></i> Passwords match';
+                    matchMsg.classList.remove('hidden');
+                }
+                return true;
+            } else {
+                regConfirmPassword.classList.remove('is-valid');
+                regConfirmPassword.classList.add('is-invalid');
+                if (matchMsg) {
+                    matchMsg.className = 'text-xs mt-1.5 font-semibold text-rose-500 flex items-center gap-1.5 transition-all duration-200';
+                    matchMsg.innerHTML = '<i class="fas fa-times-circle"></i> Passwords do not match';
+                    matchMsg.classList.remove('hidden');
+                }
+                return false;
+            }
+        };
+
+        if (regPassword) {
+            regPassword.addEventListener('input', () => {
+                if (regConfirmPassword && regConfirmPassword.value.length > 0) {
+                    validatePasswordMatch();
                 }
             });
         }
+
+        if (regConfirmPassword) {
+            regConfirmPassword.addEventListener('input', validatePasswordMatch);
+        }
+
+        registerForm.addEventListener('reset', () => {
+            if (regConfirmPassword) {
+                regConfirmPassword.classList.remove('is-valid', 'is-invalid');
+            }
+            if (matchMsg) {
+                matchMsg.className = 'text-xs mt-1.5 font-medium transition-all duration-200 hidden';
+                matchMsg.innerHTML = '';
+            }
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('regName').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const phone = document.getElementById('regPhone').value.trim();
+            const password = regPassword ? regPassword.value : '';
+            const confirmPassword = regConfirmPassword ? regConfirmPassword.value : '';
+            const address = document.getElementById('regAddress').value.trim();
+
+            if (password !== confirmPassword) {
+                this.showToast('Passwords do not match. Please verify your password.', 'error');
+                validatePasswordMatch();
+                if (regConfirmPassword) regConfirmPassword.focus();
+                return;
+            }
+
+            if (password.length < 6) {
+                this.showToast('Password must be at least 6 characters long.', 'warning');
+                if (regPassword) regPassword.focus();
+                return;
+            }
+
+            const userData = {
+                userName: name,
+                userEmail: email,
+                userPassword: password,
+                userPhone: phone,
+                userAddress: address
+            };
+
+            try {
+                const response = await authController.register(userData);
+                if (response.success) {
+                    this.showToast(response.message || 'Registration successful!', 'success');
+                    setTimeout(() => window.location.href = "index.html", 1500);
+                } else {
+                    const errorMsg = response.message || response.error || 'Registration failed';
+                    this.showToast(errorMsg, 'error');
+                }
+            } catch (error) {
+                console.error('❌ Registration error:', error);
+                this.showToast('An unexpected error occurred during registration', 'error');
+            }
+        });
     }
 
     updateMainMenu(user) {
